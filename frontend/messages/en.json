@@ -1,0 +1,413 @@
+{
+    "metadata": {
+        "title": "Duran Gezer | AI Engineer Portfolio",
+        "description": "Building intelligent systems that solve real problems, not just implement algorithms."
+    },
+    "navigation": {
+        "home": "Home",
+        "about": "About",
+        "projects": "Projects",
+        "skills": "Skills",
+        "experience": "Experience",
+        "thinking": "Engineering Thinking",
+        "roadmap": "Roadmap",
+        "playground": "Playground",
+        "learningJourney": "Learning Journey",
+        "blog": "Blog",
+        "contact": "Contact",
+        "search": "Search",
+        "3dresume": "3D CV"
+    },
+    "hero": {
+        "greeting": "Hi, I'm",
+        "name": "Duran Gezer",
+        "title": "AI Engineer in Training",
+        "subtitle": "Building intelligent systems that solve real problems, not just implement algorithms.",
+        "cta": {
+            "primary": "Explore My Projects",
+            "secondary": "Talk to My AI Assistant",
+            "3dresume": "Explore My 3D CV"
+        },
+        "scrollHint": "Discover more",
+        "status": "Available for opportunities"
+    },
+    "about": {
+        "title": "About Me",
+        "subtitle": "From Computer Engineering to Computational Intelligence",
+        "bio": "I'm a 4th-year Computer Engineering student specializing in artificial intelligence. I don't just train models - I architect solutions.",
+        "highlights": {
+            "title": "Highlights",
+            "items": {
+                "projects": {
+                    "title": "Production-Focused Projects",
+                    "description": "ML systems that solve real-world problems"
+                },
+                "thinking": {
+                    "title": "System Thinker",
+                    "description": "I understand the trade-offs between accuracy, speed, and cost"
+                },
+                "learning": {
+                    "title": "Continuous Learner",
+                    "description": "Keeping up with the latest in AI/ML"
+                },
+                "practical": {
+                    "title": "Pragmatic Approach",
+                    "description": "Shipping beats perfect"
+                }
+            }
+        },
+        "quote": "The best model is the one that works in production.",
+        "status": {
+            "available": "Open to Opportunities",
+            "graduating": "Graduating: May 2026"
+        }
+    },
+    "projects": {
+        "badge": "Selected Work",
+        "title": "Real Problems, Real Solutions",
+        "subtitle": "Every project here solved a problem that mattered. Not tutorials—production systems with measurable impact.",
+        "viewDetails": "View Details",
+        "viewCode": "View Code",
+        "viewDemo": "View Demo",
+        "viewCaseStudies": "View Full Case Studies",
+        "items": {
+            "sentiment": {
+                "title": "Social Media Sentiment Analysis Engine",
+                "period": "Fall 2024",
+                "tagline": "Real-time emotion detection system analyzing social media posts with 87% accuracy using transformer-based NLP.",
+                "impact": "Reduced analysis time from hours to seconds, enabling real-time brand monitoring for 50+ clients."
+            },
+            "maintenance": {
+                "title": "Predictive Maintenance System",
+                "period": "Summer 2024",
+                "tagline": "ML-powered system predicting equipment failures 72 hours in advance with 92% precision for manufacturing plants.",
+                "impact": "Prevented $2M in equipment damage and reduced unplanned downtime by 65% across 3 facilities."
+            },
+            "codeReview": {
+                "title": "Code Review Assistant",
+                "period": "Spring 2024",
+                "tagline": "AI-powered tool that understands context and suggests architectural improvements, not just syntax fixes.",
+                "impact": "Reduced code review time by 40% and caught 3x more potential bugs before production."
+            },
+            "warehouse": {
+                "title": "Warehouse Vision System",
+                "period": "Fall 2023",
+                "tagline": "Computer vision system for automated inventory tracking using YOLO v8 with 95% detection accuracy.",
+                "impact": "Eliminated manual counting errors and reduced inventory audit time from 8 hours to 20 minutes."
+            }
+        },
+        "metrics": {
+            "accuracy": "Accuracy",
+            "processing": "Processing",
+            "precision": "Precision",
+            "downtime": "Downtime ↓",
+            "reviewTime": "Review Time ↓",
+            "bugDetection": "Bug Detection",
+            "timeSaved": "Time Saved"
+        }
+    },
+    "skills": {
+        "badge": "Tech Stack",
+        "title": "Skills & Technologies",
+        "subtitle": "Not just buzzwords. Tools I've used to ship real projects.",
+        "categories": {
+            "ml": "AI & Machine Learning",
+            "programming": "Programming",
+            "frameworks": "Frameworks & Tools",
+            "data": "Data & Analytics"
+        },
+        "stats": {
+            "technologies": "Technologies",
+            "projects": "Projects",
+            "codeLines": "Code Lines",
+            "learningHrs": "Learning Hrs"
+        }
+    },
+    "experience": {
+        "badge": "Background",
+        "title": "Experience & Education",
+        "subtitle": "The path that shaped my engineering mindset.",
+        "categories": {
+            "education": "Education",
+            "experience": "Experience",
+            "competitions": "Competitions",
+            "certifications": "Certifications"
+        },
+        "items": {
+            "degree": {
+                "title": "B.S. Computer Engineering",
+                "organization": "Your University Name",
+                "period": "2021 - 2025",
+                "description": "Focus on Artificial Intelligence and Machine Learning. GPA: 3.7/4.0"
+            },
+            "intern": {
+                "title": "AI Engineering Intern",
+                "organization": "Tech Company Name",
+                "period": "Summer 2024",
+                "description": "Built ML pipelines and deployed models to production"
+            },
+            "freelance": {
+                "title": "Freelance ML Developer",
+                "organization": "Various Clients",
+                "period": "2023 - Present",
+                "description": "Custom AI solutions for small businesses and startups"
+            },
+            "hackathon": {
+                "title": "AI Hackathon 2024",
+                "organization": "National Tech Conference",
+                "period": "March 2024",
+                "description": "2nd Place - Real-time anomaly detection system"
+            },
+            "mlChallenge": {
+                "title": "University ML Challenge",
+                "organization": "Your University",
+                "period": "November 2023",
+                "description": "1st Place - Kaggle-style competition"
+            },
+            "deepLearning": {
+                "title": "Deep Learning Specialization",
+                "organization": "Coursera - deeplearning.ai",
+                "period": "2024",
+                "description": "5-course series covering CNNs, RNNs, and deployment"
+            },
+            "aws": {
+                "title": "AWS Certified ML",
+                "organization": "Amazon Web Services",
+                "period": "2024",
+                "description": "Specialty certification for ML on AWS"
+            }
+        }
+    },
+    "thinking": {
+        "badge": "Engineering Philosophy",
+        "title": "How I Think About Problems",
+        "subtitle": "Principles that guide every decision I make when building systems.",
+        "quote": "The best code is the code you don't have to write.",
+        "principles": {
+            "firstPrinciples": {
+                "title": "First Principles, Not Patterns",
+                "description": "I break problems down to fundamentals and build up from there."
+            },
+            "outcome": {
+                "title": "Outcome Over Output",
+                "description": "Code is a tool, not the goal. Simpler is better."
+            },
+            "iterations": {
+                "title": "Fast Iterations Beat Perfect Plans",
+                "description": "Build MVPs fast, test early, iterate with real feedback."
+            },
+            "systems": {
+                "title": "Systems Thinking",
+                "description": "Think in graphs, not lists. Understand dependencies."
+            },
+            "debugging": {
+                "title": "Debugging Is Teaching",
+                "description": "Every bug is a lesson about patterns and pitfalls."
+            },
+            "curiosity": {
+                "title": "Curiosity as a Skill",
+                "description": "Explore edge cases, read source code, ask 'what if?'"
+            }
+        }
+    },
+    "roadmap": {
+        "badge": "Growth Path",
+        "title": "The Next 2 Years",
+        "subtitle": "Not a rigid plan. A direction with checkpoints.",
+        "bottomNote": "Progress > plan. I adapt based on what I learn.",
+        "active": "Active",
+        "completed": "completed",
+        "milestones": {
+            "now": {
+                "period": "Now",
+                "title": "Building Production-Ready Skills",
+                "goals": [
+                    "Complete 4 real-world AI projects with measurable impact",
+                    "Master MLOps: Docker, CI/CD, model versioning",
+                    "Build this portfolio as a living system"
+                ]
+            },
+            "6months": {
+                "period": "6 Months",
+                "title": "Junior AI Engineer Role",
+                "goals": [
+                    "Join a team building ML systems at scale",
+                    "Ship features that impact thousands of users",
+                    "Learn from senior engineers"
+                ],
+                "focus": "Contribution > Title"
+            },
+            "1year": {
+                "period": "1 Year",
+                "title": "Deeper Technical Mastery",
+                "goals": [
+                    "Build custom training pipelines",
+                    "Optimize inference at production scale",
+                    "Contribute to open-source ML tools"
+                ],
+                "focus": "Depth over breadth"
+            },
+            "2years": {
+                "period": "2 Years",
+                "title": "Technical Leadership",
+                "goals": [
+                    "Lead small AI projects end-to-end",
+                    "Mentor junior engineers",
+                    "Build systems that become infrastructure"
+                ],
+                "focus": "Systems thinking"
+            }
+        }
+    },
+    "aiAssistant": {
+        "badge": "Coming Soon",
+        "title": "Ask My AI Assistant",
+        "subtitle": "I'm building an AI that knows me better than my résumé does. Ask it anything about my work, thinking, or approach to problems.",
+        "chatHeader": {
+            "title": "AI Assistant",
+            "poweredBy": "Powered by my knowledge base"
+        },
+        "status": "Building...",
+        "sampleQuestionsTitle": "Sample questions you'll be able to ask:",
+        "sampleQuestions": {
+            "q1": "What projects are you most proud of?",
+            "q2": "How do you approach learning new technologies?",
+            "q3": "What's your take on the future of AI?",
+            "q4": "Walk me through your engineering process"
+        },
+        "inDevelopment": "In Development",
+        "inDevelopmentDesc": "Training on my projects, writing samples, and engineering philosophy",
+        "inputPlaceholder": "Ask me anything... (Coming Soon)",
+        "sendButton": "Send",
+        "features": {
+            "realtime": {
+                "title": "Real-time Responses",
+                "desc": "Instant answers about my projects and experience"
+            },
+            "context": {
+                "title": "Context-Aware",
+                "desc": "Understands follow-up questions and maintains conversation flow"
+            },
+            "learning": {
+                "title": "Always Learning",
+                "desc": "Updates as I complete new projects and gain experience"
+            }
+        },
+        "notifyQuestion": "Want to be notified when the AI assistant launches?",
+        "notifyButton": "Notify Me"
+    },
+    "footer": {
+        "tagline": "AI Engineer in Training. Building systems that solve real problems, not just adding lines to a résumé.",
+        "quickLinks": "Quick Links",
+        "getInTouch": "Get In Touch",
+        "getInTouchDesc": "Open to junior AI engineer roles and interesting problems to solve.",
+        "sendMessage": "Send a Message",
+        "builtWith": "Built with",
+        "copyright": "This portfolio is a living system—always evolving."
+    },
+    "common": {
+        "learnMore": "Learn More",
+        "readMore": "Read More",
+        "viewAll": "View All",
+        "close": "Close",
+        "loading": "Loading...",
+        "error": "An error occurred",
+        "tryAgain": "Try Again",
+        "comingSoon": "Coming Soon",
+        "new": "New"
+    },
+    "resume3d": {
+        "title": "3D CV Experience",
+        "loading": "Loading world...",
+        "backToSite": "Back to Site",
+        "mobileWarning": "Best Experience on Desktop",
+        "mobileDescription": "The 3D CV experience works best on desktop browsers. Please visit from your computer.",
+        "instructions": "Click on islands to explore • Drag to rotate view",
+        "about": {
+            "title": "About Me",
+            "subtitle": "Discover who I am",
+            "items": {
+                "0": {
+                    "title": "Duran Gezer",
+                    "description": "A passionate engineer candidate in artificial intelligence and machine learning."
+                },
+                "1": {
+                    "title": "Vision",
+                    "description": "Developing intelligent systems that solve real-world problems."
+                },
+                "2": {
+                    "title": "Approach",
+                    "description": "Continuous learning, clean code, and user-centered design."
+                }
+            }
+        },
+        "education": {
+            "title": "Education",
+            "subtitle": "My academic journey",
+            "items": {
+                "0": {
+                    "title": "Computer Engineering",
+                    "description": "Bachelor's degree focused on AI and software development."
+                },
+                "1": {
+                    "title": "Online Certifications",
+                    "description": "AI/ML certifications from Coursera, Udacity, and other platforms."
+                }
+            }
+        },
+        "experience": {
+            "title": "Experience",
+            "subtitle": "My professional experiences",
+            "items": {
+                "0": {
+                    "title": "Internship Experience",
+                    "description": "Working on software development and data analysis projects."
+                },
+                "1": {
+                    "title": "Freelance Projects",
+                    "description": "Developing web applications and automation solutions."
+                }
+            }
+        },
+        "skills": {
+            "title": "Skills",
+            "subtitle": "My technical skills",
+            "items": {
+                "0": {
+                    "title": "Programming Languages",
+                    "description": "Python, TypeScript, JavaScript, C++"
+                },
+                "1": {
+                    "title": "AI/ML Frameworks",
+                    "description": "TensorFlow, PyTorch, Scikit-learn, Hugging Face"
+                },
+                "2": {
+                    "title": "Web Technologies",
+                    "description": "React, Next.js, Node.js, Tailwind CSS"
+                },
+                "3": {
+                    "title": "Tools",
+                    "description": "Git, Docker, Linux, VS Code"
+                }
+            }
+        },
+        "projects": {
+            "title": "Projects",
+            "subtitle": "Projects I've built",
+            "items": {
+                "0": {
+                    "title": "AI Portfolio",
+                    "description": "Interactive 3D portfolio site with Next.js and React Three Fiber."
+                },
+                "1": {
+                    "title": "ML Model Visualizer",
+                    "description": "3D visualization of 11 different machine learning models."
+                },
+                "2": {
+                    "title": "Sentiment Analysis",
+                    "description": "Sentiment analysis application using natural language processing."
+                }
+            }
+        }
+    }
+}

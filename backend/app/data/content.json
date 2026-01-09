@@ -1,0 +1,207 @@
+{
+    "hero": {
+        "greeting": "Merhaba, Ben",
+        "name": "Duran Gezer",
+        "title": "AI Engineer Adayı",
+        "subtitle": "Sadece algoritmaları uygulamayan, gerçek problemleri çözen akıllı sistemler inşa ediyorum.",
+        "status": "İş fırsatlarına açık"
+    },
+    "about": {
+        "title": "Hakkımda",
+        "subtitle": "Bilgisayar Mühendisliğinden Hesaplamalı Zekaya",
+        "bio": "Bilgisayar Mühendisliği 4. sınıf öğrencisiyim ve yapay zeka alanında uzmanlaşıyorum. Sadece modelleri eğitmiyorum - çözümler tasarlıyorum.",
+        "quote": "En iyi model, üretimde çalışan modeldir."
+    },
+    "projects": {
+        "badge": "Seçilmiş Çalışmalar",
+        "title": "Gerçek Problemler, Gerçek Çözümler",
+        "subtitle": "Buradaki her proje önemli bir problemi çözdü.",
+        "items": [
+            {
+                "id": "sentiment",
+                "title": "Sosyal Medya Duygu Analizi Motoru",
+                "period": "Güz 2024",
+                "tagline": "Transformer tabanlı NLP kullanarak %87 doğrulukla sosyal medya gönderilerini analiz eden gerçek zamanlı duygu algılama sistemi.",
+                "impact": "Analiz süresini saatlerden saniyelere düşürdü.",
+                "tech": [
+                    "Python",
+                    "Transformers",
+                    "FastAPI",
+                    "Redis"
+                ],
+                "metrics": {
+                    "accuracy": "87%",
+                    "processing": "3ms"
+                }
+            },
+            {
+                "id": "maintenance",
+                "title": "Kestirimci Bakım Sistemi",
+                "period": "Yaz 2024",
+                "tagline": "Üretim tesisleri için %92 hassasiyetle ekipman arızalarını 72 saat önceden tahmin eden ML destekli sistem.",
+                "impact": "2 milyon dolarlık ekipman hasarını önledi.",
+                "tech": [
+                    "TensorFlow",
+                    "Python",
+                    "PostgreSQL",
+                    "Docker"
+                ],
+                "metrics": {
+                    "precision": "92%",
+                    "downtime": "-65%"
+                }
+            },
+            {
+                "id": "codeReview",
+                "title": "Kod İnceleme Asistanı",
+                "period": "Bahar 2024",
+                "tagline": "Bağlamı anlayan ve mimari iyileştirmeler öneren AI destekli araç.",
+                "impact": "Kod inceleme süresini %40 azalttı.",
+                "tech": [
+                    "GPT-4",
+                    "Python",
+                    "GitHub API"
+                ],
+                "metrics": {
+                    "reviewTime": "-40%",
+                    "bugDetection": "+300%"
+                }
+            },
+            {
+                "id": "warehouse",
+                "title": "Depo Görüş Sistemi",
+                "period": "Güz 2023",
+                "tagline": "%95 algılama doğruluğu ile YOLO v8 kullanarak otomatik envanter takibi.",
+                "impact": "Manuel sayım hatalarını ortadan kaldırdı.",
+                "tech": [
+                    "YOLO v8",
+                    "OpenCV",
+                    "Python",
+                    "FastAPI"
+                ],
+                "metrics": {
+                    "accuracy": "95%",
+                    "timeSaved": "8h→20m"
+                }
+            }
+        ]
+    },
+    "skills": {
+        "badge": "Teknoloji Yığını",
+        "title": "Yetenekler ve Teknolojiler",
+        "subtitle": "Gerçek projeleri göndermek için kullandığım araçlar.",
+        "categories": [
+            {
+                "id": "ml",
+                "name": "AI ve Makine Öğrenmesi",
+                "items": [
+                    {
+                        "name": "PyTorch",
+                        "level": 90
+                    },
+                    {
+                        "name": "TensorFlow",
+                        "level": 85
+                    },
+                    {
+                        "name": "Transformers",
+                        "level": 80
+                    },
+                    {
+                        "name": "scikit-learn",
+                        "level": 90
+                    }
+                ]
+            },
+            {
+                "id": "programming",
+                "name": "Programlama",
+                "items": [
+                    {
+                        "name": "Python",
+                        "level": 95
+                    },
+                    {
+                        "name": "TypeScript",
+                        "level": 80
+                    },
+                    {
+                        "name": "SQL",
+                        "level": 85
+                    },
+                    {
+                        "name": "Rust",
+                        "level": 60
+                    }
+                ]
+            },
+            {
+                "id": "frameworks",
+                "name": "Frameworkler ve Araçlar",
+                "items": [
+                    {
+                        "name": "FastAPI",
+                        "level": 90
+                    },
+                    {
+                        "name": "Next.js",
+                        "level": 75
+                    },
+                    {
+                        "name": "Docker",
+                        "level": 80
+                    },
+                    {
+                        "name": "Git",
+                        "level": 90
+                    }
+                ]
+            }
+        ]
+    },
+    "experience": {
+        "badge": "Geçmiş",
+        "title": "Deneyim ve Eğitim",
+        "subtitle": "Mühendislik zihniyetimi şekillendiren yol.",
+        "items": [
+            {
+                "id": "degree",
+                "type": "education",
+                "title": "Bilgisayar Mühendisliği Lisans",
+                "organization": "Üniversite Adı",
+                "period": "2021 - 2025",
+                "description": "Yapay Zeka ve Makine Öğrenmesi odaklı. GPA: 3.7/4.0"
+            },
+            {
+                "id": "intern",
+                "type": "experience",
+                "title": "AI Mühendisliği Stajyeri",
+                "organization": "Teknoloji Şirketi",
+                "period": "Yaz 2024",
+                "description": "ML pipeline'ları oluşturdu ve modelleri üretime aldı"
+            },
+            {
+                "id": "freelance",
+                "type": "experience",
+                "title": "Serbest ML Geliştirici",
+                "organization": "Çeşitli Müşteriler",
+                "period": "2023 - Devam",
+                "description": "Küçük işletmeler için özel AI çözümleri"
+            }
+        ]
+    },
+    "thinking": {
+        "badge": "Mühendislik Felsefesi",
+        "title": "Problemler Hakkında Nasıl Düşünüyorum",
+        "subtitle": "Sistem kurarken aldığım her kararı yönlendiren ilkeler.",
+        "quote": "En iyi kod, yazmak zorunda olmadığın koddur."
+    },
+    "roadmap": {
+        "badge": "Büyüme Yolu",
+        "title": "Önümüzdeki 2 Yıl",
+        "subtitle": "Katı bir plan değil. Kontrol noktaları olan bir yön."
+    },
+    "footer": {
+        "tagline": "AI Engineer Adayı. Gerçek problemleri çözen sistemler inşa ediyorum."
+    }
+}

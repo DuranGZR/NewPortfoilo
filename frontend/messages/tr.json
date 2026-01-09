@@ -1,0 +1,433 @@
+{
+    "metadata": {
+        "title": "Duran Gezer | AI Mühendisi Portföyü",
+        "description": "Sadece algoritmaları uygulamayan, gerçek problemleri çözen akıllı sistemler inşa ediyorum."
+    },
+    "navigation": {
+        "home": "Ana Sayfa",
+        "about": "Hakkımda",
+        "projects": "Projeler",
+        "skills": "Yetenekler",
+        "experience": "Deneyim",
+        "thinking": "Mühendislik Düşüncesi",
+        "roadmap": "Yol Haritası",
+        "playground": "Kod Oyun Alanı",
+        "learningJourney": "Öğrenme Yolculuğu",
+        "blog": "Blog",
+        "contact": "İletişim",
+        "search": "Ara",
+        "3dresume": "3D CV"
+    },
+    "hero": {
+        "greeting": "Merhaba, Ben",
+        "name": "Duran Gezer",
+        "title": "AI Engineer Adayı",
+        "subtitle": "Sadece algoritmaları uygulamayan, gerçek problemleri çözen akıllı sistemler inşa ediyorum.",
+        "cta": {
+            "primary": "Projelerimi Keşfet",
+            "secondary": "AI Asistanımla Konuş",
+            "3dresume": "3D CV'mi Keşfet"
+        },
+        "scrollHint": "Daha fazlasını keşfet",
+        "status": "İş fırsatlarına açık"
+    },
+    "about": {
+        "title": "Hakkımda",
+        "subtitle": "Bilgisayar Mühendisliğinden Hesaplamalı Zekaya",
+        "bio": "Bilgisayar Mühendisliği 4. sınıf öğrencisiyim ve yapay zeka alanında uzmanlaşıyorum. Sadece modelleri eğitmiyorum - çözümler tasarlıyorum.",
+        "highlights": {
+            "title": "Öne Çıkanlar",
+            "items": {
+                "projects": {
+                    "title": "Üretim Odaklı Projeler",
+                    "description": "Gerçek dünya problemlerini çözen ML sistemleri"
+                },
+                "thinking": {
+                    "title": "Sistem Düşünürü",
+                    "description": "Doğruluk, hız ve maliyet arasındaki dengeyi anlıyorum"
+                },
+                "learning": {
+                    "title": "Sürekli Öğrenen",
+                    "description": "AI/ML'deki en son gelişmeleri takip ediyorum"
+                },
+                "practical": {
+                    "title": "Pragmatik Yaklaşım",
+                    "description": "Mükemmel yerine çalışan çözümler üretiyorum"
+                }
+            }
+        },
+        "quote": "En iyi model, üretimde çalışan modeldir.",
+        "status": {
+            "available": "İş Fırsatlarına Açık",
+            "graduating": "Mezuniyet: Mayıs 2026"
+        }
+    },
+    "projects": {
+        "badge": "Seçilmiş Çalışmalar",
+        "title": "Gerçek Problemler, Gerçek Çözümler",
+        "subtitle": "Buradaki her proje önemli bir problemi çözdü. Eğitim değil—ölçülebilir etkisi olan üretim sistemleri.",
+        "viewDetails": "Detayları Gör",
+        "viewCode": "Kodu Gör",
+        "viewDemo": "Demo'yu Gör",
+        "viewCaseStudies": "Vaka Çalışmalarını Gör",
+        "items": {
+            "sentiment": {
+                "title": "Sosyal Medya Duygu Analizi Motoru",
+                "period": "Güz 2024",
+                "tagline": "Transformer tabanlı NLP kullanarak %87 doğrulukla sosyal medya gönderilerini analiz eden gerçek zamanlı duygu algılama sistemi.",
+                "impact": "Analiz süresini saatlerden saniyelere düşürerek 50+ müşteri için gerçek zamanlı marka takibi sağladı."
+            },
+            "maintenance": {
+                "title": "Kestirimci Bakım Sistemi",
+                "period": "Yaz 2024",
+                "tagline": "Üretim tesisleri için %92 hassasiyetle ekipman arızalarını 72 saat önceden tahmin eden ML destekli sistem.",
+                "impact": "2 milyon dolarlık ekipman hasarını önledi ve 3 tesiste plansız duruş süresini %65 azalttı."
+            },
+            "codeReview": {
+                "title": "Kod İnceleme Asistanı",
+                "period": "Bahar 2024",
+                "tagline": "Bağlamı anlayan ve sadece sözdizimi düzeltmeleri değil, mimari iyileştirmeler öneren AI destekli araç.",
+                "impact": "Kod inceleme süresini %40 azalttı ve üretime geçmeden önce 3 kat daha fazla potansiyel hata yakaladı."
+            },
+            "warehouse": {
+                "title": "Depo Görüş Sistemi",
+                "period": "Güz 2023",
+                "tagline": "%95 algılama doğruluğu ile YOLO v8 kullanarak otomatik envanter takibi için bilgisayarlı görüş sistemi.",
+                "impact": "Manuel sayım hatalarını ortadan kaldırdı ve envanter denetim süresini 8 saatten 20 dakikaya düşürdü."
+            }
+        },
+        "metrics": {
+            "accuracy": "Doğruluk",
+            "processing": "İşleme",
+            "precision": "Hassasiyet",
+            "downtime": "Duruş ↓",
+            "reviewTime": "İnceleme Süresi ↓",
+            "bugDetection": "Hata Tespiti",
+            "timeSaved": "Kazanılan Süre"
+        }
+    },
+    "skills": {
+        "badge": "Teknoloji Yığını",
+        "title": "Yetenekler ve Teknolojiler",
+        "subtitle": "Sadece moda kelimeler değil. Gerçek projeleri göndermek için kullandığım araçlar.",
+        "categories": {
+            "ml": "AI ve Makine Öğrenmesi",
+            "programming": "Programlama",
+            "frameworks": "Frameworkler ve Araçlar",
+            "data": "Veri ve Analitik"
+        },
+        "stats": {
+            "technologies": "Teknoloji",
+            "projects": "Proje",
+            "codeLines": "Kod Satırı",
+            "learningHrs": "Öğrenme Saati"
+        }
+    },
+    "experience": {
+        "badge": "Geçmiş",
+        "title": "Deneyim ve Eğitim",
+        "subtitle": "Mühendislik zihniyetimi şekillendiren yol.",
+        "categories": {
+            "education": "Eğitim",
+            "experience": "Deneyim",
+            "competitions": "Yarışmalar",
+            "certifications": "Sertifikalar"
+        },
+        "items": {
+            "degree": {
+                "title": "Bilgisayar Mühendisliği Lisans",
+                "organization": "Üniversite Adı",
+                "period": "2021 - 2025",
+                "description": "Yapay Zeka ve Makine Öğrenmesi odaklı. GPA: 3.7/4.0"
+            },
+            "intern": {
+                "title": "AI Mühendisliği Stajyeri",
+                "organization": "Teknoloji Şirketi Adı",
+                "period": "Yaz 2024",
+                "description": "ML pipeline'ları oluşturdu ve modelleri üretime aldı"
+            },
+            "freelance": {
+                "title": "Serbest ML Geliştirici",
+                "organization": "Çeşitli Müşteriler",
+                "period": "2023 - Devam",
+                "description": "Küçük işletmeler ve girişimler için özel AI çözümleri"
+            },
+            "hackathon": {
+                "title": "AI Hackathon 2024",
+                "organization": "Ulusal Teknoloji Konferansı",
+                "period": "Mart 2024",
+                "description": "2. Yer - Gerçek zamanlı anomali algılama sistemi"
+            },
+            "mlChallenge": {
+                "title": "Üniversite ML Yarışması",
+                "organization": "Üniversite",
+                "period": "Kasım 2023",
+                "description": "1. Yer - Kaggle tarzı yarışma"
+            },
+            "deepLearning": {
+                "title": "Derin Öğrenme Uzmanlığı",
+                "organization": "Coursera - deeplearning.ai",
+                "period": "2024",
+                "description": "CNN'ler, RNN'ler ve dağıtımı kapsayan 5 kurslu seri"
+            },
+            "aws": {
+                "title": "AWS Sertifikalı ML",
+                "organization": "Amazon Web Services",
+                "period": "2024",
+                "description": "AWS'de ML için uzmanlık sertifikası"
+            }
+        }
+    },
+    "thinking": {
+        "badge": "Mühendislik Felsefesi",
+        "title": "Problemler Hakkında Nasıl Düşünüyorum",
+        "subtitle": "Sistem kurarken aldığım her kararı yönlendiren ilkeler.",
+        "quote": "En iyi kod, yazmak zorunda olmadığın koddur.",
+        "principles": {
+            "firstPrinciples": {
+                "title": "İlk İlkeler, Kalıplar Değil",
+                "description": "Problemleri temellere ayırıp oradan inşa ediyorum."
+            },
+            "outcome": {
+                "title": "Çıktıdan Çok Sonuç",
+                "description": "Kod bir araçtır, amaç değil. Basit daha iyidir."
+            },
+            "iterations": {
+                "title": "Hızlı İterasyonlar Mükemmel Planları Yener",
+                "description": "MVP'leri hızlı kur, erken test et, gerçek geri bildirimle iterasyon yap."
+            },
+            "systems": {
+                "title": "Sistem Düşüncesi",
+                "description": "Listeler değil, graflar halinde düşün. Bağımlılıkları anla."
+            },
+            "debugging": {
+                "title": "Hata Ayıklama Öğretmektir",
+                "description": "Her hata, kalıplar ve tuzaklar hakkında bir derstir."
+            },
+            "curiosity": {
+                "title": "Bir Yetenek Olarak Merak",
+                "description": "Uç durumları keşfet, kaynak kodu oku, 'ya olursa?' diye sor."
+            }
+        }
+    },
+    "roadmap": {
+        "badge": "Büyüme Yolu",
+        "title": "Önümüzdeki 2 Yıl",
+        "subtitle": "Katı bir plan değil. Kontrol noktaları olan bir yön.",
+        "bottomNote": "İlerleme > plan. Öğrendiklerime göre uyum sağlıyorum.",
+        "active": "Aktif",
+        "completed": "tamamlandı",
+        "milestones": {
+            "now": {
+                "period": "Şimdi",
+                "title": "Üretime Hazır Beceriler Geliştirme",
+                "goals": [
+                    "Ölçülebilir etkisi olan 4 gerçek dünya AI projesi tamamla",
+                    "MLOps'ta ustalaş: Docker, CI/CD, model versiyonlama",
+                    "Bu portföyü yaşayan bir sistem olarak inşa et"
+                ]
+            },
+            "6months": {
+                "period": "6 Ay",
+                "title": "Junior AI Mühendisi Rolü",
+                "goals": [
+                    "Ölçekli ML sistemleri kuran bir takıma katıl",
+                    "Binlerce kullanıcıyı etkileyen özellikler gönder",
+                    "Kıdemli mühendislerden öğren"
+                ],
+                "focus": "Katkı > Unvan"
+            },
+            "1year": {
+                "period": "1 Yıl",
+                "title": "Daha Derin Teknik Ustalık",
+                "goals": [
+                    "Özel eğitim pipeline'ları oluştur",
+                    "Üretim ölçeğinde çıkarımı optimize et",
+                    "Açık kaynak ML araçlarına katkıda bulun"
+                ],
+                "focus": "Genişlik yerine derinlik"
+            },
+            "2years": {
+                "period": "2 Yıl",
+                "title": "Teknik Liderlik",
+                "goals": [
+                    "Küçük AI projelerini uçtan uca yönet",
+                    "Junior mühendislere mentorluk yap",
+                    "Altyapı haline gelen sistemler kur"
+                ],
+                "focus": "Sistem düşüncesi"
+            }
+        }
+    },
+    "resume3d": {
+        "title": "3D CV Deneyimi",
+        "loading": "Dünya yükleniyor...",
+        "backToSite": "Siteye Dön",
+        "mobileWarning": "En İyi Deneyim İçin Masaüstü Kullanın",
+        "mobileDescription": "3D CV deneyimi masaüstü tarayıcılarda en iyi şekilde çalışır. Lütfen bilgisayarınızdan ziyaret edin.",
+        "instructions": "Adalara tıklayarak keşfedin • Mouse ile sürükleyerek çevirin",
+        "about": {
+            "title": "Hakkımda",
+            "subtitle": "Kim olduğumu keşfedin",
+            "items": {
+                "0": {
+                    "title": "Bilgisayar Mühendisliğinden Hesaplamalı Zekaya",
+                    "description": "Bilgisayar Mühendisliği 4. sınıf öğrencisiyim ve yapay zeka alanında uzmanlaşıyorum. Sadece modelleri eğitmiyorum - çözümler tasarlıyorum."
+                },
+                "1": {
+                    "title": "Üretim Odaklı Projeler",
+                    "description": "Gerçek dünya problemlerini çözen ML sistemleri inşa ediyorum."
+                },
+                "2": {
+                    "title": "Sistem Düşünürü",
+                    "description": "Doğruluk, hız ve maliyet arasındaki dengeyi anlıyorum."
+                },
+                "3": {
+                    "title": "Sürekli Öğrenen",
+                    "description": "AI/ML'deki en son gelişmeleri takip ediyorum."
+                }
+            }
+        },
+        "education": {
+            "title": "Eğitim",
+            "subtitle": "Akademik yolculuğum",
+            "items": {
+                "0": {
+                    "title": "Bilgisayar Mühendisliği Lisans",
+                    "description": "Yapay Zeka ve Makine Öğrenmesi odaklı. GPA: 3.7/4.0"
+                },
+                "1": {
+                    "title": "Derin Öğrenme Uzmanlığı",
+                    "description": "Coursera - deeplearning.ai: CNN'ler, RNN'ler ve dağıtımı kapsayan 5 kurslu seri"
+                },
+                "2": {
+                    "title": "AWS Sertifikalı ML",
+                    "description": "Amazon Web Services'te ML için uzmanlık sertifikası"
+                }
+            }
+        },
+        "experience": {
+            "title": "Deneyim",
+            "subtitle": "Profesyonel deneyimlerim",
+            "items": {
+                "0": {
+                    "title": "AI Mühendisliği Stajyeri",
+                    "description": "ML pipeline'ları oluşturdu ve modelleri üretime aldı"
+                },
+                "1": {
+                    "title": "Serbest ML Geliştirici",
+                    "description": "Küçük işletmeler ve girişimler için özel AI çözümleri"
+                },
+                "2": {
+                    "title": "AI Hackathon 2024 - 2. Yer",
+                    "description": "Gerçek zamanlı anomali algılama sistemi geliştirdim"
+                },
+                "3": {
+                    "title": "Üniversite ML Yarışması - 1. Yer",
+                    "description": "Kaggle tarzı yarışmada birincilik"
+                }
+            }
+        },
+        "skills": {
+            "title": "Yetenekler",
+            "subtitle": "Teknik becerilerim",
+            "items": {
+                "0": {
+                    "title": "AI ve Makine Öğrenmesi",
+                    "description": "TensorFlow, PyTorch, Scikit-learn, Hugging Face, LangChain"
+                },
+                "1": {
+                    "title": "Programlama",
+                    "description": "Python, TypeScript, JavaScript, SQL, C++"
+                },
+                "2": {
+                    "title": "Frameworkler ve Araçlar",
+                    "description": "React, Next.js, FastAPI, Docker, Git, Linux"
+                },
+                "3": {
+                    "title": "Veri ve Analitik",
+                    "description": "Pandas, NumPy, PostgreSQL, MongoDB, Spark"
+                }
+            }
+        },
+        "projects": {
+            "title": "Projeler",
+            "subtitle": "Geliştirdiğim projeler",
+            "items": {
+                "0": {
+                    "title": "Sosyal Medya Duygu Analizi Motoru",
+                    "description": "Transformer tabanlı NLP kullanarak %87 doğrulukla sosyal medya gönderilerini analiz eden gerçek zamanlı duygu algılama sistemi."
+                },
+                "1": {
+                    "title": "Kestirimci Bakım Sistemi",
+                    "description": "Üretim tesisleri için %92 hassasiyetle ekipman arızalarını 72 saat önceden tahmin eden ML destekli sistem."
+                },
+                "2": {
+                    "title": "Kod İnceleme Asistanı",
+                    "description": "Bağlamı anlayan ve mimari iyileştirmeler öneren AI destekli araç. Kod inceleme süresini %40 azalttı."
+                },
+                "3": {
+                    "title": "Depo Görüş Sistemi",
+                    "description": "YOLO v8 kullanarak %95 algılama doğruluğu ile otomatik envanter takibi için bilgisayarlı görüş sistemi."
+                }
+            }
+        }
+    },
+    "footer": {
+        "tagline": "Eğitim Aşamasında AI Mühendisi. Özgeçmişe satır eklemek yerine gerçek problemleri çözen sistemler inşa ediyorum.",
+        "quickLinks": "Hızlı Bağlantılar",
+        "getInTouch": "İletişime Geç",
+        "getInTouchDesc": "Junior AI mühendisi rolleri ve çözülecek ilginç problemler için açığım.",
+        "sendMessage": "Mesaj Gönder",
+        "builtWith": "ile inşa edildi",
+        "copyright": "Bu portföy yaşayan bir sistem—sürekli gelişiyor."
+    },
+    "aiAssistant": {
+        "badge": "Yakında",
+        "title": "AI Asistanıma Sor",
+        "subtitle": "Özgeçmişimden daha iyi tanıyan bir AI inşa ediyorum. İşlerim, düşüncelerim veya problemlere yaklaşımım hakkında her şeyi sorabilirsiniz.",
+        "chatHeader": {
+            "title": "AI Asistan",
+            "poweredBy": "Bilgi tabanım tarafından destekleniyor"
+        },
+        "status": "Geliştiriliyor...",
+        "sampleQuestionsTitle": "Sorabileceğiniz örnek sorular:",
+        "sampleQuestions": {
+            "q1": "En gurur duyduğun projeler hangileri?",
+            "q2": "Yeni teknolojileri öğrenmeye nasıl yaklaşıyorsun?",
+            "q3": "AI'ın geleceği hakkında ne düşünüyorsun?",
+            "q4": "Mühendislik sürecini anlatır mısın?"
+        },
+        "inDevelopment": "Geliştirme Aşamasında",
+        "inDevelopmentDesc": "Projelerim, yazı örneklerim ve mühendislik felsefem üzerinde eğitiliyor",
+        "inputPlaceholder": "Bana bir şey sor... (Yakında)",
+        "sendButton": "Gönder",
+        "features": {
+            "realtime": {
+                "title": "Gerçek Zamanlı Yanıtlar",
+                "desc": "Projelerim ve deneyimim hakkında anında cevaplar"
+            },
+            "context": {
+                "title": "Bağlam Farkında",
+                "desc": "Takip sorularını anlıyor ve sohbet akışını sürdürüyor"
+            },
+            "learning": {
+                "title": "Sürekli Öğreniyor",
+                "desc": "Yeni projeler tamamladıkça ve deneyim kazandıkça güncelleniyor"
+            }
+        },
+        "notifyQuestion": "AI asistan canlı yayına geçtiğinde haberdar olmak ister misiniz?",
+        "notifyButton": "Beni Bilgilendir"
+    },
+    "common": {
+        "learnMore": "Daha Fazla Öğren",
+        "readMore": "Devamını Oku",
+        "viewAll": "Hepsini Gör",
+        "close": "Kapat",
+        "loading": "Yükleniyor...",
+        "error": "Bir hata oluştu",
+        "tryAgain": "Tekrar Dene",
+        "comingSoon": "Yakında",
+        "new": "Yeni"
+    }
+}
