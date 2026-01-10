@@ -33,20 +33,7 @@ export default function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left - Text Content */}
           <div className="text-center lg:text-left order-2 lg:order-1">
-            {/* Status Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-              className="inline-flex items-center gap-2 mb-8"
-            >
-              <span className="text-xs font-medium tracking-[0.15em] uppercase text-[#819fa7] px-4 py-2 rounded-full border border-[#819fa7]/30 bg-[#819fa7]/5 backdrop-blur-sm flex items-center gap-2">
-                <span className="w-2 h-2 bg-[#819fa7] rounded-full animate-pulse" />
-                {t('status')}
-              </span>
-            </motion.div>
-
-            {/* Name with typewriter effect */}
+            {/* Name */}
             <motion.h1
               initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -54,7 +41,7 @@ export default function Hero() {
               className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight"
             >
               <span className="text-gradient">
-                <TypewriterText text={t('name')} speed={100} delay={800} />
+                {t('name')}
               </span>
             </motion.h1>
 
@@ -83,7 +70,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.6, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start flex-wrap"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
               <motion.a
                 href="#projects"
@@ -103,20 +90,6 @@ export default function Hero() {
               >
                 <Sparkles className="w-4 h-4 text-[#819fa7]" />
                 {t('cta.secondary')}
-              </motion.a>
-
-              <motion.a
-                href="/3d-resume"
-                className="group flex items-center gap-2 px-6 py-3 rounded-lg border border-[#819fa7]/30 bg-[#819fa7]/5 text-[#f3f5f9] hover:bg-[#819fa7]/10 hover:border-[#819fa7]/50 transition-all backdrop-blur-sm"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <svg className="w-4 h-4 text-[#819fa7]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 3L2 8l10 5 10-5-10-5z" />
-                  <path d="M2 16l10 5 10-5" />
-                  <path d="M2 12l10 5 10-5" />
-                </svg>
-                {t('cta.3dresume')}
               </motion.a>
             </motion.div>
           </div>

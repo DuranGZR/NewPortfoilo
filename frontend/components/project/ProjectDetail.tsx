@@ -1,17 +1,20 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { ArrowLeft, ExternalLink, Github, Lightbulb, Target, Cpu, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Github, Lightbulb, Target, Cpu, CheckCircle2, BookOpen, Wrench, Tag } from 'lucide-react';
 import Link from 'next/link';
 import { Project } from '@/data/projects';
 import SectionReveal from '@/components/animations/SectionReveal';
 import GlassCard from '@/components/ui/GlassCard';
+import { useTranslations } from 'next-intl';
 
 interface ProjectDetailProps {
   project: Project;
 }
 
 export default function ProjectDetail({ project }: ProjectDetailProps) {
+  const t = useTranslations('projectDetail');
+
   const statusColors = {
     'completed': 'bg-green-500/20 text-green-400 border-green-500/30',
     'in-progress': 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
@@ -26,7 +29,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
 
   return (
     <div className="min-h-screen bg-[#0d0d0d]">
-      {/* Back Button - Glassmorphism */}
+      {/* Back Button */}
       <div className="sticky top-0 z-50 bg-[#0d0d0d]/60 backdrop-blur-xl border-b border-[#819fa7]/10">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <motion.div
@@ -39,14 +42,14 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               className="inline-flex items-center gap-2 text-sm text-[#819fa7] hover:text-[#f3f5f9] transition-colors group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              Back to Projects
+              {t('backToProjects')}
             </Link>
           </motion.div>
         </div>
       </div>
 
       <div className="max-w-6xl mx-auto px-6 py-12">
-        {/* Header with reveal animation */}
+        {/* Header */}
         <SectionReveal delay={0}>
           <div className="mb-16">
             <div className="flex flex-wrap items-center gap-3 mb-6">
@@ -57,7 +60,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 transition={{ delay: 0.2 }}
               >
                 {statusIcons[project.status]}
-                {project.status.replace('-', ' ')}
+                {t(`status.${project.status}`)}
               </motion.span>
             </div>
 
@@ -80,7 +83,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                   whileTap={{ scale: 0.98 }}
                 >
                   <ExternalLink className="w-4 h-4" />
-                  Live Demo
+                  {t('liveDemo')}
                 </motion.a>
               )}
               {project.github && (
@@ -93,7 +96,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                   whileTap={{ scale: 0.98 }}
                 >
                   <Github className="w-4 h-4" />
-                  View Code
+                  {t('viewCode')}
                 </motion.a>
               )}
             </div>
@@ -104,7 +107,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         <SectionReveal delay={0.1}>
           <section className="mb-16">
             <h2 className="text-2xl font-display font-bold text-[#f3f5f9] mb-6 flex items-center gap-3">
-              <span className="text-[#819fa7] font-mono">01.</span> The Problem
+              <span className="text-[#819fa7] font-mono">01.</span> {t('sections.problem')}
             </h2>
             <GlassCard className="p-8">
               <p className="text-[#f3f5f9]/80 leading-relaxed text-lg mb-8">
@@ -113,7 +116,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               <div>
                 <h3 className="text-lg font-display font-semibold text-[#f3f5f9] mb-4 flex items-center gap-2">
                   <Target className="w-5 h-5 text-[#819fa7]" />
-                  Key Constraints
+                  {t('sections.constraints')}
                 </h3>
                 <ul className="grid md:grid-cols-2 gap-3">
                   {project.constraints.map((constraint, index) => (
@@ -135,11 +138,11 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
           </section>
         </SectionReveal>
 
-        {/* Solution Section */}
+        {/* Approach Section */}
         <SectionReveal delay={0.15}>
           <section className="mb-16">
             <h2 className="text-2xl font-display font-bold text-[#f3f5f9] mb-6 flex items-center gap-3">
-              <span className="text-[#819fa7] font-mono">02.</span> The Approach
+              <span className="text-[#819fa7] font-mono">02.</span> {t('sections.approach')}
             </h2>
             <div className="space-y-6">
               <GlassCard className="p-8">
@@ -148,19 +151,19 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 </p>
               </GlassCard>
 
-              {/* Model Choice Card - Premium */}
+              {/* Model Choice Card */}
               <GlassCard className="p-8" glow>
                 <h3 className="text-lg font-display font-semibold text-[#f3f5f9] mb-6 flex items-center gap-2">
                   <Cpu className="w-5 h-5 text-[#819fa7]" />
-                  Model Choice
+                  {t('sections.modelChoice')}
                 </h3>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="p-4 rounded-xl bg-[#0d0d0d]/60">
-                    <span className="text-xs font-bold text-[#819fa7] uppercase tracking-wider">Selected Model</span>
+                    <span className="text-xs font-bold text-[#819fa7] uppercase tracking-wider">{t('labels.selectedModel')}</span>
                     <p className="text-xl font-display font-semibold text-[#f3f5f9] mt-2">{project.modelChoice.name}</p>
                   </div>
                   <div className="p-4 rounded-xl bg-[#0d0d0d]/40">
-                    <span className="text-xs font-bold text-[#819fa7] uppercase tracking-wider">Rationale</span>
+                    <span className="text-xs font-bold text-[#819fa7] uppercase tracking-wider">{t('labels.rationale')}</span>
                     <p className="text-[#f3f5f9]/70 mt-2 leading-relaxed">{project.modelChoice.rationale}</p>
                   </div>
                 </div>
@@ -173,10 +176,10 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         <SectionReveal delay={0.2}>
           <section className="mb-16">
             <h2 className="text-2xl font-display font-bold text-[#f3f5f9] mb-6 flex items-center gap-3">
-              <span className="text-[#819fa7] font-mono">03.</span> Results & Evaluation
+              <span className="text-[#819fa7] font-mono">03.</span> {t('sections.results')}
             </h2>
 
-            {/* Metrics Grid - Animated */}
+            {/* Metrics Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
               {project.evaluation.metrics.map((metric, index) => (
                 <motion.div
@@ -203,7 +206,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             </div>
 
             <GlassCard className="p-8 mb-6">
-              <h3 className="text-lg font-display font-semibold text-[#f3f5f9] mb-3">Evaluation Approach</h3>
+              <h3 className="text-lg font-display font-semibold text-[#f3f5f9] mb-3">{t('labels.evaluationApproach')}</h3>
               <p className="text-[#f3f5f9]/70 leading-relaxed">
                 {project.evaluation.approach}
               </p>
@@ -212,7 +215,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             <GlassCard className="p-8 border-l-4 border-l-[#819fa7]" glow>
               <h3 className="text-lg font-display font-semibold text-[#f3f5f9] mb-3 flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-[#819fa7]" />
-                Outcome
+                {t('labels.outcome')}
               </h3>
               <p className="text-[#f3f5f9]/80 leading-relaxed text-lg">
                 {project.outcome}
@@ -225,7 +228,8 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         <SectionReveal delay={0.25}>
           <section className="mb-16">
             <h2 className="text-2xl font-display font-bold text-[#f3f5f9] mb-6 flex items-center gap-3">
-              <span className="text-[#819fa7] font-mono">04.</span> Lessons Learned
+              <BookOpen className="w-6 h-6 text-[#819fa7]" />
+              {t('sections.lessons')}
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
               {project.learnings.map((learning, index) => (
@@ -253,7 +257,10 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         {/* Tech Stack */}
         <SectionReveal delay={0.3}>
           <section className="mb-16">
-            <h2 className="text-2xl font-display font-bold text-[#f3f5f9] mb-6">Tech Stack</h2>
+            <h2 className="text-2xl font-display font-bold text-[#f3f5f9] mb-6 flex items-center gap-3">
+              <Wrench className="w-6 h-6 text-[#819fa7]" />
+              {t('sections.techStack')}
+            </h2>
             <div className="flex flex-wrap gap-3">
               {project.techStack.map((tech, index) => (
                 <motion.span
@@ -276,7 +283,10 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         {project.tags.length > 0 && (
           <SectionReveal delay={0.35}>
             <section>
-              <h2 className="text-2xl font-display font-bold text-[#f3f5f9] mb-6">Tags</h2>
+              <h2 className="text-2xl font-display font-bold text-[#f3f5f9] mb-6 flex items-center gap-3">
+                <Tag className="w-6 h-6 text-[#819fa7]" />
+                {t('sections.tags')}
+              </h2>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag, index) => (
                   <motion.span
@@ -298,3 +308,4 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
     </div>
   );
 }
+

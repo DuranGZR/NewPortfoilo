@@ -1,7 +1,7 @@
 {
     "metadata": {
-        "title": "Duran Gezer | AI Engineer Portfolio",
-        "description": "Building intelligent systems that solve real problems, not just implement algorithms."
+        "title": "Duran Gezer | AI/ML Engineer",
+        "description": "Understanding data, teaching machines, shaping the future."
     },
     "navigation": {
         "home": "Home",
@@ -21,8 +21,9 @@
     "hero": {
         "greeting": "Hi, I'm",
         "name": "Duran Gezer",
-        "title": "AI Engineer in Training",
-        "subtitle": "Building intelligent systems that solve real problems, not just implement algorithms.",
+        "title": "AI/ML Engineer",
+        "subtitle": "Understanding data, teaching machines, shaping the future.",
+        "location": "İzmir, Turkey",
         "cta": {
             "primary": "Explore My Projects",
             "secondary": "Talk to My AI Assistant",
@@ -33,77 +34,109 @@
     },
     "about": {
         "title": "About Me",
-        "subtitle": "From Computer Engineering to Computational Intelligence",
-        "bio": "I'm a 4th-year Computer Engineering student specializing in artificial intelligence. I don't just train models - I architect solutions.",
+        "subtitle": "AI Passion, Engineering Vision",
+        "bio": "I'm a 4th-year Computer Engineering student at İnönü University. Since 2022, I've been focusing on artificial intelligence and machine learning, developing various projects with technologies like Python, TensorFlow, and Scikit-learn. I've gained experience across a wide range of areas, from image processing to natural language processing, from reinforcement learning to deep learning. In every project, I make it a principle to translate theory into practice, solve complex problems with analytical thinking, and continuously learn. My goal is to specialize in AI/ML after graduation and become an engineer who applies data science and AI technologies to real-world problems. I value contributing to open-source projects, writing technical blog posts, and sharing knowledge.",
         "highlights": {
             "title": "Highlights",
             "items": {
                 "projects": {
-                    "title": "Production-Focused Projects",
-                    "description": "ML systems that solve real-world problems"
+                    "title": "15+ Completed Projects",
+                    "description": "Applications solving real-world problems"
                 },
                 "thinking": {
-                    "title": "System Thinker",
-                    "description": "I understand the trade-offs between accuracy, speed, and cost"
+                    "title": "Analytical Thinking",
+                    "description": "Breaking down complex problems into solutions"
                 },
                 "learning": {
                     "title": "Continuous Learner",
                     "description": "Keeping up with the latest in AI/ML"
                 },
                 "practical": {
-                    "title": "Pragmatic Approach",
-                    "description": "Shipping beats perfect"
+                    "title": "Application-Focused",
+                    "description": "From theory to practice, building working solutions"
                 }
             }
         },
-        "quote": "The best model is the one that works in production.",
+        "quote": "Learning is a journey, every project is a new discovery.",
         "status": {
             "available": "Open to Opportunities",
-            "graduating": "Graduating: May 2026"
+            "graduating": "Graduating: 2026"
         }
     },
     "projects": {
-        "badge": "Selected Work",
-        "title": "Real Problems, Real Solutions",
-        "subtitle": "Every project here solved a problem that mattered. Not tutorials—production systems with measurable impact.",
+        "badge": "My Projects",
+        "title": "Real Projects, Real Learning",
+        "subtitle": "Projects I've developed in artificial intelligence, machine learning, and software development.",
         "viewDetails": "View Details",
         "viewCode": "View Code",
         "viewDemo": "View Demo",
-        "viewCaseStudies": "View Full Case Studies",
+        "viewCaseStudies": "View All Projects",
+        "showLess": "Show Less",
+        "moreProjects": "more projects",
         "items": {
-            "sentiment": {
-                "title": "Social Media Sentiment Analysis Engine",
-                "period": "Fall 2024",
-                "tagline": "Real-time emotion detection system analyzing social media posts with 87% accuracy using transformer-based NLP.",
-                "impact": "Reduced analysis time from hours to seconds, enabling real-time brand monitoring for 50+ clients."
+            "visualAI": {
+                "title": "Real-Time Visual Understanding AI",
+                "period": "2024",
+                "tagline": "AI system that analyzes images from camera in real-time using Ollama LLaVA model. Understands and describes visual content instantly.",
+                "impact": "Built with Python, Ollama, LLaVA, OpenCV.",
+                "github": "https://github.com/DuranGZR/Real-Time-Visual-Understanding"
             },
-            "maintenance": {
-                "title": "Predictive Maintenance System",
-                "period": "Summer 2024",
-                "tagline": "ML-powered system predicting equipment failures 72 hours in advance with 92% precision for manufacturing plants.",
-                "impact": "Prevented $2M in equipment damage and reduced unplanned downtime by 65% across 3 facilities."
+            "handwriting": {
+                "title": "Handwriting Digit Recognition",
+                "period": "2024",
+                "tagline": "Deep learning model trained on MNIST dataset using CNN and OpenCV. Real-time drawing interface for recognizing handwritten digits.",
+                "impact": "Built with TensorFlow, Keras, OpenCV, CNN architecture.",
+                "github": "https://github.com/DuranGZR/El_Yazisi_Tahmin"
             },
-            "codeReview": {
-                "title": "Code Review Assistant",
-                "period": "Spring 2024",
-                "tagline": "AI-powered tool that understands context and suggests architectural improvements, not just syntax fixes.",
-                "impact": "Reduced code review time by 40% and caught 3x more potential bugs before production."
+            "diabetes": {
+                "title": "Diabetes Prediction System",
+                "period": "2024",
+                "tagline": "Machine learning model for early diabetes diagnosis. Data analysis, preprocessing, and multiple classification algorithms applied.",
+                "impact": "Built with Python, Scikit-learn, Pandas, NumPy.",
+                "github": "https://github.com/DuranGZR/Diabetes_Prediction"
             },
-            "warehouse": {
-                "title": "Warehouse Vision System",
-                "period": "Fall 2023",
-                "tagline": "Computer vision system for automated inventory tracking using YOLO v8 with 95% detection accuracy.",
-                "impact": "Eliminated manual counting errors and reduced inventory audit time from 8 hours to 20 minutes."
+            "xoxBot": {
+                "title": "XOX Bot - Q-Learning AI",
+                "period": "2024",
+                "tagline": "AI-powered Tic-Tac-Toe bot trained with Q-Learning algorithm. Develops strategies through reinforcement learning to make optimal moves.",
+                "impact": "Built with Python, Q-Learning, Reinforcement Learning.",
+                "github": "https://github.com/DuranGZR/XOX_Bot"
+            },
+            "salary": {
+                "title": "Salary Prediction Model",
+                "period": "2024",
+                "tagline": "Machine learning model for predicting baseball player salaries. Exploratory data analysis, feature engineering, and regression algorithms applied.",
+                "impact": "Built with Python, Scikit-learn, Feature Engineering.",
+                "github": "https://github.com/DuranGZR/Salary_Prediction_with_Mahcine_Learning"
+            },
+            "neuron": {
+                "title": "Simple Artificial Neuron",
+                "period": "2024",
+                "tagline": "Educational project demonstrating the fundamental principles of artificial neural networks. Neuron structure and activation function implementation.",
+                "impact": "Built from scratch with Python and NumPy.",
+                "github": "https://github.com/DuranGZR/Simple-Artificial-Neuron"
+            },
+            "pharmacy": {
+                "title": "Pharmacy Automation System",
+                "period": "2024",
+                "tagline": "Automation software developed for pharmacy management. Automates stock tracking, medicine management, and sales operations.",
+                "impact": "Built with C# and database management.",
+                "github": "https://github.com/DuranGZR/Pharmacy_Automation"
+            },
+            "busTicket": {
+                "title": "Bus Ticket Reservation System",
+                "period": "2024",
+                "tagline": "Ticket reservation system built using object-oriented programming and data structures. Features passenger management and seat selection.",
+                "impact": "Built with Java, OOP principles, and data structures.",
+                "github": "https://github.com/DuranGZR/A_Bus_Ticket_Reservation_System"
             }
         },
         "metrics": {
             "accuracy": "Accuracy",
             "processing": "Processing",
             "precision": "Precision",
-            "downtime": "Downtime ↓",
-            "reviewTime": "Review Time ↓",
-            "bugDetection": "Bug Detection",
-            "timeSaved": "Time Saved"
+            "technologies": "Technologies",
+            "github": "GitHub"
         }
     },
     "skills": {
@@ -116,146 +149,199 @@
             "frameworks": "Frameworks & Tools",
             "data": "Data & Analytics"
         },
+        "levels": {
+            "beginner": "Beginner",
+            "intermediate": "Intermediate",
+            "advanced": "Advanced",
+            "expert": "Expert"
+        },
         "stats": {
             "technologies": "Technologies",
             "projects": "Projects",
             "codeLines": "Code Lines",
             "learningHrs": "Learning Hrs"
+        },
+        "modal": {
+            "whatIKnow": "What I Know"
         }
     },
     "experience": {
         "badge": "Background",
-        "title": "Experience & Education",
-        "subtitle": "The path that shaped my engineering mindset.",
+        "title": "Education & Certifications",
+        "subtitle": "The journey that shaped my engineering vision.",
         "categories": {
             "education": "Education",
-            "experience": "Experience",
-            "competitions": "Competitions",
             "certifications": "Certifications"
         },
         "items": {
             "degree": {
                 "title": "B.S. Computer Engineering",
-                "organization": "Your University Name",
-                "period": "2021 - 2025",
-                "description": "Focus on Artificial Intelligence and Machine Learning. GPA: 3.7/4.0"
+                "organization": "İnönü University",
+                "period": "2022 - 2026",
+                "description": "Focus on Artificial Intelligence and Machine Learning. GPA: 2.84/4.0"
             },
-            "intern": {
-                "title": "AI Engineering Intern",
-                "organization": "Tech Company Name",
-                "period": "Summer 2024",
-                "description": "Built ML pipelines and deployed models to production"
-            },
-            "freelance": {
-                "title": "Freelance ML Developer",
-                "organization": "Various Clients",
-                "period": "2023 - Present",
-                "description": "Custom AI solutions for small businesses and startups"
-            },
-            "hackathon": {
-                "title": "AI Hackathon 2024",
-                "organization": "National Tech Conference",
-                "period": "March 2024",
-                "description": "2nd Place - Real-time anomaly detection system"
-            },
-            "mlChallenge": {
-                "title": "University ML Challenge",
-                "organization": "Your University",
-                "period": "November 2023",
-                "description": "1st Place - Kaggle-style competition"
-            },
-            "deepLearning": {
-                "title": "Deep Learning Specialization",
-                "organization": "Coursera - deeplearning.ai",
+            "mlCamp": {
+                "title": "Machine Learning Camp",
+                "organization": "Miuul",
                 "period": "2024",
-                "description": "5-course series covering CNNs, RNNs, and deployment"
+                "description": "Comprehensive machine learning bootcamp program"
             },
-            "aws": {
-                "title": "AWS Certified ML",
-                "organization": "Amazon Web Services",
+            "featureEng": {
+                "title": "Feature Engineering",
+                "organization": "Miuul",
                 "period": "2024",
-                "description": "Specialty certification for ML on AWS"
+                "description": "Feature engineering and data preprocessing techniques"
+            },
+            "machineLearning": {
+                "title": "Machine Learning",
+                "organization": "Miuul",
+                "period": "2024",
+                "description": "Machine learning algorithms and applications"
+            },
+            "pythonDS": {
+                "title": "Python Programming for Data Science",
+                "organization": "Miuul",
+                "period": "2024",
+                "description": "Python programming for data science"
+            },
+            "csharp": {
+                "title": "C# Programming",
+                "organization": "Udemy",
+                "period": "2024",
+                "description": "Comprehensive C# programming course for all levels"
+            },
+            "cloudNight": {
+                "title": "Cloud Night",
+                "organization": "HSD İnönü - Huawei",
+                "period": "2025",
+                "description": "Cloud technologies and Huawei Cloud training"
+            }
+        },
+        "modal": {
+            "learned": "What I Learned"
+        },
+        "coursesTitle": "Courses Taken",
+        "courses": {
+            "dataStructures": {
+                "title": "Data Structures",
+                "description": "Implementation of fundamental data structures and algorithms."
+            },
+            "oop": {
+                "title": "Object-Oriented Programming",
+                "description": "OOP principles and design patterns."
+            },
+            "database": {
+                "title": "Database Management Systems",
+                "description": "Relational databases and SQL."
+            },
+            "algorithms": {
+                "title": "Algorithm Analysis",
+                "description": "Algorithm design and complexity analysis."
+            },
+            "ai": {
+                "title": "Artificial Intelligence",
+                "description": "AI fundamentals and search algorithms."
+            },
+            "imageProcessing": {
+                "title": "Image Processing",
+                "description": "Digital image processing techniques."
+            },
+            "computerNetworks": {
+                "title": "Computer Networks",
+                "description": "Network protocols and communication."
+            },
+            "webProgramming": {
+                "title": "Web Programming",
+                "description": "Web development and backend systems."
+            },
+            "programmingLanguages": {
+                "title": "Programming Languages",
+                "description": "Programming paradigms and language design."
+            },
+            "softwareEng": {
+                "title": "Software Engineering",
+                "description": "Software development methodologies."
             }
         }
     },
     "thinking": {
-        "badge": "Engineering Philosophy",
-        "title": "How I Think About Problems",
-        "subtitle": "Principles that guide every decision I make when building systems.",
-        "quote": "The best code is the code you don't have to write.",
+        "badge": "Engineering Mindset",
+        "title": "My Problem-Solving Philosophy",
+        "subtitle": "Principles I follow when transforming complex problems into simple solutions.",
+        "quote": "A good engineer never starts coding without understanding the problem first.",
         "principles": {
             "firstPrinciples": {
-                "title": "First Principles, Not Patterns",
-                "description": "I break problems down to fundamentals and build up from there."
+                "title": "Understand First, Solve Later",
+                "description": "I never start coding without fully understanding the problem. I analyze requirements, consider edge cases, then move to implementation."
             },
             "outcome": {
-                "title": "Outcome Over Output",
-                "description": "Code is a tool, not the goal. Simpler is better."
+                "title": "Simplicity First",
+                "description": "The best code is the least complex code. I avoid premature optimization and focus on readable, maintainable solutions."
             },
             "iterations": {
-                "title": "Fast Iterations Beat Perfect Plans",
-                "description": "Build MVPs fast, test early, iterate with real feedback."
+                "title": "Bugs = Learning",
+                "description": "Every bug is an opportunity to understand how the system works. Instead of quick fixes, I investigate the root cause."
             },
             "systems": {
-                "title": "Systems Thinking",
-                "description": "Think in graphs, not lists. Understand dependencies."
+                "title": "Data-Driven Thinking",
+                "description": "I base decisions on data, not intuition. I measure model performance with metrics and validate with A/B testing."
             },
             "debugging": {
-                "title": "Debugging Is Teaching",
-                "description": "Every bug is a lesson about patterns and pitfalls."
+                "title": "Documentation Culture",
+                "description": "Half of software is code, the other half is documentation. I leave explanatory notes even for my future self."
             },
             "curiosity": {
-                "title": "Curiosity as a Skill",
-                "description": "Explore edge cases, read source code, ask 'what if?'"
+                "title": "Continuous Learning",
+                "description": "Technology constantly evolves. I try to learn something new every day and experiment to stay current."
             }
         }
     },
     "roadmap": {
-        "badge": "Growth Path",
-        "title": "The Next 2 Years",
-        "subtitle": "Not a rigid plan. A direction with checkpoints.",
-        "bottomNote": "Progress > plan. I adapt based on what I learn.",
+        "badge": "Career Journey",
+        "title": "Looking Ahead",
+        "subtitle": "My post-graduation goals and career plan.",
+        "bottomNote": "A flexible plan. I adapt to opportunities and what I learn.",
         "active": "Active",
         "completed": "completed",
         "milestones": {
             "now": {
                 "period": "Now",
-                "title": "Building Production-Ready Skills",
+                "title": "Senior Year - Self Development",
                 "goals": [
-                    "Complete 4 real-world AI projects with measurable impact",
-                    "Master MLOps: Docker, CI/CD, model versioning",
-                    "Build this portfolio as a living system"
+                    "Strengthening my AI and machine learning projects",
+                    "Enriching my portfolio with real projects",
+                    "Researching and applying for internship opportunities"
                 ]
             },
             "6months": {
-                "period": "6 Months",
-                "title": "Junior AI Engineer Role",
+                "period": "2026 - Graduation",
+                "title": "Career Start",
                 "goals": [
-                    "Join a team building ML systems at scale",
-                    "Ship features that impact thousands of users",
-                    "Learn from senior engineers"
+                    "Earning my Computer Engineering degree",
+                    "Finding a junior position in AI/ML field",
+                    "Gaining professional work experience"
                 ],
-                "focus": "Contribution > Title"
+                "focus": "Learning > Salary"
             },
             "1year": {
-                "period": "1 Year",
-                "title": "Deeper Technical Mastery",
+                "period": "1 Year Later",
+                "title": "Technical Deepening",
                 "goals": [
-                    "Build custom training pipelines",
-                    "Optimize inference at production scale",
-                    "Contribute to open-source ML tools"
+                    "Gaining experience in real-world ML projects",
+                    "Specializing in deep learning and NLP",
+                    "Contributing to open-source projects"
                 ],
-                "focus": "Depth over breadth"
+                "focus": "Developing expertise"
             },
             "2years": {
-                "period": "2 Years",
-                "title": "Technical Leadership",
+                "period": "2 Years Later",
+                "title": "Becoming an AI Engineer",
                 "goals": [
-                    "Lead small AI projects end-to-end",
-                    "Mentor junior engineers",
-                    "Build systems that become infrastructure"
+                    "Reaching mid-level AI/ML Engineer position",
+                    "Bringing my own AI projects to life",
+                    "Actively contributing to the software community"
                 ],
-                "focus": "Systems thinking"
+                "focus": "Creating value"
             }
         }
     },
@@ -375,7 +461,7 @@
             "items": {
                 "0": {
                     "title": "Programming Languages",
-                    "description": "Python, TypeScript, JavaScript, C++"
+                    "description": "Python, JavaScript, SQL, C++, C#, C, Kotlin, Java"
                 },
                 "1": {
                     "title": "AI/ML Frameworks",
@@ -383,11 +469,11 @@
                 },
                 "2": {
                     "title": "Web Technologies",
-                    "description": "React, Next.js, Node.js, Tailwind CSS"
+                    "description": "React, Next.js, FastAPI, Tailwind CSS"
                 },
                 "3": {
                     "title": "Tools",
-                    "description": "Git, Docker, Linux, VS Code"
+                    "description": "Git, Docker, VS Code"
                 }
             }
         },
@@ -408,6 +494,32 @@
                     "description": "Sentiment analysis application using natural language processing."
                 }
             }
+        }
+    },
+    "projectDetail": {
+        "backToProjects": "Back to Projects",
+        "liveDemo": "Live Demo",
+        "viewCode": "View Code",
+        "status": {
+            "completed": "Completed",
+            "in-progress": "In Progress",
+            "planned": "Planned"
+        },
+        "sections": {
+            "problem": "The Problem",
+            "constraints": "Key Constraints",
+            "approach": "The Approach",
+            "modelChoice": "Model Choice",
+            "results": "Results & Evaluation",
+            "lessons": "Lessons Learned",
+            "techStack": "Tech Stack",
+            "tags": "Tags"
+        },
+        "labels": {
+            "selectedModel": "Selected Model",
+            "rationale": "Rationale",
+            "evaluationApproach": "Evaluation Approach",
+            "outcome": "Outcome"
         }
     }
 }

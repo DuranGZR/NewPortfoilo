@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Calendar, TrendingUp } from 'lucide-react';
-import Link from 'next/link';
+import { Github, Calendar, TrendingUp, ArrowUpRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 interface ProjectCardProps {
   id: string;
@@ -14,6 +14,7 @@ interface ProjectCardProps {
   }[];
   tags: string[];
   index: number;
+  github?: string;
 }
 
 export default function ProjectCard({
@@ -21,7 +22,8 @@ export default function ProjectCard({
   translationKey,
   metrics,
   tags,
-  index
+  index,
+  github
 }: ProjectCardProps) {
   const t = useTranslations('projects');
 
@@ -35,11 +37,11 @@ export default function ProjectCard({
         delay: index * 0.1,
         ease: [0.25, 0.1, 0.25, 1]
       }}
-      className="group"
+      className="group h-full"
     >
-      <Link href={`/projects/${id}`}>
+      <Link href={`/projects/${id}`} className="block h-full">
         <motion.div
-          className="h-full p-6 rounded-2xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 cursor-pointer overflow-hidden relative"
+          className="h-full p-6 rounded-2xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 overflow-hidden relative flex flex-col cursor-pointer"
           whileHover={{
             y: -4,
             borderColor: 'rgba(129, 159, 167, 0.3)',
@@ -63,18 +65,29 @@ export default function ProjectCard({
                 {t(`items.${translationKey}.title`)}
               </h3>
             </div>
-            <motion.div
-              className="w-10 h-10 rounded-full border border-[#819fa7]/20 flex items-center justify-center text-[#819fa7]/50"
-              whileHover={{
-                backgroundColor: '#819fa7',
-                borderColor: '#819fa7',
-                color: '#0d0d0d',
-                rotate: 45
-              }}
-              transition={{ duration: 0.3 }}
-            >
-              <ArrowUpRight className="w-4 h-4" />
-            </motion.div>
+            <div className="flex items-center gap-2">
+              {github && (
+                <motion.button
+                  type="button"
+                  className="w-9 h-9 rounded-full border border-[#819fa7]/20 flex items-center justify-center text-[#819fa7]/50 hover:bg-[#819fa7] hover:border-[#819fa7] hover:text-[#0d0d0d] transition-all duration-300"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.open(github, '_blank', 'noopener,noreferrer');
+                  }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Github className="w-4 h-4" />
+                </motion.button>
+              )}
+              <motion.div
+                className="w-9 h-9 rounded-full border border-[#819fa7]/20 flex items-center justify-center text-[#819fa7]/50 group-hover:bg-[#819fa7] group-hover:border-[#819fa7] group-hover:text-[#0d0d0d] transition-all duration-300"
+                whileHover={{ rotate: 45 }}
+              >
+                <ArrowUpRight className="w-4 h-4" />
+              </motion.div>
+            </div>
           </div>
 
           {/* Tagline */}
@@ -92,7 +105,7 @@ export default function ProjectCard({
             </div>
           </div>
 
-          {/* Metrics with stagger */}
+          {/* Metrics */}
           <div className="relative z-10 grid grid-cols-2 gap-3 mb-4">
             {metrics.map((metric, idx) => (
               <motion.div
@@ -113,8 +126,8 @@ export default function ProjectCard({
             ))}
           </div>
 
-          {/* Tags with stagger */}
-          <div className="relative z-10 flex flex-wrap gap-2">
+          {/* Tags */}
+          <div className="relative z-10 flex flex-wrap gap-2 mt-auto">
             {tags.slice(0, 4).map((tag, idx) => (
               <motion.span
                 key={idx}
@@ -138,3 +151,4 @@ export default function ProjectCard({
     </motion.div>
   );
 }
+

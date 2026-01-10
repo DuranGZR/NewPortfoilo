@@ -1,23 +1,23 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Twitter, ArrowUpRight, Heart } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowUpRight, Heart } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 const socialLinks = [
-  { icon: Github, href: '#', label: 'GitHub' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Mail, href: 'mailto:duran@example.com', label: 'Email' }
+  { icon: Github, href: 'https://github.com/DuranGZR', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://linkedin.com/in/durangezer', label: 'LinkedIn' },
+  { icon: Mail, href: 'mailto:contact@durangezer.com', label: 'Email' }
 ];
 
 const quickLinks = [
-  { nameKey: 'about', href: '#about' },
-  { nameKey: 'projects', href: '#projects' },
-  { nameKey: 'skills', href: '#skills' },
-  { nameKey: 'experience', href: '#experience' },
-  { nameKey: 'roadmap', href: '#roadmap' }
+  { nameKey: 'about', href: '/#about' },
+  { nameKey: 'projects', href: '/#projects' },
+  { nameKey: 'skills', href: '/#skills' },
+  { nameKey: 'experience', href: '/#experience' },
+  { nameKey: 'roadmap', href: '/#roadmap' }
 ];
+
 
 export default function Footer() {
   const t = useTranslations('footer');
@@ -124,7 +124,7 @@ export default function Footer() {
                 {t('getInTouchDesc')}
               </p>
               <motion.a
-                href="mailto:duran@example.com"
+                href="mailto:contact@durangezer.com"
                 className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium text-[#f3f5f9] bg-[#1a1a1a]/50 border border-[#819fa7]/10 rounded-xl hover:border-[#819fa7]/40 transition-all group"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}

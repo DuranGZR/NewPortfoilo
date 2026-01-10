@@ -1,21 +1,20 @@
-// Placeholder Project Data
-// Bu dosya gerçek projelerle güncellenecek
+// Proje Verileri - Duran Gezer'in GitHub Projeleri (Türkçe)
 
 export interface Project {
   id: string
   title: string
   status: 'completed' | 'in-progress' | 'planned'
   oneLiner: string
-  
+
   problem: string
   constraints: string[]
   approach: string
-  
+
   modelChoice: {
     name: string
     rationale: string
   }
-  
+
   evaluation: {
     metrics: Array<{
       name: string
@@ -23,236 +22,409 @@ export interface Project {
     }>
     approach: string
   }
-  
+
   outcome: string
   learnings: string[]
-  
+
   techStack: string[]
   github?: string
   demo?: string
-  
+
   thumbnail: string
   tags: string[]
 }
 
 export const projects: Project[] = [
   {
-    id: 'sentiment-analysis',
-    title: 'E-commerce Review Intelligence System',
+    id: 'visual-ai',
+    title: 'Gerçek Zamanlı Görsel Anlama AI',
     status: 'completed',
-    oneLiner: 'Multi-class sentiment analysis on Turkish product reviews with 89% accuracy',
-    
-    problem: 'E-commerce platforms need automated review analysis. Turkish language lacks robust pre-trained models for sentiment nuances in product reviews.',
-    
+    oneLiner: 'Kamera görüntüsünü anlık olarak analiz eden ve Türkçe açıklama üreten yapay zeka sistemi.',
+
+    problem: 'Görme engelli bireyler veya anlık çevre analizi ihtiyacı olanlar için gerçek zamanlı görsel açıklama sistemi gerekiyor. Mevcut çözümler ya çok yavaş ya da Türkçe desteklemiyor.',
+
     constraints: [
-      'Limited labeled Turkish review dataset',
-      'Need for multi-class (positive/negative/neutral/mixed)',
-      'Real-time inference requirement (<200ms)',
-      'Cost-effective (can\'t use GPT-4 for all reviews)'
+      'Düşük gecikme süresi gereksinimi (<2 saniye)',
+      'Türkçe dil desteği zorunluluğu',
+      'Lokal çalışabilme (internet bağımsız, gizlilik)',
+      'Farklı ışık koşullarında güvenilir çalışma'
     ],
-    
-    approach: 'Fine-tuned BERTurk on custom-labeled dataset. Implemented ensemble with rule-based fallback for edge cases. Optimized inference with ONNX.',
-    
+
+    approach: 'Ollama üzerinde LLaVA vision-language modeli kullanarak gerçek zamanlı görüntü analizi. OpenCV ile kamera entegrasyonu sağlandı. Görüntü ön işleme ile model performansı optimize edildi.',
+
     modelChoice: {
-      name: 'BERTurk (Transformer)',
-      rationale: 'Tried LSTM baseline (76% accuracy) but transformer architecture captured contextual nuances better. BERTurk chosen over multilingual BERT due to 12% accuracy gain on Turkish-specific idioms.'
+      name: 'LLaVA (Ollama)',
+      rationale: 'Lokal çalışabilme özelliği sayesinde internet bağımsızlığı ve gizlilik sağlıyor. Türkçe dil desteği mevcut. API maliyeti yok ve açık kaynak olması geliştirmeyi kolaylaştırıyor.'
     },
-    
+
     evaluation: {
       metrics: [
-        { name: 'Accuracy', value: '89%' },
-        { name: 'F1-Score (weighted)', value: '0.87' },
-        { name: 'Inference Time', value: '145ms avg' }
+        { name: 'Yanıt Süresi', value: '<2s' },
+        { name: 'Doğruluk', value: '%85+' },
+        { name: 'Dil Desteği', value: 'TR/EN' }
       ],
-      approach: 'K-fold cross-validation, separate test set from different platforms'
+      approach: 'Farklı ortam ve nesnelerle manuel test yapıldı. 100+ farklı sahne üzerinde doğruluk ölçümü gerçekleştirildi.'
     },
-    
-    outcome: 'Successfully deployed to staging. Reduced manual review classification time by 80%. Identified 23% more actionable customer feedback.',
-    
+
+    outcome: 'Başarıyla çalışan gerçek zamanlı görsel anlama sistemi geliştirildi. Sesli çıktı özelliği eklenebilir durumda. Görme engelli bireylere yardımcı olabilecek potansiyele sahip.',
+
     learnings: [
-      'Data quality > model complexity for this use case',
-      'Class imbalance required weighted loss function',
-      'ONNX quantization crucial for production speed',
-      'Rule-based fallback prevented hallucination on ambiguous cases'
+      'Vision-language modelleri hızla gelişiyor ve lokal kullanıma uygun hale geliyor',
+      'Lokal LLM performansı birçok kullanım senaryosu için yeterli olabiliyor',
+      'Prompt engineering, model çıktı kalitesini dramatik şekilde etkiliyor',
+      'Türkçe için ek prompt optimizasyonu daha iyi sonuçlar veriyor'
     ],
-    
-    techStack: [
-      'PyTorch',
-      'Transformers (HuggingFace)',
-      'FastAPI',
-      'ONNX Runtime',
-      'Docker',
-      'PostgreSQL',
-      'Scikit-learn'
-    ],
-    
-    github: 'https://github.com/durangezer/review-sentiment',
+
+    techStack: ['Python', 'Ollama', 'LLaVA', 'OpenCV'],
+
+    github: 'https://github.com/DuranGZR/Real-Time-Visual-Understanding',
     demo: undefined,
-    
-    thumbnail: '/projects/sentiment-analysis.jpg',
-    tags: ['NLP', 'Transformers', 'Production ML', 'Turkish']
+
+    thumbnail: '/projects/visual-ai.jpg',
+    tags: ['AI', 'Computer Vision', 'LLM', 'Python']
   },
-  
+
   {
-    id: 'predictive-maintenance',
-    title: 'Factory Equipment Failure Prediction',
-    status: 'in-progress',
-    oneLiner: 'Time-series anomaly detection for predicting equipment failures 4-6 hours in advance',
-    
-    problem: 'Manufacturing downtime costs $260K per hour. Reactive maintenance is expensive. Need predictive system to prevent failures.',
-    
+    id: 'handwriting',
+    title: 'El Yazısı Rakam Tanıma',
+    status: 'completed',
+    oneLiner: 'CNN kullanarak el yazısıyla yazılmış rakamları yüksek doğrulukla tanıyan derin öğrenme modeli.',
+
+    problem: 'El yazısı dijitalleştirme ve otomatik form işleme için güvenilir rakam tanıma sistemi gerekiyor. Farklı el yazısı stillerini doğru tanımlayabilmeli.',
+
     constraints: [
-      'Noisy sensor data (vibration, temperature, pressure)',
-      'Class imbalance (99.8% normal, 0.2% failure)',
-      'Must minimize false positives (unnecessary shutdowns costly)',
-      'Edge deployment preferred (low latency, data privacy)'
+      'Farklı el yazısı stillerini tanıyabilme',
+      'Yüksek doğruluk oranı gereksinimi (%95+)',
+      'Hızlı inference süresi (<50ms)',
+      'MNIST veri seti ile uyumluluk'
     ],
-    
-    approach: 'LSTM-based autoencoder for anomaly detection. Threshold tuning optimized for precision>0.85. Currently implementing online learning for drift adaptation.',
-    
+
+    approach: 'Convolutional Neural Network (CNN) mimarisi ile görüntü sınıflandırma. Veri artırma (data augmentation) teknikleri ile modelin genelleme yeteneği güçlendirildi.',
+
     modelChoice: {
-      name: 'LSTM Autoencoder',
-      rationale: 'Evaluated ARIMA (too simple), Isolation Forest (poor with temporal patterns), and Transformer (overkill). LSTM autoencoder balanced complexity and explainability while handling time-series naturally.'
+      name: 'CNN (TensorFlow/Keras)',
+      rationale: 'Görüntü sınıflandırma için standart ve kanıtlanmış mimari. Basit ama güçlü performans. Eğitim ve deploy süreçleri iyi dokümante edilmiş.'
     },
-    
+
     evaluation: {
       metrics: [
-        { name: 'Precision', value: '0.87' },
-        { name: 'Recall', value: '0.74' },
-        { name: 'Lead Time', value: '4.2 hours avg' }
+        { name: 'Test Doğruluğu', value: '%98+' },
+        { name: 'Model Boyutu', value: '<5MB' },
+        { name: 'Inference', value: '<50ms' }
       ],
-      approach: 'Time-series split validation, separate factory line for testing'
+      approach: 'MNIST test seti ve özel toplanmış el yazısı örnekleri üzerinde değerlendirme yapıldı.'
     },
-    
-    outcome: 'Currently in testing phase. Early results show 65% reduction in unplanned downtime on test equipment.',
-    
+
+    outcome: 'Yüksek doğrulukla çalışan rakam tanıma modeli geliştirildi. Kullanıcı dostu GUI arayüzü ile entegre edildi.',
+
     learnings: [
-      'Domain knowledge critical (worked with factory engineers)',
-      'Feature engineering > raw sensor data',
-      'Explainability matters (engineers need to trust predictions)',
-      'Edge deployment harder than expected (optimization ongoing)'
+      'CNN temelleri, derin öğrenme için kritik bir başlangıç noktası',
+      'Data augmentation, sınırlı veriyle bile genellemeyi önemli ölçüde artırıyor',
+      'Basit problemler için basit çözümler genellikle en etkili oluyor',
+      'Transfer learning her zaman gerekli değil, özellikle yeterli veri varsa'
     ],
-    
-    techStack: [
-      'TensorFlow/Keras',
-      'TensorFlow Lite',
-      'InfluxDB',
-      'Grafana',
-      'Python',
-      'NumPy',
-      'Pandas'
-    ],
-    
-    github: undefined,
+
+    techStack: ['Python', 'TensorFlow', 'Keras', 'OpenCV', 'NumPy'],
+
+    github: 'https://github.com/DuranGZR/El_Yazisi_Tahmin',
     demo: undefined,
-    
-    thumbnail: '/projects/predictive-maintenance.jpg',
-    tags: ['Time-Series', 'Anomaly Detection', 'IoT', 'Edge ML']
+
+    thumbnail: '/projects/handwriting.jpg',
+    tags: ['Deep Learning', 'CNN', 'Image Classification']
   },
-  
+
   {
-    id: 'code-review-assistant',
-    title: 'Intelligent Code Review Copilot',
-    status: 'planned',
-    oneLiner: 'LLM-based assistant for suggesting code improvements and catching anti-patterns',
-    
-    problem: 'Code reviews are time-consuming and quality varies by reviewer. Need automated first-pass to catch common issues, freeing humans for architectural decisions.',
-    
+    id: 'diabetes',
+    title: 'Diyabet Tahmin Sistemi',
+    status: 'completed',
+    oneLiner: 'Makine öğrenmesi ile diyabet risk tahminlemesi yapan sınıflandırma modeli.',
+
+    problem: 'Erken teşhis için diyabet risk faktörlerini analiz eden bir sistem gerekli. Sağlık verilerinden anlamlı tahminler üretebilmeli.',
+
     constraints: [
-      'Must understand multiple languages (Python, JS, Java)',
-      'Context awareness (whole file, not just snippet)',
-      'No false positives on stylistic preferences',
-      'Privacy (code stays local or private cloud)'
+      'Sınırlı veri seti (Pima Indians Diabetes Dataset)',
+      'Dengesiz sınıf dağılımı problemi',
+      'Tıbbi alanda yüksek precision gereksinimi',
+      'Yorumlanabilirlik önemli (kara kutu model yetersiz)'
     ],
-    
-    approach: 'Fine-tune CodeLLaMA on curated code review comments. Implement RAG for project-specific patterns. Rule-based filters for style issues.',
-    
+
+    approach: 'Çeşitli ML algoritmalarının karşılaştırmalı analizi yapıldı. Kapsamlı feature engineering ve veri ön işleme uygulandı. Ensemble yöntemler ile en iyi sonuç elde edildi.',
+
     modelChoice: {
-      name: 'CodeLLaMA (13B) + RAG',
-      rationale: 'Open-source (privacy), specialized for code, reasonable size for fine-tuning. RAG adds project context without retraining.'
+      name: 'Random Forest / XGBoost',
+      rationale: 'Ensemble yöntemler daha iyi genelleme sağlıyor. Feature importance analizi ile hangi faktörlerin etkili olduğu yorumlanabiliyor.'
     },
-    
+
     evaluation: {
       metrics: [
-        { name: 'Precision on bug detection', value: 'Target: >0.8' },
-        { name: 'Developer acceptance rate', value: 'Target: >60%' },
-        { name: 'Time saved per review', value: 'Target: 15+ min' }
+        { name: 'Accuracy', value: '%82' },
+        { name: 'F1-Score', value: '0.78' },
+        { name: 'AUC-ROC', value: '0.85' }
       ],
-      approach: 'Planned: A/B test with dev team, manual annotation of suggestions'
+      approach: 'K-fold cross-validation ve confusion matrix analizi ile model performansı değerlendirildi.'
     },
-    
-    outcome: 'Researching feasibility. Exploring whether local LLM can compete with GitHub Copilot while maintaining privacy.',
-    
+
+    outcome: 'Tıbbi karar destek sistemi prototipi geliştirildi. Feature importance analizi ile en etkili risk faktörleri belirlendi.',
+
     learnings: [
-      'Research phase - no learnings yet',
-      'Exploring fine-tuning vs prompt engineering trade-offs'
+      'Tıbbi verilerde precision çok kritik - yanlış pozitifler ciddi sonuçlar doğurabilir',
+      'Feature engineering, ham veriden çok daha iyi sonuçlar alınmasını sağlıyor',
+      'Ensemble yöntemler genellikle tek modellere göre daha güçlü',
+      'Veri kalitesi, model karmaşıklığından daha önemli'
     ],
-    
-    techStack: [
-      'CodeLLaMA',
-      'LangChain',
-      'ChromaDB',
-      'FastAPI',
-      'VS Code Extension API'
-    ],
-    
-    github: undefined,
+
+    techStack: ['Python', 'Scikit-learn', 'Pandas', 'NumPy', 'Matplotlib'],
+
+    github: 'https://github.com/DuranGZR/Diabetes_Prediction',
     demo: undefined,
-    
-    thumbnail: '/projects/code-review.jpg',
-    tags: ['LLM', 'Code Analysis', 'RAG', 'Developer Tools']
+
+    thumbnail: '/projects/diabetes.jpg',
+    tags: ['Machine Learning', 'Classification', 'Healthcare']
   },
-  
+
   {
-    id: 'warehouse-vision',
-    title: 'Smart Inventory Vision System',
-    status: 'planned',
-    oneLiner: 'YOLOv8-based real-time detection for automated inventory tracking',
-    
-    problem: 'Manual inventory counting is error-prone and slow. Need automated system to track items on conveyor belts.',
-    
+    id: 'xox-bot',
+    title: 'XOX Bot (Q-Learning AI)',
+    status: 'completed',
+    oneLiner: 'Pekiştirmeli öğrenme ile kendini eğiten ve optimal strateji geliştiren tic-tac-toe oyuncu yapay zekası.',
+
+    problem: 'Klasik oyunlarda yapay zekanın strateji öğrenme ve optimal hamle bulma sürecini anlamak ve uygulamak.',
+
     constraints: [
-      'Real-time (>30 FPS)',
-      'High accuracy (misses costly)',
-      'Variable lighting conditions',
-      'Edge deployment (camera on device)'
+      'Oyun kurallarına tam uyum',
+      'Öğrenme hızı optimizasyonu',
+      'Exploration vs exploitation dengesi',
+      'Farklı rakip stratejilerine adaptasyon'
     ],
-    
-    approach: 'YOLOv8 fine-tuned on warehouse items. Data augmentation for lighting variations. TensorRT optimization for edge GPU.',
-    
+
+    approach: 'Q-Learning algoritması ile pekiştirmeli öğrenme uygulandı. Epsilon-greedy strateji ile keşif ve kullanım dengesi sağlandı.',
+
     modelChoice: {
-      name: 'YOLOv8',
-      rationale: 'Industry standard for real-time detection. Better speed-accuracy tradeoff than RCNN. Easier edge deployment than transformers.'
+      name: 'Q-Learning',
+      rationale: 'Basit ama etkili bir pekiştirmeli öğrenme algoritması. Discrete state-action space için ideal. Öğrenme sürecini gözlemlemeye uygun.'
     },
-    
+
     evaluation: {
       metrics: [
-        { name: 'FPS', value: 'Target: >30' },
-        { name: 'mAP', value: 'Target: >0.85' },
-        { name: 'Miss rate', value: 'Target: <2%' }
+        { name: 'Kazanma Oranı', value: '%95+' },
+        { name: 'Eğitim Süresi', value: '<1dk' },
+        { name: 'Optimal Hamleler', value: '%90+' }
       ],
-      approach: 'Planned: Real warehouse testing over 1 month'
+      approach: 'Random ve optimal rakiplere karşı binlerce oyun ile test edildi.'
     },
-    
-    outcome: 'Need access to warehouse for data collection. Exploring partnerships with logistics companies.',
-    
+
+    outcome: 'Neredeyse yenilmez XOX oyuncusu geliştirildi. Reinforcement learning temellerini anlamak için mükemmel bir uygulama projesi oldu.',
+
     learnings: [
-      'Concept phase - no learnings yet'
+      'RL temelleri en iyi pratik uygulama ile öğreniliyor',
+      'Hyperparameter tuning (learning rate, epsilon decay) sonucu dramatik etkiliyor',
+      'Basit oyunlar RL algoritmaları için ideal test ortamı',
+      'Convergence garantisi için dikkatli tasarım gerekiyor'
     ],
-    
-    techStack: [
-      'YOLOv8',
-      'PyTorch',
-      'TensorRT',
-      'OpenCV',
-      'NVIDIA Jetson'
-    ],
-    
-    github: undefined,
+
+    techStack: ['Python', 'NumPy', 'Q-Learning'],
+
+    github: 'https://github.com/DuranGZR/XOX_Bot',
     demo: undefined,
-    
-    thumbnail: '/projects/warehouse-vision.jpg',
-    tags: ['Computer Vision', 'Real-time', 'Edge ML', 'Object Detection']
+
+    thumbnail: '/projects/xox-bot.jpg',
+    tags: ['Reinforcement Learning', 'Q-Learning', 'Game AI']
+  },
+
+  {
+    id: 'salary-prediction',
+    title: 'Maaş Tahmin Modeli',
+    status: 'completed',
+    oneLiner: 'Kapsamlı feature engineering ve makine öğrenmesi ile çalışan maaş tahmini yapan regresyon modeli.',
+
+    problem: 'İK ve işe alım süreçlerinde adil ve veri odaklı maaş belirleme için tahmin sistemi gerekiyor.',
+
+    constraints: [
+      'Çok sayıda kategorik değişken yönetimi',
+      'Eksik verilerle başa çıkma stratejileri',
+      'Non-linear ilişkilerin modellenmesi',
+      'Outlier (aykırı değer) yönetimi'
+    ],
+
+    approach: 'Kapsamlı EDA (Exploratory Data Analysis) yapıldı. Feature engineering ile yeni özellikler türetildi. Farklı modeller karşılaştırıldı. Pipeline ile end-to-end çözüm geliştirildi.',
+
+    modelChoice: {
+      name: 'Gradient Boosting / Random Forest',
+      rationale: 'Regresyon problemlerinde güçlü performans. Feature importance ile hangi faktörlerin maaşı etkilediği yorumlanabilir.'
+    },
+
+    evaluation: {
+      metrics: [
+        { name: 'R² Score', value: '0.85' },
+        { name: 'MAE', value: '±%8' },
+        { name: 'RMSE', value: 'Düşük' }
+      ],
+      approach: 'Train-test split ve cross-validation ile model performansı değerlendirildi.'
+    },
+
+    outcome: 'Maaş tahmini için kullanılabilir model geliştirildi. Maaşı en çok etkileyen faktörler (deneyim, pozisyon, sektör vb.) belirlendi.',
+
+    learnings: [
+      'Feature engineering, model performansını dramatik şekilde artırabiliyor',
+      'Kategorik değişkenlerin encoding stratejisi çok önemli',
+      'Domain knowledge (sektör bilgisi) feature engineering\'i yönlendirmeli',
+      'Pipeline kullanımı temiz ve bakımı kolay kod sağlıyor'
+    ],
+
+    techStack: ['Python', 'Scikit-learn', 'Pandas', 'Feature Engineering'],
+
+    github: 'https://github.com/DuranGZR/Salary_Prediction_with_Mahcine_Learning',
+    demo: undefined,
+
+    thumbnail: '/projects/salary.jpg',
+    tags: ['Machine Learning', 'Regression', 'Feature Engineering']
+  },
+
+  {
+    id: 'neuron',
+    title: 'Basit Yapay Sinir Ağı',
+    status: 'completed',
+    oneLiner: 'Sıfırdan NumPy ile yazılmış, temel yapay nöron ve neural network implementasyonu.',
+
+    problem: 'Yapay sinir ağlarının temel çalışma prensiplerini derinlemesine anlamak ve framework kullanmadan uygulamak.',
+
+    constraints: [
+      'Sadece NumPy kullanımı (TensorFlow/PyTorch yok)',
+      'Matematiksel temelleri tam anlama',
+      'Forward ve backward propagation implementasyonu',
+      'Gradient descent optimizasyonu'
+    ],
+
+    approach: 'Perceptron ve basit multi-layer neural network sıfırdan kodlandı. Aktivasyon fonksiyonları, loss hesaplama ve backpropagation elle implemente edildi.',
+
+    modelChoice: {
+      name: 'Perceptron / MLP',
+      rationale: 'En temel neural network yapısı. Öğrenim için ideal başlangıç noktası. Matematiği anlamak framework kullanmadan önce kritik.'
+    },
+
+    evaluation: {
+      metrics: [
+        { name: 'AND/OR Gates', value: '%100' },
+        { name: 'XOR (MLP)', value: '%100' },
+        { name: 'Öğrenim Değeri', value: 'Yüksek' }
+      ],
+      approach: 'Boolean logic gates (AND, OR, XOR) problemleri ile test edildi.'
+    },
+
+    outcome: 'Neural network temellerini derinlemesine anlama sağlandı. Framework kullanmadan önce bu bilgi kritik öneme sahip.',
+
+    learnings: [
+      'Backpropagation algoritması chain rule matematiğine dayanıyor',
+      'Gradient descent\'in farklı varyantları (SGD, momentum) önemli farklar yaratıyor',
+      'Aktivasyon fonksiyonları non-linearity sağlıyor ve kritik önemde',
+      'Framework\'lerin arkasındaki matematiği anlamak debugging\'i kolaylaştırıyor'
+    ],
+
+    techStack: ['Python', 'NumPy', 'Mathematics'],
+
+    github: 'https://github.com/DuranGZR/Simple-Artificial-Neuron',
+    demo: undefined,
+
+    thumbnail: '/projects/neuron.jpg',
+    tags: ['Neural Networks', 'Deep Learning Fundamentals', 'NumPy']
+  },
+
+  {
+    id: 'pharmacy',
+    title: 'Eczane Otomasyon Sistemi',
+    status: 'completed',
+    oneLiner: 'C# ile geliştirilmiş kapsamlı eczane yönetim ve satış takip sistemi.',
+
+    problem: 'Eczanelerde stok takibi, ilaç yönetimi ve satış işlemlerinin dijitalleştirilmesi için otomasyon sistemi gerekiyor.',
+
+    constraints: [
+      'Kullanıcı dostu arayüz tasarımı',
+      'Güvenilir veritabanı entegrasyonu',
+      'Stok yönetimi ve uyarı sistemi',
+      'Raporlama ve istatistik özellikleri'
+    ],
+
+    approach: 'Windows Forms ile masaüstü uygulama geliştirildi. SQL veritabanı ile CRUD işlemleri implemente edildi. OOP prensipleri uygulandı.',
+
+    modelChoice: {
+      name: 'Windows Forms + SQL Server',
+      rationale: 'Masaüstü uygulamalar için stabil ve yaygın kullanılan teknoloji. Kurumsal ortamlarda güvenilir çözüm.'
+    },
+
+    evaluation: {
+      metrics: [
+        { name: 'Tamamlanma', value: '%100' },
+        { name: 'Özellik Sayısı', value: '10+' },
+        { name: 'Kullanılabilirlik', value: 'Yüksek' }
+      ],
+      approach: 'Manuel test ve kullanıcı geri bildirimi ile değerlendirildi.'
+    },
+
+    outcome: 'Tam işlevsel eczane otomasyon sistemi geliştirildi. OOP prensiplerinin gerçek dünya uygulaması oldu.',
+
+    learnings: [
+      'Desktop uygulama geliştirme süreçlerini öğrendim',
+      'Veritabanı tasarımı ve normalizasyon önemli',
+      'OOP prensipleri (encapsulation, inheritance) kod kalitesini artırıyor',
+      'Kullanıcı arayüzü tasarımı kullanıcı deneyimini doğrudan etkiliyor'
+    ],
+
+    techStack: ['C#', 'Windows Forms', 'SQL', 'OOP'],
+
+    github: 'https://github.com/DuranGZR/Pharmacy_Automation',
+    demo: undefined,
+
+    thumbnail: '/projects/pharmacy.jpg',
+    tags: ['C#', 'Desktop App', 'Database', 'OOP']
+  },
+
+  {
+    id: 'bus-ticket',
+    title: 'Otobüs Bilet Rezervasyon Sistemi',
+    status: 'completed',
+    oneLiner: 'Java ile geliştirilmiş otobüs seferi ve bilet yönetim sistemi.',
+
+    problem: 'Otobüs firmalarında bilet satış ve koltuk rezervasyon süreçlerinin dijitalleştirilmesi gerekiyor.',
+
+    constraints: [
+      'Çoklu sefer ve otobüs yönetimi',
+      'Koltuk seçimi ve rezervasyon işlemleri',
+      'Veri yapılarının etkin kullanımı',
+      'OOP ilkelerine uygun tasarım'
+    ],
+
+    approach: 'Java Swing ile graphical user interface geliştirildi. ArrayList, HashMap gibi veri yapıları ile veri yönetimi sağlandı. OOP tasarım kalıpları uygulandı.',
+
+    modelChoice: {
+      name: 'Java Swing',
+      rationale: 'Java için standart GUI toolkit. Platform bağımsız çalışma. Veri yapıları ve OOP öğrenimi için uygun.'
+    },
+
+    evaluation: {
+      metrics: [
+        { name: 'Çalışan Özellikler', value: '%100' },
+        { name: 'OOP Uyumu', value: 'Yüksek' },
+        { name: 'Kod Kalitesi', value: 'İyi' }
+      ],
+      approach: 'Manuel test ile fonksiyonellik doğrulandı.'
+    },
+
+    outcome: 'Tam işlevsel bilet rezervasyon sistemi geliştirildi. Java ve OOP pratik uygulaması olarak değerli deneyim sağladı.',
+
+    learnings: [
+      'Java Swing ile GUI geliştirme temellerini öğrendim',
+      'Veri yapılarının pratik kullanım alanlarını gördüm',
+      'OOP tasarım kalıpları (MVC benzeri) kod organizasyonunu iyileştiriyor',
+      'Event-driven programlama paradigmasını uyguladım'
+    ],
+
+    techStack: ['Java', 'Swing', 'OOP', 'Data Structures'],
+
+    github: 'https://github.com/DuranGZR/A_Bus_Ticket_Reservation_System',
+    demo: undefined,
+
+    thumbnail: '/projects/bus-ticket.jpg',
+    tags: ['Java', 'Desktop App', 'OOP', 'Data Structures']
   }
 ]
 

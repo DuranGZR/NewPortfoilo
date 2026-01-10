@@ -1,7 +1,7 @@
 {
     "metadata": {
-        "title": "Duran Gezer | AI Mühendisi Portföyü",
-        "description": "Sadece algoritmaları uygulamayan, gerçek problemleri çözen akıllı sistemler inşa ediyorum."
+        "title": "Duran Gezer | AI/ML Engineer",
+        "description": "Veriyi anlayan, makineleri öğreten, geleceği şekillendiren."
     },
     "navigation": {
         "home": "Ana Sayfa",
@@ -21,8 +21,9 @@
     "hero": {
         "greeting": "Merhaba, Ben",
         "name": "Duran Gezer",
-        "title": "AI Engineer Adayı",
-        "subtitle": "Sadece algoritmaları uygulamayan, gerçek problemleri çözen akıllı sistemler inşa ediyorum.",
+        "title": "AI/ML Engineer",
+        "subtitle": "Veriyi anlayan, makineleri öğreten, geleceği şekillendiren.",
+        "location": "İzmir, Türkiye",
         "cta": {
             "primary": "Projelerimi Keşfet",
             "secondary": "AI Asistanımla Konuş",
@@ -33,77 +34,109 @@
     },
     "about": {
         "title": "Hakkımda",
-        "subtitle": "Bilgisayar Mühendisliğinden Hesaplamalı Zekaya",
-        "bio": "Bilgisayar Mühendisliği 4. sınıf öğrencisiyim ve yapay zeka alanında uzmanlaşıyorum. Sadece modelleri eğitmiyorum - çözümler tasarlıyorum.",
+        "subtitle": "Yapay Zeka Tutkusu, Mühendislik Vizyonu",
+        "bio": "İnönü Üniversitesi Bilgisayar Mühendisliği 4. sınıf öğrencisiyim. 2022'den bu yana yapay zeka ve makine öğrenmesi üzerine yoğunlaşarak, Python, TensorFlow, Scikit-learn gibi teknolojilerle çeşitli projeler geliştirdim. Görüntü işlemeden doğal dil işlemeye, pekiştirmeli öğrenmeden derin öğrenmeye kadar geniş bir yelpazede deneyim kazandım. Her projemde teoriyi pratiğe dökmeyi, karmaşık problemleri analitik düşünceyle çözmeyi ve sürekli öğrenmeyi ilke edindim. Hedefim, mezuniyetimin ardından AI/ML alanında uzmanlaşarak, veri bilimi ve yapay zeka teknolojilerini gerçek dünya problemlerine uygulayan bir mühendis olmak. Açık kaynak projelere katkı sağlamayı, teknik blog yazıları yazmayı ve bilgi paylaşımını önemsiyorum.",
         "highlights": {
             "title": "Öne Çıkanlar",
             "items": {
                 "projects": {
-                    "title": "Üretim Odaklı Projeler",
-                    "description": "Gerçek dünya problemlerini çözen ML sistemleri"
+                    "title": "15+ Tamamlanan Proje",
+                    "description": "Gerçek dünya problemlerini çözen uygulamalar"
                 },
                 "thinking": {
-                    "title": "Sistem Düşünürü",
-                    "description": "Doğruluk, hız ve maliyet arasındaki dengeyi anlıyorum"
+                    "title": "Analitik Düşünce",
+                    "description": "Karmaşık problemleri parçalara ayırıp çözümlüyorum"
                 },
                 "learning": {
                     "title": "Sürekli Öğrenen",
                     "description": "AI/ML'deki en son gelişmeleri takip ediyorum"
                 },
                 "practical": {
-                    "title": "Pragmatik Yaklaşım",
-                    "description": "Mükemmel yerine çalışan çözümler üretiyorum"
+                    "title": "Uygulama Odaklı",
+                    "description": "Teoriden pratiğe, çalışan çözümler üretiyorum"
                 }
             }
         },
-        "quote": "En iyi model, üretimde çalışan modeldir.",
+        "quote": "Öğrenmek bir yolculuk, her proje yeni bir keşif.",
         "status": {
             "available": "İş Fırsatlarına Açık",
-            "graduating": "Mezuniyet: Mayıs 2026"
+            "graduating": "Mezuniyet: 2026"
         }
     },
     "projects": {
-        "badge": "Seçilmiş Çalışmalar",
-        "title": "Gerçek Problemler, Gerçek Çözümler",
-        "subtitle": "Buradaki her proje önemli bir problemi çözdü. Eğitim değil—ölçülebilir etkisi olan üretim sistemleri.",
+        "badge": "Projelerim",
+        "title": "Gerçek Projeler, Gerçek Öğrenmeler",
+        "subtitle": "Yapay zeka, makine öğrenmesi ve yazılım geliştirme alanlarında geliştirdiğim projeler.",
         "viewDetails": "Detayları Gör",
         "viewCode": "Kodu Gör",
         "viewDemo": "Demo'yu Gör",
-        "viewCaseStudies": "Vaka Çalışmalarını Gör",
+        "viewCaseStudies": "Tüm Projeleri Gör",
+        "showLess": "Daha Az Göster",
+        "moreProjects": "proje daha",
         "items": {
-            "sentiment": {
-                "title": "Sosyal Medya Duygu Analizi Motoru",
-                "period": "Güz 2024",
-                "tagline": "Transformer tabanlı NLP kullanarak %87 doğrulukla sosyal medya gönderilerini analiz eden gerçek zamanlı duygu algılama sistemi.",
-                "impact": "Analiz süresini saatlerden saniyelere düşürerek 50+ müşteri için gerçek zamanlı marka takibi sağladı."
+            "visualAI": {
+                "title": "Gerçek Zamanlı Görsel Anlama AI",
+                "period": "2024",
+                "tagline": "Ollama LLaVA modeli kullanarak kameradan anlık görüntü analizi yapan yapay zeka sistemi. Görüntüleri gerçek zamanlı olarak anlayıp Türkçe açıklama üretir.",
+                "impact": "Python, Ollama, LLaVA, OpenCV kullanılarak geliştirildi.",
+                "github": "https://github.com/DuranGZR/Real-Time-Visual-Understanding"
             },
-            "maintenance": {
-                "title": "Kestirimci Bakım Sistemi",
-                "period": "Yaz 2024",
-                "tagline": "Üretim tesisleri için %92 hassasiyetle ekipman arızalarını 72 saat önceden tahmin eden ML destekli sistem.",
-                "impact": "2 milyon dolarlık ekipman hasarını önledi ve 3 tesiste plansız duruş süresini %65 azalttı."
+            "handwriting": {
+                "title": "El Yazısı Rakam Tanıma",
+                "period": "2024",
+                "tagline": "CNN ve OpenCV ile MNIST veri seti üzerinde eğitilmiş derin öğrenme modeli. Gerçek zamanlı çizim arayüzü ile el yazısı rakamları tanır.",
+                "impact": "TensorFlow, Keras, OpenCV, CNN mimarisi kullanıldı.",
+                "github": "https://github.com/DuranGZR/El_Yazisi_Tahmin"
             },
-            "codeReview": {
-                "title": "Kod İnceleme Asistanı",
-                "period": "Bahar 2024",
-                "tagline": "Bağlamı anlayan ve sadece sözdizimi düzeltmeleri değil, mimari iyileştirmeler öneren AI destekli araç.",
-                "impact": "Kod inceleme süresini %40 azalttı ve üretime geçmeden önce 3 kat daha fazla potansiyel hata yakaladı."
+            "diabetes": {
+                "title": "Diyabet Tahmin Sistemi",
+                "period": "2024",
+                "tagline": "Makine öğrenmesi ile diyabet hastalığını erken teşhis eden tahmin modeli. Veri analizi, ön işleme ve çoklu sınıflandırma algoritmaları kullanıldı.",
+                "impact": "Python, Scikit-learn, Pandas, NumPy ile geliştirildi.",
+                "github": "https://github.com/DuranGZR/Diabetes_Prediction"
             },
-            "warehouse": {
-                "title": "Depo Görüş Sistemi",
-                "period": "Güz 2023",
-                "tagline": "%95 algılama doğruluğu ile YOLO v8 kullanarak otomatik envanter takibi için bilgisayarlı görüş sistemi.",
-                "impact": "Manuel sayım hatalarını ortadan kaldırdı ve envanter denetim süresini 8 saatten 20 dakikaya düşürdü."
+            "xoxBot": {
+                "title": "XOX Bot - Q-Learning AI",
+                "period": "2024",
+                "tagline": "Q-Öğrenme algoritması ile eğitilmiş yapay zeka destekli Tic-Tac-Toe botu. Takviye öğrenme ile stratejilerini geliştirerek optimal hamleler yapar.",
+                "impact": "Python, Q-Learning, Reinforcement Learning kullanıldı.",
+                "github": "https://github.com/DuranGZR/XOX_Bot"
+            },
+            "salary": {
+                "title": "Maaş Tahmin Modeli",
+                "period": "2024",
+                "tagline": "Beyzbol oyuncularının maaş tahminleri için makine öğrenmesi modeli. Keşifçi veri analizi, özellik mühendisliği ve regresyon algoritmaları uygulandı.",
+                "impact": "Python, Scikit-learn, Feature Engineering teknikleri.",
+                "github": "https://github.com/DuranGZR/Salary_Prediction_with_Mahcine_Learning"
+            },
+            "neuron": {
+                "title": "Basit Yapay Sinir Ağı",
+                "period": "2024",
+                "tagline": "Yapay sinir ağlarının temel çalışma prensiplerini gösteren eğitim amaçlı proje. Nöron yapısı ve aktivasyon fonksiyonları implementasyonu.",
+                "impact": "Python, NumPy ile sıfırdan geliştirildi.",
+                "github": "https://github.com/DuranGZR/Simple-Artificial-Neuron"
+            },
+            "pharmacy": {
+                "title": "Eczane Otomasyon Sistemi",
+                "period": "2024",
+                "tagline": "Eczane yönetimi için geliştirilmiş otomasyon yazılımı. Stok takibi, ilaç yönetimi ve satış işlemlerini otomatize eder.",
+                "impact": "C# ve veritabanı yönetimi ile geliştirildi.",
+                "github": "https://github.com/DuranGZR/Pharmacy_Automation"
+            },
+            "busTicket": {
+                "title": "Otobüs Bilet Rezervasyon Sistemi",
+                "period": "2024",
+                "tagline": "Nesne yönelimli programlama ve veri yapıları kullanılarak geliştirilen bilet rezervasyon sistemi. Yolcu yönetimi ve koltuk seçimi özellikleri.",
+                "impact": "Java, OOP prensipleri ve veri yapıları kullanıldı.",
+                "github": "https://github.com/DuranGZR/A_Bus_Ticket_Reservation_System"
             }
         },
         "metrics": {
             "accuracy": "Doğruluk",
             "processing": "İşleme",
             "precision": "Hassasiyet",
-            "downtime": "Duruş ↓",
-            "reviewTime": "İnceleme Süresi ↓",
-            "bugDetection": "Hata Tespiti",
-            "timeSaved": "Kazanılan Süre"
+            "technologies": "Teknolojiler",
+            "github": "GitHub"
         }
     },
     "skills": {
@@ -116,146 +149,199 @@
             "frameworks": "Frameworkler ve Araçlar",
             "data": "Veri ve Analitik"
         },
+        "levels": {
+            "beginner": "Temel",
+            "intermediate": "Orta",
+            "advanced": "İleri",
+            "expert": "Uzman"
+        },
         "stats": {
             "technologies": "Teknoloji",
             "projects": "Proje",
             "codeLines": "Kod Satırı",
             "learningHrs": "Öğrenme Saati"
+        },
+        "modal": {
+            "whatIKnow": "Bildiklerim"
         }
     },
     "experience": {
         "badge": "Geçmiş",
-        "title": "Deneyim ve Eğitim",
-        "subtitle": "Mühendislik zihniyetimi şekillendiren yol.",
+        "title": "Eğitim ve Sertifikalar",
+        "subtitle": "Mühendislik vizyonumu şekillendiren yolculuk.",
         "categories": {
             "education": "Eğitim",
-            "experience": "Deneyim",
-            "competitions": "Yarışmalar",
             "certifications": "Sertifikalar"
         },
         "items": {
             "degree": {
                 "title": "Bilgisayar Mühendisliği Lisans",
-                "organization": "Üniversite Adı",
-                "period": "2021 - 2025",
-                "description": "Yapay Zeka ve Makine Öğrenmesi odaklı. GPA: 3.7/4.0"
+                "organization": "İnönü Üniversitesi",
+                "period": "2022 - 2026",
+                "description": "Yapay Zeka ve Makine Öğrenmesi odaklı. GPA: 2.84/4.0"
             },
-            "intern": {
-                "title": "AI Mühendisliği Stajyeri",
-                "organization": "Teknoloji Şirketi Adı",
-                "period": "Yaz 2024",
-                "description": "ML pipeline'ları oluşturdu ve modelleri üretime aldı"
-            },
-            "freelance": {
-                "title": "Serbest ML Geliştirici",
-                "organization": "Çeşitli Müşteriler",
-                "period": "2023 - Devam",
-                "description": "Küçük işletmeler ve girişimler için özel AI çözümleri"
-            },
-            "hackathon": {
-                "title": "AI Hackathon 2024",
-                "organization": "Ulusal Teknoloji Konferansı",
-                "period": "Mart 2024",
-                "description": "2. Yer - Gerçek zamanlı anomali algılama sistemi"
-            },
-            "mlChallenge": {
-                "title": "Üniversite ML Yarışması",
-                "organization": "Üniversite",
-                "period": "Kasım 2023",
-                "description": "1. Yer - Kaggle tarzı yarışma"
-            },
-            "deepLearning": {
-                "title": "Derin Öğrenme Uzmanlığı",
-                "organization": "Coursera - deeplearning.ai",
+            "mlCamp": {
+                "title": "Machine Learning Camp",
+                "organization": "Miuul",
                 "period": "2024",
-                "description": "CNN'ler, RNN'ler ve dağıtımı kapsayan 5 kurslu seri"
+                "description": "Kapsamlı makine öğrenmesi bootcamp programı"
             },
-            "aws": {
-                "title": "AWS Sertifikalı ML",
-                "organization": "Amazon Web Services",
+            "featureEng": {
+                "title": "Feature Engineering",
+                "organization": "Miuul",
                 "period": "2024",
-                "description": "AWS'de ML için uzmanlık sertifikası"
+                "description": "Özellik mühendisliği ve veri ön işleme teknikleri"
+            },
+            "machineLearning": {
+                "title": "Machine Learning",
+                "organization": "Miuul",
+                "period": "2024",
+                "description": "Makine öğrenmesi algoritmaları ve uygulamaları"
+            },
+            "pythonDS": {
+                "title": "Python Programming for Data Science",
+                "organization": "Miuul",
+                "period": "2024",
+                "description": "Veri bilimi için Python programlama"
+            },
+            "csharp": {
+                "title": "C# Programlama Dili",
+                "organization": "Udemy",
+                "period": "2024",
+                "description": "Her seviyeye hitap eden kapsamlı C# eğitimi"
+            },
+            "cloudNight": {
+                "title": "Cloud Night",
+                "organization": "HSD İnönü - Huawei",
+                "period": "2025",
+                "description": "Bulut teknolojileri ve Huawei Cloud eğitimi"
+            }
+        },
+        "modal": {
+            "learned": "Bu Eğitimde Öğrendiklerim"
+        },
+        "coursesTitle": "Aldığım Dersler",
+        "courses": {
+            "dataStructures": {
+                "title": "Veri Yapıları",
+                "description": "Temel veri yapıları ve algoritmaların implementasyonu."
+            },
+            "oop": {
+                "title": "Nesne Tabanlı Programlama",
+                "description": "OOP prensipleri ve tasarım kalıpları."
+            },
+            "database": {
+                "title": "Veritabanı Yönetim Sistemleri",
+                "description": "İlişkisel veritabanları ve SQL."
+            },
+            "algorithms": {
+                "title": "Algoritma Analizi",
+                "description": "Algoritma tasarımı ve karmaşıklık analizi."
+            },
+            "ai": {
+                "title": "Yapay Zeka",
+                "description": "AI temelleri ve arama algoritmaları."
+            },
+            "imageProcessing": {
+                "title": "Görüntü İşleme",
+                "description": "Dijital görüntü işleme teknikleri."
+            },
+            "computerNetworks": {
+                "title": "Bilgisayar Ağları",
+                "description": "Ağ protokolleri ve iletişim."
+            },
+            "webProgramming": {
+                "title": "İnternet Programcılığı",
+                "description": "Web geliştirme ve backend sistemleri."
+            },
+            "programmingLanguages": {
+                "title": "Programlama Dilleri",
+                "description": "Programlama paradigmaları ve dil tasarımı."
+            },
+            "softwareEng": {
+                "title": "Yazılım Mühendisliği",
+                "description": "Yazılım geliştirme metodolojileri."
             }
         }
     },
     "thinking": {
-        "badge": "Mühendislik Felsefesi",
-        "title": "Problemler Hakkında Nasıl Düşünüyorum",
-        "subtitle": "Sistem kurarken aldığım her kararı yönlendiren ilkeler.",
-        "quote": "En iyi kod, yazmak zorunda olmadığın koddur.",
+        "badge": "Mühendislik Yaklaşımım",
+        "title": "Problem Çözme Felsefem",
+        "subtitle": "Karmaşık problemleri basit çözümlere dönüştürürken izlediğim prensipler.",
+        "quote": "İyi bir mühendis problemi anlamadan çözüme başlamaz.",
         "principles": {
             "firstPrinciples": {
-                "title": "İlk İlkeler, Kalıplar Değil",
-                "description": "Problemleri temellere ayırıp oradan inşa ediyorum."
+                "title": "Önce Anla, Sonra Çöz",
+                "description": "Problemi tam olarak anlamadan kod yazmaya başlamam. Gereksinimleri analiz eder, edge case'leri düşünür, sonra çözüme geçerim."
             },
             "outcome": {
-                "title": "Çıktıdan Çok Sonuç",
-                "description": "Kod bir araçtır, amaç değil. Basit daha iyidir."
+                "title": "Basitlik Öncelikli",
+                "description": "En iyi kod, en az karmaşık koddur. Gereksiz optimizasyonlardan kaçınır, okunabilir ve sürdürülebilir çözümler üretirim."
             },
             "iterations": {
-                "title": "Hızlı İterasyonlar Mükemmel Planları Yener",
-                "description": "MVP'leri hızlı kur, erken test et, gerçek geri bildirimle iterasyon yap."
+                "title": "Hata = Öğrenme",
+                "description": "Her bug, sistemin nasıl çalıştığını anlamak için bir fırsat. Hataları hızlıca düzeltmek yerine, neden oluştuğunu araştırırım."
             },
             "systems": {
-                "title": "Sistem Düşüncesi",
-                "description": "Listeler değil, graflar halinde düşün. Bağımlılıkları anla."
+                "title": "Veri Odaklı Düşün",
+                "description": "Kararları sezgilere değil, verilere dayandırırım. Model performansını metriklerle ölçer, A/B testleriyle doğrularım."
             },
             "debugging": {
-                "title": "Hata Ayıklama Öğretmektir",
-                "description": "Her hata, kalıplar ve tuzaklar hakkında bir derstir."
+                "title": "Dokümantasyon Kültürü",
+                "description": "Yazılımın yarısı koddur, diğer yarısı dokümantasyon. Gelecekteki ben için bile açıklayıcı notlar bırakırım."
             },
             "curiosity": {
-                "title": "Bir Yetenek Olarak Merak",
-                "description": "Uç durumları keşfet, kaynak kodu oku, 'ya olursa?' diye sor."
+                "title": "Sürekli Öğrenme",
+                "description": "Teknoloji sürekli değişiyor. Güncel kalmak için her gün yeni bir şey öğrenmeye, denemeler yapmaya çalışırım."
             }
         }
     },
     "roadmap": {
-        "badge": "Büyüme Yolu",
-        "title": "Önümüzdeki 2 Yıl",
-        "subtitle": "Katı bir plan değil. Kontrol noktaları olan bir yön.",
-        "bottomNote": "İlerleme > plan. Öğrendiklerime göre uyum sağlıyorum.",
+        "badge": "Kariyer Yolculuğum",
+        "title": "Geleceğe Doğru",
+        "subtitle": "Mezuniyet sonrası hedeflerim ve kariyer planım.",
+        "bottomNote": "Esnek bir plan. Fırsatlara ve öğrendiklerime göre adapte oluyorum.",
         "active": "Aktif",
         "completed": "tamamlandı",
         "milestones": {
             "now": {
                 "period": "Şimdi",
-                "title": "Üretime Hazır Beceriler Geliştirme",
+                "title": "Son Sınıf - Kendini Geliştirme",
                 "goals": [
-                    "Ölçülebilir etkisi olan 4 gerçek dünya AI projesi tamamla",
-                    "MLOps'ta ustalaş: Docker, CI/CD, model versiyonlama",
-                    "Bu portföyü yaşayan bir sistem olarak inşa et"
+                    "Yapay zeka ve makine öğrenmesi projelerimi güçlendirme",
+                    "Portföyümü gerçek projelerle zenginleştirme",
+                    "Staj fırsatlarını araştırma ve başvuru yapma"
                 ]
             },
             "6months": {
-                "period": "6 Ay",
-                "title": "Junior AI Mühendisi Rolü",
+                "period": "2026 - Mezuniyet",
+                "title": "Kariyer Başlangıcı",
                 "goals": [
-                    "Ölçekli ML sistemleri kuran bir takıma katıl",
-                    "Binlerce kullanıcıyı etkileyen özellikler gönder",
-                    "Kıdemli mühendislerden öğren"
+                    "Bilgisayar Mühendisliği diplomamı almak",
+                    "AI/ML alanında junior pozisyon bulmak",
+                    "Profesyonel iş deneyimi kazanmak"
                 ],
-                "focus": "Katkı > Unvan"
+                "focus": "Öğrenme > Maaş"
             },
             "1year": {
-                "period": "1 Yıl",
-                "title": "Daha Derin Teknik Ustalık",
+                "period": "1 Yıl Sonra",
+                "title": "Teknik Derinleşme",
                 "goals": [
-                    "Özel eğitim pipeline'ları oluştur",
-                    "Üretim ölçeğinde çıkarımı optimize et",
-                    "Açık kaynak ML araçlarına katkıda bulun"
+                    "Gerçek dünya ML projelerinde deneyim kazanmak",
+                    "Derin öğrenme ve NLP'de uzmanlaşmak",
+                    "Açık kaynak projelere katkıda bulunmak"
                 ],
-                "focus": "Genişlik yerine derinlik"
+                "focus": "Uzmanlık alanı geliştirme"
             },
             "2years": {
-                "period": "2 Yıl",
-                "title": "Teknik Liderlik",
+                "period": "2 Yıl Sonra",
+                "title": "AI Mühendisi Olmak",
                 "goals": [
-                    "Küçük AI projelerini uçtan uca yönet",
-                    "Junior mühendislere mentorluk yap",
-                    "Altyapı haline gelen sistemler kur"
+                    "Mid-level AI/ML Engineer pozisyonuna ulaşmak",
+                    "Kendi AI projelerimi hayata geçirmek",
+                    "Yazılım topluluğuna aktif katkı sağlamak"
                 ],
-                "focus": "Sistem düşüncesi"
+                "focus": "Değer yaratma"
             }
         }
     },
@@ -294,37 +380,37 @@
             "items": {
                 "0": {
                     "title": "Bilgisayar Mühendisliği Lisans",
-                    "description": "Yapay Zeka ve Makine Öğrenmesi odaklı. GPA: 3.7/4.0"
+                    "description": "İnönü Üniversitesi • 2022 - 2026 • GPA: 2.84/4.0"
                 },
                 "1": {
-                    "title": "Derin Öğrenme Uzmanlığı",
-                    "description": "Coursera - deeplearning.ai: CNN'ler, RNN'ler ve dağıtımı kapsayan 5 kurslu seri"
+                    "title": "Machine Learning Camp",
+                    "description": "Miuul • 2024 • Kapsamlı makine öğrenmesi bootcamp programı"
                 },
                 "2": {
-                    "title": "AWS Sertifikalı ML",
-                    "description": "Amazon Web Services'te ML için uzmanlık sertifikası"
+                    "title": "Feature Engineering",
+                    "description": "Miuul • 2024 • Özellik mühendisliği ve veri ön işleme teknikleri"
+                },
+                "3": {
+                    "title": "Python Programming for Data Science",
+                    "description": "Miuul • 2024 • Veri bilimi için Python programlama"
                 }
             }
         },
         "experience": {
-            "title": "Deneyim",
-            "subtitle": "Profesyonel deneyimlerim",
+            "title": "Sertifikalar",
+            "subtitle": "Aldığım eğitim ve sertifikalar",
             "items": {
                 "0": {
-                    "title": "AI Mühendisliği Stajyeri",
-                    "description": "ML pipeline'ları oluşturdu ve modelleri üretime aldı"
+                    "title": "Machine Learning",
+                    "description": "Miuul • 2024 • Makine öğrenmesi algoritmaları ve uygulamaları"
                 },
                 "1": {
-                    "title": "Serbest ML Geliştirici",
-                    "description": "Küçük işletmeler ve girişimler için özel AI çözümleri"
+                    "title": "C# Programlama Dili",
+                    "description": "Udemy • 2024 • Her seviyeye hitap eden kapsamlı C# eğitimi"
                 },
                 "2": {
-                    "title": "AI Hackathon 2024 - 2. Yer",
-                    "description": "Gerçek zamanlı anomali algılama sistemi geliştirdim"
-                },
-                "3": {
-                    "title": "Üniversite ML Yarışması - 1. Yer",
-                    "description": "Kaggle tarzı yarışmada birincilik"
+                    "title": "Cloud Night",
+                    "description": "HSD İnönü - Huawei • 2025 • Bulut teknolojileri eğitimi"
                 }
             }
         },
@@ -334,19 +420,19 @@
             "items": {
                 "0": {
                     "title": "AI ve Makine Öğrenmesi",
-                    "description": "TensorFlow, PyTorch, Scikit-learn, Hugging Face, LangChain"
+                    "description": "TensorFlow, PyTorch, Scikit-learn, Keras, OpenCV, NumPy"
                 },
                 "1": {
-                    "title": "Programlama",
-                    "description": "Python, TypeScript, JavaScript, SQL, C++"
+                    "title": "Programlama Dilleri",
+                    "description": "Python, JavaScript, TypeScript, C#, C++, Java, Kotlin, SQL"
                 },
                 "2": {
                     "title": "Frameworkler ve Araçlar",
-                    "description": "React, Next.js, FastAPI, Docker, Git, Linux"
+                    "description": "React, Next.js, FastAPI, Docker, Git, Pandas"
                 },
                 "3": {
-                    "title": "Veri ve Analitik",
-                    "description": "Pandas, NumPy, PostgreSQL, MongoDB, Spark"
+                    "title": "Veri Bilimi",
+                    "description": "Veri analizi, özellik mühendisliği, model değerlendirme, PostgreSQL"
                 }
             }
         },
@@ -355,20 +441,28 @@
             "subtitle": "Geliştirdiğim projeler",
             "items": {
                 "0": {
-                    "title": "Sosyal Medya Duygu Analizi Motoru",
-                    "description": "Transformer tabanlı NLP kullanarak %87 doğrulukla sosyal medya gönderilerini analiz eden gerçek zamanlı duygu algılama sistemi."
+                    "title": "Gerçek Zamanlı Görsel Anlama AI",
+                    "description": "Ollama LLaVA modeli ile kameradan anlık görüntü analizi. Python, OpenCV."
                 },
                 "1": {
-                    "title": "Kestirimci Bakım Sistemi",
-                    "description": "Üretim tesisleri için %92 hassasiyetle ekipman arızalarını 72 saat önceden tahmin eden ML destekli sistem."
+                    "title": "El Yazısı Rakam Tanıma",
+                    "description": "CNN ile MNIST üzerinde eğitilmiş derin öğrenme modeli. TensorFlow, Keras."
                 },
                 "2": {
-                    "title": "Kod İnceleme Asistanı",
-                    "description": "Bağlamı anlayan ve mimari iyileştirmeler öneren AI destekli araç. Kod inceleme süresini %40 azalttı."
+                    "title": "Diyabet Tahmin Sistemi",
+                    "description": "Makine öğrenmesi ile erken teşhis modeli. Scikit-learn, Pandas."
                 },
                 "3": {
-                    "title": "Depo Görüş Sistemi",
-                    "description": "YOLO v8 kullanarak %95 algılama doğruluğu ile otomatik envanter takibi için bilgisayarlı görüş sistemi."
+                    "title": "XOX Bot - Q-Learning AI",
+                    "description": "Q-Öğrenme ile eğitilmiş Tic-Tac-Toe botu. Reinforcement Learning."
+                },
+                "4": {
+                    "title": "Maaş Tahmin Modeli",
+                    "description": "Özellik mühendisliği ve regresyon algoritmaları. Scikit-learn."
+                },
+                "5": {
+                    "title": "Eczane Otomasyon Sistemi",
+                    "description": "Stok takibi ve satış yönetimi. C#, veritabanı yönetimi."
                 }
             }
         }
@@ -429,5 +523,31 @@
         "tryAgain": "Tekrar Dene",
         "comingSoon": "Yakında",
         "new": "Yeni"
+    },
+    "projectDetail": {
+        "backToProjects": "Projelere Dön",
+        "liveDemo": "Canlı Demo",
+        "viewCode": "Kodu Gör",
+        "status": {
+            "completed": "Tamamlandı",
+            "in-progress": "Devam Ediyor",
+            "planned": "Planlandı"
+        },
+        "sections": {
+            "problem": "Problem",
+            "constraints": "Kısıtlamalar",
+            "approach": "Yaklaşım",
+            "modelChoice": "Model Seçimi",
+            "results": "Sonuçlar ve Değerlendirme",
+            "lessons": "Öğrenilen Dersler",
+            "techStack": "Teknoloji Yığını",
+            "tags": "Etiketler"
+        },
+        "labels": {
+            "selectedModel": "Seçilen Model",
+            "rationale": "Gerekçe",
+            "evaluationApproach": "Değerlendirme Yaklaşımı",
+            "outcome": "Sonuç"
+        }
     }
 }
