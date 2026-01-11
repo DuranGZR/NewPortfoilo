@@ -38,8 +38,8 @@ class Settings(BaseSettings):
     # Database
     database_url: str = "sqlite+aiosqlite:///./portfolio.db"
     
-    # AI - Gemini
-    gemini_api_key: str = ""
+    # AI - Groq
+    groq_api_key: str = ""
     
     # Email - Resend
     resend_api_key: str = ""

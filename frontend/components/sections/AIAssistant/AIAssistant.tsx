@@ -1,14 +1,28 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import { MessageSquare, Sparkles, ArrowRight } from 'lucide-react';
-import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MessageSquare, Sparkles, Send, Loader2, Bot, User } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import SectionReveal from '@/components/animations/SectionReveal';
 
+interface Message {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+}
+
 export default function AIAssistant() {
   const t = useTranslations('aiAssistant');
-  const [selectedQuestion, setSelectedQuestion] = useState<string | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
 
   const sampleQuestions = [
     t('sampleQuestions.q1'),
@@ -22,6 +36,75 @@ export default function AIAssistant() {
     { title: t('features.context.title'), desc: t('features.context.desc') },
     { title: t('features.learning.title'), desc: t('features.learning.desc') }
   ];
+
+  // Scroll to bottom when messages change (only within chat container)
+  useEffect(() => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  const sendMessage = async (messageText: string) => {
+    if (!messageText.trim() || isLoading) return;
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      role: 'user',
+      content: messageText.trim()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setInput('');
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`${API_URL}/chat`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: messageText.trim(),
+          session_id: sessionId
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Sunucu hatası');
+      }
+
+      const data = await response.json();
+
+      // Save session ID for context
+      if (data.session_id) {
+        setSessionId(data.session_id);
+      }
+
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: data.response
+      };
+
+      setMessages(prev => [...prev, assistantMessage]);
+    } catch (err) {
+      setError('Bir hata oluştu. Backend çalışıyor mu kontrol edin.');
+      console.error('Chat error:', err);
+    } finally {
+      setIsLoading(false);
+      inputRef.current?.focus();
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    sendMessage(input);
+  };
+
+  const handleQuestionClick = (question: string) => {
+    sendMessage(question);
+  };
 
   return (
     <section id="ai-assistant" className="relative py-24 px-6 overflow-hidden bg-[#0d0d0d]">
@@ -54,7 +137,7 @@ export default function AIAssistant() {
           </p>
         </SectionReveal>
 
-        {/* Chat Interface Preview */}
+        {/* Chat Interface */}
         <SectionReveal delay={0.2}>
           <div className="relative">
             {/* Chat Container */}
@@ -72,80 +155,127 @@ export default function AIAssistant() {
                   </div>
                 </div>
                 <div className="flex items-center gap-1">
-                  <div className="w-2 h-2 rounded-full bg-[#819fa7] animate-pulse" />
-                  <span className="text-xs text-[#819fa7] ml-2">{t('status')}</span>
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-xs text-emerald-400 ml-2">Çevrimiçi</span>
                 </div>
               </div>
 
               {/* Chat Body */}
-              <div className="p-6 min-h-[400px] flex flex-col justify-center items-center">
+              <div ref={messagesContainerRef} className="p-6 min-h-[400px] max-h-[500px] overflow-y-auto scroll-smooth">
+                {messages.length === 0 ? (
+                  /* Sample Questions - Show when no messages */
+                  <div className="w-full max-w-xl mx-auto space-y-4">
+                    <p className="text-sm text-[#f3f5f9]/60 text-center mb-6">
+                      {t('sampleQuestionsTitle')}
+                    </p>
 
-                {/* Sample Questions */}
-                <div className="w-full max-w-xl space-y-4">
-                  <p className="text-sm text-[#f3f5f9]/60 text-center mb-6">
-                    {t('sampleQuestionsTitle')}
-                  </p>
-
-                  {sampleQuestions.map((question, index) => (
-                    <SectionReveal key={question} delay={0.3 + index * 0.1} direction="left">
-                      <motion.button
-                        whileHover={{ scale: 1.02, x: 5 }}
-                        onClick={() => setSelectedQuestion(question)}
-                        className={`
-                          w-full p-4 rounded-lg text-left transition-all
-                          ${selectedQuestion === question
-                            ? 'bg-[#819fa7]/15 border border-[#819fa7]/40'
-                            : 'bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/30'
-                          }
-                        `}
+                    {sampleQuestions.map((question) => (
+                      <button
+                        key={question}
+                        onClick={() => handleQuestionClick(question)}
+                        className="w-full p-4 rounded-lg text-left transition-all duration-200 bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/30 hover:bg-[#819fa7]/5 hover:translate-x-1"
                       >
                         <div className="flex items-center justify-between">
                           <span className="text-sm text-[#f3f5f9]/80">{question}</span>
-                          <ArrowRight className={`
-                            w-4 h-4 transition-all
-                            ${selectedQuestion === question ? 'text-[#819fa7]' : 'text-[#f3f5f9]/30'}
-                          `} />
+                          <Send className="w-4 h-4 text-[#f3f5f9]/30" />
                         </div>
-                      </motion.button>
-                    </SectionReveal>
-                  ))}
-                </div>
-
-                {/* Coming Soon Note */}
-                <SectionReveal delay={0.7}>
-                  <div className="mt-12 text-center">
-                    <div className="inline-block px-6 py-3 rounded-lg bg-[#819fa7]/5 border border-[#819fa7]/20">
-                      <p className="text-sm text-[#f3f5f9]/60">
-                        <span className="text-[#819fa7] font-semibold">{t('inDevelopment')}:</span> {t('inDevelopmentDesc')}
-                      </p>
-                    </div>
+                      </button>
+                    ))}
                   </div>
-                </SectionReveal>
+                ) : (
+                  /* Messages */
+                  <div className="space-y-4">
+                    {messages.map((message) => (
+                      <div
+                        key={message.id}
+                        className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                      >
+                        {message.role === 'assistant' && (
+                          <div className="w-8 h-8 rounded-full bg-[#819fa7]/20 border border-[#819fa7]/30 flex items-center justify-center shrink-0">
+                            <Bot className="w-4 h-4 text-[#819fa7]" />
+                          </div>
+                        )}
+                        <div
+                          className={`max-w-[80%] p-4 rounded-2xl ${message.role === 'user'
+                            ? 'bg-[#819fa7]/20 border border-[#819fa7]/30 text-[#f3f5f9]'
+                            : 'bg-[#1a1a1a]/80 border border-[#819fa7]/10 text-[#f3f5f9]/90'
+                            }`}
+                        >
+                          <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                        </div>
+                        {message.role === 'user' && (
+                          <div className="w-8 h-8 rounded-full bg-[#819fa7]/30 border border-[#819fa7]/40 flex items-center justify-center shrink-0">
+                            <User className="w-4 h-4 text-[#819fa7]" />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+
+                    {/* Loading indicator */}
+                    {isLoading && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="flex gap-3"
+                      >
+                        <div className="w-8 h-8 rounded-full bg-[#819fa7]/20 border border-[#819fa7]/30 flex items-center justify-center">
+                          <Bot className="w-4 h-4 text-[#819fa7]" />
+                        </div>
+                        <div className="p-4 rounded-2xl bg-[#1a1a1a]/80 border border-[#819fa7]/10">
+                          <div className="flex items-center gap-2">
+                            <Loader2 className="w-4 h-4 text-[#819fa7] animate-spin" />
+                            <span className="text-sm text-[#f3f5f9]/60">Düşünüyor...</span>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {/* Error message */}
+                    {error && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm text-center"
+                      >
+                        {error}
+                      </motion.div>
+                    )}
+                  </div>
+                )}
               </div>
 
-              {/* Chat Input (Disabled) */}
-              <div className="px-6 py-4 border-t border-[#819fa7]/10">
+              {/* Chat Input */}
+              <form onSubmit={handleSubmit} className="px-6 py-4 border-t border-[#819fa7]/10">
                 <div className="flex gap-3">
                   <input
+                    ref={inputRef}
                     type="text"
-                    disabled
-                    placeholder={t('inputPlaceholder')}
-                    className="flex-1 px-4 py-3 rounded-lg bg-[#1a1a1a]/50 border border-[#819fa7]/20 text-[#f3f5f9]/50 text-sm placeholder:text-[#f3f5f9]/30 cursor-not-allowed"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    placeholder="Duran hakkında bir şey sor..."
+                    disabled={isLoading}
+                    className="flex-1 px-4 py-3 rounded-lg bg-[#1a1a1a]/50 border border-[#819fa7]/20 text-[#f3f5f9] text-sm placeholder:text-[#f3f5f9]/30 focus:outline-none focus:border-[#819fa7]/50 transition-colors disabled:opacity-50"
                   />
                   <button
-                    disabled
-                    className="px-6 py-3 rounded-lg bg-[#819fa7]/20 text-[#819fa7]/50 text-sm font-medium cursor-not-allowed"
+                    type="submit"
+                    disabled={isLoading || !input.trim()}
+                    className="px-6 py-3 rounded-lg bg-[#819fa7]/20 border border-[#819fa7]/30 text-[#819fa7] text-sm font-medium hover:bg-[#819fa7]/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                   >
-                    {t('sendButton')}
+                    {isLoading ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Send className="w-4 h-4" />
+                    )}
+                    Gönder
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
 
             {/* Info Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
               {features.map((feature, index) => (
-                <SectionReveal key={feature.title} delay={0.8 + index * 0.1}>
+                <SectionReveal key={feature.title} delay={0.4 + index * 0.1}>
                   <div className="h-full p-4 rounded-lg bg-[#1a1a1a]/40 border border-[#819fa7]/10 hover:border-[#819fa7]/25 transition-colors">
                     <h4 className="text-sm font-semibold text-[#f3f5f9] mb-2">
                       {feature.title}
@@ -157,22 +287,6 @@ export default function AIAssistant() {
                 </SectionReveal>
               ))}
             </div>
-          </div>
-        </SectionReveal>
-
-        {/* Notify Me */}
-        <SectionReveal delay={1}>
-          <div className="mt-12 text-center">
-            <p className="text-sm text-[#f3f5f9]/50 mb-4">
-              {t('notifyQuestion')}
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-6 py-2.5 rounded-lg bg-[#819fa7]/10 border border-[#819fa7]/30 text-[#819fa7] text-sm font-medium hover:bg-[#819fa7]/15 transition-all"
-            >
-              {t('notifyButton')}
-            </motion.button>
           </div>
         </SectionReveal>
       </div>

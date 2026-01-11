@@ -1,11 +1,12 @@
 """
-AI Service - Gemini Integration for Portfolio Assistant
+AI Service - Groq Integration for Portfolio Assistant
+Uses Groq API with Llama 3.3 70B model
 """
 import json
 from pathlib import Path
 from typing import Dict, List, Optional
 
-import google.generativeai as genai
+from groq import Groq
 
 from app.config import settings
 
@@ -15,6 +16,17 @@ _sessions: Dict[str, List[Dict]] = {}
 
 # Knowledge base cache
 _knowledge_base: Optional[Dict] = None
+
+# Groq client
+_client: Optional[Groq] = None
+
+
+def get_client() -> Groq:
+    """Get or create Groq client."""
+    global _client
+    if _client is None:
+        _client = Groq(api_key=settings.groq_api_key)
+    return _client
 
 
 def load_knowledge_base() -> Dict:
@@ -30,76 +42,17 @@ def load_knowledge_base() -> Dict:
         with open(kb_path, "r", encoding="utf-8") as f:
             _knowledge_base = json.load(f)
     else:
-        # Default knowledge base
+        # Minimal fallback - JSON dosyası yoksa
         _knowledge_base = {
-            "about": {
-                "name": "Duran Gezer",
-                "title": "AI Engineer Candidate",
-                "bio": "Bilgisayar Mühendisliği 4. sınıf öğrencisi, yapay zeka ve makine öğrenmesi alanında uzmanlaşıyor.",
-                "approach": "Sadece modelleri eğitmiyor, çözümler tasarlıyor."
-            },
-            "skills": {
-                "ai_ml": ["PyTorch", "TensorFlow", "Transformers", "NLP", "Computer Vision", "MLOps"],
-                "programming": ["Python", "TypeScript", "JavaScript", "SQL", "C++"],
-                "frameworks": ["Next.js", "React", "FastAPI", "Docker", "Git", "AWS"],
-                "data": ["Pandas", "NumPy", "Data Visualization", "Time Series"]
-            },
-            "projects": [
-                {
-                    "name": "Sosyal Medya Duygu Analizi Motoru",
-                    "description": "Transformer tabanlı NLP kullanarak %87 doğrulukla sosyal medya gönderilerini analiz eden gerçek zamanlı duygu algılama sistemi.",
-                    "tech": ["Transformers", "PyTorch", "BERT", "FastAPI", "React"],
-                    "impact": "500+ post/dakika işleme kapasitesi"
-                },
-                {
-                    "name": "Kestirimci Bakım Sistemi",
-                    "description": "Üretim tesisleri için %92 hassasiyetle ekipman arızalarını 72 saat önceden tahmin eden ML destekli sistem.",
-                    "tech": ["XGBoost", "Time Series", "IoT", "Python", "AWS"],
-                    "impact": "2 milyon dolarlık ekipman hasarını önledi"
-                },
-                {
-                    "name": "Kod İnceleme Asistanı",
-                    "description": "Bağlamı anlayan ve mimari iyileştirmeler öneren AI destekli araç.",
-                    "tech": ["GPT-4", "AST Analysis", "TypeScript", "VS Code API"],
-                    "impact": "Kod inceleme süresini %40 azalttı"
-                },
-                {
-                    "name": "Depo Görüş Sistemi",
-                    "description": "YOLO v8 kullanarak %95 algılama doğruluğu ile otomatik envanter takibi.",
-                    "tech": ["YOLOv8", "OpenCV", "Edge AI", "Raspberry Pi"],
-                    "impact": "Envanter denetim süresini 8 saatten 20 dakikaya düşürdü"
-                }
-            ],
-            "experience": [
-                {
-                    "title": "AI Mühendisliği Stajyeri",
-                    "period": "Yaz 2024",
-                    "description": "ML pipeline'ları oluşturdu ve modelleri üretime aldı"
-                },
-                {
-                    "title": "Serbest ML Geliştirici",
-                    "period": "2023 - Devam",
-                    "description": "Küçük işletmeler ve girişimler için özel AI çözümleri"
-                }
-            ],
-            "achievements": [
-                "AI Hackathon 2024 - 2. Yer",
-                "Üniversite ML Yarışması - 1. Yer"
-            ],
-            "goals": [
-                "6 ay içinde Junior AI Engineer pozisyonu",
-                "1 yıl içinde derin teknik uzmanlık",
-                "2 yıl içinde teknik liderlik"
-            ],
-            "thinking": {
-                "principles": [
-                    "İlk ilkeler, kalıplar değil",
-                    "Çıktıdan çok sonuç",
-                    "Hızlı iterasyonlar mükemmel planları yener",
-                    "Sistem düşüncesi"
-                ],
-                "quote": "En iyi model, üretimde çalışan modeldir."
-            }
+            "about": {"name": "Duran Gezer", "title": "AI/ML Engineer"},
+            "skills": {"ai_ml": [], "programming": [], "frameworks": [], "data": []},
+            "projects": [],
+            "certifications": [],
+            "courses": [],
+            "thinking": {"principles": [], "quote": ""},
+            "roadmap": {},
+            "contact": {"github": "https://github.com/DuranGZR"},
+            "highlights": []
         }
     
     return _knowledge_base
@@ -109,44 +62,122 @@ def get_system_prompt() -> str:
     """Generate system prompt with knowledge base."""
     kb = load_knowledge_base()
     
-    return f"""Sen Duran Gezer'in AI asistanısın. Ziyaretçilerin Duran hakkında sorularını yanıtlıyorsun.
+    # Format projects with GitHub links
+    projects_text = ""
+    for p in kb.get('projects', []):
+        github_link = p.get('github', '')
+        projects_text += f"- **{p['name']}** ({p.get('year', '')}): {p['description']}\n"
+        projects_text += f"  Teknolojiler: {', '.join(p['tech'])}\n"
+        if github_link:
+            projects_text += f"  GitHub: {github_link}\n"
+        projects_text += "\n"
+    
+    # Format certifications
+    certs_text = ""
+    for c in kb.get('certifications', []):
+        certs_text += f"- {c['title']} ({c['organization']}, {c['year']}): {c['description']}\n"
+    
+    # Format skills
+    skills = kb.get('skills', {})
+    
+    # Format thinking principles
+    thinking = kb.get('thinking', {})
+    principles_text = "\n".join([f"- {p}" for p in thinking.get('principles', [])])
+    
+    # Format roadmap
+    roadmap = kb.get('roadmap', {})
+    
+    about = kb.get('about', {})
+    
+    from datetime import datetime
+    current_date = datetime.now().strftime("%d %B %Y")
+    
+    return f"""You are Duran Gezer's portfolio assistant. You speak ABOUT Duran to visitors - like a knowledgeable friend introducing him.
 
-## Kurallar:
-1. Samimi ama profesyonel ol
-2. Soruyu algıladığın dilde yanıtla (Türkçe veya İngilizce)
-3. Bilmediğin konularda "Bu konuda bilgim yok" de
-4. Yanıtlarını kısa ve öz tut (2-3 paragraf max)
-5. Teknik sorularda detaylı, genel sorularda özet bilgi ver
+# PERSONALITY
+- Warm and professional, never robotic
+- Speak naturally in flowing sentences, not bullet lists
+- Match the visitor's language (Turkish → Turkish, English → English)
+- Use 1-2 emojis max per response
 
-## Duran Hakkında Bilgiler:
+# CORE RULES
+1. ALWAYS use third person: "Duran does...", "He works on...", "His approach..."
+2. NEVER use first person for Duran: No "I do...", "My projects...", "I learned..."
+3. Keep responses concise: 2-3 short paragraphs maximum
+4. End every response with 1-2 suggested follow-up questions
+5. For personal/sensitive topics (politics, religion, salary, relationships): politely redirect to professional topics
 
-### Genel
-- İsim: {kb['about']['name']}
-- Unvan: {kb['about']['title']}
-- Bio: {kb['about']['bio']}
+# EXAMPLE CONVERSATIONS
 
-### Yetenekler
-- AI/ML: {', '.join(kb['skills']['ai_ml'])}
-- Programlama: {', '.join(kb['skills']['programming'])}
-- Frameworks: {', '.join(kb['skills']['frameworks'])}
+**Greeting:**
+User: "merhaba"
+Assistant: "Merhaba! 👋 Ben Duran'ın portfolyo asistanıyım. Projeleri, kullandığı teknolojiler, kariyer hedefleri - ne merak edersen sorabilirsin. Ne öğrenmek istersin?"
 
-### Projeler
-{chr(10).join([f"- {p['name']}: {p['description']}" for p in kb['projects']])}
+**Technical Question:**
+User: "What technologies does he use?"
+Assistant: "Duran specializes in AI/ML technologies - primarily TensorFlow, PyTorch, and Scikit-learn for machine learning. For development, he uses Python as his main language, along with React and Next.js for web projects. He's particularly experienced with computer vision using OpenCV.
 
-### Deneyim
-{chr(10).join([f"- {e['title']} ({e['period']}): {e['description']}" for e in kb['experience']])}
+---
+💬 You might also ask:
+• What AI projects has he built?
+• What's his educational background?"
 
-### Başarılar
-{chr(10).join([f"- {a}" for a in kb['achievements']])}
+**About Projects:**
+User: "projeleri neler?"
+Assistant: "Duran'ın öne çıkan projeleri arasında Gerçek Zamanlı Görsel Anlama AI var - Ollama LLaVA modeli ile kameradan anlık görüntü analizi yapıyor. Ayrıca CNN kullanarak El Yazısı Rakam Tanıma sistemi ve Q-Learning ile eğitilmiş XOX Bot geliştirdi. Tüm projelerini GitHub'da bulabilirsin: github.com/DuranGZR
 
-### Hedefler
-{chr(10).join([f"- {g}" for g in kb['goals']])}
+---
+💬 Şunları da sorabilirsin:
+• En zorlu projesi hangisiydi?
+• Hangi teknolojileri kullanıyor?"
 
-### Düşünce Tarzı
-- İlkeler: {', '.join(kb['thinking']['principles'])}
-- Alıntı: "{kb['thinking']['quote']}"
+**Sensitive Topic:**
+User: "duran hangi partiye oy veriyor?"
+Assistant: "Bu konuda bilgim yok 😊 Ama Duran'ın AI projeleri veya teknik yetenekleri hakkında sorularını yanıtlayabilirim. Ne merak ediyorsun?"
 
-Şimdi ziyaretçinin sorusunu yanıtla:
+**About the Assistant:**
+User: "sen kimsin?"
+Assistant: "Ben Duran'ın portfolyo sitesindeki dijital asistanım! Arkada bir dil modeli çalışıyor ama önemli olan bu değil - asıl işim Duran hakkında merak ettiklerini yanıtlamak. Projeleri, yetenekleri, kariyer hedefleri... Ne öğrenmek istersin?"
+
+# DURAN'S PROFILE
+
+**Quick Facts:**
+- Name: {about.get('name', 'Duran Gezer')}
+- Role: {about.get('title', 'AI/ML Engineer')} (seeking opportunities)
+- Education: {about.get('university', 'İnönü Üniversitesi')} - {about.get('year', '4. sınıf')}
+- Location: {about.get('location', 'İzmir, Türkiye')}
+- GitHub: {kb.get('contact', {}).get('github', 'https://github.com/DuranGZR')}
+
+**Bio:** {about.get('bio', '')}
+
+**Goal:** {about.get('goal', '')}
+
+**Skills:**
+- AI/ML: {', '.join(skills.get('ai_ml', []))}
+- Programming: {', '.join(skills.get('programming', []))}
+- Frameworks: {', '.join(skills.get('frameworks', []))}
+- Data: {', '.join(skills.get('data', []))}
+
+**Projects ({len(kb.get('projects', []))} total):**
+{projects_text}
+
+**Certifications ({len(kb.get('certifications', []))} total):**
+{certs_text}
+
+**University Courses:** {', '.join(kb.get('courses', []))}
+
+**Engineering Philosophy:**
+{principles_text}
+Favorite quote: "{thinking.get('quote', '')}"
+
+**Career Roadmap:**
+- Current: {roadmap.get('now', '')}
+- After graduation: {roadmap.get('graduation', '')}
+- 1 Year: {roadmap.get('1year', '')}
+- 2 Years: {roadmap.get('2years', '')}
+
+# YOUR TASK
+Respond to the visitor's question about Duran. Be natural, use third person, and suggest follow-up questions.
 """
 
 
@@ -161,13 +192,11 @@ async def get_ai_response(message: str, session_id: str) -> str:
     Returns:
         AI assistant's response
     """
-    if not settings.gemini_api_key:
+    if not settings.groq_api_key:
         return "AI asistan şu anda yapılandırılmamış. Lütfen daha sonra tekrar deneyin."
     
     try:
-        # Configure Gemini
-        genai.configure(api_key=settings.gemini_api_key)
-        model = genai.GenerativeModel("gemini-1.5-flash")
+        client = get_client()
         
         # Get or create session history
         if session_id not in _sessions:
@@ -175,20 +204,32 @@ async def get_ai_response(message: str, session_id: str) -> str:
         
         history = _sessions[session_id]
         
-        # Build prompt with history
+        # Build messages for Groq API
         system_prompt = get_system_prompt()
         
-        # Format conversation history
-        conversation = system_prompt + "\n\n"
-        for msg in history[-10:]:  # Last 10 messages for context
-            role = "Kullanıcı" if msg["role"] == "user" else "Asistan"
-            conversation += f"{role}: {msg['content']}\n\n"
+        messages = [
+            {"role": "system", "content": system_prompt}
+        ]
         
-        conversation += f"Kullanıcı: {message}\n\nAsistan:"
+        # Add conversation history (last 10 messages)
+        for msg in history[-10:]:
+            messages.append({
+                "role": msg["role"],
+                "content": msg["content"]
+            })
         
-        # Generate response
-        response = model.generate_content(conversation)
-        ai_response = response.text.strip()
+        # Add current user message
+        messages.append({"role": "user", "content": message})
+        
+        # Generate response using Groq API
+        response = client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=messages,
+            temperature=0.7,
+            max_tokens=1024,
+        )
+        
+        ai_response = response.choices[0].message.content.strip()
         
         # Update session history
         history.append({"role": "user", "content": message})
