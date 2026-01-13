@@ -12,6 +12,7 @@ interface TerminalEmulatorProps {
 
 const TerminalEmulator = ({ onClose }: TerminalEmulatorProps) => {
   const terminalRef = useRef<HTMLDivElement>(null)
+  const termRef = useRef<Terminal | null>(null)
 
   useEffect(() => {
     if (!terminalRef.current) return
@@ -46,133 +47,141 @@ const TerminalEmulator = ({ onClose }: TerminalEmulatorProps) => {
       rows: 28
     })
 
+    termRef.current = term
     term.loadAddon(new WebLinksAddon())
-    term.open(terminalRef.current)
 
-    // Welcome banner
-    term.writeln('\x1b[1;36m╔══════════════════════════════════════════════════════╗\x1b[0m')
-    term.writeln('\x1b[1;36m║     🚀 DURAN.AI SECURE TERMINAL v2.0 🚀            ║\x1b[0m')
-    term.writeln('\x1b[1;36m╚══════════════════════════════════════════════════════╝\x1b[0m')
-    term.writeln('')
-    term.writeln('\x1b[33m⚠️  WARNING: Authorized access only.\x1b[0m')
-    term.writeln('\x1b[32m✓  Authentication bypassed via Konami sequence.\x1b[0m')
-    term.writeln('\x1b[35m🎮 Achievement Unlocked: Konami Master!\x1b[0m')
-    term.writeln('')
-    term.writeln('\x1b[2mType \x1b[1;33mhelp\x1b[0m\x1b[2m for available commands.\x1b[0m')
-    term.writeln('\x1b[2mPress \x1b[1mESC\x1b[0m\x1b[2m to close terminal.\x1b[0m')
-    term.writeln('')
+    // Wait for DOM to be fully ready before opening terminal
+    const timeoutId = setTimeout(() => {
+      if (!terminalRef.current) return
 
-    let currentLine = ''
-    let cursorPosition = 0
-    const commandHistory: string[] = []
-    let historyIndex = -1
+      term.open(terminalRef.current)
 
-    const prompt = () => {
-      term.write('\r\n\x1b[32mduran@ai\x1b[0m:\x1b[34m~\x1b[0m$ ')
-    }
+      // Welcome banner
+      term.writeln('\x1b[1;36m╔══════════════════════════════════════════════════════╗\x1b[0m')
+      term.writeln('\x1b[1;36m║     🚀 DURAN.AI SECURE TERMINAL v2.0 🚀            ║\x1b[0m')
+      term.writeln('\x1b[1;36m╚══════════════════════════════════════════════════════╝\x1b[0m')
+      term.writeln('')
+      term.writeln('\x1b[33m⚠️  WARNING: Authorized access only.\x1b[0m')
+      term.writeln('\x1b[32m✓  Authentication bypassed via Konami sequence.\x1b[0m')
+      term.writeln('\x1b[35m🎮 Achievement Unlocked: Konami Master!\x1b[0m')
+      term.writeln('')
+      term.writeln('\x1b[2mType \x1b[1;33mhelp\x1b[0m\x1b[2m for available commands.\x1b[0m')
+      term.writeln('\x1b[2mPress \x1b[1mESC\x1b[0m\x1b[2m to close terminal.\x1b[0m')
+      term.writeln('')
 
-    prompt()
+      let currentLine = ''
+      let cursorPosition = 0
+      const commandHistory: string[] = []
+      let historyIndex = -1
 
-    // Command handler
-    term.onKey(({ key, domEvent }) => {
-      const ev = domEvent
-      const printable = !ev.altKey && !ev.ctrlKey && !ev.metaKey
-
-      // ESC key
-      if (ev.keyCode === 27) {
-        onClose()
-        return
+      const prompt = () => {
+        term.write('\r\n\x1b[32mduran@ai\x1b[0m:\x1b[34m~\x1b[0m$ ')
       }
 
-      // Enter key
-      if (ev.keyCode === 13) {
-        term.write('\r\n')
-        if (currentLine.trim()) {
-          commandHistory.push(currentLine.trim())
-          historyIndex = commandHistory.length
-          
-          const output = executeCommand(currentLine.trim())
-          
-          if (output === '\x1b[2J\x1b[3J\x1b[H') {
-            term.clear()
-          } else {
-            term.write(output)
+      prompt()
+
+      // Command handler
+      term.onKey(({ key, domEvent }) => {
+        const ev = domEvent
+        const printable = !ev.altKey && !ev.ctrlKey && !ev.metaKey
+
+        // ESC key
+        if (ev.keyCode === 27) {
+          onClose()
+          return
+        }
+
+        // Enter key
+        if (ev.keyCode === 13) {
+          term.write('\r\n')
+          if (currentLine.trim()) {
+            commandHistory.push(currentLine.trim())
+            historyIndex = commandHistory.length
+
+            const output = executeCommand(currentLine.trim())
+
+            if (output === '\x1b[2J\x1b[3J\x1b[H') {
+              term.clear()
+            } else {
+              term.write(output)
+            }
+          }
+          currentLine = ''
+          cursorPosition = 0
+          prompt()
+        }
+        // Backspace
+        else if (ev.keyCode === 8) {
+          if (cursorPosition > 0) {
+            currentLine = currentLine.slice(0, cursorPosition - 1) + currentLine.slice(cursorPosition)
+            cursorPosition--
+            term.write('\b \b')
+            if (cursorPosition < currentLine.length) {
+              term.write(currentLine.slice(cursorPosition) + ' ')
+              for (let i = 0; i <= currentLine.length - cursorPosition; i++) {
+                term.write('\b')
+              }
+            }
           }
         }
-        currentLine = ''
-        cursorPosition = 0
-        prompt()
-      }
-      // Backspace
-      else if (ev.keyCode === 8) {
-        if (cursorPosition > 0) {
-          currentLine = currentLine.slice(0, cursorPosition - 1) + currentLine.slice(cursorPosition)
-          cursorPosition--
-          term.write('\b \b')
+        // Up arrow - previous command
+        else if (ev.keyCode === 38) {
+          if (commandHistory.length > 0 && historyIndex > 0) {
+            historyIndex--
+            // Clear current line
+            term.write('\r\x1b[K')
+            term.write('\x1b[32mduran@ai\x1b[0m:\x1b[34m~\x1b[0m$ ')
+            currentLine = commandHistory[historyIndex]
+            cursorPosition = currentLine.length
+            term.write(currentLine)
+          }
+        }
+        // Down arrow - next command
+        else if (ev.keyCode === 40) {
+          if (historyIndex < commandHistory.length - 1) {
+            historyIndex++
+            term.write('\r\x1b[K')
+            term.write('\x1b[32mduran@ai\x1b[0m:\x1b[34m~\x1b[0m$ ')
+            currentLine = commandHistory[historyIndex]
+            cursorPosition = currentLine.length
+            term.write(currentLine)
+          } else {
+            historyIndex = commandHistory.length
+            term.write('\r\x1b[K')
+            term.write('\x1b[32mduran@ai\x1b[0m:\x1b[34m~\x1b[0m$ ')
+            currentLine = ''
+            cursorPosition = 0
+          }
+        }
+        // Tab - autocomplete (basic)
+        else if (ev.keyCode === 9) {
+          ev.preventDefault()
+          const commands = ['help', 'ls', 'cat', 'whoami', 'date', 'secrets', 'matrix', 'coffee', 'skills', 'joke', 'quote', 'clear', 'history', 'stats']
+          const matches = commands.filter(cmd => cmd.startsWith(currentLine))
+          if (matches.length === 1) {
+            const remaining = matches[0].slice(currentLine.length)
+            currentLine += remaining
+            cursorPosition += remaining.length
+            term.write(remaining)
+          }
+        }
+        // Printable characters
+        else if (printable) {
+          currentLine = currentLine.slice(0, cursorPosition) + key + currentLine.slice(cursorPosition)
+          cursorPosition++
+          term.write(key)
           if (cursorPosition < currentLine.length) {
-            term.write(currentLine.slice(cursorPosition) + ' ')
-            for (let i = 0; i <= currentLine.length - cursorPosition; i++) {
+            term.write(currentLine.slice(cursorPosition))
+            for (let i = 0; i < currentLine.length - cursorPosition; i++) {
               term.write('\b')
             }
           }
         }
-      }
-      // Up arrow - previous command
-      else if (ev.keyCode === 38) {
-        if (commandHistory.length > 0 && historyIndex > 0) {
-          historyIndex--
-          // Clear current line
-          term.write('\r\x1b[K')
-          term.write('\x1b[32mduran@ai\x1b[0m:\x1b[34m~\x1b[0m$ ')
-          currentLine = commandHistory[historyIndex]
-          cursorPosition = currentLine.length
-          term.write(currentLine)
-        }
-      }
-      // Down arrow - next command
-      else if (ev.keyCode === 40) {
-        if (historyIndex < commandHistory.length - 1) {
-          historyIndex++
-          term.write('\r\x1b[K')
-          term.write('\x1b[32mduran@ai\x1b[0m:\x1b[34m~\x1b[0m$ ')
-          currentLine = commandHistory[historyIndex]
-          cursorPosition = currentLine.length
-          term.write(currentLine)
-        } else {
-          historyIndex = commandHistory.length
-          term.write('\r\x1b[K')
-          term.write('\x1b[32mduran@ai\x1b[0m:\x1b[34m~\x1b[0m$ ')
-          currentLine = ''
-          cursorPosition = 0
-        }
-      }
-      // Tab - autocomplete (basic)
-      else if (ev.keyCode === 9) {
-        ev.preventDefault()
-        const commands = ['help', 'ls', 'cat', 'whoami', 'date', 'secrets', 'matrix', 'coffee', 'skills', 'joke', 'quote', 'clear', 'history', 'stats']
-        const matches = commands.filter(cmd => cmd.startsWith(currentLine))
-        if (matches.length === 1) {
-          const remaining = matches[0].slice(currentLine.length)
-          currentLine += remaining
-          cursorPosition += remaining.length
-          term.write(remaining)
-        }
-      }
-      // Printable characters
-      else if (printable) {
-        currentLine = currentLine.slice(0, cursorPosition) + key + currentLine.slice(cursorPosition)
-        cursorPosition++
-        term.write(key)
-        if (cursorPosition < currentLine.length) {
-          term.write(currentLine.slice(cursorPosition))
-          for (let i = 0; i < currentLine.length - cursorPosition; i++) {
-            term.write('\b')
-          }
-        }
-      }
-    })
+      })
+    }, 50)
 
     return () => {
+      clearTimeout(timeoutId)
       term.dispose()
     }
   }, [onClose])
