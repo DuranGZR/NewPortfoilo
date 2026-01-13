@@ -1,656 +1,481 @@
-# 🌌 Duran Gezer | AI Engineer Portfolio
+# 🌌 Duran Gezer | AI/ML Engineer Portfolio
+
+<div align="center">
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
-![FastAPI](https://img.shields.io/badge/FastAPI-Production-009688?style=for-the-badge&logo=fastapi)
+![FastAPI](https://img.shields.io/badge/FastAPI-Python-009688?style=for-the-badge&logo=fastapi)
 ![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178C6?style=for-the-badge&logo=typescript)
-![Groq](https://img.shields.io/badge/Groq-Llama_3.1-FF6B35?style=for-the-badge)
 ![Three.js](https://img.shields.io/badge/Three.js-3D-white?style=for-the-badge&logo=three.js)
+![Groq](https://img.shields.io/badge/Groq-Llama_3.1-FF6B35?style=for-the-badge)
 
-> **Yapay zeka ve makine öğrenmesi yeteneklerimi sergileyen, 3D interaktif deneyim ve akıllı AI asistan içeren yaşayan bir portfolyo.**
+**[🌐 Live Demo](https://durangezer.com)** · **[📧 Contact](mailto:contact@durangezer.com)** · **[💼 LinkedIn](https://linkedin.com/in/durangezer)**
 
----
+*An interactive AI-powered portfolio featuring 3D experiences, intelligent chat assistant, and professional design.*
 
-## 📑 İçindekiler
-
-- [Proje Hakkında](#-proje-hakkında)
-- [Canlı Demo](#-canlı-demo)
-- [Mimari](#-mimari)
-- [Özellikler](#-özellikler)
-  - [AI Asistan](#-ai-asistan-groq--llama-31)
-  - [3D İnteraktif Özgeçmiş](#-3d-interaktif-özgeçmiş)
-  - [Çok Dilli Destek](#-çok-dilli-destek-i18n)
-  - [Admin Paneli](#-admin-paneli-cms)
-  - [UI/UX Özellikleri](#-premium-uiux)
-- [Teknoloji Stack](#-teknoloji-stack)
-- [Kurulum](#-kurulum)
-- [Proje Yapısı](#-proje-yapısı)
-- [API Endpoints](#-api-endpoints)
-- [AI Prompt Mühendisliği](#-ai-prompt-mühendisliği)
-- [Knowledge Base](#-knowledge-base)
-- [Bileşenler](#-bileşenler)
-- [Çevre Değişkenleri](#-çevre-değişkenleri)
-- [Geliştirme](#-geliştirme)
-- [Lisans](#-lisans)
+</div>
 
 ---
 
-## 🎯 Proje Hakkında
+## ✨ Highlights
 
-Bu proje, geleneksel statik portfolyolardan farklı olarak:
+<table>
+<tr>
+<td width="50%">
 
-| Geleneksel Portfolyo | Bu Portfolyo |
-|---------------------|--------------|
-| Statik HTML/PDF | İnteraktif 3D WebGL deneyimi |
-| Sadece okuma | AI asistanla sohbet |
-| Tek dil | Türkçe ve İngilizce |
-| Manuel güncelleme | Gerçek zamanlı CMS |
-| Basit tasarım | Glassmorphism, animasyonlar, efektler |
+### 🤖 AI Chat Assistant
+Real-time AI assistant powered by Groq (Llama 3.1) that answers questions about me in third person. Professionally engineered prompts with language detection.
 
-### Neden Bu Projeyi Yaptım?
+</td>
+<td width="50%">
 
-1. **AI/ML yeteneklerimi göstermek** - Sadece liste değil, çalışan bir AI sistemi
-2. **Frontend becerilerimi sergilemek** - 3D WebGL, animasyonlar, modern UI
-3. **Full-stack yetkinlik** - FastAPI backend, Next.js frontend
-4. **Profesyonel prompt engineering** - Gerçek dünya AI uygulaması
+### 🌌 3D Interactive Resume
+Explore my resume in space! Click on floating islands to discover Education, Experience, Skills, Projects, and more in an immersive 3D environment.
 
----
+</td>
+</tr>
+<tr>
+<td width="50%">
 
-## 🌐 Canlı Demo
+### 🎮 Hidden Easter Eggs
+Find the secret terminal by entering the Konami Code (↑↑↓↓←→←→BA). Explore 15+ commands, achievements, and hidden content!
 
-> 🚧 Yakında: deploy edilecek
+</td>
+<td width="50%">
 
-**Yerel çalıştırma için [Kurulum](#-kurulum) bölümüne bakın.**
+### 🌍 Bilingual Support
+Full Turkish and English support with automatic language detection, SEO-optimized metadata, and seamless switching.
 
----
-
-## 🏗 Mimari
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                          KULLANICI ARAYÜZÜ                               │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐ │
-│  │  3D Resume  │  │   Sections  │  │  AI Chat    │  │   Admin Panel   │ │
-│  │ (Three.js)  │  │  (React)    │  │  (Streaming)│  │   (CMS)         │ │
-│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────────┘ │
-│                           NEXT.JS 15 APP ROUTER                          │
-└─────────────────────────────────────────────────────────────────────────┘
-                                    │
-                                    │ HTTP/REST API
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│                           FASTAPI BACKEND                                │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐ │
-│  │  /api/chat  │  │ /api/admin  │  │/api/contact │  │ /api/analytics  │ │
-│  │             │  │             │  │             │  │                 │ │
-│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └────────┬────────┘ │
-│         │                │                │                   │          │
-│  ┌──────┴────────────────┴────────────────┴───────────────────┴────────┐ │
-│  │                         SERVICES LAYER                               │ │
-│  │   ai_service.py    │    admin_service.py    │    email_service.py   │ │
-│  └──────────────────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────────────────┘
-                                    │
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│                           GROQ AI SERVICE                                │
-│  ┌──────────────────────────────────────────────────────────────────┐   │
-│  │   Model: llama-3.1-8b-instant                                     │   │
-│  │   Prompt: 90 satır profesyonel system prompt                      │   │
-│  │   Context: knowledge_base.json (225 satır)                        │   │
-│  └──────────────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+</td>
+</tr>
+</table>
 
 ---
 
-## ✨ Özellikler
+## 📋 Table of Contents
 
-### 🤖 AI Asistan (Groq + Llama 3.1)
-
-Sağ alt köşedeki chat widget'ı gerçek bir AI asistan:
-
-**Teknik Detaylar:**
-- **API**: Groq Cloud (14,400 request/gün ücretsiz)
-- **Model**: `llama-3.1-8b-instant` (hızlı ve verimli)
-- **Prompt**: 90 satır profesyonel prompt engineering
-- **Bağlam**: Session-based konuşma geçmişi (son 10 mesaj)
-
-**Davranış Özellikleri:**
-- ✅ **Üçüncü şahıs** - "Duran bunu yapıyor" (asla "Ben yapıyorum" demez)
-- ✅ **Dil eşleştirme** - Türkçe soru → Türkçe cevap
-- ✅ **Hassas konular** - Politik/dini sorulara nazik reddetme
-- ✅ **Takip soruları** - Her cevabın sonunda öneriler
-- ✅ **İç kuralları sızdırmaz** - "Red liste" gibi teknik terimler kullanmaz
-
-**Örnek Konuşma:**
-```
-Kullanıcı: "Duran hangi teknolojileri biliyor?"
-
-Asistan: "Duran özellikle AI/ML teknolojilerinde uzmanlaşmış. TensorFlow, 
-PyTorch ve Scikit-learn ile makine öğrenmesi projeleri geliştiriyor. 
-Python ana dili, ayrıca React ve Next.js ile web projeleri de yapıyor.
-
----
-💬 Şunları da sorabilirsin:
-• Hangi AI projeleri var?
-• Eğitim geçmişi nedir?"
-```
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Quick Start](#-quick-start)
+- [Project Structure](#-project-structure)
+- [AI Assistant](#-ai-assistant)
+- [3D Resume](#-3d-resume)
+- [Easter Eggs](#-easter-eggs)
+- [Components](#-components)
+- [API Reference](#-api-reference)
+- [Environment Variables](#-environment-variables)
+- [Development](#-development)
+- [License](#-license)
 
 ---
 
-### 🌌 3D İnteraktif Özgeçmiş
+## 🚀 Features
 
-`/3d-resume` rotasında uzay temalı 3D deneyim:
+### Core Features
 
-**3D Bileşenleri:**
-| Dosya | Açıklama |
-|-------|----------|
-| `World3D.tsx` | Ana sahne, kamera kontrolü |
-| `Environment3D.tsx` | Uzay arka planı, yıldızlar, gezegenler |
-| `Island.tsx` | Tıklanabilir bölüm adaları |
-| `DetailPanel.tsx` | Bilgi popup paneli |
-| `EnergyBeam.tsx` | Ada-panel bağlantı ışını |
-| `Particles.tsx` | Kozmik toz efektleri |
-| `Spaceship.tsx` | Dekoratif uzay gemisi |
+| Feature | Description |
+|---------|-------------|
+| **AI Chat Assistant** | Groq-powered (Llama 3.1) intelligent chat with third-person responses |
+| **3D Interactive Resume** | Space-themed WebGL experience with floating islands |
+| **Bilingual (i18n)** | Full Turkish/English support with `next-intl` |
+| **Premium UI/UX** | Glassmorphism, animations, micro-interactions |
+| **Mobile Responsive** | Optimized for all screen sizes |
+| **SEO Optimized** | OpenGraph, Twitter Cards, JSON-LD structured data |
 
-**Uzay Ortamı:**
-- 7500+ yıldız (2 katman)
-- 5 gerçekçi gezegen (1 halkalı)
-- Pulsing güneş efekti
-- Kozmik toz partikülleri
+### Visual Effects
 
-**Bölüm Adaları (6 adet):**
-1. **Eğitim** - Üniversite ve sertifikalar
-2. **Deneyim** - İş ve proje deneyimi
-3. **Yetenekler** - Teknik beceriler
-4. **Projeler** - GitHub projeleri
-5. **Felsefe** - Mühendislik yaklaşımı
-6. **İletişim** - Sosyal linkler
+- 🌫️ **Noise Texture Overlay** - Subtle grain effect
+- 🎨 **Gradient Mesh Background** - Animated floating blobs
+- ✨ **Section Reveal Animations** - Scroll-triggered effects
+- 🪟 **Glassmorphism Cards** - Modern frosted glass design
+- ⌨️ **Typewriter Text** - Character-by-character animation
+- 🧲 **Magnetic Buttons** - Cursor-following interactions
+- 🎯 **Custom Cursor** - Glowing follow cursor
 
----
+### Performance
 
-### 🌍 Çok Dilli Destek (i18n)
-
-**Teknoloji:** `next-intl`
-
-**Desteklenen Diller:**
-- 🇹🇷 Türkçe (varsayılan)
-- 🇬🇧 İngilizce
-
-**Özellikler:**
-- URL tabanlı routing (`/tr`, `/en`)
-- Otomatik dil algılama
-- SEO-friendly meta tag'ler
-- 212+ çeviri key'i
-
-**Dosya Yapısı:**
-```
-frontend/messages/
-├── tr.json    # 212 satır Türkçe çeviriler
-└── en.json    # 212 satır İngilizce çeviriler
-```
+- 📊 **Web Vitals Tracking** - LCP, CLS, INP, FCP, TTFB monitoring
+- ⚡ **Lazy Loading** - Components load on viewport entry
+- 📦 **Code Splitting** - Dynamic imports for optimal bundles
+- 🖼️ **Image Optimization** - Next.js Image component
 
 ---
 
-### 🛠 Admin Paneli (CMS)
-
-**Gizli URL:** `/ctrl-x7k9p2m` (güvenlik için obscure path)
-
-**Güvenlik Katmanları:**
-1. Gizli URL path
-2. Bcrypt şifreli parola
-3. JWT token (1 saat geçerli)
-4. Rate limiting (3 deneme → 15dk kilitleme)
-
-**Yönetilebilir İçerikler:**
-- Hero section (isim, başlık, alt başlık)
-- About section (bio, highlights, quote)
-- Projeler (başlık, açıklama, teknolojiler, linkler)
-- Yetenekler (kategoriler ve seviyeler)
-- Deneyim (eğitim, iş, sertifikalar)
-- Mühendislik felsefesi (6 prensip)
-- Yol haritası (kariyer planı)
-
----
-
-### 🎨 Premium UI/UX
-
-**Görsel Efektler:**
-| Bileşen | Dosya | Açıklama |
-|---------|-------|----------|
-| Noise Texture | `NoiseTexture.tsx` | SVG grain overlay |
-| Gradient Mesh | `GradientMesh.tsx` | 4 animasyonlu blob |
-| Section Reveal | `SectionReveal.tsx` | Scroll tetiklemeli efekt |
-| Glass Card | `GlassCard.tsx` | Glassmorphism kartlar |
-| Typewriter | `TypewriterText.tsx` | Karakter karakter yazım |
-| Loading Screen | `LoadingScreen.tsx` | DG logo animasyonu |
-
-**Mikro-Etkileşimler:**
-- Manyetik butonlar (cursor'a doğru çekim)
-- Özel cursor (takip eden glow efekti)
-- Scroll progress indicator
-- Hover efektleri (scale, glow, gradient)
-
-**Performans:**
-- Web Vitals tracking (LCP, CLS, INP, FCP, TTFB)
-- Lazy loading (komponentler viewport'a girince yüklenir)
-- Dynamic imports (kod bölünmesi)
-
----
-
-## 💻 Teknoloji Stack
+## 💻 Tech Stack
 
 ### Frontend
 
-| Paket | Versiyon | Kullanım |
-|-------|----------|----------|
-| `next` | 15.0+ | React framework (App Router) |
-| `react` | 19.0+ | UI kütüphanesi |
-| `typescript` | 5.0+ | Tip güvenliği |
-| `tailwindcss` | 4.0+ | Utility-first CSS |
-| `three` | 0.160+ | 3D rendering engine |
-| `@react-three/fiber` | 8.15+ | React için Three.js renderer |
-| `@react-three/drei` | 9.0+ | R3F yardımcıları |
-| `framer-motion` | 11.0+ | Animasyon kütüphanesi |
-| `next-intl` | latest | Çok dilli destek |
-| `lucide-react` | latest | Icon sistemi |
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| Next.js | 15+ | React framework (App Router) |
+| React | 19+ | UI library |
+| TypeScript | 5+ | Type safety |
+| Tailwind CSS | 4+ | Utility-first styling |
+| Three.js | 0.160+ | 3D rendering engine |
+| @react-three/fiber | 8.15+ | React Three.js renderer |
+| @react-three/drei | 9+ | R3F helper components |
+| Framer Motion | 11+ | Animation library |
+| next-intl | latest | Internationalization |
+| xterm.js | 5.3+ | Terminal emulator (Easter egg) |
+| Lucide React | latest | Icon system |
 
 ### Backend
 
-| Paket | Versiyon | Kullanım |
-|-------|----------|----------|
-| `fastapi` | 0.109+ | ASGI web framework |
-| `uvicorn` | standard | ASGI server |
-| `groq` | latest | Groq AI SDK |
-| `pydantic` | 2.0+ | Veri validasyonu |
-| `passlib[bcrypt]` | latest | Şifre hashleme |
-| `python-jose[cryptography]` | latest | JWT token |
-| `resend` | latest | Email servisi |
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| FastAPI | 0.109+ | ASGI web framework |
+| Uvicorn | latest | ASGI server |
+| Groq SDK | latest | AI model provider |
+| Pydantic | 2+ | Data validation |
+| Resend | latest | Email service |
 
 ---
 
-## 🚀 Kurulum
+## 🚀 Quick Start
 
-### Gereksinimler
+### Prerequisites
 
 - **Node.js** 18+ (LTS)
 - **Python** 3.10+
 - **Git**
-- **Groq API Key** ([Ücretsiz al](https://console.groq.com))
+- **Groq API Key** ([Get free key](https://console.groq.com))
 
-### 1. Repository'yi Klonla
+### 1. Clone Repository
 
 ```bash
 git clone https://github.com/DuranGZR/NewPortfoilo.git
 cd NewPortfoilo
 ```
 
-### 2. Frontend Kurulumu
+### 2. Frontend Setup
 
 ```bash
 cd frontend
 
-# Bağımlılıkları yükle
+# Install dependencies
 npm install --legacy-peer-deps
 
-# Environment dosyasını oluştur
+# Create environment file
 echo "NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1" > .env.local
 
-# Geliştirme sunucusunu başlat
+# Start development server
 npm run dev
 ```
 
-Frontend: http://localhost:3000
+Frontend runs at: **http://localhost:3000**
 
-### 3. Backend Kurulumu
+### 3. Backend Setup
 
 ```bash
 cd backend
 
-# Virtual environment oluştur
+# Create virtual environment
 python -m venv venv
 
-# Aktive et
-# Windows:
+# Activate (Windows)
 venv\Scripts\activate
-# Mac/Linux:
+# Activate (Mac/Linux)
 source venv/bin/activate
 
-# Bağımlılıkları yükle
+# Install dependencies
 pip install -r requirements.txt
 
-# .env dosyasını oluştur (aşağıya bak)
+# Create .env file (see Environment Variables section)
 
-# Sunucuyu başlat
+# Start server
 uvicorn app.main:app --reload --port 8000
 ```
 
-Backend: http://localhost:8000
-API Docs: http://localhost:8000/docs
+Backend runs at: **http://localhost:8000**  
+API Docs: **http://localhost:8000/docs**
 
 ---
 
-## 📂 Proje Yapısı
+## 📂 Project Structure
 
 ```
-NewPortfoilo/
+NewPortfolio/
 │
 ├── 📁 frontend/                      # NEXT.JS FRONTEND
 │   ├── 📁 app/
-│   │   └── 📁 [locale]/              # i18n routing
-│   │       ├── page.tsx              # Ana sayfa
-│   │       ├── 📁 3d-resume/         # 3D özgeçmiş sayfası
-│   │       ├── 📁 projects/[slug]/   # Proje detay sayfaları
-│   │       └── 📁 admin/      # Admin paneli (gizli)
+│   │   └── 📁 [locale]/              # i18n routing (tr, en)
+│   │       ├── page.tsx              # Main page
+│   │       ├── 📁 3d-resume/         # 3D Resume experience
+│   │       └── 📁 projects/[slug]/   # Project detail pages
 │   │
 │   ├── 📁 components/
-│   │   ├── 📁 3d-resume/             # 3D bileşenler (17 dosya)
-│   │   │   ├── World3D.tsx           # Ana 3D sahne
-│   │   │   ├── Environment3D.tsx     # Uzay ortamı
-│   │   │   ├── Island.tsx            # Bölüm adaları
-│   │   │   ├── DetailPanel.tsx       # Bilgi paneli
+│   │   ├── 📁 3d-resume/             # 3D components (17 files)
+│   │   │   ├── World3D.tsx           # Main 3D scene
+│   │   │   ├── Environment3D.tsx     # Space environment
+│   │   │   ├── Island.tsx            # Clickable section islands
+│   │   │   ├── DetailPanel.tsx       # Info popup panel
 │   │   │   └── ...
 │   │   │
-│   │   ├── 📁 sections/              # Sayfa bölümleri (10 klasör)
-│   │   │   ├── 📁 Hero/
-│   │   │   ├── 📁 About/
-│   │   │   ├── 📁 Projects/
-│   │   │   ├── 📁 Skills/
-│   │   │   ├── 📁 Experience/
-│   │   │   ├── 📁 Thinking/
-│   │   │   ├── 📁 Roadmap/
-│   │   │   └── 📁 AIAssistant/       # Chat widget
+│   │   ├── 📁 sections/              # Page sections (10 folders)
+│   │   │   ├── Hero/                 # Landing section
+│   │   │   ├── About/                # Bio & highlights
+│   │   │   ├── Projects/             # Project cards
+│   │   │   ├── Skills/               # Tech stack
+│   │   │   ├── Experience/           # Education & certs
+│   │   │   ├── Thinking/             # Engineering philosophy
+│   │   │   ├── Roadmap/              # Career plan
+│   │   │   └── AIAssistant/          # Chat widget intro
 │   │   │
-│   │   ├── 📁 widgets/               # UI bileşenleri (15 dosya)
-│   │   │   ├── ChatWidget.tsx        # AI chat arayüzü
-│   │   │   ├── CommandPalette.tsx    # ⌘K menü
-│   │   │   ├── LanguageSwitcher.tsx
+│   │   ├── 📁 widgets/               # UI components (15 files)
+│   │   │   ├── ChatWidget.tsx        # AI chat interface
+│   │   │   ├── CommandPalette.tsx    # ⌘K quick nav
+│   │   │   ├── 📁 EasterEggs/        # Hidden features
+│   │   │   │   ├── KonamiListener.tsx
+│   │   │   │   ├── TerminalEmulator.tsx
+│   │   │   │   └── commands/
 │   │   │   └── ...
 │   │   │
-│   │   ├── 📁 effects/               # Görsel efektler
-│   │   │   ├── NoiseTexture.tsx
-│   │   │   └── GradientMesh.tsx
-│   │   │
-│   │   ├── 📁 animations/            # Animasyon bileşenleri
-│   │   │   ├── SectionReveal.tsx
-│   │   │   └── TypewriterText.tsx
-│   │   │
-│   │   └── 📁 layout/                # Layout bileşenleri
-│   │       ├── Navigation.tsx
-│   │       ├── Footer.tsx
-│   │       └── LoadingScreen.tsx
+│   │   ├── 📁 effects/               # Visual effects
+│   │   ├── 📁 animations/            # Animation components
+│   │   └── 📁 layout/                # Layout components
 │   │
-│   ├── 📁 messages/                  # Çeviri dosyaları
-│   │   ├── tr.json                   # 212 satır
-│   │   └── en.json                   # 212 satır
+│   ├── 📁 messages/                  # Translation files
+│   │   ├── tr.json                   # Turkish (600+ lines)
+│   │   └── en.json                   # English (600+ lines)
 │   │
-│   ├── 📁 data/                      # Statik veri
-│   │   ├── projects.ts
-│   │   ├── skills.ts
-│   │   └── experience.ts
-│   │
-│   ├── 📁 lib/                       # Yardımcı fonksiyonlar
-│   │   ├── web-vitals.ts
-│   │   └── utils.ts
-│   │
-│   └── i18n.ts                       # i18n yapılandırması
+│   └── 📁 data/                      # Static data files
 │
 ├── 📁 backend/                       # FASTAPI BACKEND
 │   ├── 📁 app/
-│   │   ├── main.py                   # FastAPI app başlatma
-│   │   ├── config.py                 # Ayarlar (Pydantic)
+│   │   ├── main.py                   # FastAPI app
+│   │   ├── config.py                 # Settings
 │   │   │
 │   │   ├── 📁 api/v1/                # API endpoints
-│   │   │   ├── chat.py               # POST /chat
-│   │   │   ├── admin.py              # Admin CRUD
-│   │   │   ├── contact.py            # POST /contact
-│   │   │   └── analytics.py          # GET /analytics
+│   │   │   ├── endpoints/
+│   │   │   │   ├── chat.py           # AI chat
+│   │   │   │   ├── contact.py        # Email form
+│   │   │   │   ├── analytics.py      # Site analytics
+│   │   │   │   └── health.py         # Health check
+│   │   │   └── router.py
 │   │   │
-│   │   ├── 📁 services/              # İş mantığı
-│   │   │   ├── ai_service.py         # Groq entegrasyonu + prompt
-│   │   │   └── email_service.py      # Resend email
+│   │   ├── 📁 services/              # Business logic
+│   │   │   └── ai_service.py         # Groq AI integration
 │   │   │
-│   │   ├── 📁 data/                  # Veri dosyaları
-│   │   │   └── knowledge_base.json   # AI bilgi tabanı (225 satır)
-│   │   │
-│   │   └── 📁 core/                  # Çekirdek modüller
-│   │       ├── security.py           # JWT, bcrypt
-│   │       └── deps.py               # Bağımlılıklar
+│   │   └── 📁 data/
+│   │       └── knowledge_base.json   # AI knowledge base
 │   │
 │   ├── requirements.txt
-│   └── .env                          # Çevre değişkenleri
+│   └── .env
 │
-├── 📁 memory-bank/                   # Proje dokümantasyonu
-│   ├── progress.md                   # İlerleme takibi
-│   ├── activeContext.md              # Güncel durum
+├── 📁 memory-bank/                   # Project documentation
+│   ├── progress.md
+│   ├── activeContext.md
 │   └── ...
 │
-└── README.md                         # Bu dosya
+└── README.md
 ```
 
 ---
 
-## 🔌 API Endpoints
+## 🤖 AI Assistant
+
+### Overview
+
+The AI chat assistant uses **Groq API** with `llama-3.1-8b-instant` model to answer questions about me.
+
+### Technical Details
+
+| Aspect | Details |
+|--------|---------|
+| **Provider** | Groq Cloud (14,400 req/day free tier) |
+| **Model** | `llama-3.1-8b-instant` |
+| **Temperature** | 0.5 (balanced creativity) |
+| **Context** | Session-based (last 10 messages) |
+
+### Prompt Engineering
+
+The prompt follows a professional 6-section structure:
+
+1. **Role** - Defines the assistant's identity
+2. **Personality** - Sets conversation style
+3. **Core Rules** - Enforces behavior (third-person, language matching)
+4. **Examples** - Few-shot learning with 5 scenarios
+5. **Knowledge Base** - Real data from JSON
+6. **Task** - Final instruction
+
+### Key Behaviors
+
+- ✅ **Third Person** - "Duran works on..." (never "I work on...")
+- ✅ **Language Matching** - Turkish question → Turkish answer
+- ✅ **Scope Control** - Only answers about Duran
+- ✅ **Graceful Redirects** - Politely declines off-topic questions
+- ✅ **Follow-up Suggestions** - Ends with conversation prompts
+
+---
+
+## 🌌 3D Resume
+
+### Space Environment
+
+Access the 3D resume at `/3d-resume`:
+
+- **7500+ stars** in two depth layers
+- **5 realistic planets** (including Saturn-like with rings)
+- **Pulsing sun** with glow effects
+- **Cosmic dust particles**
+- **Pure black space background**
+
+### Interactive Islands (6)
+
+| Island | Content |
+|--------|---------|
+| 🎓 **Education** | University, certifications |
+| 💼 **Experience** | Roles, activities |
+| 🛠️ **Skills** | Tech stack categories |
+| 🚀 **Projects** | GitHub projects |
+| 🧠 **Philosophy** | Engineering mindset |
+| 📬 **Contact** | Social links |
+
+### Technical Implementation
+
+- **Three.js** + **React Three Fiber** for 3D rendering
+- **Glassmorphism panels** with backdrop blur
+- **Energy beam** animations connecting islands to panels
+- **Camera controls** with smooth transitions
+
+---
+
+## 🎮 Easter Eggs
+
+### Konami Code Terminal
+
+**Activation:** Press `↑↑↓↓←→←→BA` anywhere on the site
+
+### Available Commands
+
+| Command | Description |
+|---------|-------------|
+| `help` | List all commands |
+| `ls` | List virtual files |
+| `cat <file>` | Read file contents |
+| `whoami` | Display user info |
+| `neofetch` | System info (Linux style) |
+| `skills` | ASCII art skill bars |
+| `socials` | Social media links |
+| `hire` | Contact info & CV |
+| `matrix` | Enter the Matrix... |
+| `coffee` | Coffee consumption log |
+| `snake` | Mini snake game |
+| `joke` | Random dev joke |
+| `quote` | AI/coding quotes |
+| `secrets` | Achievement progress |
+| `stats` | Terminal statistics |
+
+### Achievements (9)
+
+- 🎮 **Konami Master** - Find the terminal
+- 📁 **File Explorer** - Read all files
+- 💻 **Command Master** - Use 10+ commands
+- 🕵️ **Secret Finder** - Find .secrets file
+- 🔴 **Matrix Dweller** - Use matrix command
+- ☕ **Coffee Connoisseur** - Read coffee.log
+- 💬 **Quote Collector** - Read 5 quotes
+- 🐍 **Snake Charmer** - Try snake command
+- 💼 **Professional** - Use hire command
+
+---
+
+## 🧩 Components
+
+### Sections (10)
+
+| Component | Description |
+|-----------|-------------|
+| `Hero` | Landing with 3D avatar, typed text, CTAs |
+| `About` | Bio, highlights, quote, status |
+| `Projects` | Filterable project cards |
+| `Skills` | Category-based skill levels |
+| `Experience` | Timeline with modals |
+| `Thinking` | 6 engineering principles |
+| `Roadmap` | Career timeline |
+| `AIAssistant` | Chat widget introduction |
+
+### Effects
+
+| Component | Description |
+|-----------|-------------|
+| `NoiseTexture` | SVG grain overlay |
+| `GradientMesh` | Animated blob gradients |
+| `SectionReveal` | Scroll-triggered animations |
+| `GlassCard` | Glassmorphism container |
+| `TypewriterText` | Character-by-character text |
+| `LoadingScreen` | DG logo loading animation |
+
+### Widgets
+
+| Component | Description |
+|-----------|-------------|
+| `ChatWidget` | Floating AI chat |
+| `CommandPalette` | ⌘K navigation |
+| `LanguageSwitcher` | TR/EN toggle |
+| `ScrollProgress` | Page progress bar |
+| `MagneticButton` | Cursor-following button |
+| `CustomCursor` | Glowing cursor effect |
+
+---
+
+## 🔌 API Reference
+
+### Endpoints
+
+```
+POST /api/v1/chat           # AI chat
+POST /api/v1/contact        # Send email
+GET  /api/v1/analytics      # Site analytics
+GET  /api/v1/health         # Health check
+```
 
 ### Chat Endpoint
-
-```
-POST /api/v1/chat
-```
 
 **Request:**
 ```json
 {
-  "message": "Duran hangi teknolojileri biliyor?",
-  "session_id": "uuid-v4-session-id"
+  "message": "What projects has Duran built?",
+  "session_id": "uuid-v4"
 }
 ```
 
 **Response:**
 ```json
 {
-  "response": "Duran özellikle AI/ML teknolojilerinde uzmanlaşmış...",
-  "session_id": "uuid-v4-session-id"
+  "response": "Duran has developed several AI/ML projects...",
+  "session_id": "uuid-v4"
 }
 ```
 
-### Admin Endpoints
-
-```
-POST   /api/v1/admin/login           # JWT token al
-GET    /api/v1/translations/{lang}   # Çevirileri getir
-PUT    /api/v1/translations/{lang}/field  # Tek alan güncelle
-PUT    /api/v1/translations/{lang}/section/{section}  # Bölüm güncelle
-```
-
 ### Contact Endpoint
-
-```
-POST /api/v1/contact
-```
 
 **Request:**
 ```json
 {
   "name": "John Doe",
   "email": "john@example.com",
-  "message": "Merhaba, iş teklifi hakkında..."
+  "message": "Hello! I'd like to discuss..."
 }
 ```
 
 ---
 
-## 🧠 AI Prompt Mühendisliği
-
-**Dosya:** `backend/app/services/ai_service.py`
-
-### Prompt Yapısı (6 Bölüm)
-
-```python
-"""
-# ROLE
-You are Duran Gezer's portfolio assistant. You speak ABOUT Duran...
-
-# PERSONALITY
-- Warm and professional, never robotic
-- Speak naturally in flowing sentences
-- Match the visitor's language
-- Use 1-2 emojis max per response
-
-# CORE RULES
-1. ALWAYS use third person: "Duran does...", "He works on..."
-2. NEVER use first person for Duran
-3. Keep responses concise: 2-3 paragraphs max
-4. End with suggested follow-up questions
-5. For sensitive topics: politely redirect
-
-# EXAMPLE CONVERSATIONS
-[5 örnek soru-cevap]
-
-# DURAN'S PROFILE
-[knowledge_base.json verileri]
-
-# YOUR TASK
-Respond to the visitor's question about Duran...
-"""
-```
-
-### Neden Bu Yapı?
-
-| Bölüm | Amacı |
-|-------|-------|
-| Role | Model'in kim olduğunu tanımlar |
-| Personality | Konuşma stilini belirler |
-| Core Rules | Kesin kuralları listeler |
-| Examples | Few-shot learning ile davranış öğretir |
-| Profile | Güncel bilgileri sağlar |
-| Task | Final direktifi verir |
-
----
-
-## 📚 Knowledge Base
-
-**Dosya:** `backend/app/data/knowledge_base.json`
-
-### Yapı
-
-```json
-{
-  "about": {
-    "name": "Duran Gezer",
-    "title": "AI/ML Engineer",
-    "location": "İzmir, Türkiye",
-    "university": "İnönü Üniversitesi",
-    "year": "4. sınıf",
-    "gpa": "2.84/4.0",
-    "bio": "...",
-    "goal": "...",
-    "status": "İş fırsatlarına açık"
-  },
-  "highlights": ["15+ Proje", "Analitik Düşünce", ...],
-  "skills": {
-    "ai_ml": ["TensorFlow", "PyTorch", ...],
-    "programming": ["Python", "JavaScript", ...],
-    "frameworks": ["React", "FastAPI", ...],
-    "data": ["Veri Analizi", ...]
-  },
-  "projects": [
-    {
-      "name": "Gerçek Zamanlı Görsel Anlama AI",
-      "description": "...",
-      "tech": ["Python", "Ollama", "LLaVA"],
-      "github": "https://github.com/...",
-      "year": "2024"
-    },
-    // 7 proje daha
-  ],
-  "certifications": [
-    {
-      "title": "Machine Learning Camp",
-      "organization": "Miuul",
-      "year": "2024"
-    },
-    // 5 sertifika daha
-  ],
-  "courses": ["Veri Yapıları", "Yapay Zeka", ...],
-  "thinking": {
-    "principles": ["Önce Anla, Sonra Çöz", ...],
-    "quote": "İyi bir mühendis problemi anlamadan çözüme başlamaz."
-  },
-  "roadmap": {
-    "now": "Son Sınıf - AI/ML projelerini güçlendirme",
-    "graduation": "2026 - AI/ML junior pozisyon",
-    "1year": "Derin öğrenme ve NLP'de uzmanlaşma",
-    "2years": "Mid-level AI/ML Engineer"
-  },
-  "contact": {
-    "github": "https://github.com/DuranGZR",
-    "location": "İzmir, Türkiye"
-  }
-}
-```
-
----
-
-## 🧩 Bileşenler
-
-### Frontend Bileşenleri
-
-#### Sections (10 adet)
-| Bileşen | Açıklama |
-|---------|----------|
-| `Hero` | Ana giriş, isim, başlık, CTA butonları |
-| `About` | Hakkında, bio, highlights |
-| `Projects` | Proje kartları, filtre, detay |
-| `Skills` | Yetenek kategorileri, seviyeler |
-| `Experience` | Eğitim, sertifikalar, timeline |
-| `Thinking` | Mühendislik felsefesi, 6 prensip |
-| `Roadmap` | Kariyer yol haritası |
-| `AIAssistant` | Chat widget tanıtımı |
-
-#### 3D Resume (17 dosya)
-| Bileşen | Açıklama |
-|---------|----------|
-| `World3D` | Ana Canvas, kamera, ışıklar |
-| `Environment3D` | Uzay, yıldızlar, gezegenler |
-| `Island` | Tıklanabilir bölüm adaları |
-| `DetailPanel` | Glassmorphism info panel |
-| `EnergyBeam` | Ada-panel bağlantı ışını |
-| `CameraController` | Kamera animasyonları |
-| `Particles` | Kozmik toz |
-| `HolographicEffect` | Hologram efekti |
-
-#### Widgets (15 dosya)
-| Bileşen | Açıklama |
-|---------|----------|
-| `ChatWidget` | AI chat arayüzü |
-| `CommandPalette` | ⌘K quick navigation |
-| `LanguageSwitcher` | TR/EN değiştirici |
-| `ScrollProgress` | Sayfa scroll göstergesi |
-| `MagneticButton` | Cursor'a çekilen buton |
-| `CustomCursor` | Takip eden glow cursor |
-
----
-
-## 🔐 Çevre Değişkenleri
+## 🔐 Environment Variables
 
 ### Backend (`.env`)
 
 ```env
-# === AI Servisi (ZORUNLU) ===
+# === AI Service (REQUIRED) ===
 GROQ_API_KEY=gsk_xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-# === Email Servisi (Opsiyonel) ===
+# === Email Service (Optional) ===
 RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
 EMAIL_FROM=onboarding@resend.dev
 EMAIL_TO=your@email.com
 
-# === Güvenlik ===
+# === Security ===
 SECRET_KEY=your-32-character-secret-key-here
-ADMIN_PASSWORD=your-admin-password
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=60
 
 # === CORS ===
 BACKEND_CORS_ORIGINS=["http://localhost:3000"]
@@ -662,57 +487,59 @@ BACKEND_CORS_ORIGINS=["http://localhost:3000"]
 NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
 ```
 
-### API Key Alma
+### Getting API Keys
 
-1. **Groq API Key**: https://console.groq.com → API Keys → Create
-2. **Resend API Key**: https://resend.com → API Keys → Create
+1. **Groq API Key**: [console.groq.com](https://console.groq.com) → API Keys → Create
+2. **Resend API Key**: [resend.com](https://resend.com) → API Keys → Create
 
 ---
 
-## 🔧 Geliştirme
+## 🔧 Development
 
 ### Scripts
 
 **Frontend:**
 ```bash
-npm run dev      # Geliştirme sunucusu (localhost:3000)
+npm run dev      # Development server (localhost:3000)
 npm run build    # Production build
-npm run start    # Production sunucusu
-npm run lint     # ESLint kontrolü
+npm run start    # Production server
+npm run lint     # ESLint check
 ```
 
 **Backend:**
 ```bash
-uvicorn app.main:app --reload           # Geliştirme (localhost:8000)
+uvicorn app.main:app --reload           # Development (localhost:8000)
 uvicorn app.main:app --host 0.0.0.0     # Production
 ```
 
-### Kod Standartları
+### Code Standards
 
-- **Frontend**: ESLint, Prettier, TypeScript strict mode
+- **Frontend**: ESLint, TypeScript strict mode, Prettier
 - **Backend**: PEP8, Type hints, Pydantic validation
 
 ---
 
-## 📄 Lisans
+## 📄 License
 
 MIT License © 2024-2026 Duran Gezer
 
 ---
 
-## 👤 Geliştirici
+## 👤 Author
 
 **Duran Gezer**
 
 | | |
 |-|-|
-| 🎓 | İnönü Üniversitesi - Bilgisayar Mühendisliği (4. sınıf) |
-| 🎯 | AI/ML Engineer (iş fırsatlarına açık) |
-| 📍 | İzmir, Türkiye |
-| 🔗 | [GitHub](https://github.com/DuranGZR) |
+| 🎓 | İnönü University - Computer Engineering (4th Year) |
+| 🎯 | AI/ML Engineer (Open to opportunities) |
+| 📍 | İzmir, Turkey |
+| 🔗 | [GitHub](https://github.com/DuranGZR) · [LinkedIn](https://linkedin.com/in/durangezer) |
 
 ---
 
 <p align="center">
-  <b>❤️ ve ☕ ile yapıldı</b>
+  <b>Built with ❤️ and ☕</b>
+  <br><br>
+  <i>Try the Konami Code: ↑↑↓↓←→←→BA</i>
 </p>

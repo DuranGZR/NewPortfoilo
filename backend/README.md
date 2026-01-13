@@ -1,17 +1,26 @@
-# Portfolio Backend
+# FastAPI Backend Service
 
-AI Engineer Portfolio için FastAPI backend servisi.
+Production-ready backend service for the AI Engineer Portfolio, powering the AI assistant, contact form, and analytics.
 
-## Özellikler
+## 🚀 Features
 
-- 🤖 **AI Asistan** - Gemini API ile sohbet
-- 📧 **İletişim Formu** - Mesaj + email bildirimi
-- 📊 **Analytics** - Sayfa görüntüleme takibi
-- 🔐 **Security** - Rate limiting, CORS, API key
+- **🤖 AI Assistant** - Powered by **Groq (Llama 3.1)** for ultra-fast responses
+- **📧 Contact System** - Email delivery via **Resend**
+- **📊 Analytics** - Privacy-friendly page view tracking
+- **🛡️ Security** - Rate limiting, CORS configuration, Trusted Host middleware
+- **⚡ Performance** - Async/await architecture
 
-## Kurulum
+## 🛠️ Tech Stack
 
-### 1. Virtual Environment
+- **Framework**: FastAPI (Python 3.10+)
+- **Server**: Uvicorn (ASGI)
+- **AI**: Groq SDK (`llama-3.1-8b-instant`)
+- **Validation**: Pydantic v2
+- **Email**: Resend SDK
+
+## ⚡ Quick Start
+
+### 1. Setup Environment
 
 ```bash
 cd backend
@@ -24,63 +33,72 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-### 2. Dependencies
+### 2. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Environment Variables
+### 3. Configure Environment
 
-```bash
-cp .env.example .env
-# .env dosyasını düzenle
+Create a `.env` file in the `backend` directory:
+
+```env
+# === AI Service (REQUIRED) ===
+GROQ_API_KEY=gsk_your_key_here
+
+# === Email Service (Optional) ===
+RESEND_API_KEY=re_your_key_here
+EMAIL_FROM=onboarding@resend.dev
+EMAIL_TO=contact@durangezer.com
+
+# === Security ===
+SECRET_KEY=your_secret_key_here
+BACKEND_CORS_ORIGINS=["http://localhost:3000", "https://durangezer.com"]
 ```
 
 ### 4. Run Server
 
 ```bash
-# Development
+# Development (Auto-reload)
 uvicorn app.main:app --reload --port 8000
 
-# veya
-python -m app.main
+# Production
+uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
-## API Documentation
+## 📚 API Documentation
 
-Sunucu çalışırken:
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
+Once the server is running, meaningful documentation is automatically generated:
 
-## Endpoints
+- **Swagger UI**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- **ReDoc**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/v1/health` | Health check |
-| POST | `/api/v1/contact` | İletişim formu |
-| POST | `/api/v1/chat` | AI sohbet |
-| GET | `/api/v1/chat/suggestions` | Örnek sorular |
-| POST | `/api/v1/analytics/pageview` | Sayfa görüntüleme |
-| GET | `/api/v1/analytics/stats` | İstatistikler (admin) |
+## 🔌 Endpoints
 
-## Environment Variables
+| Method | Path | Description |
+|--------|------|-------------|
+| `POST` | `/api/v1/chat` | AI Chat completion |
+| `POST` | `/api/v1/contact` | Send contact email |
+| `GET` | `/api/v1/analytics` | Track page views |
+| `GET` | `/api/v1/health` | Health check probe |
 
-| Variable | Description |
-|----------|-------------|
-| `GEMINI_API_KEY` | Google Gemini API key |
-| `RESEND_API_KEY` | Resend email API key |
-| `CONTACT_EMAIL` | Bildirim e-posta adresi |
-| `CORS_ORIGINS` | İzin verilen origin'ler |
-| `ADMIN_API_KEY` | Admin endpoint'leri için |
+## 🧠 AI Configuration
 
-## Docker
+The AI service is configured in `app/services/ai_service.py`.
+- **Model**: `llama-3.1-8b-instant`
+- **Context**: Loads from `app/data/knowledge_base.json`
+- **Prompt**: Uses a specialized system prompt for third-person responses.
+
+## 📦 Deployment
+
+**Docker Build:**
 
 ```bash
 docker build -t portfolio-backend .
 docker run -p 8000:8000 --env-file .env portfolio-backend
 ```
 
-## Lisans
+## 📄 License
 
-MIT
+MIT © Duran Gezer
