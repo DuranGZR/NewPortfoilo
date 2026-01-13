@@ -22,6 +22,7 @@ slowapi>=0.1.9
 
 # Email
 resend>=0.7.0
+email-validator>=2.1.0
 
 # Testing
 pytest>=7.4.0
