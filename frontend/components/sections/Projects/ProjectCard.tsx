@@ -1,13 +1,14 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Github, Calendar, TrendingUp, ArrowUpRight } from 'lucide-react';
+import { Github, Calendar, TrendingUp, ArrowUpRight, ChevronRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 interface ProjectCardProps {
   id: string;
   translationKey: string;
+  thumbnail?: string;
   metrics: {
     labelKey: string;
     value: string;
@@ -20,6 +21,7 @@ interface ProjectCardProps {
 export default function ProjectCard({
   id,
   translationKey,
+  thumbnail,
   metrics,
   tags,
   index,
@@ -40,8 +42,37 @@ export default function ProjectCard({
       className="group h-full"
     >
       <Link href={`/projects/${id}`} className="block h-full">
+        {/* Mobile: Compact horizontal list item */}
         <motion.div
-          className="h-full p-6 rounded-2xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 overflow-hidden relative flex flex-col cursor-pointer"
+          className="md:hidden flex items-center gap-3 p-3 rounded-xl bg-[#1a1a1a]/50 border border-[#819fa7]/10"
+          whileTap={{ scale: 0.98 }}
+        >
+          {/* Left: Metric badge */}
+          <div className="w-12 h-12 rounded-lg bg-[#819fa7]/10 flex items-center justify-center shrink-0">
+            <span className="text-sm font-bold text-[#819fa7]">{metrics[0]?.value}</span>
+          </div>
+          
+          {/* Middle: Title & Tags */}
+          <div className="flex-1 min-w-0">
+            <h3 className="text-sm font-semibold text-[#f3f5f9] truncate">
+              {t(`items.${translationKey}.title`)}
+            </h3>
+            <div className="flex items-center gap-1.5 mt-1">
+              {tags.slice(0, 2).map((tag, idx) => (
+                <span key={idx} className="text-[10px] text-[#819fa7]/70">
+                  {tag}{idx === 0 && tags.length > 1 ? ' •' : ''}
+                </span>
+              ))}
+            </div>
+          </div>
+          
+          {/* Right: Arrow */}
+          <ChevronRight className="w-4 h-4 text-[#819fa7]/50 shrink-0" />
+        </motion.div>
+
+        {/* Desktop: Full card */}
+        <motion.div
+          className="hidden md:flex h-full p-6 rounded-2xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 overflow-hidden relative flex-col cursor-pointer"
           whileHover={{
             y: -4,
             borderColor: 'rgba(129, 159, 167, 0.3)',

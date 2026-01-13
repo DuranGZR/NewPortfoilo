@@ -1,0 +1,17 @@
+{
+    "name": "Duran Gezer Portfolio",
+    "short_name": "DG Portfolio",
+    "description": "AI/ML Engineer - Veriyi anlayan, makineleri öğreten, geleceği şekillendiren.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a0a0a",
+    "theme_color": "#819fa7",
+    "icons": [
+        {
+            "src": "/favicon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

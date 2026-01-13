@@ -63,13 +63,13 @@ const projects = [
     github: "https://github.com/DuranGZR/Simple-Artificial-Neuron"
   },
   {
-    id: "pharmacy",
-    translationKey: "pharmacy",
+    id: "telegram-birthday-bot",
+    translationKey: "telegramBot",
     metrics: [
-      { labelKey: "technologies", value: "App" }
+      { labelKey: "technologies", value: "Bot" }
     ],
-    tags: ["C#", "Database", "OOP"],
-    github: "https://github.com/DuranGZR/Pharmacy_Automation"
+    tags: ["Python", "Telegram API", "Railway"],
+    github: "https://github.com/DuranGZR/Telegram_dogum_gunu_bot"
   },
   {
     id: "bus-ticket",
@@ -92,26 +92,26 @@ export default function Projects() {
   const hasMoreProjects = projects.length > INITIAL_DISPLAY_COUNT;
 
   return (
-    <section id="projects" className="relative py-24 px-6 bg-[#0d0d0d]">
+    <section id="projects" className="relative py-16 md:py-24 px-4 md:px-6 bg-[#0d0d0d]">
       {/* Simple gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] to-[#0d0d0d]" />
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Section Header */}
-        <SectionReveal className="text-center mb-16">
+        <SectionReveal className="text-center mb-10 md:mb-16">
           <span className="inline-block text-xs font-medium tracking-[0.15em] uppercase text-[#819fa7] px-4 py-2 rounded-full border border-[#819fa7]/30 bg-[#819fa7]/5 mb-6">
             {t('badge')}
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-[#f3f5f9] mb-4">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-display font-bold text-[#f3f5f9] mb-4">
             {t('title')}
           </h2>
-          <p className="text-[#f3f5f9]/50 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#f3f5f9]/50 max-w-xl mx-auto">
             {t('subtitle')}
           </p>
         </SectionReveal>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
           <AnimatePresence mode="popLayout">
             {displayedProjects.map((project, index) => (
               <motion.div
@@ -138,7 +138,7 @@ export default function Projects() {
         {/* Show More/Less Button */}
         {hasMoreProjects && (
           <SectionReveal delay={0.5}>
-            <div className="mt-12 text-center">
+            <div className="mt-8 md:mt-12 text-center">
               <button
                 onClick={() => setShowAll(!showAll)}
                 className="group inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-[#819fa7] border border-[#819fa7]/30 rounded-xl hover:bg-[#819fa7]/10 hover:border-[#819fa7]/50 transition-all duration-300"

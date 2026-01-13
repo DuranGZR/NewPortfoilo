@@ -28,23 +28,24 @@ export default function AboutPanel({ color }: AboutPanelProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
             >
-                {/* Avatar */}
+                {/* Profile Photo */}
                 <div
-                    className="w-20 h-20 rounded-2xl flex items-center justify-center relative overflow-hidden"
+                    className="w-20 h-20 rounded-2xl relative overflow-hidden shrink-0"
                     style={{
-                        background: `linear-gradient(135deg, ${color}30, ${color}10)`,
-                        border: `1px solid ${color}30`
+                        border: `2px solid ${color}50`,
+                        boxShadow: `0 0 20px ${color}30`
                     }}
                 >
-                    <div
-                        className="w-12 h-12 rounded-xl"
-                        style={{ background: `linear-gradient(135deg, ${color}, ${color}80)` }}
+                    <img
+                        src="/muklogo.png"
+                        alt="Duran Gezer"
+                        className="w-full h-full object-cover"
                     />
                     {/* Glow effect */}
                     <div
-                        className="absolute inset-0 opacity-50"
+                        className="absolute inset-0 opacity-30"
                         style={{
-                            background: `radial-gradient(circle at center, ${color}20 0%, transparent 70%)`
+                            background: `radial-gradient(circle at center, ${color}40 0%, transparent 70%)`
                         }}
                     />
                 </div>

@@ -30,6 +30,10 @@ export async function generateMetadata({
         title: t('title'),
         description: t('description'),
         metadataBase: new URL(siteUrl),
+        icons: {
+            icon: '/favicon.png',
+            apple: '/favicon.png',
+        },
         openGraph: {
             type: 'website',
             locale: locale === 'tr' ? 'tr_TR' : 'en_US',
@@ -39,7 +43,7 @@ export async function generateMetadata({
             siteName: 'Duran Gezer Portfolio',
             images: [
                 {
-                    url: '/og-image.jpg',
+                    url: '/og-image.png',
                     width: 1200,
                     height: 630,
                     alt: t('title'),
@@ -50,7 +54,7 @@ export async function generateMetadata({
             card: 'summary_large_image',
             title: t('title'),
             description: t('description'),
-            images: ['/og-image.jpg'],
+            images: ['/og-image.png'],
             creator: '@durangezer',
         },
         robots: {

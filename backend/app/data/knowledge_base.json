@@ -124,14 +124,17 @@
             "year": "2024"
         },
         {
-            "name": "Eczane Otomasyon Sistemi",
-            "description": "Eczane yönetimi için geliştirilmiş otomasyon yazılımı. Stok takibi, ilaç yönetimi ve satış işlemlerini otomatize eder.",
+            "name": "Telegram Doğum Günü Botu",
+            "description": "Doğum günlerini takip eden ve otomatik hatırlatma gönderen Telegram botu. Her gün 09:00'da kontrol eder ve doğum gününden 1 gün önce gruba mesaj atar. CSV ile toplu ekleme, admin yetkilendirme ve istatistik özellikleri mevcut.",
             "tech": [
-                "C#",
-                "Veritabanı Yönetimi"
+                "Python",
+                "Telegram Bot API",
+                "SQLite",
+                "APScheduler",
+                "Railway"
             ],
-            "github": "https://github.com/DuranGZR/Pharmacy_Automation",
-            "year": "2024"
+            "github": "https://github.com/DuranGZR/Telegram_dogum_gunu_bot",
+            "year": "2025"
         },
         {
             "name": "Otobüs Bilet Rezervasyon Sistemi",
@@ -187,6 +190,23 @@
             "organization": "HSD İnönü - Huawei",
             "year": "2025",
             "description": "Bulut teknolojileri ve Huawei Cloud eğitimi"
+        }
+    ],
+    "community_activities": [
+        {
+            "title": "DevOps Developer",
+            "organization": "HSD İNÖNÜ",
+            "period": "Ekim 2025 - Devam Ediyor",
+            "description": "Topluluk projelerinde CI/CD pipeline'ları kurma, Docker container yönetimi, GitHub Actions ile otomasyon ve sunucu yönetimi. DevOps kültürü ve best practice'leri uygulama.",
+            "skills_gained": ["CI/CD", "Docker", "GitHub Actions", "Linux Server Management", "DevOps"]
+        },
+        {
+            "title": "Organizasyon Başkanı",
+            "organization": "İnönü Üniversitesi Siber Güvenlik Topluluğu",
+            "period": "Kasım 2024 - Eylül 2025",
+            "duration": "11 ay",
+            "description": "Topluluk etkinlikleri planlama, eğitim programları organize etme, takım yönetimi ve siber güvenlik farkındalığı oluşturma.",
+            "skills_gained": ["Liderlik", "Takım Yönetimi", "Etkinlik Organizasyonu", "İletişim", "Siber Güvenlik Farkındalığı"]
         }
     ],
     "courses": [

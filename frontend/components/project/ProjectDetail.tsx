@@ -31,7 +31,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
     <div className="min-h-screen bg-[#0d0d0d]">
       {/* Back Button */}
       <div className="sticky top-0 z-50 bg-[#0d0d0d]/60 backdrop-blur-xl border-b border-[#819fa7]/10">
-        <div className="max-w-6xl mx-auto px-6 py-4">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 py-3 md:py-4">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -48,11 +48,11 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 py-12">
+      <div className="max-w-6xl mx-auto px-0 md:px-6 py-4 md:py-12">
         {/* Header */}
         <SectionReveal delay={0}>
-          <div className="mb-16">
-            <div className="flex flex-wrap items-center gap-3 mb-6">
+          <div className="mb-6 md:mb-16 px-4 md:px-0">
+            <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-4 md:mb-6">
               <motion.span
                 className={`inline-flex items-center gap-2 px-4 py-1.5 text-xs font-medium rounded-full border backdrop-blur-sm ${statusColors[project.status]}`}
                 initial={{ scale: 0.9, opacity: 0 }}
@@ -64,21 +64,21 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               </motion.span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 leading-tight">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-display font-bold mb-4 md:mb-6 leading-tight">
               <span className="text-gradient">{project.title}</span>
             </h1>
-            <p className="text-xl md:text-2xl text-[#f3f5f9]/70 mb-8 max-w-3xl leading-relaxed">
+            <p className="text-base md:text-xl lg:text-2xl text-[#f3f5f9]/70 mb-6 md:mb-8 max-w-3xl leading-relaxed">
               {project.oneLiner}
             </p>
 
             {/* Links */}
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-3 md:gap-4">
               {project.demo && (
                 <motion.a
                   href={project.demo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#819fa7] to-[#5b6e74] text-[#0d0d0d] rounded-xl font-medium hover:shadow-lg hover:shadow-[#819fa7]/20 transition-all"
+                  className="inline-flex items-center gap-2 px-4 md:px-6 py-2.5 md:py-3 bg-gradient-to-r from-[#819fa7] to-[#5b6e74] text-[#0d0d0d] rounded-xl text-sm md:text-base font-medium hover:shadow-lg hover:shadow-[#819fa7]/20 transition-all"
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -91,7 +91,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-[#819fa7]/30 text-[#819fa7] rounded-xl font-medium hover:bg-[#819fa7]/10 hover:border-[#819fa7]/50 backdrop-blur-sm transition-all"
+                  className="inline-flex items-center gap-2 px-4 md:px-6 py-2.5 md:py-3 border border-[#819fa7]/30 text-[#819fa7] rounded-xl text-sm md:text-base font-medium hover:bg-[#819fa7]/10 hover:border-[#819fa7]/50 backdrop-blur-sm transition-all"
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -105,24 +105,24 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
 
         {/* Problem Section */}
         <SectionReveal delay={0.1}>
-          <section className="mb-16">
-            <h2 className="text-2xl font-display font-bold text-[#f3f5f9] mb-6 flex items-center gap-3">
-              <span className="text-[#819fa7] font-mono">01.</span> {t('sections.problem')}
+          <section className="mb-6 md:mb-16">
+            <h2 className="text-lg md:text-2xl font-display font-bold text-[#f3f5f9] mb-3 md:mb-6 flex items-center gap-2 md:gap-3 px-4 md:px-0">
+              <span className="text-[#819fa7] font-mono text-sm md:text-base">01.</span> {t('sections.problem')}
             </h2>
-            <GlassCard className="p-8">
-              <p className="text-[#f3f5f9]/80 leading-relaxed text-lg mb-8">
+            <div className="bg-[#1a1a1a]/50 md:rounded-2xl border-y md:border border-[#819fa7]/10 p-4 md:p-8">
+              <p className="text-[#f3f5f9]/80 leading-relaxed text-base md:text-lg mb-6 md:mb-8">
                 {project.problem}
               </p>
               <div>
-                <h3 className="text-lg font-display font-semibold text-[#f3f5f9] mb-4 flex items-center gap-2">
-                  <Target className="w-5 h-5 text-[#819fa7]" />
+                <h3 className="text-base md:text-lg font-display font-semibold text-[#f3f5f9] mb-3 md:mb-4 flex items-center gap-2">
+                  <Target className="w-4 h-4 md:w-5 md:h-5 text-[#819fa7]" />
                   {t('sections.constraints')}
                 </h3>
-                <ul className="grid md:grid-cols-2 gap-3">
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
                   {project.constraints.map((constraint, index) => (
                     <motion.li
                       key={index}
-                      className="flex items-start gap-3 text-[#f3f5f9]/70 p-3 rounded-lg bg-[#0d0d0d]/40"
+                      className="flex items-start gap-2 md:gap-3 text-sm md:text-base text-[#f3f5f9]/70 p-2 md:p-3 rounded-lg bg-[#0d0d0d]/40"
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
@@ -134,53 +134,53 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                   ))}
                 </ul>
               </div>
-            </GlassCard>
+            </div>
           </section>
         </SectionReveal>
 
         {/* Approach Section */}
         <SectionReveal delay={0.15}>
-          <section className="mb-16">
-            <h2 className="text-2xl font-display font-bold text-[#f3f5f9] mb-6 flex items-center gap-3">
-              <span className="text-[#819fa7] font-mono">02.</span> {t('sections.approach')}
+          <section className="mb-6 md:mb-16">
+            <h2 className="text-lg md:text-2xl font-display font-bold text-[#f3f5f9] mb-3 md:mb-6 flex items-center gap-2 md:gap-3 px-4 md:px-0">
+              <span className="text-[#819fa7] font-mono text-sm md:text-base">02.</span> {t('sections.approach')}
             </h2>
-            <div className="space-y-6">
-              <GlassCard className="p-8">
-                <p className="text-[#f3f5f9]/80 leading-relaxed text-lg">
+            <div className="space-y-0 md:space-y-6">
+              <div className="bg-[#1a1a1a]/50 md:rounded-2xl border-y md:border border-[#819fa7]/10 p-4 md:p-8">
+                <p className="text-[#f3f5f9]/80 leading-relaxed text-sm md:text-lg">
                   {project.approach}
                 </p>
-              </GlassCard>
+              </div>
 
               {/* Model Choice Card */}
-              <GlassCard className="p-8" glow>
-                <h3 className="text-lg font-display font-semibold text-[#f3f5f9] mb-6 flex items-center gap-2">
-                  <Cpu className="w-5 h-5 text-[#819fa7]" />
+              <div className="bg-[#1a1a1a]/70 md:rounded-2xl border-y md:border border-[#819fa7]/20 p-4 md:p-8 mt-0 md:mt-6">
+                <h3 className="text-base md:text-lg font-display font-semibold text-[#f3f5f9] mb-4 md:mb-6 flex items-center gap-2">
+                  <Cpu className="w-4 h-4 md:w-5 md:h-5 text-[#819fa7]" />
                   {t('sections.modelChoice')}
                 </h3>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="p-4 rounded-xl bg-[#0d0d0d]/60">
-                    <span className="text-xs font-bold text-[#819fa7] uppercase tracking-wider">{t('labels.selectedModel')}</span>
-                    <p className="text-xl font-display font-semibold text-[#f3f5f9] mt-2">{project.modelChoice.name}</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                  <div className="p-3 md:p-4 rounded-xl bg-[#0d0d0d]/60">
+                    <span className="text-[10px] md:text-xs font-bold text-[#819fa7] uppercase tracking-wider">{t('labels.selectedModel')}</span>
+                    <p className="text-lg md:text-xl font-display font-semibold text-[#f3f5f9] mt-1 md:mt-2">{project.modelChoice.name}</p>
                   </div>
-                  <div className="p-4 rounded-xl bg-[#0d0d0d]/40">
-                    <span className="text-xs font-bold text-[#819fa7] uppercase tracking-wider">{t('labels.rationale')}</span>
-                    <p className="text-[#f3f5f9]/70 mt-2 leading-relaxed">{project.modelChoice.rationale}</p>
+                  <div className="p-3 md:p-4 rounded-xl bg-[#0d0d0d]/40">
+                    <span className="text-[10px] md:text-xs font-bold text-[#819fa7] uppercase tracking-wider">{t('labels.rationale')}</span>
+                    <p className="text-sm md:text-base text-[#f3f5f9]/70 mt-1 md:mt-2 leading-relaxed">{project.modelChoice.rationale}</p>
                   </div>
                 </div>
-              </GlassCard>
+              </div>
             </div>
           </section>
         </SectionReveal>
 
         {/* Results Section */}
         <SectionReveal delay={0.2}>
-          <section className="mb-16">
-            <h2 className="text-2xl font-display font-bold text-[#f3f5f9] mb-6 flex items-center gap-3">
-              <span className="text-[#819fa7] font-mono">03.</span> {t('sections.results')}
+          <section className="mb-6 md:mb-16">
+            <h2 className="text-lg md:text-2xl font-display font-bold text-[#f3f5f9] mb-3 md:mb-6 flex items-center gap-2 md:gap-3 px-4 md:px-0">
+              <span className="text-[#819fa7] font-mono text-sm md:text-base">03.</span> {t('sections.results')}
             </h2>
 
             {/* Metrics Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-3 gap-0 md:gap-4 mb-0 md:mb-8 border-y md:border-0 border-[#819fa7]/10">
               {project.evaluation.metrics.map((metric, index) => (
                 <motion.div
                   key={index}
@@ -188,50 +188,49 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.4 }}
+                  className="bg-[#1a1a1a]/50 p-4 md:p-6 text-center border-r border-[#819fa7]/10 last:border-r-0 md:border-0 md:rounded-2xl md:border md:border-[#819fa7]/10"
                 >
-                  <GlassCard className="p-6 text-center">
-                    <motion.div
-                      className="text-3xl md:text-4xl font-display font-bold text-[#819fa7] mb-2"
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 + 0.2, type: "spring", stiffness: 200 }}
-                    >
-                      {metric.value}
-                    </motion.div>
-                    <div className="text-sm text-[#f3f5f9]/60 uppercase tracking-wider">{metric.name}</div>
-                  </GlassCard>
+                  <motion.div
+                    className="text-lg md:text-3xl lg:text-4xl font-display font-bold text-[#819fa7] mb-1"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 + 0.2, type: "spring", stiffness: 200 }}
+                  >
+                    {metric.value}
+                  </motion.div>
+                  <div className="text-[9px] md:text-sm text-[#f3f5f9]/60 uppercase tracking-wider">{metric.name}</div>
                 </motion.div>
               ))}
             </div>
 
-            <GlassCard className="p-8 mb-6">
-              <h3 className="text-lg font-display font-semibold text-[#f3f5f9] mb-3">{t('labels.evaluationApproach')}</h3>
-              <p className="text-[#f3f5f9]/70 leading-relaxed">
+            <div className="bg-[#1a1a1a]/50 md:rounded-2xl border-y md:border border-[#819fa7]/10 p-4 md:p-8 mb-0 md:mb-6">
+              <h3 className="text-sm md:text-lg font-display font-semibold text-[#f3f5f9] mb-2 md:mb-3">{t('labels.evaluationApproach')}</h3>
+              <p className="text-sm md:text-base text-[#f3f5f9]/70 leading-relaxed">
                 {project.evaluation.approach}
               </p>
-            </GlassCard>
+            </div>
 
-            <GlassCard className="p-8 border-l-4 border-l-[#819fa7]" glow>
-              <h3 className="text-lg font-display font-semibold text-[#f3f5f9] mb-3 flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-[#819fa7]" />
+            <div className="bg-[#1a1a1a]/70 md:rounded-2xl border-y md:border border-[#819fa7]/10 border-l-4 border-l-[#819fa7] p-4 md:p-8">
+              <h3 className="text-base md:text-lg font-display font-semibold text-[#f3f5f9] mb-2 md:mb-3 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-[#819fa7]" />
                 {t('labels.outcome')}
               </h3>
-              <p className="text-[#f3f5f9]/80 leading-relaxed text-lg">
+              <p className="text-sm md:text-base lg:text-lg text-[#f3f5f9]/80 leading-relaxed">
                 {project.outcome}
               </p>
-            </GlassCard>
+            </div>
           </section>
         </SectionReveal>
 
         {/* Lessons Learned */}
         <SectionReveal delay={0.25}>
-          <section className="mb-16">
-            <h2 className="text-2xl font-display font-bold text-[#f3f5f9] mb-6 flex items-center gap-3">
-              <BookOpen className="w-6 h-6 text-[#819fa7]" />
+          <section className="mb-6 md:mb-16">
+            <h2 className="text-lg md:text-2xl font-display font-bold text-[#f3f5f9] mb-3 md:mb-6 flex items-center gap-2 md:gap-3 px-4 md:px-0">
+              <BookOpen className="w-5 h-5 md:w-6 md:h-6 text-[#819fa7]" />
               {t('sections.lessons')}
             </h2>
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="md:grid md:grid-cols-2 md:gap-4 divide-y md:divide-y-0 divide-[#819fa7]/10 border-y md:border-0 border-[#819fa7]/10">
               {project.learnings.map((learning, index) => (
                 <motion.div
                   key={index}
@@ -239,15 +238,14 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
+                  className="bg-[#1a1a1a]/30 md:bg-[#1a1a1a]/50 md:rounded-2xl md:border md:border-[#819fa7]/10 p-4 md:p-6"
                 >
-                  <GlassCard className="p-6 h-full">
-                    <div className="flex items-start gap-4">
-                      <span className="flex-shrink-0 w-8 h-8 rounded-full bg-[#819fa7]/10 flex items-center justify-center text-[#819fa7] text-sm font-mono">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                      <p className="text-[#f3f5f9]/70 leading-relaxed">{learning}</p>
-                    </div>
-                  </GlassCard>
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#819fa7]/10 flex items-center justify-center text-[#819fa7] text-xs font-mono">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <p className="text-sm md:text-base text-[#f3f5f9]/70 leading-relaxed">{learning}</p>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -256,16 +254,16 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
 
         {/* Tech Stack */}
         <SectionReveal delay={0.3}>
-          <section className="mb-16">
-            <h2 className="text-2xl font-display font-bold text-[#f3f5f9] mb-6 flex items-center gap-3">
-              <Wrench className="w-6 h-6 text-[#819fa7]" />
+          <section className="mb-6 md:mb-16">
+            <h2 className="text-lg md:text-2xl font-display font-bold text-[#f3f5f9] mb-3 md:mb-6 flex items-center gap-2 md:gap-3 px-4 md:px-0">
+              <Wrench className="w-5 h-5 md:w-6 md:h-6 text-[#819fa7]" />
               {t('sections.techStack')}
             </h2>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2 md:gap-3 px-4 md:px-0">
               {project.techStack.map((tech, index) => (
                 <motion.span
                   key={index}
-                  className="px-4 py-2 text-sm text-[#f3f5f9]/80 bg-[#1a1a1a]/60 backdrop-blur-sm rounded-lg border border-[#819fa7]/10 hover:border-[#819fa7]/30 hover:bg-[#819fa7]/5 transition-all cursor-default"
+                  className="px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-sm text-[#f3f5f9]/80 bg-[#1a1a1a]/60 backdrop-blur-sm rounded-lg border border-[#819fa7]/10 hover:border-[#819fa7]/30 hover:bg-[#819fa7]/5 transition-all cursor-default"
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
@@ -282,9 +280,9 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         {/* Tags */}
         {project.tags.length > 0 && (
           <SectionReveal delay={0.35}>
-            <section>
-              <h2 className="text-2xl font-display font-bold text-[#f3f5f9] mb-6 flex items-center gap-3">
-                <Tag className="w-6 h-6 text-[#819fa7]" />
+            <section className="px-4 md:px-0">
+              <h2 className="text-lg md:text-2xl font-display font-bold text-[#f3f5f9] mb-3 md:mb-6 flex items-center gap-2 md:gap-3">
+                <Tag className="w-5 h-5 md:w-6 md:h-6 text-[#819fa7]" />
                 {t('sections.tags')}
               </h2>
               <div className="flex flex-wrap gap-2">

@@ -48,12 +48,6 @@ class Settings(BaseSettings):
     # Rate Limiting
     rate_limit_per_minute: int = 30
     
-    # Admin
-    admin_api_key: str = ""
-    admin_password_hash: str = ""
-    admin_jwt_secret: str = ""
-    admin_path: str = "ctrl-x7k9p2m"
-    
     @property
     def is_production(self) -> bool:
         """Check if running in production."""

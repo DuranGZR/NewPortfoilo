@@ -25,6 +25,17 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Scroll offset for fixed header */
+section[id] {
+  scroll-margin-top: 70px;
+}
+
+@media (max-width: 768px) {
+  section[id] {
+    scroll-margin-top: 60px;
+  }
+}
+
 body {
   font-family: var(--font-body);
   background-color: var(--bg-primary);

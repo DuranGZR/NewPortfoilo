@@ -107,12 +107,12 @@ export default function AIAssistant() {
   };
 
   return (
-    <section id="ai-assistant" className="relative py-24 px-6 overflow-hidden bg-[#0d0d0d]">
+    <section id="ai-assistant" className="relative py-8 md:py-24 px-4 md:px-6 overflow-hidden bg-[#0d0d0d]">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0d0d0d] via-[#1a1a1a] to-[#0d0d0d]" />
 
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 opacity-[0.02]" style={{
+      {/* Subtle grid pattern - Hidden on mobile for performance */}
+      <div className="hidden md:block absolute inset-0 opacity-[0.02]" style={{
         backgroundImage: `
           linear-gradient(#819fa7 1px, transparent 1px),
           linear-gradient(90deg, #819fa7 1px, transparent 1px)
@@ -121,8 +121,13 @@ export default function AIAssistant() {
       }} />
 
       <div className="relative z-10 max-w-5xl mx-auto">
-        {/* Section Header */}
-        <SectionReveal className="mb-16 text-center">
+        {/* Section Header - Mobile */}
+        <div className="md:hidden text-center mb-4">
+          <h2 className="text-lg font-bold text-[#f3f5f9]">{t('title')}</h2>
+        </div>
+
+        {/* Desktop Header */}
+        <SectionReveal className="hidden md:block mb-16 text-center">
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full border border-[#819fa7]/30 bg-[#819fa7]/5">
             <Sparkles className="w-4 h-4 text-[#819fa7]" />
             <span className="text-xs font-light tracking-[0.3em] uppercase text-[#819fa7]">
@@ -140,72 +145,104 @@ export default function AIAssistant() {
         {/* Chat Interface */}
         <SectionReveal delay={0.2}>
           <div className="relative">
-            {/* Chat Container */}
+            {/* Chat Container - Card style on both */}
             <div className="relative rounded-2xl bg-gradient-to-br from-[#1a1a1a]/80 to-[#0d0d0d]/80 border border-[#819fa7]/20 backdrop-blur-xl overflow-hidden">
 
               {/* Chat Header */}
-              <div className="px-6 py-4 border-b border-[#819fa7]/10 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#819fa7]/20 border border-[#819fa7]/30 flex items-center justify-center">
-                    <MessageSquare className="w-5 h-5 text-[#819fa7]" />
+              <div className="px-4 md:px-6 py-3 md:py-4 border-b border-[#819fa7]/10 flex items-center justify-between">
+                <div className="flex items-center gap-2 md:gap-3">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#819fa7]/20 border border-[#819fa7]/30 flex items-center justify-center">
+                    <MessageSquare className="w-4 h-4 md:w-5 md:h-5 text-[#819fa7]" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold text-[#f3f5f9]">{t('chatHeader.title')}</h3>
-                    <p className="text-xs text-[#f3f5f9]/50">{t('chatHeader.poweredBy')}</p>
+                    <h3 className="text-xs md:text-sm font-semibold text-[#f3f5f9]">{t('chatHeader.title')}</h3>
+                    <p className="hidden md:block text-xs text-[#f3f5f9]/50">{t('chatHeader.poweredBy')}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1.5">
                   <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-xs text-emerald-400 ml-2">Çevrimiçi</span>
+                  <span className="text-xs text-emerald-400">Online</span>
                 </div>
               </div>
 
               {/* Chat Body */}
-              <div ref={messagesContainerRef} className="p-6 min-h-[400px] max-h-[500px] overflow-y-auto scroll-smooth">
+              <div ref={messagesContainerRef} className="p-4 md:p-6 min-h-[420px] md:min-h-[400px] max-h-[480px] md:max-h-[500px] overflow-y-auto scroll-smooth">
                 {messages.length === 0 ? (
-                  /* Sample Questions - Show when no messages */
-                  <div className="w-full max-w-xl mx-auto space-y-4">
-                    <p className="text-sm text-[#f3f5f9]/60 text-center mb-6">
+                  /* Sample Questions */
+                  <div className="h-full flex flex-col justify-center max-w-xl mx-auto">
+                    {/* AI Avatar - Mobile */}
+                    <div className="md:hidden flex flex-col items-center mb-4">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#819fa7]/30 to-[#819fa7]/10 border-2 border-[#819fa7]/40 flex items-center justify-center mb-2">
+                        <Bot className="w-6 h-6 text-[#819fa7]" />
+                      </div>
+                      <p className="text-xs text-[#f3f5f9]/50 text-center">
+                        {t('sampleQuestionsTitle')}
+                      </p>
+                    </div>
+
+                    {/* Desktop text */}
+                    <p className="hidden md:block text-sm text-[#f3f5f9]/60 text-center mb-6">
                       {t('sampleQuestionsTitle')}
                     </p>
 
-                    {sampleQuestions.map((question) => (
-                      <button
-                        key={question}
-                        onClick={() => handleQuestionClick(question)}
-                        className="w-full p-4 rounded-lg text-left transition-all duration-200 bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/30 hover:bg-[#819fa7]/5 hover:translate-x-1"
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-[#f3f5f9]/80">{question}</span>
-                          <Send className="w-4 h-4 text-[#f3f5f9]/30" />
-                        </div>
-                      </button>
-                    ))}
+                    {/* Mobile: Compact buttons */}
+                    <div className="md:hidden space-y-2">
+                      {sampleQuestions.map((question) => (
+                        <button
+                          key={question}
+                          onClick={() => handleQuestionClick(question)}
+                          className="w-full p-3 rounded-xl text-left bg-[#1a1a1a]/80 border border-[#819fa7]/15 hover:border-[#819fa7]/40 active:scale-[0.98] transition-all"
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <Send className="w-3.5 h-3.5 text-[#819fa7] flex-shrink-0" />
+                            <span className="text-xs text-[#f3f5f9]/70 leading-snug">
+                              {question}
+                            </span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Desktop: Original list style */}
+                    <div className="hidden md:block space-y-4">
+                      {sampleQuestions.map((question) => (
+                        <button
+                          key={question}
+                          onClick={() => handleQuestionClick(question)}
+                          className="w-full p-4 rounded-lg text-left transition-all duration-200 bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/30 hover:bg-[#819fa7]/5 hover:translate-x-1"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm text-[#f3f5f9]/80">{question}</span>
+                            <Send className="w-4 h-4 text-[#f3f5f9]/30" />
+                          </div>
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 ) : (
                   /* Messages */
-                  <div className="space-y-4">
+                  <div className="space-y-3 md:space-y-4">
                     {messages.map((message) => (
                       <div
                         key={message.id}
-                        className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                        className={`flex gap-2 md:gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                       >
                         {message.role === 'assistant' && (
-                          <div className="w-8 h-8 rounded-full bg-[#819fa7]/20 border border-[#819fa7]/30 flex items-center justify-center shrink-0">
-                            <Bot className="w-4 h-4 text-[#819fa7]" />
+                          <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#819fa7]/20 border border-[#819fa7]/30 flex items-center justify-center shrink-0">
+                            <Bot className="w-3 h-3 md:w-4 md:h-4 text-[#819fa7]" />
                           </div>
                         )}
                         <div
-                          className={`max-w-[80%] p-4 rounded-2xl ${message.role === 'user'
+                          className={`max-w-[85%] md:max-w-[80%] p-2.5 md:p-4 rounded-xl md:rounded-2xl ${message.role === 'user'
                             ? 'bg-[#819fa7]/20 border border-[#819fa7]/30 text-[#f3f5f9]'
                             : 'bg-[#1a1a1a]/80 border border-[#819fa7]/10 text-[#f3f5f9]/90'
                             }`}
                         >
-                          <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                          <p className="text-xs md:text-sm whitespace-pre-wrap">{message.content}</p>
                         </div>
                         {message.role === 'user' && (
-                          <div className="w-8 h-8 rounded-full bg-[#819fa7]/30 border border-[#819fa7]/40 flex items-center justify-center shrink-0">
-                            <User className="w-4 h-4 text-[#819fa7]" />
+                          <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#819fa7]/30 border border-[#819fa7]/40 flex items-center justify-center shrink-0">
+                            <User className="w-3 h-3 md:w-4 md:h-4 text-[#819fa7]" />
                           </div>
                         )}
                       </div>
@@ -216,15 +253,15 @@ export default function AIAssistant() {
                       <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="flex gap-3"
+                        className="flex gap-2 md:gap-3"
                       >
-                        <div className="w-8 h-8 rounded-full bg-[#819fa7]/20 border border-[#819fa7]/30 flex items-center justify-center">
-                          <Bot className="w-4 h-4 text-[#819fa7]" />
+                        <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#819fa7]/20 border border-[#819fa7]/30 flex items-center justify-center">
+                          <Bot className="w-3 h-3 md:w-4 md:h-4 text-[#819fa7]" />
                         </div>
-                        <div className="p-4 rounded-2xl bg-[#1a1a1a]/80 border border-[#819fa7]/10">
+                        <div className="p-2.5 md:p-4 rounded-xl md:rounded-2xl bg-[#1a1a1a]/80 border border-[#819fa7]/10">
                           <div className="flex items-center gap-2">
                             <Loader2 className="w-4 h-4 text-[#819fa7] animate-spin" />
-                            <span className="text-sm text-[#f3f5f9]/60">Düşünüyor...</span>
+                            <span className="text-xs md:text-sm text-[#f3f5f9]/60">Düşünüyor...</span>
                           </div>
                         </div>
                       </motion.div>
@@ -235,7 +272,7 @@ export default function AIAssistant() {
                       <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm text-center"
+                        className="p-2.5 md:p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-xs md:text-sm text-center"
                       >
                         {error}
                       </motion.div>
@@ -245,35 +282,34 @@ export default function AIAssistant() {
               </div>
 
               {/* Chat Input */}
-              <form onSubmit={handleSubmit} className="px-6 py-4 border-t border-[#819fa7]/10">
-                <div className="flex gap-3">
+              <form onSubmit={handleSubmit} className="px-4 md:px-6 py-3 md:py-4 border-t border-[#819fa7]/10">
+                <div className="flex gap-2">
                   <input
                     ref={inputRef}
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    placeholder="Duran hakkında bir şey sor..."
+                    placeholder="Mesajınızı yazın..."
                     disabled={isLoading}
-                    className="flex-1 px-4 py-3 rounded-lg bg-[#1a1a1a]/50 border border-[#819fa7]/20 text-[#f3f5f9] text-sm placeholder:text-[#f3f5f9]/30 focus:outline-none focus:border-[#819fa7]/50 transition-colors disabled:opacity-50"
+                    className="flex-1 px-3 md:px-4 py-2.5 md:py-3 rounded-lg bg-[#1a1a1a]/50 border border-[#819fa7]/20 text-[#f3f5f9] text-xs md:text-sm placeholder:text-[#f3f5f9]/30 focus:outline-none focus:border-[#819fa7]/50 transition-colors disabled:opacity-50"
                   />
                   <button
                     type="submit"
                     disabled={isLoading || !input.trim()}
-                    className="px-6 py-3 rounded-lg bg-[#819fa7]/20 border border-[#819fa7]/30 text-[#819fa7] text-sm font-medium hover:bg-[#819fa7]/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                    className="px-4 py-2.5 md:py-3 rounded-lg bg-[#819fa7]/20 border border-[#819fa7]/30 text-[#819fa7] hover:bg-[#819fa7]/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isLoading ? (
                       <Loader2 className="w-4 h-4 animate-spin" />
                     ) : (
                       <Send className="w-4 h-4" />
                     )}
-                    Gönder
                   </button>
                 </div>
               </form>
             </div>
 
-            {/* Info Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+            {/* Info Cards - Desktop only */}
+            <div className="hidden md:grid grid-cols-3 gap-4 mt-8">
               {features.map((feature, index) => (
                 <SectionReveal key={feature.title} delay={0.4 + index * 0.1}>
                   <div className="h-full p-4 rounded-lg bg-[#1a1a1a]/40 border border-[#819fa7]/10 hover:border-[#819fa7]/25 transition-colors">

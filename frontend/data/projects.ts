@@ -30,7 +30,7 @@ export interface Project {
   github?: string
   demo?: string
 
-  thumbnail: string
+  thumbnail?: string
   tags: string[]
 }
 
@@ -80,7 +80,6 @@ export const projects: Project[] = [
     github: 'https://github.com/DuranGZR/Real-Time-Visual-Understanding',
     demo: undefined,
 
-    thumbnail: '/projects/visual-ai.jpg',
     tags: ['AI', 'Computer Vision', 'LLM', 'Python']
   },
 
@@ -129,7 +128,6 @@ export const projects: Project[] = [
     github: 'https://github.com/DuranGZR/El_Yazisi_Tahmin',
     demo: undefined,
 
-    thumbnail: '/projects/handwriting.jpg',
     tags: ['Deep Learning', 'CNN', 'Image Classification']
   },
 
@@ -178,7 +176,6 @@ export const projects: Project[] = [
     github: 'https://github.com/DuranGZR/Diabetes_Prediction',
     demo: undefined,
 
-    thumbnail: '/projects/diabetes.jpg',
     tags: ['Machine Learning', 'Classification', 'Healthcare']
   },
 
@@ -227,7 +224,6 @@ export const projects: Project[] = [
     github: 'https://github.com/DuranGZR/XOX_Bot',
     demo: undefined,
 
-    thumbnail: '/projects/xox-bot.jpg',
     tags: ['Reinforcement Learning', 'Q-Learning', 'Game AI']
   },
 
@@ -276,7 +272,6 @@ export const projects: Project[] = [
     github: 'https://github.com/DuranGZR/Salary_Prediction_with_Mahcine_Learning',
     demo: undefined,
 
-    thumbnail: '/projects/salary.jpg',
     tags: ['Machine Learning', 'Regression', 'Feature Engineering']
   },
 
@@ -325,57 +320,57 @@ export const projects: Project[] = [
     github: 'https://github.com/DuranGZR/Simple-Artificial-Neuron',
     demo: undefined,
 
-    thumbnail: '/projects/neuron.jpg',
     tags: ['Neural Networks', 'Deep Learning Fundamentals', 'NumPy']
   },
 
   {
-    id: 'pharmacy',
-    title: 'Eczane Otomasyon Sistemi',
+    id: 'telegram-birthday-bot',
+    title: 'Telegram Doğum Günü Botu',
     status: 'completed',
-    oneLiner: 'C# ile geliştirilmiş kapsamlı eczane yönetim ve satış takip sistemi.',
+    oneLiner: 'Doğum günlerini takip eden ve otomatik hatırlatma gönderen Telegram botu.',
 
-    problem: 'Eczanelerde stok takibi, ilaç yönetimi ve satış işlemlerinin dijitalleştirilmesi için otomasyon sistemi gerekiyor.',
+    problem: 'Topluluklar ve gruplar için doğum günlerini manuel takip etmek zor. Otomatik hatırlatma sistemi ile kimsenin doğum günü unutulmasın.',
 
     constraints: [
-      'Kullanıcı dostu arayüz tasarımı',
-      'Güvenilir veritabanı entegrasyonu',
-      'Stok yönetimi ve uyarı sistemi',
-      'Raporlama ve istatistik özellikleri'
+      'Telegram Bot API entegrasyonu',
+      'Thread-safe veritabanı yönetimi',
+      'Zamanlama sistemi (her gün 09:00)',
+      'Admin yetkilendirme sistemi',
+      'Cloud deployment (Railway)'
     ],
 
-    approach: 'Windows Forms ile masaüstü uygulama geliştirildi. SQL veritabanı ile CRUD işlemleri implemente edildi. OOP prensipleri uygulandı.',
+    approach: 'python-telegram-bot kütüphanesi ile async bot geliştirildi. SQLite ile thread-safe veritabanı, APScheduler ile günlük hatırlatma sistemi kuruldu. Railway üzerinde 7/24 çalışacak şekilde deploy edildi.',
 
     modelChoice: {
-      name: 'Windows Forms + SQL Server',
-      rationale: 'Masaüstü uygulamalar için stabil ve yaygın kullanılan teknoloji. Kurumsal ortamlarda güvenilir çözüm.'
+      name: 'Python + Telegram Bot API',
+      rationale: 'Async yapısı sayesinde yüksek performans. python-telegram-bot kütüphanesi güçlü ve iyi dokümante edilmiş. Railway ile kolay deployment.'
     },
 
     evaluation: {
       metrics: [
-        { name: 'Tamamlanma', value: '%100' },
-        { name: 'Özellik Sayısı', value: '10+' },
-        { name: 'Kullanılabilirlik', value: 'Yüksek' }
+        { name: 'Uptime', value: '7/24' },
+        { name: 'Hatırlatma Zamanı', value: '09:00' },
+        { name: 'Komut Sayısı', value: '5+' }
       ],
-      approach: 'Manuel test ve kullanıcı geri bildirimi ile değerlendirildi.'
+      approach: 'Gerçek grup ortamında test edildi. Zamanlama ve hatırlatma sistemleri doğrulandı.'
     },
 
-    outcome: 'Tam işlevsel eczane otomasyon sistemi geliştirildi. OOP prensiplerinin gerçek dünya uygulaması oldu.',
+    outcome: 'Aktif olarak çalışan Telegram botu geliştirildi. Doğum günü ekleme/silme/listeleme, CSV ile toplu ekleme, otomatik hatırlatma ve istatistik özellikleri mevcut.',
 
     learnings: [
-      'Desktop uygulama geliştirme süreçlerini öğrendim',
-      'Veritabanı tasarımı ve normalizasyon önemli',
-      'OOP prensipleri (encapsulation, inheritance) kod kalitesini artırıyor',
-      'Kullanıcı arayüzü tasarımı kullanıcı deneyimini doğrudan etkiliyor'
+      'Telegram Bot API ve async programlama deneyimi kazandım',
+      'APScheduler ile cron-job benzeri zamanlama sistemleri kurdum',
+      'Thread-safe veritabanı yönetimini öğrendim',
+      'Railway ile cloud deployment süreçlerini deneyimledim',
+      'Environment variables ile güvenli config yönetimi'
     ],
 
-    techStack: ['C#', 'Windows Forms', 'SQL', 'OOP'],
+    techStack: ['Python', 'Telegram Bot API', 'SQLite', 'APScheduler', 'Railway'],
 
-    github: 'https://github.com/DuranGZR/Pharmacy_Automation',
+    github: 'https://github.com/DuranGZR/Telegram_dogum_gunu_bot',
     demo: undefined,
 
-    thumbnail: '/projects/pharmacy.jpg',
-    tags: ['C#', 'Desktop App', 'Database', 'OOP']
+    tags: ['Python', 'Bot Development', 'Automation', 'Cloud Deploy']
   },
 
   {
@@ -423,7 +418,6 @@ export const projects: Project[] = [
     github: 'https://github.com/DuranGZR/A_Bus_Ticket_Reservation_System',
     demo: undefined,
 
-    thumbnail: '/projects/bus-ticket.jpg',
     tags: ['Java', 'Desktop App', 'OOP', 'Data Structures']
   }
 ]

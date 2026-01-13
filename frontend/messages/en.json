@@ -1,6 +1,6 @@
 {
     "metadata": {
-        "title": "Duran Gezer | AI/ML Engineer",
+        "title": "Duran Gezer",
         "description": "Understanding data, teaching machines, shaping the future."
     },
     "navigation": {
@@ -116,12 +116,12 @@
                 "impact": "Built from scratch with Python and NumPy.",
                 "github": "https://github.com/DuranGZR/Simple-Artificial-Neuron"
             },
-            "pharmacy": {
-                "title": "Pharmacy Automation System",
-                "period": "2024",
-                "tagline": "Automation software developed for pharmacy management. Automates stock tracking, medicine management, and sales operations.",
-                "impact": "Built with C# and database management.",
-                "github": "https://github.com/DuranGZR/Pharmacy_Automation"
+            "telegramBot": {
+                "title": "Telegram Birthday Reminder Bot",
+                "period": "2025",
+                "tagline": "Telegram bot that tracks birthdays and sends automatic reminders. Features CSV bulk import, admin authorization, and scheduling.",
+                "impact": "Built with Python, Telegram Bot API, SQLite, APScheduler. Running 24/7 on Railway.",
+                "github": "https://github.com/DuranGZR/Telegram_dogum_gunu_bot"
             },
             "busTicket": {
                 "title": "Bus Ticket Reservation System",
@@ -167,11 +167,12 @@
     },
     "experience": {
         "badge": "Background",
-        "title": "Education & Certifications",
+        "title": "Education, Certifications & Activities",
         "subtitle": "The journey that shaped my engineering vision.",
         "categories": {
             "education": "Education",
-            "certifications": "Certifications"
+            "certifications": "Certifications",
+            "community": "Community Activities"
         },
         "items": {
             "degree": {
@@ -215,6 +216,18 @@
                 "organization": "HSD İnönü - Huawei",
                 "period": "2025",
                 "description": "Cloud technologies and Huawei Cloud training"
+            },
+            "hsdDevOps": {
+                "title": "DevOps Developer",
+                "organization": "HSD İNÖNÜ",
+                "period": "Oct 2025 - Present",
+                "description": "Building CI/CD pipelines for community projects, Docker container management, automation with GitHub Actions, and server administration. Implementing DevOps culture and best practices."
+            },
+            "cyberSecurityOrg": {
+                "title": "Organization President",
+                "organization": "İnönü University Cyber Security Community",
+                "period": "Nov 2024 - Sep 2025",
+                "description": "During 11-month tenure: planning community events, organizing training programs, team management, and raising cybersecurity awareness. Developing leadership and organizational skills."
             }
         },
         "modal": {
@@ -391,6 +404,17 @@
         "builtWith": "Built with",
         "copyright": "This portfolio is a living system—always evolving."
     },
+    "contact": {
+        "title": "Get In Touch",
+        "name": "Your Name",
+        "email": "Email",
+        "subject": "Subject (Optional)",
+        "message": "Your Message",
+        "send": "Send",
+        "sending": "Sending...",
+        "success": "Your message has been sent successfully! I'll get back to you soon.",
+        "error": "An error occurred. Please try again."
+    },
     "common": {
         "learnMore": "Learn More",
         "readMore": "Read More",
@@ -442,16 +466,24 @@
             }
         },
         "experience": {
-            "title": "Experience",
-            "subtitle": "My professional experiences",
+            "title": "Experience & Activities",
+            "subtitle": "My professional and community experiences",
             "items": {
                 "0": {
-                    "title": "Internship Experience",
-                    "description": "Working on software development and data analysis projects."
+                    "title": "DevOps Developer - HSD İNÖNÜ",
+                    "description": "Oct 2025 - Present • CI/CD, Docker, GitHub Actions, server management"
                 },
                 "1": {
-                    "title": "Freelance Projects",
-                    "description": "Developing web applications and automation solutions."
+                    "title": "Organization President - Cyber Security Community",
+                    "description": "Nov 2024 - Sep 2025 • 11 months leadership, event organization, team management"
+                },
+                "2": {
+                    "title": "Machine Learning Certifications",
+                    "description": "Miuul • 2024 • ML algorithms, Feature Engineering, Python for Data Science"
+                },
+                "3": {
+                    "title": "Cloud Night",
+                    "description": "HSD İnönü - Huawei • 2025 • Cloud technologies training"
                 }
             }
         },
@@ -520,6 +552,33 @@
             "rationale": "Rationale",
             "evaluationApproach": "Evaluation Approach",
             "outcome": "Outcome"
+        }
+    },
+    "commandPalette": {
+        "placeholder": "Type a command or search...",
+        "noResults": "No results found.",
+        "categories": {
+            "navigation": "Navigation",
+            "language": "Language",
+            "social": "Social & Contact"
+        },
+        "navigation": {
+            "home": "Go to Home",
+            "about": "About Me",
+            "projects": "View Projects",
+            "skills": "My Skills",
+            "mlVisualizer": "ML Model Visualizer",
+            "experience": "Experience & Education",
+            "thinking": "Engineering Thinking",
+            "roadmap": "Career Roadmap",
+            "aiAssistant": "AI Assistant"
+        },
+        "social": {
+            "email": "Send Email"
+        },
+        "footer": {
+            "navigate": "Navigate",
+            "select": "Select"
         }
     }
 }

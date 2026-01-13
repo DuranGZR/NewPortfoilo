@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { Rocket, Github, ExternalLink, Eye, Camera, Brain, Activity, Gamepad2, DollarSign, Pill, Bus } from 'lucide-react';
+import { Rocket, Github, ExternalLink, Eye, Camera, Brain, Activity, Gamepad2, DollarSign, MessageSquare, Bus } from 'lucide-react';
 
 interface ProjectsPanelProps {
     color: string;
@@ -40,10 +40,10 @@ const projects = [
         github: 'https://github.com/DuranGZR/Salary_Prediction_with_Mahcine_Learning'
     },
     {
-        key: 'pharmacy',
-        icon: Pill,
-        techs: ['C#', 'Database'],
-        github: 'https://github.com/DuranGZR/Pharmacy_Automation'
+        key: 'telegramBot',
+        icon: MessageSquare,
+        techs: ['Python', 'Telegram API'],
+        github: 'https://github.com/DuranGZR/Telegram_dogum_gunu_bot'
     },
 ];
 

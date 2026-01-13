@@ -3,6 +3,8 @@
 import { useEffect, useState, createElement } from 'react';
 import { Command } from 'cmdk';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslations, useLocale } from 'next-intl';
+import { useRouter, usePathname } from 'next/navigation';
 import { 
   Search, 
   Home, 
@@ -16,7 +18,9 @@ import {
   Brain,
   Github,
   Linkedin,
-  Mail
+  Mail,
+  Globe,
+  ExternalLink
 } from 'lucide-react';
 
 interface CommandItem {
@@ -24,12 +28,17 @@ interface CommandItem {
   label: string;
   icon: React.ElementType;
   action: () => void;
-  category: 'navigation' | 'social' | 'actions';
+  category: 'navigation' | 'social' | 'actions' | 'language';
+  shortcut?: string;
 }
 
 export default function CommandPalette() {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
+  const t = useTranslations('commandPalette');
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
 
   // Keyboard shortcut
   useEffect(() => {
@@ -52,91 +61,107 @@ export default function CommandPalette() {
     }
   };
 
+  const switchLanguage = (newLocale: string) => {
+    const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
+    router.push(newPath);
+    setOpen(false);
+  };
+
   const commands: CommandItem[] = [
     // Navigation
     {
       id: 'home',
-      label: 'Go to Home',
+      label: t('navigation.home'),
       icon: Home,
-      action: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
+      action: () => { window.scrollTo({ top: 0, behavior: 'smooth' }); setOpen(false); },
       category: 'navigation'
     },
     {
       id: 'about',
-      label: 'About Me',
+      label: t('navigation.about'),
       icon: User,
       action: () => scrollToSection('about'),
       category: 'navigation'
     },
     {
       id: 'projects',
-      label: 'View Projects',
+      label: t('navigation.projects'),
       icon: FolderOpen,
       action: () => scrollToSection('projects'),
       category: 'navigation'
     },
     {
       id: 'skills',
-      label: 'My Skills',
+      label: t('navigation.skills'),
       icon: Code,
       action: () => scrollToSection('skills'),
       category: 'navigation'
     },
     {
-      id: 'ml-visualizer',
-      label: 'ML Model Visualizer',
-      icon: Brain,
-      action: () => scrollToSection('ml-visualizer'),
-      category: 'navigation'
-    },
-    {
       id: 'experience',
-      label: 'Experience & Education',
+      label: t('navigation.experience'),
       icon: Briefcase,
       action: () => scrollToSection('experience'),
       category: 'navigation'
     },
     {
       id: 'thinking',
-      label: 'Engineering Thinking',
+      label: t('navigation.thinking'),
       icon: Lightbulb,
       action: () => scrollToSection('thinking'),
       category: 'navigation'
     },
     {
       id: 'roadmap',
-      label: 'Career Roadmap',
+      label: t('navigation.roadmap'),
       icon: Map,
       action: () => scrollToSection('roadmap'),
       category: 'navigation'
     },
     {
       id: 'ai-assistant',
-      label: 'AI Assistant',
+      label: t('navigation.aiAssistant'),
       icon: MessageSquare,
       action: () => scrollToSection('ai-assistant'),
       category: 'navigation'
     },
+    // Language
+    {
+      id: 'lang-tr',
+      label: '🇹🇷 Türkçe',
+      icon: Globe,
+      action: () => switchLanguage('tr'),
+      category: 'language',
+      shortcut: locale === 'tr' ? '✓' : undefined
+    },
+    {
+      id: 'lang-en',
+      label: '🇬🇧 English',
+      icon: Globe,
+      action: () => switchLanguage('en'),
+      category: 'language',
+      shortcut: locale === 'en' ? '✓' : undefined
+    },
     // Social
     {
       id: 'github',
-      label: 'Open GitHub',
+      label: 'GitHub',
       icon: Github,
-      action: () => window.open('https://github.com/durangezer', '_blank'),
+      action: () => window.open('https://github.com/DuranGZR', '_blank'),
       category: 'social'
     },
     {
       id: 'linkedin',
-      label: 'Open LinkedIn',
+      label: 'LinkedIn',
       icon: Linkedin,
       action: () => window.open('https://linkedin.com/in/durangezer', '_blank'),
       category: 'social'
     },
     {
       id: 'email',
-      label: 'Send Email',
+      label: t('social.email'),
       icon: Mail,
-      action: () => window.location.href = 'mailto:your.email@example.com',
+      action: () => window.location.href = 'mailto:durangzr@gmail.com',
       category: 'social'
     }
   ];
@@ -146,6 +171,7 @@ export default function CommandPalette() {
   );
 
   const navigationCommands = filteredCommands.filter(c => c.category === 'navigation');
+  const languageCommands = filteredCommands.filter(c => c.category === 'language');
   const socialCommands = filteredCommands.filter(c => c.category === 'social');
 
   return (
@@ -167,7 +193,7 @@ export default function CommandPalette() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed top-[20%] left-1/2 -translate-x-1/2 w-full max-w-2xl z-[101]"
+            className="fixed top-[20%] left-1/2 -translate-x-1/2 w-full max-w-2xl z-[101] px-4"
           >
             <Command className="rounded-2xl border border-[#819fa7]/30 bg-[#0d0d0d]/95 backdrop-blur-xl shadow-2xl overflow-hidden">
               {/* Search Input */}
@@ -176,7 +202,7 @@ export default function CommandPalette() {
                 <Command.Input
                   value={search}
                   onValueChange={setSearch}
-                  placeholder="Type a command or search..."
+                  placeholder={t('placeholder')}
                   className="flex-1 bg-transparent border-none outline-none text-[#f3f5f9] placeholder:text-[#f3f5f9]/40 text-base"
                 />
                 <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-[#819fa7] bg-[#819fa7]/10 rounded border border-[#819fa7]/20">
@@ -187,52 +213,73 @@ export default function CommandPalette() {
               {/* Command List */}
               <Command.List className="max-h-[400px] overflow-y-auto p-2">
                 <Command.Empty className="py-12 text-center text-sm text-[#f3f5f9]/50">
-                  No results found.
+                  {t('noResults')}
                 </Command.Empty>
 
                 {/* Navigation Commands */}
                 {navigationCommands.length > 0 && (
-                  <Command.Group heading="Navigation" className="px-2 py-2">
+                  <Command.Group heading={t('categories.navigation')} className="px-2 py-2">
                     <div className="text-xs font-semibold text-[#819fa7] uppercase tracking-wider mb-2 px-2">
-                      Navigation
+                      {t('categories.navigation')}
                     </div>
-                    {navigationCommands.map((cmd) => {
-                      return (
-                        <Command.Item
-                          key={cmd.id}
-                          onSelect={() => cmd.action()}
-                          className="flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer hover:bg-[#819fa7]/10 transition-colors group data-[selected=true]:bg-[#819fa7]/15"
-                        >
-                          {createElement(cmd.icon, { className: "w-4 h-4 text-[#819fa7] group-hover:text-[#f3f5f9] transition-colors" })}
-                          <span className="text-sm text-[#f3f5f9] group-hover:text-[#f3f5f9] font-medium">
-                            {cmd.label}
-                          </span>
-                        </Command.Item>
-                      );
-                    })}
+                    {navigationCommands.map((cmd) => (
+                      <Command.Item
+                        key={cmd.id}
+                        onSelect={() => cmd.action()}
+                        className="flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer hover:bg-[#819fa7]/10 transition-colors group data-[selected=true]:bg-[#819fa7]/15"
+                      >
+                        {createElement(cmd.icon, { className: "w-4 h-4 text-[#819fa7] group-hover:text-[#f3f5f9] transition-colors" })}
+                        <span className="text-sm text-[#f3f5f9] group-hover:text-[#f3f5f9] font-medium">
+                          {cmd.label}
+                        </span>
+                      </Command.Item>
+                    ))}
+                  </Command.Group>
+                )}
+
+                {/* Language Commands */}
+                {languageCommands.length > 0 && (
+                  <Command.Group heading={t('categories.language')} className="px-2 py-2 mt-2">
+                    <div className="text-xs font-semibold text-[#819fa7] uppercase tracking-wider mb-2 px-2">
+                      {t('categories.language')}
+                    </div>
+                    {languageCommands.map((cmd) => (
+                      <Command.Item
+                        key={cmd.id}
+                        onSelect={() => cmd.action()}
+                        className="flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer hover:bg-[#819fa7]/10 transition-colors group data-[selected=true]:bg-[#819fa7]/15"
+                      >
+                        {createElement(cmd.icon, { className: "w-4 h-4 text-[#819fa7] group-hover:text-[#f3f5f9] transition-colors" })}
+                        <span className="text-sm text-[#f3f5f9] group-hover:text-[#f3f5f9] font-medium flex-1">
+                          {cmd.label}
+                        </span>
+                        {cmd.shortcut && (
+                          <span className="text-[#819fa7] text-sm">{cmd.shortcut}</span>
+                        )}
+                      </Command.Item>
+                    ))}
                   </Command.Group>
                 )}
 
                 {/* Social Commands */}
                 {socialCommands.length > 0 && (
-                  <Command.Group heading="Social" className="px-2 py-2 mt-2">
+                  <Command.Group heading={t('categories.social')} className="px-2 py-2 mt-2">
                     <div className="text-xs font-semibold text-[#819fa7] uppercase tracking-wider mb-2 px-2">
-                      Social & Contact
+                      {t('categories.social')}
                     </div>
-                    {socialCommands.map((cmd) => {
-                      return (
-                        <Command.Item
-                          key={cmd.id}
-                          onSelect={() => cmd.action()}
-                          className="flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer hover:bg-[#819fa7]/10 transition-colors group data-[selected=true]:bg-[#819fa7]/15"
-                        >
-                          {createElement(cmd.icon, { className: "w-4 h-4 text-[#819fa7] group-hover:text-[#f3f5f9] transition-colors" })}
-                          <span className="text-sm text-[#f3f5f9] group-hover:text-[#f3f5f9] font-medium">
-                            {cmd.label}
-                          </span>
-                        </Command.Item>
-                      );
-                    })}
+                    {socialCommands.map((cmd) => (
+                      <Command.Item
+                        key={cmd.id}
+                        onSelect={() => cmd.action()}
+                        className="flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer hover:bg-[#819fa7]/10 transition-colors group data-[selected=true]:bg-[#819fa7]/15"
+                      >
+                        {createElement(cmd.icon, { className: "w-4 h-4 text-[#819fa7] group-hover:text-[#f3f5f9] transition-colors" })}
+                        <span className="text-sm text-[#f3f5f9] group-hover:text-[#f3f5f9] font-medium flex-1">
+                          {cmd.label}
+                        </span>
+                        <ExternalLink className="w-3 h-3 text-[#819fa7]/50" />
+                      </Command.Item>
+                    ))}
                   </Command.Group>
                 )}
               </Command.List>
@@ -242,15 +289,15 @@ export default function CommandPalette() {
                 <div className="flex items-center gap-4 text-xs text-[#f3f5f9]/50">
                   <span className="flex items-center gap-1.5">
                     <kbd className="px-1.5 py-0.5 bg-[#819fa7]/10 rounded border border-[#819fa7]/20 text-[#819fa7]">↑↓</kbd>
-                    Navigate
+                    {t('footer.navigate')}
                   </span>
                   <span className="flex items-center gap-1.5">
                     <kbd className="px-1.5 py-0.5 bg-[#819fa7]/10 rounded border border-[#819fa7]/20 text-[#819fa7]">↵</kbd>
-                    Select
+                    {t('footer.select')}
                   </span>
                 </div>
                 <div className="text-xs text-[#f3f5f9]/50">
-                  Press <kbd className="px-1.5 py-0.5 bg-[#819fa7]/10 rounded border border-[#819fa7]/20 text-[#819fa7]">⌘K</kbd> anytime
+                  <kbd className="px-1.5 py-0.5 bg-[#819fa7]/10 rounded border border-[#819fa7]/20 text-[#819fa7]">⌘K</kbd>
                 </div>
               </div>
             </Command>

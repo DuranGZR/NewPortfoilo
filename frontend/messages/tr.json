@@ -1,6 +1,6 @@
 {
     "metadata": {
-        "title": "Duran Gezer | AI/ML Engineer",
+        "title": "Duran Gezer",
         "description": "Veriyi anlayan, makineleri öğreten, geleceği şekillendiren."
     },
     "navigation": {
@@ -116,12 +116,12 @@
                 "impact": "Python, NumPy ile sıfırdan geliştirildi.",
                 "github": "https://github.com/DuranGZR/Simple-Artificial-Neuron"
             },
-            "pharmacy": {
-                "title": "Eczane Otomasyon Sistemi",
-                "period": "2024",
-                "tagline": "Eczane yönetimi için geliştirilmiş otomasyon yazılımı. Stok takibi, ilaç yönetimi ve satış işlemlerini otomatize eder.",
-                "impact": "C# ve veritabanı yönetimi ile geliştirildi.",
-                "github": "https://github.com/DuranGZR/Pharmacy_Automation"
+            "telegramBot": {
+                "title": "Telegram Doğum Günü Botu",
+                "period": "2025",
+                "tagline": "Doğum günlerini takip eden ve otomatik hatırlatma gönderen Telegram botu. CSV ile toplu ekleme, admin yetkilendirme ve zamanlama özellikleri.",
+                "impact": "Python, Telegram Bot API, SQLite, APScheduler ile geliştirildi. Railway'de 7/24 çalışıyor.",
+                "github": "https://github.com/DuranGZR/Telegram_dogum_gunu_bot"
             },
             "busTicket": {
                 "title": "Otobüs Bilet Rezervasyon Sistemi",
@@ -167,11 +167,12 @@
     },
     "experience": {
         "badge": "Geçmiş",
-        "title": "Eğitim ve Sertifikalar",
+        "title": "Eğitim, Sertifikalar ve Aktiviteler",
         "subtitle": "Mühendislik vizyonumu şekillendiren yolculuk.",
         "categories": {
             "education": "Eğitim",
-            "certifications": "Sertifikalar"
+            "certifications": "Sertifikalar",
+            "community": "Topluluk Aktiviteleri"
         },
         "items": {
             "degree": {
@@ -215,6 +216,18 @@
                 "organization": "HSD İnönü - Huawei",
                 "period": "2025",
                 "description": "Bulut teknolojileri ve Huawei Cloud eğitimi"
+            },
+            "hsdDevOps": {
+                "title": "DevOps Developer",
+                "organization": "HSD İNÖNÜ",
+                "period": "Eki 2025 - Devam Ediyor",
+                "description": "Topluluk projelerinde CI/CD pipeline'ları kurma, Docker container yönetimi, GitHub Actions ile otomasyon ve sunucu yönetimi. DevOps kültürü ve best practice'leri uygulama."
+            },
+            "cyberSecurityOrg": {
+                "title": "Organizasyon Başkanı",
+                "organization": "İnönü Üniversitesi Siber Güvenlik Topluluğu",
+                "period": "Kas 2024 - Eyl 2025",
+                "description": "11 aylık görev süresinde topluluk etkinlikleri planlama, eğitim programları organize etme, takım yönetimi ve siber güvenlik farkındalığı oluşturma. Liderlik ve organizasyon becerileri geliştirme."
             }
         },
         "modal": {
@@ -397,18 +410,22 @@
             }
         },
         "experience": {
-            "title": "Sertifikalar",
-            "subtitle": "Aldığım eğitim ve sertifikalar",
+            "title": "Sertifikalar & Aktiviteler",
+            "subtitle": "Aldığım eğitim ve topluluk deneyimlerim",
             "items": {
                 "0": {
+                    "title": "DevOps Developer - HSD İNÖNÜ",
+                    "description": "Eki 2025 - Devam • CI/CD, Docker, GitHub Actions, sunucu yönetimi"
+                },
+                "1": {
+                    "title": "Organizasyon Başkanı - Siber Güvenlik Topluluğu",
+                    "description": "Kas 2024 - Eyl 2025 • 11 ay liderlik, etkinlik organizasyonu, takım yönetimi"
+                },
+                "2": {
                     "title": "Machine Learning",
                     "description": "Miuul • 2024 • Makine öğrenmesi algoritmaları ve uygulamaları"
                 },
-                "1": {
-                    "title": "C# Programlama Dili",
-                    "description": "Udemy • 2024 • Her seviyeye hitap eden kapsamlı C# eğitimi"
-                },
-                "2": {
+                "3": {
                     "title": "Cloud Night",
                     "description": "HSD İnönü - Huawei • 2025 • Bulut teknolojileri eğitimi"
                 }
@@ -461,8 +478,8 @@
                     "description": "Özellik mühendisliği ve regresyon algoritmaları. Scikit-learn."
                 },
                 "5": {
-                    "title": "Eczane Otomasyon Sistemi",
-                    "description": "Stok takibi ve satış yönetimi. C#, veritabanı yönetimi."
+                    "title": "Telegram Doğum Günü Botu",
+                    "description": "Otomatik hatırlatma ve zamanlama. Python, Telegram Bot API."
                 }
             }
         }
@@ -513,6 +530,17 @@
         "notifyQuestion": "AI asistan canlı yayına geçtiğinde haberdar olmak ister misiniz?",
         "notifyButton": "Beni Bilgilendir"
     },
+    "contact": {
+        "title": "İletişime Geç",
+        "name": "Adınız",
+        "email": "E-posta",
+        "subject": "Konu (Opsiyonel)",
+        "message": "Mesajınız",
+        "send": "Gönder",
+        "sending": "Gönderiliyor...",
+        "success": "Mesajınız başarıyla gönderildi! En kısa sürede size döneceğim.",
+        "error": "Bir hata oluştu. Lütfen tekrar deneyin."
+    },
     "common": {
         "learnMore": "Daha Fazla Öğren",
         "readMore": "Devamını Oku",
@@ -548,6 +576,33 @@
             "rationale": "Gerekçe",
             "evaluationApproach": "Değerlendirme Yaklaşımı",
             "outcome": "Sonuç"
+        }
+    },
+    "commandPalette": {
+        "placeholder": "Komut yaz veya ara...",
+        "noResults": "Sonuç bulunamadı.",
+        "categories": {
+            "navigation": "Navigasyon",
+            "language": "Dil",
+            "social": "Sosyal & İletişim"
+        },
+        "navigation": {
+            "home": "Ana Sayfa",
+            "about": "Hakkımda",
+            "projects": "Projeler",
+            "skills": "Yeteneklerim",
+            "mlVisualizer": "ML Model Görselleştirici",
+            "experience": "Deneyim & Eğitim",
+            "thinking": "Mühendislik Düşüncesi",
+            "roadmap": "Kariyer Yol Haritası",
+            "aiAssistant": "AI Asistan"
+        },
+        "social": {
+            "email": "E-posta Gönder"
+        },
+        "footer": {
+            "navigate": "Gezin",
+            "select": "Seç"
         }
     }
 }

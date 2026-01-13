@@ -16,26 +16,151 @@ export default function Roadmap() {
   const t = useTranslations('roadmap');
 
   return (
-    <section id="roadmap" className="relative py-24 px-6 bg-[#0d0d0d]">
+    <section id="roadmap" className="relative py-12 md:py-24 px-4 md:px-6 bg-[#0d0d0d]">
       {/* Simple gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] to-[#0d0d0d]" />
 
       <div className="relative z-10 max-w-4xl mx-auto">
         {/* Section Header */}
-        <SectionReveal className="text-center mb-16">
-          <span className="inline-block text-xs font-medium tracking-[0.15em] uppercase text-[#819fa7] px-4 py-2 rounded-full border border-[#819fa7]/30 bg-[#819fa7]/5 mb-6">
+        <SectionReveal className="text-center mb-6 md:mb-16">
+          <span className="inline-block text-[10px] md:text-xs font-medium tracking-[0.15em] uppercase text-[#819fa7] px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-[#819fa7]/30 bg-[#819fa7]/5 mb-3 md:mb-6">
             {t('badge')}
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-[#f3f5f9] mb-4">
+          <h2 className="text-xl md:text-4xl lg:text-5xl font-display font-bold text-[#f3f5f9] mb-2 md:mb-4">
             {t('title')}
           </h2>
-          <p className="text-[#f3f5f9]/50 max-w-xl mx-auto">
+          <p className="text-xs md:text-base text-[#f3f5f9]/50 max-w-xl mx-auto hidden md:block">
             {t('subtitle')}
           </p>
         </SectionReveal>
 
-        {/* Timeline */}
-        <div className="relative">
+        {/* ===== MOBILE LAYOUT - Compact Timeline ===== */}
+        <div className="md:hidden relative pl-6">
+          {/* Vertical Line */}
+          <div className="absolute left-[11px] top-0 bottom-8 w-0.5 bg-gradient-to-b from-[#819fa7] via-[#819fa7]/50 to-[#819fa7]/10" />
+
+          <div className="space-y-4">
+            {milestones.map((milestone, index) => {
+              const isActive = milestone.status === 'active';
+              const goals = t.raw(`milestones.${milestone.key}.goals`) as string[];
+              const focus = milestone.status !== 'active' ? t(`milestones.${milestone.key}.focus`) : null;
+
+              return (
+                <motion.div
+                  key={milestone.key}
+                  className="relative"
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  {/* Timeline Node */}
+                  <div className="absolute -left-6 top-2">
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center border-2 ${
+                      isActive 
+                        ? 'bg-[#819fa7]/20 border-[#819fa7]' 
+                        : milestone.status === 'upcoming' 
+                          ? 'bg-[#1a1a1a] border-[#819fa7]/50' 
+                          : 'bg-[#0d0d0d] border-[#819fa7]/20'
+                    }`}>
+                      {isActive ? (
+                        <Target className="w-3 h-3 text-[#819fa7]" />
+                      ) : milestone.status === 'upcoming' ? (
+                        <Clock className="w-3 h-3 text-[#819fa7]/60" />
+                      ) : (
+                        <Circle className="w-3 h-3 text-[#819fa7]/40" />
+                      )}
+                    </div>
+                    {isActive && (
+                      <div className="absolute inset-0 rounded-full bg-[#819fa7]/20 animate-ping" />
+                    )}
+                  </div>
+
+                  {/* Content Card */}
+                  <div className={`ml-2 p-3 rounded-xl border ${
+                    isActive 
+                      ? 'bg-[#819fa7]/5 border-[#819fa7]/30' 
+                      : 'bg-[#1a1a1a]/50 border-[#819fa7]/10'
+                  }`}>
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-2">
+                      <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${
+                        isActive 
+                          ? 'bg-[#819fa7]/20 text-[#819fa7]' 
+                          : 'bg-[#1a1a1a] text-[#819fa7]/60'
+                      }`}>
+                        {t(`milestones.${milestone.key}.period`)}
+                      </span>
+                      {isActive && (
+                        <span className="flex items-center gap-1 text-[10px] text-[#819fa7]">
+                          <span className="w-1.5 h-1.5 bg-[#819fa7] rounded-full animate-pulse" />
+                          {t('active')}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-sm font-semibold text-[#f3f5f9] mb-2">
+                      {t(`milestones.${milestone.key}.title`)}
+                    </h3>
+
+                    {/* Goals - Compact */}
+                    <div className="space-y-1 mb-2">
+                      {goals.slice(0, 2).map((goal: string, idx: number) => (
+                        <div key={idx} className="flex items-start gap-1.5 text-xs text-[#f3f5f9]/60">
+                          <ArrowRight className="w-3 h-3 text-[#819fa7] mt-0.5 flex-shrink-0" />
+                          <span className="line-clamp-1">{goal}</span>
+                        </div>
+                      ))}
+                      {goals.length > 2 && (
+                        <span className="text-[10px] text-[#819fa7]/50 ml-4">+{goals.length - 2} daha</span>
+                      )}
+                    </div>
+
+                    {/* Progress Bar */}
+                    {milestone.progress && (
+                      <div className="pt-2 border-t border-[#819fa7]/10">
+                        <div className="flex items-center justify-between text-xs mb-1">
+                          <span className="text-[#f3f5f9]/50 flex items-center gap-1">
+                            <CheckCircle className="w-3 h-3 text-[#819fa7]" />
+                            İlerleme
+                          </span>
+                          <span className="text-[#819fa7] font-medium">
+                            {milestone.progress.completed}/{milestone.progress.total}
+                          </span>
+                        </div>
+                        <div className="h-1 bg-[#1a1a1a] rounded-full overflow-hidden">
+                          <motion.div
+                            className="h-full bg-gradient-to-r from-[#819fa7] to-[#5b6e74] rounded-full"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${(milestone.progress.completed / milestone.progress.total) * 100}%` }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3, duration: 0.5 }}
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Focus */}
+                    {focus && (
+                      <p className="text-[10px] text-[#819fa7]/70 italic mt-2 line-clamp-1">"{focus}"</p>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Bottom Note */}
+          <div className="mt-4 text-center">
+            <p className="text-[10px] text-[#f3f5f9]/40">
+              {t('bottomNote')}
+            </p>
+          </div>
+        </div>
+
+        {/* ===== DESKTOP LAYOUT - Original Timeline ===== */}
+        <div className="hidden md:block relative">
           {/* Vertical Line */}
           <div className="absolute left-6 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#819fa7] via-[#819fa7]/50 to-[#819fa7]/10" />
 

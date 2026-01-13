@@ -323,13 +323,41 @@ const levelColors = {
   expert: 'bg-[#819fa7]/30 text-[#819fa7] border-[#819fa7]/50'
 };
 
+// Chip style colors for mobile
+const chipColors = {
+  beginner: 'bg-gradient-to-r from-[#3a4a4f]/60 to-[#3a4a4f]/40 border-[#819fa7]/20 text-[#f3f5f9]/70',
+  intermediate: 'bg-gradient-to-r from-[#4a5f65]/60 to-[#4a5f65]/40 border-[#819fa7]/30 text-[#f3f5f9]/80',
+  advanced: 'bg-gradient-to-r from-[#5b7078]/60 to-[#5b7078]/40 border-[#819fa7]/40 text-[#f3f5f9]/90',
+  expert: 'bg-gradient-to-r from-[#819fa7]/40 to-[#6b8a92]/40 border-[#819fa7]/50 text-[#f3f5f9]'
+};
+
+// Mobile Chip Component
+function SkillChip({ skill, index, onClick }: { skill: Skill; index: number; onClick: () => void }) {
+  const Icon = skill.icon;
+
+  return (
+    <motion.button
+      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border ${chipColors[skill.level]} hover:scale-105 active:scale-95 transition-all duration-200`}
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.03 }}
+      onClick={onClick}
+    >
+      <Icon className="w-3 h-3" />
+      <span className="text-[11px] font-medium whitespace-nowrap">{skill.name}</span>
+    </motion.button>
+  );
+}
+
+// Desktop List Component
 function SkillCard({ skill, index, onClick }: { skill: Skill; index: number; onClick: () => void }) {
   const t = useTranslations('skills');
   const Icon = skill.icon;
 
   return (
     <motion.div
-      className="group flex items-center justify-between p-3 rounded-xl bg-[#0d0d0d]/40 hover:bg-[#819fa7]/5 transition-all duration-300 cursor-pointer"
+      className="group flex items-center justify-between p-2.5 md:p-3 rounded-lg md:rounded-xl bg-[#0d0d0d]/40 hover:bg-[#819fa7]/5 transition-all duration-300 cursor-pointer"
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -337,13 +365,13 @@ function SkillCard({ skill, index, onClick }: { skill: Skill; index: number; onC
       whileHover={{ x: 4 }}
       onClick={onClick}
     >
-      <div className="flex items-center gap-3">
-        <Icon className="w-4 h-4 text-[#819fa7]" />
-        <span className="text-sm text-[#f3f5f9]/80 group-hover:text-[#f3f5f9] transition-colors">
+      <div className="flex items-center gap-2 md:gap-3">
+        <Icon className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#819fa7]" />
+        <span className="text-xs md:text-sm text-[#f3f5f9]/80 group-hover:text-[#f3f5f9] transition-colors">
           {skill.name}
         </span>
       </div>
-      <span className={`px-2.5 py-1 text-[10px] font-medium rounded-full border ${levelColors[skill.level]}`}>
+      <span className={`px-2 md:px-2.5 py-0.5 md:py-1 text-[9px] md:text-[10px] font-medium rounded-full border ${levelColors[skill.level]}`}>
         {t(`levels.${skill.level}`)}
       </span>
     </motion.div>
@@ -360,7 +388,7 @@ function SkillModal({ skill, onClose }: { skill: Skill | null; onClose: () => vo
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -376,7 +404,7 @@ function SkillModal({ skill, onClose }: { skill: Skill | null; onClose: () => vo
 
         {/* Modal */}
         <motion.div
-          className="relative w-full max-w-lg bg-[#1a1a1a] border border-[#819fa7]/20 rounded-2xl p-6 shadow-2xl"
+          className="relative w-full max-w-lg bg-[#1a1a1a] border border-[#819fa7]/20 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-2xl max-h-[85vh] overflow-y-auto"
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -385,44 +413,44 @@ function SkillModal({ skill, onClose }: { skill: Skill | null; onClose: () => vo
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-2 rounded-lg hover:bg-[#819fa7]/10 transition-colors"
+            className="absolute top-3 right-3 md:top-4 md:right-4 p-1.5 md:p-2 rounded-lg hover:bg-[#819fa7]/10 transition-colors"
           >
-            <X className="w-5 h-5 text-[#819fa7]" />
+            <X className="w-4 h-4 md:w-5 md:h-5 text-[#819fa7]" />
           </button>
 
           {/* Header */}
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 rounded-xl bg-[#819fa7]/10 flex items-center justify-center">
-              <Icon className="w-6 h-6 text-[#819fa7]" />
+          <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
+            <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-[#819fa7]/10 flex items-center justify-center">
+              <Icon className="w-5 h-5 md:w-6 md:h-6 text-[#819fa7]" />
             </div>
             <div>
-              <h3 className="text-xl font-display font-bold text-[#f3f5f9]">{skill.name}</h3>
-              <span className={`inline-block mt-1 px-2.5 py-1 text-[10px] font-medium rounded-full border ${levelColors[skill.level]}`}>
+              <h3 className="text-lg md:text-xl font-display font-bold text-[#f3f5f9]">{skill.name}</h3>
+              <span className={`inline-block mt-1 px-2 md:px-2.5 py-0.5 md:py-1 text-[9px] md:text-[10px] font-medium rounded-full border ${levelColors[skill.level]}`}>
                 {t(`levels.${skill.level}`)}
               </span>
             </div>
           </div>
 
           {/* Description */}
-          <p className="text-[#f3f5f9]/70 mb-6 leading-relaxed">
+          <p className="text-sm md:text-base text-[#f3f5f9]/70 mb-4 md:mb-6 leading-relaxed">
             {skill.description}
           </p>
 
           {/* Learnings */}
           <div>
-            <h4 className="text-sm font-semibold text-[#819fa7] uppercase tracking-wider mb-4">
+            <h4 className="text-xs md:text-sm font-semibold text-[#819fa7] uppercase tracking-wider mb-3 md:mb-4">
               {t('modal.whatIKnow')}
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-1.5 md:space-y-2">
               {skill.learns.map((learn, index) => (
                 <motion.li
                   key={index}
-                  className="flex items-start gap-3 text-sm text-[#f3f5f9]/70"
+                  className="flex items-start gap-2 md:gap-3 text-xs md:text-sm text-[#f3f5f9]/70"
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
                 >
-                  <CheckCircle className="w-4 h-4 text-[#819fa7] mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#819fa7] mt-0.5 flex-shrink-0" />
                   <span>{learn}</span>
                 </motion.li>
               ))}
@@ -439,58 +467,71 @@ export default function Skills() {
   const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
 
   return (
-    <section id="skills" className="relative py-24 px-6 bg-[#0d0d0d]">
+    <section id="skills" className="relative py-16 md:py-24 px-4 md:px-6 bg-[#0d0d0d]">
       {/* Simple gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0d0d0d] to-[#0a0a0a]" />
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Section Header */}
-        <SectionReveal className="text-center mb-16">
-          <span className="inline-block text-xs font-medium tracking-[0.15em] uppercase text-[#819fa7] px-4 py-2 rounded-full border border-[#819fa7]/30 bg-[#819fa7]/5 mb-6">
+        <SectionReveal className="text-center mb-10 md:mb-16">
+          <span className="inline-block text-[10px] md:text-xs font-medium tracking-[0.15em] uppercase text-[#819fa7] px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-[#819fa7]/30 bg-[#819fa7]/5 mb-4 md:mb-6">
             {t('badge')}
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-[#f3f5f9] mb-4">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-display font-bold text-[#f3f5f9] mb-3 md:mb-4">
             {t('title')}
           </h2>
-          <p className="text-[#f3f5f9]/50 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#f3f5f9]/50 max-w-xl mx-auto">
             {t('subtitle')}
           </p>
         </SectionReveal>
 
         {/* Level Legend */}
         <SectionReveal delay={0.05}>
-          <div className="flex flex-wrap justify-center gap-6 mb-12">
+          <div className="flex flex-wrap justify-center gap-3 md:gap-6 mb-8 md:mb-12">
             {(['expert', 'advanced', 'intermediate', 'beginner'] as SkillLevel[]).map((level, index) => (
-              <div key={level} className="flex items-center gap-2">
+              <div key={level} className="flex items-center gap-1.5 md:gap-2">
                 <span
-                  className="w-2 h-2 rounded-full bg-[#819fa7]"
+                  className="w-1.5 md:w-2 h-1.5 md:h-2 rounded-full bg-[#819fa7]"
                   style={{ opacity: 1 - (index * 0.2) }}
                 />
-                <span className="text-xs text-[#f3f5f9]/50">{t(`levels.${level}`)}</span>
+                <span className="text-[10px] md:text-xs text-[#f3f5f9]/50">{t(`levels.${level}`)}</span>
               </div>
             ))}
           </div>
         </SectionReveal>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-12">
           {skillCategories.map((category, categoryIndex) => (
             <SectionReveal
               key={category.key}
               delay={0.1 + categoryIndex * 0.1}
               direction={categoryIndex % 2 === 0 ? 'left' : 'right'}
             >
-              <div className="h-full p-6 rounded-2xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/25 transition-all duration-300">
+              <div className="h-full p-4 md:p-6 rounded-xl md:rounded-2xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/25 transition-all duration-300">
                 {/* Category header */}
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-1 h-6 rounded-full bg-gradient-to-b from-[#819fa7] to-[#5b6e74]" />
-                  <h3 className="text-base font-display font-bold text-[#f3f5f9]">
+                <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-5">
+                  <div className="w-1 h-5 md:h-6 rounded-full bg-gradient-to-b from-[#819fa7] to-[#5b6e74]" />
+                  <h3 className="text-sm md:text-base font-display font-bold text-[#f3f5f9]">
                     {t(`categories.${category.key}`)}
                   </h3>
                 </div>
 
-                {/* Skills */}
-                <div className="space-y-2">
+                {/* Skills - Chips on mobile, List on desktop */}
+                {/* Mobile: Chip/Tag style */}
+                <div className="flex flex-wrap gap-2 md:hidden">
+                  {category.skills.map((skill, index) => (
+                    <SkillChip
+                      key={skill.name}
+                      skill={skill}
+                      index={index}
+                      onClick={() => setSelectedSkill(skill)}
+                    />
+                  ))}
+                </div>
+                
+                {/* Desktop: List style */}
+                <div className="hidden md:block space-y-2">
                   {category.skills.map((skill, index) => (
                     <SkillCard
                       key={skill.name}
@@ -506,14 +547,14 @@ export default function Skills() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {stats.map((stat, index) => (
             <SectionReveal key={stat.labelKey} delay={0.4 + index * 0.08}>
-              <div className="text-center p-5 rounded-xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/25 hover:-translate-y-1 transition-all duration-300 cursor-default">
-                <div className="text-2xl md:text-3xl font-display font-bold text-[#819fa7] mb-1">
+              <div className="text-center p-3 md:p-5 rounded-lg md:rounded-xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/25 hover:-translate-y-1 transition-all duration-300 cursor-default">
+                <div className="text-xl md:text-3xl font-display font-bold text-[#819fa7] mb-0.5 md:mb-1">
                   <AnimatedCounter value={stat.value + stat.suffix} duration={2000} />
                 </div>
-                <div className="text-xs text-[#f3f5f9]/40 uppercase tracking-wider">
+                <div className="text-[10px] md:text-xs text-[#f3f5f9]/40 uppercase tracking-wider">
                   {t(`stats.${stat.labelKey}`)}
                 </div>
               </div>

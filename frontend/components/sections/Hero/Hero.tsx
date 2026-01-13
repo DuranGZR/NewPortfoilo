@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, Github, Linkedin, Mail } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { useTranslations } from 'next-intl';
 import GradientMesh from '@/components/effects/GradientMesh';
@@ -17,6 +17,14 @@ const Avatar3D = dynamic(() => import('@/components/3d/Avatar3D'), {
   )
 });
 
+const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  e.preventDefault();
+  const element = document.querySelector(href);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
 export default function Hero() {
   const t = useTranslations('hero');
 
@@ -29,7 +37,7 @@ export default function Hero() {
       <GradientMesh />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-20">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left - Text Content */}
           <div className="text-center lg:text-left order-2 lg:order-1">
@@ -70,10 +78,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.6, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="flex flex-row gap-4 justify-center lg:justify-start flex-wrap"
             >
               <motion.a
                 href="#projects"
+                onClick={(e) => scrollToSection(e, '#projects')}
                 className="btn-primary group"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -84,6 +93,7 @@ export default function Hero() {
 
               <motion.a
                 href="#ai-assistant"
+                onClick={(e) => scrollToSection(e, '#ai-assistant')}
                 className="btn-secondary group backdrop-blur-sm"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -91,6 +101,37 @@ export default function Hero() {
                 <Sparkles className="w-4 h-4 text-[#819fa7]" />
                 {t('cta.secondary')}
               </motion.a>
+            </motion.div>
+
+            {/* Social Links */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="flex gap-3 justify-center lg:justify-start mt-6"
+            >
+              <a
+                href="https://github.com/DuranGZR"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 flex items-center justify-center text-[#819fa7]/70 hover:text-[#819fa7] hover:border-[#819fa7]/40 transition-all"
+              >
+                <Github className="w-4 h-4" />
+              </a>
+              <a
+                href="https://linkedin.com/in/durangezer"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 flex items-center justify-center text-[#819fa7]/70 hover:text-[#819fa7] hover:border-[#819fa7]/40 transition-all"
+              >
+                <Linkedin className="w-4 h-4" />
+              </a>
+              <a
+                href="mailto:contact@durangezer.com"
+                className="w-10 h-10 rounded-xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 flex items-center justify-center text-[#819fa7]/70 hover:text-[#819fa7] hover:border-[#819fa7]/40 transition-all"
+              >
+                <Mail className="w-4 h-4" />
+              </a>
             </motion.div>
           </div>
 
@@ -120,11 +161,10 @@ export default function Hero() {
         transition={{ delay: 1.5 }}
       >
         <motion.div
-          className="flex flex-col items-center gap-2 text-[#5b6e74]"
+          className="flex flex-col items-center text-[#5b6e74]"
           animate={{ y: [0, 5, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <span className="text-[10px] tracking-[0.2em] uppercase">{t('scrollHint')}</span>
           <div className="w-5 h-8 rounded-full border border-[#5b6e74]/50 flex items-start justify-center p-1.5 backdrop-blur-sm">
             <motion.div
               className="w-1 h-2 bg-[#819fa7] rounded-full"
