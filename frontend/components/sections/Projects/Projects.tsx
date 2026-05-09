@@ -92,7 +92,7 @@ export default function Projects() {
   const hasMoreProjects = projects.length > INITIAL_DISPLAY_COUNT;
 
   return (
-    <section id="projects" className="relative py-16 md:py-24 px-4 md:px-6 bg-[#0d0d0d]">
+    <section id="projects" className="relative py-16 md:py-24 px-4 md:px-6 bg-[#0d0d0d] content-visibility-auto">
       {/* Simple gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] to-[#0d0d0d]" />
 

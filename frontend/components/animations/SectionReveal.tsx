@@ -18,8 +18,8 @@ const directionOffsets = {
 };
 
 /**
- * SectionReveal - Scroll-triggered reveal with blur, scale, and fade
- * Wraps content for cinematic section entrances
+ * SectionReveal - Scroll-triggered reveal with scale and fade
+ * Wraps content for cinematic section entrances (optimized for performance)
  */
 export default function SectionReveal({
     children,
@@ -32,13 +32,12 @@ export default function SectionReveal({
     const variants: Variants = {
         hidden: {
             opacity: 0,
-            filter: 'blur(8px)',
             scale: 0.96,
             ...offset,
+            willChange: 'opacity, transform',
         },
         visible: {
             opacity: 1,
-            filter: 'blur(0px)',
             scale: 1,
             x: 0,
             y: 0,
@@ -47,6 +46,7 @@ export default function SectionReveal({
                 delay,
                 ease: [0.25, 0.1, 0.25, 1],
             },
+            willChange: 'auto',
         },
     };
 

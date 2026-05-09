@@ -107,7 +107,7 @@ export default function AIAssistant() {
   };
 
   return (
-    <section id="ai-assistant" className="relative py-8 md:py-24 px-4 md:px-6 overflow-hidden bg-[#0d0d0d]">
+    <section id="ai-assistant" className="relative py-8 md:py-24 px-4 md:px-6 overflow-hidden bg-[#0d0d0d] content-visibility-auto">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0d0d0d] via-[#1a1a1a] to-[#0d0d0d]" />
 

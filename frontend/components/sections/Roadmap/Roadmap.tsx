@@ -16,7 +16,7 @@ export default function Roadmap() {
   const t = useTranslations('roadmap');
 
   return (
-    <section id="roadmap" className="relative py-12 md:py-24 px-4 md:px-6 bg-[#0d0d0d]">
+    <section id="roadmap" className="relative py-12 md:py-24 px-4 md:px-6 bg-[#0d0d0d] content-visibility-auto">
       {/* Simple gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] to-[#0d0d0d]" />
 

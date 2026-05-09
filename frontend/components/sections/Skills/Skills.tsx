@@ -467,7 +467,7 @@ export default function Skills() {
   const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
 
   return (
-    <section id="skills" className="relative py-16 md:py-24 px-4 md:px-6 bg-[#0d0d0d]">
+    <section id="skills" className="relative py-16 md:py-24 px-4 md:px-6 bg-[#0d0d0d] content-visibility-auto">
       {/* Simple gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0d0d0d] to-[#0a0a0a]" />
 
