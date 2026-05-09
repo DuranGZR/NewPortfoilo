@@ -52,11 +52,12 @@ export default function LoadingScreen() {
                             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
                             className="relative"
                         >
-                            {/* Glow effect */}
-                            <motion.div
-                                className="absolute inset-0 bg-[#819fa7]/20 blur-3xl rounded-full"
-                                animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
-                                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                            {/* Glow effect - using gradient instead of blur for performance */}
+                            <div
+                                className="absolute -inset-8 rounded-full opacity-30"
+                                style={{
+                                    background: 'radial-gradient(circle, rgba(129, 159, 167, 0.4) 0%, transparent 70%)',
+                                }}
                             />
 
                             {/* Logo text */}

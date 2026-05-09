@@ -1,29 +1,30 @@
 "use client";
 
-import { useRef, useMemo, useState } from 'react';
+import { useRef, useMemo, useState, useEffect, useCallback } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Mouse interaction - camera parallax
+// Mouse interaction - camera parallax (with proper cleanup)
 function CameraController() {
   const { camera } = useThree();
-  const [mouse] = useState({ x: 0, y: 0 });
+  const mouseRef = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseRef.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   useFrame(() => {
-    if (typeof window !== 'undefined') {
-      camera.position.x += (mouse.x * 1.5 - camera.position.x) * 0.05;
-      camera.position.y += (mouse.y * 1.5 - camera.position.y) * 0.05;
-      camera.lookAt(0, 0, 0);
-    }
+    camera.position.x += (mouseRef.current.x * 1.5 - camera.position.x) * 0.05;
+    camera.position.y += (mouseRef.current.y * 1.5 - camera.position.y) * 0.05;
+    camera.lookAt(0, 0, 0);
   });
-
-  if (typeof window !== 'undefined') {
-    window.addEventListener('mousemove', (e) => {
-      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-    });
-  }
 
   return null;
 }
@@ -442,6 +443,23 @@ function DynamicLights() {
 }
 
 export default function Avatar3D() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
+
+  // Pause 3D rendering when scrolled out of viewport
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   // Generate nodes once at the top level so we can share them
   const nodes = useMemo(() => {
     const nodePositions = [];
@@ -461,10 +479,11 @@ export default function Avatar3D() {
   }, []);
 
   return (
-    <div className="w-full h-full">
+    <div ref={containerRef} className="w-full h-full">
       <Canvas
         camera={{ position: [0, 0, 9], fov: 40 }}
         style={{ background: 'transparent' }}
+        frameloop={isVisible ? 'always' : 'never'}
       >
         {/* Dynamic Lighting */}
         <DynamicLights />
@@ -498,3 +517,4 @@ export default function Avatar3D() {
     </div>
   );
 }
+

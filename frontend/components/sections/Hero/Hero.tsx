@@ -43,8 +43,8 @@ export default function Hero() {
           <div className="text-center lg:text-left order-2 lg:order-1">
             {/* Name */}
             <motion.h1
-              initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight"
             >
@@ -55,8 +55,8 @@ export default function Hero() {
 
             {/* Title */}
             <motion.p
-              initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
               className="text-xl md:text-2xl font-display font-medium mb-6 text-[#819fa7]"
             >
@@ -65,8 +65,8 @@ export default function Hero() {
 
             {/* Subtitle */}
             <motion.p
-              initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
               className="text-base md:text-lg text-[#f3f5f9]/60 max-w-lg mx-auto lg:mx-0 mb-10 leading-relaxed"
             >
@@ -75,8 +75,8 @@ export default function Hero() {
 
             {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
               className="flex flex-row gap-4 justify-center lg:justify-start flex-wrap"
             >
@@ -138,8 +138,8 @@ export default function Hero() {
           {/* Right - 3D Globe */}
           <motion.div
             className="hidden lg:flex items-center justify-center order-1 lg:order-2"
-            initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <motion.div

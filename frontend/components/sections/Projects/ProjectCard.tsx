@@ -139,13 +139,9 @@ export default function ProjectCard({
           {/* Metrics */}
           <div className="relative z-10 grid grid-cols-2 gap-3 mb-4">
             {metrics.map((metric, idx) => (
-              <motion.div
+              <div
                 key={idx}
                 className="text-center p-2.5 rounded-lg bg-[#0d0d0d]/40"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
               >
                 <div className="text-lg font-display font-bold text-[#819fa7]">
                   {metric.value}
@@ -153,23 +149,19 @@ export default function ProjectCard({
                 <div className="text-[10px] text-[#f3f5f9]/40 uppercase tracking-wider">
                   {t(`metrics.${metric.labelKey}`)}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
           {/* Tags */}
           <div className="relative z-10 flex flex-wrap gap-2 mt-auto">
             {tags.slice(0, 4).map((tag, idx) => (
-              <motion.span
+              <span
                 key={idx}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.03 }}
                 className="px-2.5 py-1 text-[10px] font-medium text-[#819fa7]/80 bg-[#819fa7]/5 rounded-md border border-[#819fa7]/10 hover:bg-[#819fa7]/10 hover:border-[#819fa7]/20 transition-colors"
               >
                 {tag}
-              </motion.span>
+              </span>
             ))}
             {tags.length > 4 && (
               <span className="px-2.5 py-1 text-[10px] text-[#f3f5f9]/40">

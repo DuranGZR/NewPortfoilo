@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Menu, X, Search, Command } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -20,38 +20,34 @@ export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const { scrollY } = useScroll();
-
-  const backgroundColor = useTransform(
-    scrollY,
-    [0, 100],
-    ['rgba(13, 13, 13, 0)', 'rgba(13, 13, 13, 0.9)']
-  );
-
-  const backdropBlur = useTransform(
-    scrollY,
-    [0, 100],
-    ['blur(0px)', 'blur(16px)']
-  );
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    let ticking = false;
 
-      const sections = navLinks.map(link => link.href.replace('#', ''));
-      for (const section of sections.reverse()) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 200) {
-            setActiveSection(section);
-            break;
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        setIsScrolled(scrollY > 50);
+
+        const sections = navLinks.map(link => link.href.replace('#', ''));
+        for (const section of [...sections].reverse()) {
+          const element = document.getElementById(section);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            if (rect.top <= 200) {
+              setActiveSection(section);
+              break;
+            }
           }
         }
-      }
+        ticking = false;
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -66,14 +62,12 @@ export default function Navigation() {
 
   return (
     <>
-      <motion.nav
-        style={{
-          backgroundColor,
-          backdropFilter: backdropBlur,
-          WebkitBackdropFilter: backdropBlur
-        }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-3 border-b border-[#819fa7]/10' : 'py-5'
-          }`}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? 'py-3 border-b border-[#819fa7]/10 bg-[#0d0d0d]/90 backdrop-blur-xl'
+            : 'py-5 bg-transparent'
+        }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Left Side: Logo */}
@@ -186,7 +180,7 @@ export default function Navigation() {
             </motion.div>
           </motion.button>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Mobile Menu with stagger */}
       <motion.div
