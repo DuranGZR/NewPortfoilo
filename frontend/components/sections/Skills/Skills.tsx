@@ -1,572 +1,286 @@
 "use client";
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslations, useMessages } from 'next-intl';
 import SectionReveal from '@/components/animations/SectionReveal';
-import AnimatedCounter from '@/components/widgets/AnimatedCounter';
-import {
-  Brain, Code, Wrench, BarChart3,
-  FlaskConical, Cpu, Database, Eye, MessageSquare, Network,
-  Coffee, Hash, Zap, Circle, Layers,
-  Rocket, Camera, GitBranch,
-  TrendingUp, PieChart, Settings, Calculator, Bot,
-  X, CheckCircle,
-  LucideIcon
-} from 'lucide-react';
 
-type SkillLevel = 'beginner' | 'intermediate' | 'advanced' | 'expert';
-
-interface Skill {
+interface TechItem {
   name: string;
-  icon: LucideIcon;
-  level: SkillLevel;
-  description: string;
-  learns: string[];
+  icon: string;
 }
 
-const levelOrder: Record<SkillLevel, number> = {
-  expert: 0,
-  advanced: 1,
-  intermediate: 2,
-  beginner: 3
-};
-
-const skillCategories = [
-  {
-    key: "ml",
-    skills: [
-      {
-        name: "NumPy/Pandas",
-        icon: Database,
-        level: "advanced" as SkillLevel,
-        description: "Veri manipülasyonu ve analiz için temel Python kütüphaneleri.",
-        learns: [
-          "DataFrame ve Series yapıları ile çalışma",
-          "Veri temizleme ve ön işleme",
-          "Gruplama, birleştirme ve pivot işlemleri",
-          "Eksik veri yönetimi",
-          "Vektörel işlemler ve performans optimizasyonu"
-        ]
-      },
-      {
-        name: "Scikit-learn",
-        icon: FlaskConical,
-        level: "intermediate" as SkillLevel,
-        description: "Makine öğrenmesi modelleri için kapsamlı Python kütüphanesi.",
-        learns: [
-          "Sınıflandırma ve regresyon modelleri",
-          "Model değerlendirme metrikleri (accuracy, F1, ROC)",
-          "Cross-validation ve hyperparameter tuning",
-          "Feature selection ve preprocessing",
-          "Pipeline oluşturma"
-        ]
-      },
-      {
-        name: "TensorFlow/Keras",
-        icon: Brain,
-        level: "intermediate" as SkillLevel,
-        description: "Derin öğrenme modelleri geliştirmek için framework.",
-        learns: [
-          "Sequential ve Functional API ile model oluşturma",
-          "CNN ve Dense layer mimarileri",
-          "Model eğitimi ve callback kullanımı",
-          "Transfer learning temelleri",
-          "Model kaydetme ve yükleme"
-        ]
-      },
-      {
-        name: "Computer Vision",
-        icon: Eye,
-        level: "beginner" as SkillLevel,
-        description: "Görüntü işleme ve analiz teknikleri.",
-        learns: [
-          "OpenCV ile temel görüntü işleme",
-          "Görüntü filtreleme ve dönüşümleri",
-          "Nesne tespiti temelleri",
-          "CNN tabanlı görüntü sınıflandırma"
-        ]
-      },
-      {
-        name: "NLP",
-        icon: MessageSquare,
-        level: "beginner" as SkillLevel,
-        description: "Doğal dil işleme ve metin analizi.",
-        learns: [
-          "Metin ön işleme (tokenization, stemming)",
-          "TF-IDF ve Bag of Words",
-          "Sentiment analizi temelleri",
-          "Word embeddings kavramı"
-        ]
-      },
-      {
-        name: "Deep Learning",
-        icon: Network,
-        level: "beginner" as SkillLevel,
-        description: "Yapay sinir ağları ve derin öğrenme temelleri.",
-        learns: [
-          "Perceptron ve MLP mimarisi",
-          "Backpropagation algoritması",
-          "Aktivasyon fonksiyonları",
-          "Overfitting ve regularization"
-        ]
-      }
-    ].sort((a, b) => levelOrder[a.level] - levelOrder[b.level])
-  },
-  {
-    key: "programming",
-    skills: [
-      {
-        name: "Python",
-        icon: Code,
-        level: "advanced" as SkillLevel,
-        description: "Ana programlama dilim. Veri bilimi ve backend geliştirme için kullanıyorum.",
-        learns: [
-          "OOP prensipleri ve tasarım kalıpları",
-          "Veri yapıları ve algoritmalar",
-          "List comprehension ve generators",
-          "Decorators ve context managers",
-          "Async/await ve threading",
-          "Virtual environments ve paket yönetimi"
-        ]
-      },
-      {
-        name: "Java",
-        icon: Coffee,
-        level: "intermediate" as SkillLevel,
-        description: "Nesne yönelimli programlama ve Android geliştirme için.",
-        learns: [
-          "OOP prensipleri (inheritance, polymorphism)",
-          "Collections framework",
-          "Exception handling",
-          "Swing ile GUI geliştirme",
-          "Temel Android geliştirme"
-        ]
-      },
-      {
-        name: "C#",
-        icon: Hash,
-        level: "intermediate" as SkillLevel,
-        description: "Windows masaüstü uygulamaları geliştirmek için.",
-        learns: [
-          "Windows Forms ile GUI",
-          "OOP ve SOLID prensipleri",
-          "LINQ sorguları",
-          "Veritabanı bağlantısı (ADO.NET)",
-          "Event-driven programlama"
-        ]
-      },
-      {
-        name: "SQL",
-        icon: Database,
-        level: "intermediate" as SkillLevel,
-        description: "Veritabanı yönetimi ve sorgulama dili.",
-        learns: [
-          "SELECT, JOIN, GROUP BY sorguları",
-          "Subquery ve CTE kullanımı",
-          "Index ve performans optimizasyonu",
-          "Veritabanı tasarımı ve normalizasyon",
-          "CRUD işlemleri"
-        ]
-      },
-      {
-        name: "C/C++",
-        icon: Zap,
-        level: "beginner" as SkillLevel,
-        description: "Düşük seviyeli programlama ve algoritma çalışmaları.",
-        learns: [
-          "Pointer ve memory yönetimi",
-          "Temel veri yapıları implementasyonu",
-          "Algoritma analizi",
-          "Dosya işlemleri"
-        ]
-      },
-      {
-        name: "Kotlin",
-        icon: Circle,
-        level: "beginner" as SkillLevel,
-        description: "Modern Android geliştirme için.",
-        learns: [
-          "Null safety özellikleri",
-          "Data classes ve extension functions",
-          "Coroutines temelleri",
-          "Android UI geliştirme"
-        ]
-      }
-    ].sort((a, b) => levelOrder[a.level] - levelOrder[b.level])
-  },
-  {
-    key: "frameworks",
-    skills: [
-      {
-        name: "Git/GitHub",
-        icon: GitBranch,
-        level: "advanced" as SkillLevel,
-        description: "Versiyon kontrol ve işbirliği için temel araç.",
-        learns: [
-          "Branch stratejileri ve merge/rebase",
-          "Pull request ve code review süreci",
-          "Conflict çözümleme",
-          "Git flow ve conventional commits",
-          "GitHub Actions temelleri"
-        ]
-      },
-      {
-        name: "FastAPI/Flask",
-        icon: Rocket,
-        level: "intermediate" as SkillLevel,
-        description: "Python ile REST API geliştirme frameworkleri.",
-        learns: [
-          "RESTful API tasarımı",
-          "Route ve endpoint oluşturma",
-          "Request/Response handling",
-          "Middleware ve dependency injection",
-          "API dokümantasyonu (Swagger)"
-        ]
-      },
-      {
-        name: "OpenCV",
-        icon: Camera,
-        level: "intermediate" as SkillLevel,
-        description: "Görüntü ve video işleme kütüphanesi.",
-        learns: [
-          "Görüntü okuma, yazma ve dönüştürme",
-          "Renk uzayı dönüşümleri",
-          "Edge detection ve filtering",
-          "Kamera stream işleme",
-          "Temel feature extraction"
-        ]
-      }
-    ].sort((a, b) => levelOrder[a.level] - levelOrder[b.level])
-  },
-  {
-    key: "data",
-    skills: [
-      {
-        name: "Data Analysis",
-        icon: TrendingUp,
-        level: "intermediate" as SkillLevel,
-        description: "Veriden anlamlı içgörüler çıkarma süreci.",
-        learns: [
-          "Exploratory Data Analysis (EDA)",
-          "İstatistiksel analiz ve hipotez testleri",
-          "Korelasyon ve regresyon analizi",
-          "Anomali tespiti",
-          "Rapor ve dashboard oluşturma"
-        ]
-      },
-      {
-        name: "Data Visualization",
-        icon: PieChart,
-        level: "intermediate" as SkillLevel,
-        description: "Veriyi görsel olarak anlaşılır hale getirme.",
-        learns: [
-          "Matplotlib ve Seaborn ile grafikler",
-          "Plotly ile interaktif görselleştirme",
-          "Grafik türü seçimi ve best practices",
-          "Dashboard tasarımı temelleri"
-        ]
-      },
-      {
-        name: "Feature Engineering",
-        icon: Settings,
-        level: "intermediate" as SkillLevel,
-        description: "ML modelleri için özellik oluşturma ve seçme.",
-        learns: [
-          "Feature extraction ve transformation",
-          "Encoding teknikleri (one-hot, label)",
-          "Feature scaling ve normalization",
-          "Feature selection yöntemleri",
-          "Domain knowledge ile özellik türetme"
-        ]
-      },
-      {
-        name: "Machine Learning",
-        icon: Bot,
-        level: "intermediate" as SkillLevel,
-        description: "Makine öğrenmesi konseptleri ve uygulamaları.",
-        learns: [
-          "Supervised vs Unsupervised learning",
-          "Model selection ve validation",
-          "Bias-variance tradeoff",
-          "Ensemble methods",
-          "Model deployment temelleri"
-        ]
-      },
-      {
-        name: "Statistical Analysis",
-        icon: Calculator,
-        level: "beginner" as SkillLevel,
-        description: "İstatistiksel yöntemler ve analiz teknikleri.",
-        learns: [
-          "Tanımlayıcı istatistikler",
-          "Olasılık dağılımları",
-          "Hipotez testleri temelleri",
-          "Güven aralıkları"
-        ]
-      }
-    ].sort((a, b) => levelOrder[a.level] - levelOrder[b.level])
-  }
+// Duran Gezer's real skills organized into 4 vertical columns matching Richard Miculob's layout
+const TECH_COLUMNS: TechItem[][] = [
+  // Column 1: AI, Data Science & ML Core
+  [
+    { name: 'Python', icon: '/images/skills/python.svg' },
+    { name: 'NumPy', icon: '/images/skills/numpy.svg' },
+    { name: 'Pandas', icon: '/images/skills/pandas.svg' },
+    { name: 'Scikit-learn', icon: '/images/skills/scikitlearn.svg' },
+    { name: 'TensorFlow', icon: '/images/skills/tensorflow.svg' },
+  ],
+  // Column 2: Deep Learning, Computer Vision & LLM
+  [
+    { name: 'PyTorch', icon: '/images/skills/pytorch.svg' },
+    { name: 'OpenCV', icon: '/images/skills/opencv.svg' },
+    { name: 'Ollama / LLaVA', icon: '/images/skills/ollama.svg' },
+    { name: 'PostgreSQL', icon: '/images/skills/postgresql.svg' },
+  ],
+  // Column 3: Programming Languages
+  [
+    { name: 'Java', icon: '/images/skills/java.svg' },
+    { name: 'C#', icon: '/images/skills/csharp.svg' },
+    { name: 'C / C++', icon: '/images/skills/cplusplus.svg' },
+    { name: 'SQL', icon: '/images/skills/sql.svg' },
+    { name: 'Kotlin', icon: '/images/skills/kotlin.svg' },
+  ],
+  // Column 4: Backend & Modern Engineering Tools
+  [
+    { name: 'FastAPI', icon: '/images/skills/fastapi.svg' },
+    { name: 'Docker', icon: '/images/skills/docker.svg' },
+    { name: 'Git / GitHub', icon: '/images/skills/git.svg' },
+    { name: 'Postman', icon: '/images/skills/postman.svg' },
+  ],
 ];
-
-const stats = [
-  { labelKey: "technologies", value: "25", suffix: "+" },
-  { labelKey: "projects", value: "12", suffix: "" },
-  { labelKey: "codeLines", value: "50", suffix: "K+" },
-  { labelKey: "learningHrs", value: "2000", suffix: "+" }
-];
-
-const levelColors = {
-  beginner: 'bg-[#819fa7]/10 text-[#819fa7]/70 border-[#819fa7]/20',
-  intermediate: 'bg-[#819fa7]/15 text-[#819fa7]/80 border-[#819fa7]/30',
-  advanced: 'bg-[#819fa7]/20 text-[#819fa7]/90 border-[#819fa7]/40',
-  expert: 'bg-[#819fa7]/30 text-[#819fa7] border-[#819fa7]/50'
-};
-
-// Chip style colors for mobile
-const chipColors = {
-  beginner: 'bg-gradient-to-r from-[#3a4a4f]/60 to-[#3a4a4f]/40 border-[#819fa7]/20 text-[#f3f5f9]/70',
-  intermediate: 'bg-gradient-to-r from-[#4a5f65]/60 to-[#4a5f65]/40 border-[#819fa7]/30 text-[#f3f5f9]/80',
-  advanced: 'bg-gradient-to-r from-[#5b7078]/60 to-[#5b7078]/40 border-[#819fa7]/40 text-[#f3f5f9]/90',
-  expert: 'bg-gradient-to-r from-[#819fa7]/40 to-[#6b8a92]/40 border-[#819fa7]/50 text-[#f3f5f9]'
-};
-
-// Mobile Chip Component
-function SkillChip({ skill, index, onClick }: { skill: Skill; index: number; onClick: () => void }) {
-  const Icon = skill.icon;
-
-  return (
-    <motion.button
-      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border ${chipColors[skill.level]} hover:scale-105 active:scale-95 transition-all duration-200`}
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.03 }}
-      onClick={onClick}
-    >
-      <Icon className="w-3 h-3" />
-      <span className="text-[11px] font-medium whitespace-nowrap">{skill.name}</span>
-    </motion.button>
-  );
-}
-
-// Desktop List Component
-function SkillCard({ skill, index, onClick }: { skill: Skill; index: number; onClick: () => void }) {
-  const t = useTranslations('skills');
-  const Icon = skill.icon;
-
-  return (
-    <motion.div
-      className="group flex items-center justify-between p-2.5 md:p-3 rounded-lg md:rounded-xl bg-[#0d0d0d]/40 hover:bg-[#819fa7]/5 transition-all duration-300 cursor-pointer"
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.05 }}
-      whileHover={{ x: 4 }}
-      onClick={onClick}
-    >
-      <div className="flex items-center gap-2 md:gap-3">
-        <Icon className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#819fa7]" />
-        <span className="text-xs md:text-sm text-[#f3f5f9]/80 group-hover:text-[#f3f5f9] transition-colors">
-          {skill.name}
-        </span>
-      </div>
-      <span className={`px-2 md:px-2.5 py-0.5 md:py-1 text-[9px] md:text-[10px] font-medium rounded-full border ${levelColors[skill.level]}`}>
-        {t(`levels.${skill.level}`)}
-      </span>
-    </motion.div>
-  );
-}
-
-function SkillModal({ skill, onClose }: { skill: Skill | null; onClose: () => void }) {
-  const t = useTranslations('skills');
-
-  if (!skill) return null;
-
-  const Icon = skill.icon;
-
-  return (
-    <AnimatePresence>
-      <motion.div
-        className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        {/* Backdrop */}
-        <motion.div
-          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-          onClick={onClose}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        />
-
-        {/* Modal */}
-        <motion.div
-          className="relative w-full max-w-lg bg-[#1a1a1a] border border-[#819fa7]/20 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-2xl max-h-[85vh] overflow-y-auto"
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          transition={{ type: "spring", damping: 25, stiffness: 300 }}
-        >
-          {/* Close button */}
-          <button
-            onClick={onClose}
-            className="absolute top-3 right-3 md:top-4 md:right-4 p-1.5 md:p-2 rounded-lg hover:bg-[#819fa7]/10 transition-colors"
-          >
-            <X className="w-4 h-4 md:w-5 md:h-5 text-[#819fa7]" />
-          </button>
-
-          {/* Header */}
-          <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-            <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-[#819fa7]/10 flex items-center justify-center">
-              <Icon className="w-5 h-5 md:w-6 md:h-6 text-[#819fa7]" />
-            </div>
-            <div>
-              <h3 className="text-lg md:text-xl font-display font-bold text-[#f3f5f9]">{skill.name}</h3>
-              <span className={`inline-block mt-1 px-2 md:px-2.5 py-0.5 md:py-1 text-[9px] md:text-[10px] font-medium rounded-full border ${levelColors[skill.level]}`}>
-                {t(`levels.${skill.level}`)}
-              </span>
-            </div>
-          </div>
-
-          {/* Description */}
-          <p className="text-sm md:text-base text-[#f3f5f9]/70 mb-4 md:mb-6 leading-relaxed">
-            {skill.description}
-          </p>
-
-          {/* Learnings */}
-          <div>
-            <h4 className="text-xs md:text-sm font-semibold text-[#819fa7] uppercase tracking-wider mb-3 md:mb-4">
-              {t('modal.whatIKnow')}
-            </h4>
-            <ul className="space-y-1.5 md:space-y-2">
-              {skill.learns.map((learn, index) => (
-                <motion.li
-                  key={index}
-                  className="flex items-start gap-2 md:gap-3 text-xs md:text-sm text-[#f3f5f9]/70"
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                >
-                  <CheckCircle className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#819fa7] mt-0.5 flex-shrink-0" />
-                  <span>{learn}</span>
-                </motion.li>
-              ))}
-            </ul>
-          </div>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
-  );
-}
 
 export default function Skills() {
   const t = useTranslations('skills');
-  const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
+  const messages = useMessages() as any;
+  const [activeBento, setActiveBento] = useState(0);
 
-  return (
-    <section id="skills" className="relative py-16 md:py-24 px-4 md:px-6 bg-[#0d0d0d] content-visibility-auto">
-      {/* Simple gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0d0d0d] to-[#0a0a0a]" />
+  // Dynamic Bento data from i18n messages
+  const bento = messages?.skills?.bento || {};
+  const techColumns = messages?.skills?.techColumns || TECH_COLUMNS;
+  const allTechs: TechItem[] = techColumns.flat();
 
-      <div className="relative z-10 max-w-6xl mx-auto">
-        {/* Section Header */}
-        <SectionReveal className="text-center mb-10 md:mb-16">
-          <span className="inline-block text-[10px] md:text-xs font-medium tracking-[0.15em] uppercase text-[#819fa7] px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-[#819fa7]/30 bg-[#819fa7]/5 mb-4 md:mb-6">
-            {t('badge')}
+  const card1 = bento.card1 || {
+    number: '01',
+    category: 'YAPAY ZEKA &\nDERİN ÖĞRENME',
+    title: 'Yapay Zeka, Bilgisayarlı Görü & Derin Öğrenme',
+    image: '/images/gif/coding.gif',
+    description:
+      'Kameradan anlık görüntü analizi, derin öğrenme modelleri (YOLO, CNN), lokal LLM entegrasyonları (LLaVA) ve pgvector ile RAG mimarileri geliştirme.',
+    tags: [
+      'Python',
+      'TensorFlow / Keras',
+      'PyTorch',
+      'Scikit-learn',
+      'NumPy / Pandas',
+      'OpenCV',
+      'Computer Vision',
+      'NLP',
+      'Deep Learning',
+      'Ollama / LLaVA',
+      'pgvector',
+    ],
+  };
+
+  const card2 = bento.card2 || {
+    number: '02',
+    category: 'BACKEND, SİSTEMLER &\nPROGRAMLAMA',
+    title: 'Backend, Sistemler & Programlama Dilleri',
+    image: '/images/gif/assistant.gif',
+    description:
+      'FastAPI ile yüksek hızlı mikroservisler, nesne yönelimli mimariler (Java, C#, C++), SQL veritabanları ve Docker ile yapay zekayı ürünleştiren güvenilir sistem çözümleri.',
+    tags: [
+      'FastAPI',
+      'Java',
+      'C#',
+      'C / C++',
+      'SQL',
+      'PostgreSQL',
+      'Docker',
+      'Git & GitHub',
+      'Feature Engineering',
+      'Data Analysis',
+      'Kotlin',
+    ],
+  };
+
+  const renderBentoCard = (card: typeof card1) => (
+    <div className="bg-[#141414] border border-white/10 rounded-[20px] p-5 sm:p-7 flex flex-col justify-between h-full transition-all duration-400 hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.8)] relative group">
+      <div>
+        {/* Header: Number (Left) & Category (Right-aligned 2-3 lines) */}
+        <div className="flex justify-between items-start mb-4 sm:mb-5">
+          <span className="font-sans font-extralight text-3xl sm:text-5xl text-[#f3f5f9] tracking-tighter leading-none select-none">
+            {card.number}
           </span>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-display font-bold text-[#f3f5f9] mb-3 md:mb-4">
-            {t('title')}
-          </h2>
-          <p className="text-sm md:text-base text-[#f3f5f9]/50 max-w-xl mx-auto">
-            {t('subtitle')}
-          </p>
-        </SectionReveal>
-
-        {/* Level Legend */}
-        <SectionReveal delay={0.05}>
-          <div className="flex flex-wrap justify-center gap-3 md:gap-6 mb-8 md:mb-12">
-            {(['expert', 'advanced', 'intermediate', 'beginner'] as SkillLevel[]).map((level, index) => (
-              <div key={level} className="flex items-center gap-1.5 md:gap-2">
-                <span
-                  className="w-1.5 md:w-2 h-1.5 md:h-2 rounded-full bg-[#819fa7]"
-                  style={{ opacity: 1 - (index * 0.2) }}
-                />
-                <span className="text-[10px] md:text-xs text-[#f3f5f9]/50">{t(`levels.${level}`)}</span>
-              </div>
-            ))}
-          </div>
-        </SectionReveal>
-
-        {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-12">
-          {skillCategories.map((category, categoryIndex) => (
-            <SectionReveal
-              key={category.key}
-              delay={0.1 + categoryIndex * 0.1}
-              direction={categoryIndex % 2 === 0 ? 'left' : 'right'}
-            >
-              <div className="h-full p-4 md:p-6 rounded-xl md:rounded-2xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/25 transition-all duration-300">
-                {/* Category header */}
-                <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-5">
-                  <div className="w-1 h-5 md:h-6 rounded-full bg-gradient-to-b from-[#819fa7] to-[#5b6e74]" />
-                  <h3 className="text-sm md:text-base font-display font-bold text-[#f3f5f9]">
-                    {t(`categories.${category.key}`)}
-                  </h3>
-                </div>
-
-                {/* Skills - Chips on mobile, List on desktop */}
-                {/* Mobile: Chip/Tag style */}
-                <div className="flex flex-wrap gap-2 md:hidden">
-                  {category.skills.map((skill, index) => (
-                    <SkillChip
-                      key={skill.name}
-                      skill={skill}
-                      index={index}
-                      onClick={() => setSelectedSkill(skill)}
-                    />
-                  ))}
-                </div>
-                
-                {/* Desktop: List style */}
-                <div className="hidden md:block space-y-2">
-                  {category.skills.map((skill, index) => (
-                    <SkillCard
-                      key={skill.name}
-                      skill={skill}
-                      index={index}
-                      onClick={() => setSelectedSkill(skill)}
-                    />
-                  ))}
-                </div>
-              </div>
-            </SectionReveal>
-          ))}
+          <span className="font-mono text-[10px] tracking-[0.2em] text-[#819fa7] uppercase text-right leading-tight max-w-[130px] whitespace-pre-line">
+            {card.category}
+          </span>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-          {stats.map((stat, index) => (
-            <SectionReveal key={stat.labelKey} delay={0.4 + index * 0.08}>
-              <div className="text-center p-3 md:p-5 rounded-lg md:rounded-xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/25 hover:-translate-y-1 transition-all duration-300 cursor-default">
-                <div className="text-xl md:text-3xl font-display font-bold text-[#819fa7] mb-0.5 md:mb-1">
-                  <AnimatedCounter value={stat.value + stat.suffix} duration={2000} />
-                </div>
-                <div className="text-[10px] md:text-xs text-[#f3f5f9]/40 uppercase tracking-wider">
-                  {t(`stats.${stat.labelKey}`)}
-                </div>
-              </div>
-            </SectionReveal>
-          ))}
+        {/* Center Visual (GIF / Custom Image) */}
+        <div className="h-16 sm:h-20 mb-4 sm:mb-5 flex items-center justify-center opacity-85 group-hover:opacity-100 transition-opacity">
+          <img
+            src={card.image || card.gif || '/images/gif/coding.gif'}
+            alt={card.title || 'Skills visual'}
+            className="h-14 sm:h-16 object-contain select-none pointer-events-none"
+            draggable={false}
+          />
         </div>
+
+        {card.title && (
+          <h3 className="text-sm sm:text-base font-semibold text-white/95 mb-2">
+            {card.title}
+          </h3>
+        )}
+
+        {/* Description */}
+        <p className="text-[13px] sm:text-[13.5px] leading-[1.65] text-white/60 mb-5 sm:mb-6 font-sans">
+          {card.description}
+        </p>
       </div>
 
-      {/* Modal */}
-      {selectedSkill && (
-        <SkillModal skill={selectedSkill} onClose={() => setSelectedSkill(null)} />
-      )}
+      {/* Tag Cloud */}
+      <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-3 sm:pt-4 border-t border-white/5 mt-auto">
+        {(card.tags || []).map((tag: string, idx: number) => (
+          <span
+            key={idx}
+            className="font-mono text-[9.5px] sm:text-[10px] px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md bg-white/[0.03] border border-white/10 text-white/70 hover:text-white hover:border-white/30 transition-colors cursor-default"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <section
+      id="skills"
+      className="relative md:min-h-screen flex flex-col justify-center py-20 sm:py-24 md:py-28 lg:py-32 px-4 md:px-8 bg-[#0d0d0d] content-visibility-auto overflow-hidden"
+    >
+      {/* Background dark gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0d0d0d] to-[#0a0a0a] pointer-events-none" />
+
+      <div className="relative z-10 max-w-[1200px] w-full mx-auto md:my-auto">
+        {/* Exact Richard Miculob Layout: Grid with Left (Headline + 4 Columns Tech Stack) and Right (2 Side-by-Side Bento Cards) */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.35fr] gap-8 lg:gap-14 items-start">
+          
+          {/* Left Column (what-i-can-do-left) */}
+          <SectionReveal delay={0} direction="left">
+            <div className="flex flex-col">
+              <div className="font-mono text-xs font-semibold tracking-[0.25em] text-[#819fa7] uppercase mb-2 sm:mb-3">
+                {t('badge')}
+              </div>
+              <h2 className="text-2xl sm:text-5xl md:text-[54px] font-display font-extrabold text-[#f3f5f9] tracking-tight leading-[1.08] mb-3 sm:mb-4">
+                {t('title')}
+              </h2>
+              <p className="text-sm sm:text-[15px] leading-[1.7] text-white/60 max-w-[480px] mb-5 sm:mb-8">
+                {t('subtitle')}
+              </p>
+
+              {/* MOBİL: 6 Sütunlu Kompakt Grid (18 İkon, Yüksekliği 130px'e İndirir) */}
+              <div className="grid grid-cols-6 gap-2 sm:hidden pt-1 max-w-[320px]">
+                {allTechs.map((tech) => (
+                  <div
+                    key={tech.name}
+                    className="w-10 h-10 rounded-xl bg-[#141414] border border-white/10 flex items-center justify-center relative group select-none"
+                    title={tech.name}
+                  >
+                    <img
+                      src={tech.icon}
+                      alt={tech.name}
+                      className="w-5 h-5 object-contain select-none pointer-events-none opacity-90"
+                      draggable={false}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* MASAÜSTÜ & TABLET: 4 Dikey Kolon (Richard Miculob Birebir Tasarımı) */}
+              <div className="hidden sm:flex gap-3 sm:gap-4 items-start flex-wrap sm:flex-nowrap pt-2">
+                {techColumns.map((column: TechItem[], colIdx: number) => (
+                  <div key={colIdx} className="flex flex-col gap-3">
+                    {column.map((tech: TechItem) => (
+                      <div
+                        key={tech.name}
+                        className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#141414] border border-white/10 flex items-center justify-center relative group transition-all duration-300 hover:border-white/40 hover:-translate-y-1 hover:shadow-xl hover:z-50 cursor-default select-none"
+                      >
+                        <img
+                          src={tech.icon}
+                          alt={tech.name}
+                          className="w-6 h-6 sm:w-7 sm:h-7 object-contain select-none pointer-events-none opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300"
+                          draggable={false}
+                        />
+
+                        {/* Tooltip on hover */}
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 px-3 py-1.5 rounded-lg bg-[#181920] border border-white/20 text-xs font-mono font-medium text-white whitespace-nowrap opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-200 pointer-events-none z-50 shadow-[0_10px_25px_rgba(0,0,0,0.95)]">
+                          {tech.name}
+                          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#181920] border-r border-b border-white/20 rotate-45" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </SectionReveal>
+
+          {/* Right Column: Bento Cards */}
+          <SectionReveal delay={0.2} direction="right">
+            {/* MOBİL: 01 / 02 Sekmeli Geçiş (Sayfa Yüksekliğini 800px Kısaltır) */}
+            <div className="lg:hidden mt-6">
+              <div className="flex justify-center mb-4">
+                <div className="inline-flex p-1 rounded-xl bg-[#141414] border border-white/10 gap-1">
+                  <button
+                    onClick={() => setActiveBento(0)}
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition-all ${
+                      activeBento === 0
+                        ? 'bg-white text-black shadow-sm font-semibold'
+                        : 'text-white/50 hover:text-white'
+                    }`}
+                  >
+                    01 AI & Görü
+                  </button>
+                  <button
+                    onClick={() => setActiveBento(1)}
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition-all ${
+                      activeBento === 1
+                        ? 'bg-white text-black shadow-sm font-semibold'
+                        : 'text-white/50 hover:text-white'
+                    }`}
+                  >
+                    02 Backend & Sistem
+                  </button>
+                </div>
+              </div>
+
+              <AnimatePresence mode="wait">
+                {activeBento === 0 ? (
+                  <motion.div
+                    key="bento-0"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 10 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {renderBentoCard(card1)}
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="bento-1"
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {renderBentoCard(card2)}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* MASAÜSTÜ: 2 Bento Kartı Yan Yana (Birebir Richard Miculob Düzeni) */}
+            <div className="hidden lg:grid grid-cols-2 gap-5 lg:gap-6 items-stretch">
+              {renderBentoCard(card1)}
+              {renderBentoCard(card2)}
+            </div>
+          </SectionReveal>
+        </div>
+      </div>
     </section>
   );
 }

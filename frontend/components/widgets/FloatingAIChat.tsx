@@ -126,7 +126,7 @@ export default function FloatingAIChat() {
           >
             <div className="relative">
               <MessageCircle className="w-6 h-6" />
-              <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse" />
+              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#819fa7] rounded-full ring-2 ring-[#0d0d0d] animate-pulse" />
             </div>
 
             {/* Tooltip */}
@@ -154,7 +154,7 @@ export default function FloatingAIChat() {
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#819fa7] to-[#5b6e74] flex items-center justify-center">
                     <Sparkles className="w-5 h-5 text-[#0d0d0d]" />
                   </div>
-                  <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full border-2 border-[#0d0d0d]" />
+                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-[#819fa7] rounded-full border-2 border-[#0d0d0d]" />
                 </div>
                 <div>
                   <h3 className="text-[#f3f5f9] font-semibold">AI Asistan</h3>

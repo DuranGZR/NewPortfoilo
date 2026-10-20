@@ -11,7 +11,6 @@ import {
   FolderOpen, 
   Code, 
   Briefcase, 
-  Map, 
   MessageSquare,
   User,
   Lightbulb,
@@ -109,13 +108,6 @@ export default function CommandPalette() {
       label: t('navigation.thinking'),
       icon: Lightbulb,
       action: () => scrollToSection('thinking'),
-      category: 'navigation'
-    },
-    {
-      id: 'roadmap',
-      label: t('navigation.roadmap'),
-      icon: Map,
-      action: () => scrollToSection('roadmap'),
       category: 'navigation'
     },
     {

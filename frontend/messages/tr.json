@@ -61,109 +61,301 @@
         "status": {
             "available": "İş Fırsatlarına Açık",
             "graduating": "Mezuniyet: 2026"
+        },
+        "badge": "HAKKIMDA",
+        "headline": "Problem Çözücü. Yapay Zeka Mühendisi.",
+        "name": "DURAN GEZER",
+        "stats": {
+            "projectsLabel": "PROJELER",
+            "projectsValue": "20+",
+            "certsLabel": "SERTİFİKALAR",
+            "certsValue": "9",
+            "gradLabel": "BİLGİSAYAR MÜH.",
+            "gradValue": "2026"
+        },
+        "resumeCta": "Deneyimlerim hakkında daha fazlasını öğrenmek ister misiniz?",
+        "resumeLink": "CV'mi inceleyin",
+        "currently": {
+            "title": "ŞU ANDA",
+            "buildingLabel": "Geliştiriyor",
+            "buildingDesc": "Web & Yapay Zeka Projeleri",
+            "exploringLabel": "Keşfediyor",
+            "exploringDesc": "Görüntü İşleme & LLM Sistemleri",
+            "learningLabel": "Öğreniyor",
+            "learningDesc": "Derin Öğrenme & Ajanlar"
+        },
+        "traits": {
+            "label": "ÖZELLİK",
+            "items": [
+                "Problem Çözücü",
+                "Detay Odaklı",
+                "Güvenilir",
+                "Sürekli Öğrenen",
+                "Kullanıcı Odaklı",
+                "Analitik Düşünce",
+                "Geri Bildirime Açık"
+            ]
         }
     },
     "projects": {
-        "badge": "Projelerim",
-        "title": "Gerçek Projeler, Gerçek Öğrenmeler",
-        "subtitle": "Yapay zeka, makine öğrenmesi ve yazılım geliştirme alanlarında geliştirdiğim projeler.",
-        "viewDetails": "Detayları Gör",
-        "viewCode": "Kodu Gör",
-        "viewDemo": "Demo'yu Gör",
-        "viewCaseStudies": "Tüm Projeleri Gör",
-        "showLess": "Daha Az Göster",
-        "moreProjects": "proje daha",
+        "badge": "ÖNE ÇIKAN ÇALIŞMALAR",
+        "title": "Proje Galerisi",
+        "subtitle": "Geliştirdiğim yapay zeka sistemleri, mobil uygulamalar ve teknik projelerden bir seçki.",
+        "viewMore": "Tüm Projeleri Gör",
+        "viewProject": "Projeyi İncele",
+        "backToProjects": "Projelere Dön",
+        "viewCode": "Kodu İncele (GitHub)",
+        "liveDemo": "Canlı Demo",
+        "techStack": "Kullanılan Teknolojiler",
+        "overview": "Proje Genel Bakış",
+        "keyFeatures": "Temel Özellikler",
+        "architecture": "Mimari & Çalışma Mantığı",
         "items": {
+            "aliagaAI": {
+                "title": "AliağaAI - Akıllı Şehir Asistanı",
+                "tagline": "Aliağa ilçesine özel, mobil frontend (React Native) ve çok aşamalı RAG backend (FastAPI, pgvector) mimarisiyle çalışan, doğrulanmış ve halüsinasyonsuz akıllı şehir asistanı.",
+                "period": "2024",
+                "category": "AI / RAG / Full-Stack",
+                "image": "/projects/aliagaai.png",
+                "github": "https://github.com/DuranGZR/AliagaAI",
+                "demo": "",
+                "tags": [
+                    "FastAPI",
+                    "React Native",
+                    "pgvector",
+                    "Groq LLM",
+                    "PostgreSQL",
+                    "Docker"
+                ],
+                "overview": "Genel arama motorlarının yerel veriye ulaşmadaki yetersizliğini ve reklam odaklı yapısını aşmak amacıyla, kaynağını doğrulanmış yerel bilgilerden alan RAG (Retrieval-Augmented Generation) mimarisi üzerine kurulmuştur.",
+                "features": [
+                    "Ajanlı akıllı sorgu yönlendirici (Query Router)",
+                    "pgvector ile hibrit vektör ve kelime araması",
+                    "Doğrulanmış belediye ve yerel kurum veri tabanı",
+                    "React Native ile modern mobil kullanıcı deneyimi"
+                ]
+            },
+            "aiDreamInterpreter": {
+                "title": "Rüya Yorumlayıcı (AI Dream Interpreter)",
+                "tagline": "Bilinçaltınızın haritasını çıkarın. Yapay zeka destekli, Jungiyen ve Freudyen psikolojik derinliği olan, modern ve güvenli bir rüya takip platformu.",
+                "period": "2024",
+                "category": "AI / Mobile / Psychology",
+                "image": "/projects/dream-interpreter.png",
+                "github": "https://github.com/DuranGZR/Ai-Dream-Interpreter",
+                "demo": "",
+                "tags": [
+                    "React Native",
+                    "Expo",
+                    "Google Gemini",
+                    "TypeScript",
+                    "Node.js",
+                    "Firebase"
+                ],
+                "overview": "Kullanıcıların gördükleri rüyaları kayıt altına alıp psikolojik sembolizm üzerinden derinlemesine analiz etmelerini sağlayan, Google Gemini destekli akıllı mobil platform.",
+                "features": [
+                    "Jung ve Freud ekollerine dayalı sembolik rüya analizi",
+                    "Duygu durumu ve yinelenen tema takibi",
+                    "Güvenli ve şifreli kullanıcı verisi saklama",
+                    "Modern ve minimalist karanlık mod arayüzü"
+                ]
+            },
+            "kayipQR": {
+                "title": "KayıpQR - Akıllı QR Etiket Platformu",
+                "tagline": "Eşyan sana dönsün, numaran sende kalsın. Eşyalar için kişiselleştirilebilir QR etiketleri ve telefon numarası paylaşmadan güvenli mesajlaşma.",
+                "period": "2024",
+                "category": "Web Platform / QR Studio",
+                "image": "/projects/kayipqr.png",
+                "github": "https://github.com/DuranGZR/KayipQR",
+                "demo": "",
+                "tags": [
+                    "Next.js",
+                    "TypeScript",
+                    "FastAPI",
+                    "PostgreSQL",
+                    "Docker",
+                    "TailwindCSS"
+                ],
+                "overview": "Eşyalarını kaybeden kullanıcıların, bulan kişilerle telefon numaralarını ifşa etmeden tek kullanımlık güvenli web oturumları üzerinden anonim mesajlaşmasını sağlayan uçtan uca platform.",
+                "features": [
+                    "Kişiselleştirilebilir dinamik QR tasarım stüdyosu",
+                    "Telefon numarası paylaşmadan anonim sohbet odası",
+                    "Eşya durum yönetimi (Güvende, Kayıp, Teslim Alındı)",
+                    "A4 yazdırma ve PDF/SVG formatında dışa aktarma"
+                ]
+            },
+            "weDo": {
+                "title": "WeDo - Ortak Fikir & Karar Uygulaması",
+                "tagline": "Save what inspires you. Decide together. Make it happen. Çiftler ve arkadaş grupları için ortak liste ve planlama mobil uygulaması.",
+                "period": "2024",
+                "category": "Mobile / Social Planning",
+                "image": "/projects/wedo-card.png",
+                "github": "https://github.com/DuranGZR/WeDo",
+                "demo": "",
+                "tags": [
+                    "React Native",
+                    "Expo SDK 54",
+                    "FastAPI",
+                    "Python 3.13",
+                    "PostgreSQL 17"
+                ],
+                "overview": "Arkadaşların veya partnerlerin internette buldukları linkleri, mekanları, etkinlikleri ve fikirleri tek bir ortak alanda biriktirip birlikte karar almalarını sağlayan yenilikçi mobil uygulama.",
+                "features": [
+                    "Ortak panolar ve gerçek zamanlı eşzamanlanan listeler",
+                    "Hızlı link ve görsel kaydetme desteği",
+                    "Oylama ve ortak karar mekanizması",
+                    "Kusursuz Expo SDK 54 ve FastAPI Python 3.13 mimarisi"
+                ]
+            },
             "visualAI": {
-                "title": "Gerçek Zamanlı Görsel Anlama AI",
+                "title": "Anlık Anlatım (Real-Time Visual Understanding)",
+                "tagline": "Webcam görüntülerini %100 yerel multimodal Ollama LLaVA modeli ile anlık olarak analiz edip gerçek zamanlı doğal dil açıklamaları üreten AI sistemi.",
                 "period": "2024",
-                "tagline": "Ollama LLaVA modeli kullanarak kameradan anlık görüntü analizi yapan yapay zeka sistemi. Görüntüleri gerçek zamanlı olarak anlayıp Türkçe açıklama üretir.",
-                "impact": "Python, Ollama, LLaVA, OpenCV kullanılarak geliştirildi.",
-                "github": "https://github.com/DuranGZR/Real-Time-Visual-Understanding"
-            },
-            "handwriting": {
-                "title": "El Yazısı Rakam Tanıma",
-                "period": "2024",
-                "tagline": "CNN ve OpenCV ile MNIST veri seti üzerinde eğitilmiş derin öğrenme modeli. Gerçek zamanlı çizim arayüzü ile el yazısı rakamları tanır.",
-                "impact": "TensorFlow, Keras, OpenCV, CNN mimarisi kullanıldı.",
-                "github": "https://github.com/DuranGZR/El_Yazisi_Tahmin"
-            },
-            "diabetes": {
-                "title": "Diyabet Tahmin Sistemi",
-                "period": "2024",
-                "tagline": "Makine öğrenmesi ile diyabet hastalığını erken teşhis eden tahmin modeli. Veri analizi, ön işleme ve çoklu sınıflandırma algoritmaları kullanıldı.",
-                "impact": "Python, Scikit-learn, Pandas, NumPy ile geliştirildi.",
-                "github": "https://github.com/DuranGZR/Diabetes_Prediction"
-            },
-            "xoxBot": {
-                "title": "XOX Bot - Q-Learning AI",
-                "period": "2024",
-                "tagline": "Q-Öğrenme algoritması ile eğitilmiş yapay zeka destekli Tic-Tac-Toe botu. Takviye öğrenme ile stratejilerini geliştirerek optimal hamleler yapar.",
-                "impact": "Python, Q-Learning, Reinforcement Learning kullanıldı.",
-                "github": "https://github.com/DuranGZR/XOX_Bot"
-            },
-            "salary": {
-                "title": "Maaş Tahmin Modeli",
-                "period": "2024",
-                "tagline": "Beyzbol oyuncularının maaş tahminleri için makine öğrenmesi modeli. Keşifçi veri analizi, özellik mühendisliği ve regresyon algoritmaları uygulandı.",
-                "impact": "Python, Scikit-learn, Feature Engineering teknikleri.",
-                "github": "https://github.com/DuranGZR/Salary_Prediction_with_Mahcine_Learning"
-            },
-            "neuron": {
-                "title": "Basit Yapay Sinir Ağı",
-                "period": "2024",
-                "tagline": "Yapay sinir ağlarının temel çalışma prensiplerini gösteren eğitim amaçlı proje. Nöron yapısı ve aktivasyon fonksiyonları implementasyonu.",
-                "impact": "Python, NumPy ile sıfırdan geliştirildi.",
-                "github": "https://github.com/DuranGZR/Simple-Artificial-Neuron"
-            },
-            "telegramBot": {
-                "title": "Telegram Doğum Günü Botu",
-                "period": "2025",
-                "tagline": "Doğum günlerini takip eden ve otomatik hatırlatma gönderen Telegram botu. CSV ile toplu ekleme, admin yetkilendirme ve zamanlama özellikleri.",
-                "impact": "Python, Telegram Bot API, SQLite, APScheduler ile geliştirildi. Railway'de 7/24 çalışıyor.",
-                "github": "https://github.com/DuranGZR/Telegram_dogum_gunu_bot"
-            },
-            "busTicket": {
-                "title": "Otobüs Bilet Rezervasyon Sistemi",
-                "period": "2024",
-                "tagline": "Nesne yönelimli programlama ve veri yapıları kullanılarak geliştirilen bilet rezervasyon sistemi. Yolcu yönetimi ve koltuk seçimi özellikleri.",
-                "impact": "Java, OOP prensipleri ve veri yapıları kullanıldı.",
-                "github": "https://github.com/DuranGZR/A_Bus_Ticket_Reservation_System"
+                "category": "Computer Vision / Local AI",
+                "image": "/projects/visual-ai.png",
+                "github": "https://github.com/DuranGZR/Real-Time-Visual-Understanding",
+                "demo": "",
+                "tags": [
+                    "Python",
+                    "FastAPI",
+                    "Ollama",
+                    "LLaVA",
+                    "OpenCV",
+                    "WebSockets"
+                ],
+                "overview": "Verilerin hiçbir şekilde harici sunuculara veya buluta gitmediği, tamamen yerel GPU üzerinde çalışan, web kamerası akışını anlık yorumlayan multimodal yapay zeka sistemi.",
+                "features": [
+                    "%100 Yerel Yapay Zeka: İnternetsiz ve sıfır veri sızıntısı",
+                    "WebSockets üzerinden düşük gecikmeli görüntü akışı",
+                    "Ollama ve LLaVA-7B multimodal derin öğrenme modeli",
+                    "Sınırsız ve kotasız analiz yeteneği"
+                ]
             }
-        },
-        "metrics": {
-            "accuracy": "Doğruluk",
-            "processing": "İşleme",
-            "precision": "Hassasiyet",
-            "technologies": "Teknolojiler",
-            "github": "GitHub"
         }
     },
     "skills": {
-        "badge": "Teknoloji Yığını",
-        "title": "Yetenekler ve Teknolojiler",
-        "subtitle": "Sadece moda kelimeler değil. Gerçek projeleri göndermek için kullandığım araçlar.",
-        "categories": {
-            "ml": "AI ve Makine Öğrenmesi",
-            "programming": "Programlama",
-            "frameworks": "Frameworkler ve Araçlar",
-            "data": "Veri ve Analitik"
+        "badge": "YETENEKLER & UZMANLIKLAR",
+        "title": "Neler Yapabilirim?",
+        "subtitle": "Yapay zeka, derin öğrenme ve modern yazılım mühendisliğini birleştirerek güvenilir sistemler, modeller ve dijital iş akışları geliştiriyorum.",
+        "bento": {
+            "card1": {
+                "number": "01",
+                "category": "YAPAY ZEKA &\nDERİN ÖĞRENME",
+                "title": "AI, Bilgisayarlı Görü & Derin Öğrenme",
+                "description": "Kameradan anlık görüntü analizi, derin öğrenme modelleri (CNN/MLP), multimodal LLM entegrasyonları (LLaVA) ve pgvector ile RAG mimarileri geliştirme.",
+                "tags": [
+                    "Python",
+                    "TensorFlow / Keras",
+                    "PyTorch",
+                    "Scikit-learn",
+                    "NumPy / Pandas",
+                    "OpenCV",
+                    "Computer Vision",
+                    "NLP",
+                    "Deep Learning",
+                    "Ollama / LLaVA",
+                    "pgvector"
+                ],
+                "image": "/images/gif/coding.gif"
+            },
+            "card2": {
+                "number": "02",
+                "category": "BACKEND, SİSTEMLER &\nPROGRAMLAMA",
+                "title": "Backend, Sistemler & Programlama Dilleri",
+                "description": "FastAPI ile yüksek hızlı mikroservisler, nesne yönelimli mimariler (Java, C#, C++), SQL veritabanları ve Docker ile yapay zekayı ürünleştiren güvenilir sistem çözümleri.",
+                "tags": [
+                    "FastAPI",
+                    "Java",
+                    "C#",
+                    "C / C++",
+                    "SQL",
+                    "PostgreSQL",
+                    "Docker",
+                    "Git & GitHub",
+                    "Feature Engineering",
+                    "Data Analysis",
+                    "Kotlin"
+                ],
+                "image": "/images/gif/assistant.gif"
+            }
         },
-        "levels": {
-            "beginner": "Temel",
-            "intermediate": "Orta",
-            "advanced": "İleri",
-            "expert": "Uzman"
-        },
-        "stats": {
-            "technologies": "Teknoloji",
-            "projects": "Proje",
-            "codeLines": "Kod Satırı",
-            "learningHrs": "Öğrenme Saati"
-        },
-        "modal": {
-            "whatIKnow": "Bildiklerim"
-        }
+        "techColumns": [
+            [
+                {
+                    "name": "Python",
+                    "icon": "/images/skills/python.svg"
+                },
+                {
+                    "name": "NumPy",
+                    "icon": "/images/skills/numpy.svg"
+                },
+                {
+                    "name": "Pandas",
+                    "icon": "/images/skills/pandas.svg"
+                },
+                {
+                    "name": "Scikit-learn",
+                    "icon": "/images/skills/scikitlearn.svg"
+                },
+                {
+                    "name": "TensorFlow",
+                    "icon": "/images/skills/tensorflow.svg"
+                }
+            ],
+            [
+                {
+                    "name": "PyTorch",
+                    "icon": "/images/skills/pytorch.svg"
+                },
+                {
+                    "name": "OpenCV",
+                    "icon": "/images/skills/opencv.svg"
+                },
+                {
+                    "name": "Ollama / LLaVA",
+                    "icon": "/images/skills/ollama.svg"
+                },
+                {
+                    "name": "PostgreSQL",
+                    "icon": "/images/skills/postgresql.svg"
+                }
+            ],
+            [
+                {
+                    "name": "Java",
+                    "icon": "/images/skills/java.svg"
+                },
+                {
+                    "name": "C#",
+                    "icon": "/images/skills/csharp.svg"
+                },
+                {
+                    "name": "C / C++",
+                    "icon": "/images/skills/cplusplus.svg"
+                },
+                {
+                    "name": "SQL",
+                    "icon": "/images/skills/sql.svg"
+                },
+                {
+                    "name": "Kotlin",
+                    "icon": "/images/skills/kotlin.svg"
+                }
+            ],
+            [
+                {
+                    "name": "FastAPI",
+                    "icon": "/images/skills/fastapi.svg"
+                },
+                {
+                    "name": "Docker",
+                    "icon": "/images/skills/docker.svg"
+                },
+                {
+                    "name": "Git / GitHub",
+                    "icon": "/images/skills/git.svg"
+                }
+            ]
+        ]
     },
     "experience": {
         "badge": "Geçmiş",
@@ -179,7 +371,7 @@
                 "title": "Bilgisayar Mühendisliği Lisans",
                 "organization": "İnönü Üniversitesi",
                 "period": "2022 - 2026",
-                "description": "Yapay Zeka ve Makine Öğrenmesi odaklı. GPA: 2.84/4.0"
+                "description": "Yapay Zeka ve Makine Öğrenmesi odaklı lisans müfredatı ve akademik çalışmalar."
             },
             "mlCamp": {
                 "title": "Machine Learning Camp",
@@ -494,9 +686,9 @@
         "copyright": "Bu portföy yaşayan bir sistem—sürekli gelişiyor."
     },
     "aiAssistant": {
-        "badge": "Yakında",
+        "badge": "Canlı Asistan",
         "title": "AI Asistanıma Sor",
-        "subtitle": "Özgeçmişimden daha iyi tanıyan bir AI inşa ediyorum. İşlerim, düşüncelerim veya problemlere yaklaşımım hakkında her şeyi sorabilirsiniz.",
+        "subtitle": "Projelerim, deneyimim ve mühendislik yaklaşımım hakkında eğitilmiş akıllı asistan. Aklınıza takılan her şeyi doğrudan sorabilirsiniz.",
         "chatHeader": {
             "title": "AI Asistan",
             "poweredBy": "Bilgi tabanım tarafından destekleniyor"

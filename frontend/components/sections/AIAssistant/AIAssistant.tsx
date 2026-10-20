@@ -1,9 +1,9 @@
 "use client";
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, Sparkles, Send, Loader2, Bot, User } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Send, Loader2, ArrowRight, RotateCcw, Sparkles } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import SectionReveal from '@/components/animations/SectionReveal';
 
 interface Message {
@@ -14,22 +14,16 @@ interface Message {
 
 export default function AIAssistant() {
   const t = useTranslations('aiAssistant');
+  const locale = useLocale();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const chatBottomRef = useRef<HTMLDivElement>(null);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
-
-  const sampleQuestions = [
-    t('sampleQuestions.q1'),
-    t('sampleQuestions.q2'),
-    t('sampleQuestions.q3'),
-    t('sampleQuestions.q4')
-  ];
 
   const features = [
     { title: t('features.realtime.title'), desc: t('features.realtime.desc') },
@@ -37,12 +31,11 @@ export default function AIAssistant() {
     { title: t('features.learning.title'), desc: t('features.learning.desc') }
   ];
 
-  // Scroll to bottom when messages change (only within chat container)
   useEffect(() => {
-    if (messagesContainerRef.current) {
-      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    if (messages.length > 0) {
+      chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [messages]);
+  }, [messages, isLoading]);
 
   const sendMessage = async (messageText: string) => {
     if (!messageText.trim() || isLoading) return;
@@ -76,7 +69,6 @@ export default function AIAssistant() {
 
       const data = await response.json();
 
-      // Save session ID for context
       if (data.session_id) {
         setSessionId(data.session_id);
       }
@@ -89,7 +81,11 @@ export default function AIAssistant() {
 
       setMessages(prev => [...prev, assistantMessage]);
     } catch (err) {
-      setError('Bir hata oluştu. Backend çalışıyor mu kontrol edin.');
+      setError(
+        locale === 'tr'
+          ? 'Bağlantı hatası: Backend servisine ulaşılamadı.'
+          : 'Connection error: Could not reach backend service.'
+      );
       console.error('Chat error:', err);
     } finally {
       setIsLoading(false);
@@ -102,227 +98,156 @@ export default function AIAssistant() {
     sendMessage(input);
   };
 
-  const handleQuestionClick = (question: string) => {
-    sendMessage(question);
+  const handleClear = () => {
+    setMessages([]);
+    setError(null);
+    setSessionId(null);
+    setInput('');
   };
 
   return (
-    <section id="ai-assistant" className="relative py-8 md:py-24 px-4 md:px-6 overflow-hidden bg-[#0d0d0d] content-visibility-auto">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0d0d0d] via-[#1a1a1a] to-[#0d0d0d]" />
+    <section id="ai-assistant" className="relative md:min-h-screen flex flex-col justify-center py-20 sm:py-24 md:py-28 lg:py-32 px-4 md:px-6 bg-[#0d0d0d] content-visibility-auto">
+      {/* Monokrom Degrade Arka Plan */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0d0d0d] to-[#0a0a0a] pointer-events-none" />
 
-      {/* Subtle grid pattern - Hidden on mobile for performance */}
-      <div className="hidden md:block absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: `
-          linear-gradient(#819fa7 1px, transparent 1px),
-          linear-gradient(90deg, #819fa7 1px, transparent 1px)
-        `,
-        backgroundSize: '50px 50px'
-      }} />
-
-      <div className="relative z-10 max-w-5xl mx-auto">
-        {/* Section Header - Mobile */}
-        <div className="md:hidden text-center mb-4">
-          <h2 className="text-lg font-bold text-[#f3f5f9]">{t('title')}</h2>
-        </div>
-
-        {/* Desktop Header */}
-        <SectionReveal className="hidden md:block mb-16 text-center">
-          <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full border border-[#819fa7]/30 bg-[#819fa7]/5">
-            <Sparkles className="w-4 h-4 text-[#819fa7]" />
-            <span className="text-xs font-light tracking-[0.3em] uppercase text-[#819fa7]">
+      <div className="relative z-10 max-w-[1100px] w-full mx-auto md:my-auto">
+        {/* Bölüm Başlığı (Editoryal, Sol Hizalı) */}
+        <SectionReveal delay={0}>
+          <div className="mb-6 sm:mb-10">
+            <div className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.2em] text-[#819fa7] uppercase mb-1.5 sm:mb-2 flex items-center gap-2">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-40" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-white/80" />
+              </span>
               {t('badge')}
-            </span>
+            </div>
+            <h2 className="text-2xl sm:text-5xl md:text-[54px] font-display font-extrabold text-[#f3f5f9] tracking-tight leading-[1.1] mb-2 sm:mb-3">
+              {t('title')}
+            </h2>
+            <p className="text-xs sm:text-[15px] leading-relaxed sm:leading-[1.8] text-white/60 max-w-[680px]">
+              {t('subtitle')}
+            </p>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-[#f3f5f9] mb-4">
-            {t('title')}
-          </h2>
-          <p className="text-[#f3f5f9]/60 max-w-2xl mx-auto text-lg">
-            {t('subtitle')}
-          </p>
         </SectionReveal>
 
-        {/* Chat Interface */}
-        <SectionReveal delay={0.2}>
-          <div className="relative">
-            {/* Chat Container - Card style on both */}
-            <div className="relative rounded-2xl bg-gradient-to-br from-[#1a1a1a]/80 to-[#0d0d0d]/80 border border-[#819fa7]/20 backdrop-blur-xl overflow-hidden">
-
-              {/* Chat Header */}
-              <div className="px-4 md:px-6 py-3 md:py-4 border-b border-[#819fa7]/10 flex items-center justify-between">
-                <div className="flex items-center gap-2 md:gap-3">
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#819fa7]/20 border border-[#819fa7]/30 flex items-center justify-center">
-                    <MessageSquare className="w-4 h-4 md:w-5 md:h-5 text-[#819fa7]" />
-                  </div>
-                  <div>
-                    <h3 className="text-xs md:text-sm font-semibold text-[#f3f5f9]">{t('chatHeader.title')}</h3>
-                    <p className="hidden md:block text-xs text-[#f3f5f9]/50">{t('chatHeader.poweredBy')}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-xs text-emerald-400">Online</span>
-                </div>
-              </div>
-
-              {/* Chat Body */}
-              <div ref={messagesContainerRef} className="p-4 md:p-6 min-h-[420px] md:min-h-[400px] max-h-[480px] md:max-h-[500px] overflow-y-auto scroll-smooth">
-                {messages.length === 0 ? (
-                  /* Sample Questions */
-                  <div className="h-full flex flex-col justify-center max-w-xl mx-auto">
-                    {/* AI Avatar - Mobile */}
-                    <div className="md:hidden flex flex-col items-center mb-4">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#819fa7]/30 to-[#819fa7]/10 border-2 border-[#819fa7]/40 flex items-center justify-center mb-2">
-                        <Bot className="w-6 h-6 text-[#819fa7]" />
-                      </div>
-                      <p className="text-xs text-[#f3f5f9]/50 text-center">
-                        {t('sampleQuestionsTitle')}
-                      </p>
-                    </div>
-
-                    {/* Desktop text */}
-                    <p className="hidden md:block text-sm text-[#f3f5f9]/60 text-center mb-6">
-                      {t('sampleQuestionsTitle')}
-                    </p>
-
-                    {/* Mobile: Compact buttons */}
-                    <div className="md:hidden space-y-2">
-                      {sampleQuestions.map((question) => (
-                        <button
-                          key={question}
-                          onClick={() => handleQuestionClick(question)}
-                          className="w-full p-3 rounded-xl text-left bg-[#1a1a1a]/80 border border-[#819fa7]/15 hover:border-[#819fa7]/40 active:scale-[0.98] transition-all"
-                        >
-                          <div className="flex items-center gap-2.5">
-                            <Send className="w-3.5 h-3.5 text-[#819fa7] flex-shrink-0" />
-                            <span className="text-xs text-[#f3f5f9]/70 leading-snug">
-                              {question}
-                            </span>
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-
-                    {/* Desktop: Original list style */}
-                    <div className="hidden md:block space-y-4">
-                      {sampleQuestions.map((question) => (
-                        <button
-                          key={question}
-                          onClick={() => handleQuestionClick(question)}
-                          className="w-full p-4 rounded-lg text-left transition-all duration-200 bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/30 hover:bg-[#819fa7]/5 hover:translate-x-1"
-                        >
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm text-[#f3f5f9]/80">{question}</span>
-                            <Send className="w-4 h-4 text-[#f3f5f9]/30" />
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  /* Messages */
-                  <div className="space-y-3 md:space-y-4">
-                    {messages.map((message) => (
-                      <div
-                        key={message.id}
-                        className={`flex gap-2 md:gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                      >
-                        {message.role === 'assistant' && (
-                          <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#819fa7]/20 border border-[#819fa7]/30 flex items-center justify-center shrink-0">
-                            <Bot className="w-3 h-3 md:w-4 md:h-4 text-[#819fa7]" />
-                          </div>
-                        )}
-                        <div
-                          className={`max-w-[85%] md:max-w-[80%] p-2.5 md:p-4 rounded-xl md:rounded-2xl ${message.role === 'user'
-                            ? 'bg-[#819fa7]/20 border border-[#819fa7]/30 text-[#f3f5f9]'
-                            : 'bg-[#1a1a1a]/80 border border-[#819fa7]/10 text-[#f3f5f9]/90'
-                            }`}
-                        >
-                          <p className="text-xs md:text-sm whitespace-pre-wrap">{message.content}</p>
-                        </div>
-                        {message.role === 'user' && (
-                          <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#819fa7]/30 border border-[#819fa7]/40 flex items-center justify-center shrink-0">
-                            <User className="w-3 h-3 md:w-4 md:h-4 text-[#819fa7]" />
-                          </div>
-                        )}
-                      </div>
-                    ))}
-
-                    {/* Loading indicator */}
-                    {isLoading && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="flex gap-2 md:gap-3"
-                      >
-                        <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#819fa7]/20 border border-[#819fa7]/30 flex items-center justify-center">
-                          <Bot className="w-3 h-3 md:w-4 md:h-4 text-[#819fa7]" />
-                        </div>
-                        <div className="p-2.5 md:p-4 rounded-xl md:rounded-2xl bg-[#1a1a1a]/80 border border-[#819fa7]/10">
-                          <div className="flex items-center gap-2">
-                            <Loader2 className="w-4 h-4 text-[#819fa7] animate-spin" />
-                            <span className="text-xs md:text-sm text-[#f3f5f9]/60">Düşünüyor...</span>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {/* Error message */}
-                    {error && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="p-2.5 md:p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-xs md:text-sm text-center"
-                      >
-                        {error}
-                      </motion.div>
-                    )}
-                  </div>
-                )}
-              </div>
-
-              {/* Chat Input */}
-              <form onSubmit={handleSubmit} className="px-4 md:px-6 py-3 md:py-4 border-t border-[#819fa7]/10">
-                <div className="flex gap-2">
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    placeholder="Mesajınızı yazın..."
-                    disabled={isLoading}
-                    className="flex-1 px-3 md:px-4 py-2.5 md:py-3 rounded-lg bg-[#1a1a1a]/50 border border-[#819fa7]/20 text-[#f3f5f9] text-xs md:text-sm placeholder:text-[#f3f5f9]/30 focus:outline-none focus:border-[#819fa7]/50 transition-colors disabled:opacity-50"
-                  />
+        {/* Ultra Sade AI Etkileşim Alanı (Kutusuz, Fazlalıksız) */}
+        <SectionReveal delay={0.15}>
+          <div className="max-w-[760px]">
+            {/* Sohbet Geçmişi (Yalnızca mesaj varken görünür) */}
+            {messages.length > 0 && (
+              <div className="mb-6 space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                  <span className="font-mono text-xs text-[#819fa7] uppercase tracking-wider">
+                    {locale === 'tr' ? 'Sohbet Geçmişi' : 'Conversation'}
+                  </span>
                   <button
-                    type="submit"
-                    disabled={isLoading || !input.trim()}
-                    className="px-4 py-2.5 md:py-3 rounded-lg bg-[#819fa7]/20 border border-[#819fa7]/30 text-[#819fa7] hover:bg-[#819fa7]/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    onClick={handleClear}
+                    className="flex items-center gap-1.5 text-xs font-mono text-white/40 hover:text-white transition-colors"
                   >
-                    {isLoading ? (
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                    ) : (
-                      <Send className="w-4 h-4" />
-                    )}
+                    <RotateCcw className="w-3 h-3" />
+                    <span>{locale === 'tr' ? 'Temizle' : 'Clear'}</span>
                   </button>
                 </div>
-              </form>
-            </div>
 
-            {/* Info Cards - Desktop only */}
-            <div className="hidden md:grid grid-cols-3 gap-4 mt-8">
-              {features.map((feature, index) => (
-                <SectionReveal key={feature.title} delay={0.4 + index * 0.1}>
-                  <div className="h-full p-4 rounded-lg bg-[#1a1a1a]/40 border border-[#819fa7]/10 hover:border-[#819fa7]/25 transition-colors">
-                    <h4 className="text-sm font-semibold text-[#f3f5f9] mb-2">
-                      {feature.title}
-                    </h4>
-                    <p className="text-xs text-[#f3f5f9]/50">
-                      {feature.desc}
-                    </p>
-                  </div>
-                </SectionReveal>
-              ))}
-            </div>
+                <div className="space-y-4 max-h-[440px] overflow-y-auto pr-1">
+                  {messages.map((message) => (
+                    <div
+                      key={message.id}
+                      className={`flex ${
+                        message.role === 'user' ? 'justify-end' : 'justify-start'
+                      }`}
+                    >
+                      <div
+                        className={`max-w-[85%] px-4 py-3 rounded-2xl text-[14.5px] leading-relaxed ${
+                          message.role === 'user'
+                            ? 'bg-white/10 border border-white/15 text-[#f3f5f9] rounded-tr-sm'
+                            : 'bg-white/[0.03] border border-white/10 text-white/90 rounded-tl-sm'
+                        }`}
+                      >
+                        <p className="whitespace-pre-wrap">{message.content}</p>
+                      </div>
+                    </div>
+                  ))}
+
+                  {isLoading && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="flex items-center gap-2.5 px-4 py-3 rounded-2xl rounded-tl-sm bg-white/[0.03] border border-white/10 max-w-[200px]"
+                    >
+                      <Loader2 className="w-3.5 h-3.5 text-[#819fa7] animate-spin" />
+                      <span className="text-xs font-mono text-white/50 tracking-wider">
+                        {locale === 'tr' ? 'Düşünüyor...' : 'Thinking...'}
+                      </span>
+                    </motion.div>
+                  )}
+
+                  {error && (
+                    <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300 text-xs">
+                      {error}
+                    </div>
+                  )}
+                  <div ref={chatBottomRef} />
+                </div>
+              </div>
+            )}
+
+            {/* Sade ve Şık Tek Satır Giriş Alanı */}
+            <form onSubmit={handleSubmit} className="relative">
+              <div className="relative flex items-center rounded-2xl bg-white/[0.02] border border-white/10 hover:border-white/20 focus-within:border-white/30 focus-within:bg-white/[0.04] transition-all p-2 sm:p-2.5">
+                <div className="pl-3 pr-2 text-[#819fa7]">
+                  <Sparkles className="w-4 h-4" />
+                </div>
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder={
+                    locale === 'tr'
+                      ? 'Aklınızdaki soruyu yazın ve Enter\'a basın...'
+                      : 'Ask anything and press Enter...'
+                  }
+                  disabled={isLoading}
+                  style={{ outline: 'none', boxShadow: 'none' }}
+                  className="flex-1 bg-transparent px-2 py-2 text-sm sm:text-[15px] text-[#f3f5f9] placeholder:text-white/30 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 ring-0 border-none shadow-none disabled:opacity-50"
+                />
+                <button
+                  type="submit"
+                  disabled={isLoading || !input.trim()}
+                  aria-label={t('sendButton')}
+                  className="p-2.5 sm:px-4 sm:py-2.5 rounded-xl bg-white text-black font-semibold text-xs sm:text-sm hover:bg-white/90 active:scale-95 transition-all disabled:opacity-20 disabled:cursor-not-allowed flex items-center gap-2 shrink-0 shadow-sm"
+                >
+                  {isLoading ? (
+                    <Loader2 className="w-4 h-4 animate-spin text-black" />
+                  ) : (
+                    <>
+                      <span className="hidden sm:inline">{locale === 'tr' ? 'Sor' : 'Ask'}</span>
+                      <ArrowRight className="w-4 h-4 text-black" />
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </SectionReveal>
+
+        {/* 3 Özellik - Yatay Düzen (Mobilde ve Masaüstünde 3 Sütun Yan Yana Sığacak Şekilde) */}
+        <SectionReveal delay={0.25}>
+          <div className="mt-8 sm:mt-16 pt-5 sm:pt-8 border-t border-white/10 grid grid-cols-3 gap-2.5 sm:gap-8">
+            {features.map((feature, idx) => (
+              <div key={feature.title} className="flex flex-col min-w-0">
+                <span className="font-mono text-[10px] sm:text-xs font-semibold text-[#819fa7] tracking-widest mb-1 sm:mb-2 select-none">
+                  0{idx + 1}
+                </span>
+                <h4 className="text-[11.5px] sm:text-base font-display font-bold text-[#f3f5f9] mb-1 sm:mb-1.5 leading-tight sm:leading-snug truncate sm:whitespace-normal">
+                  {feature.title}
+                </h4>
+                <p className="text-[10.5px] sm:text-[13.5px] leading-snug sm:leading-relaxed text-white/50 line-clamp-3 sm:line-clamp-none">
+                  {feature.desc}
+                </p>
+              </div>
+            ))}
           </div>
         </SectionReveal>
       </div>

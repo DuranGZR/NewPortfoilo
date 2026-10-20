@@ -11,8 +11,7 @@ const navLinks = [
   { key: 'projects', href: '#projects' },
   { key: 'skills', href: '#skills' },
   { key: 'experience', href: '#experience' },
-  { key: 'thinking', href: '#thinking' },
-  { key: 'roadmap', href: '#roadmap' }
+  { key: 'thinking', href: '#thinking' }
 ];
 
 export default function Navigation() {
@@ -65,7 +64,7 @@ export default function Navigation() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'py-3 border-b border-[#819fa7]/10 bg-[#0d0d0d]/90 backdrop-blur-xl'
+            ? 'py-3 bg-[#0d0d0d]/80 backdrop-blur-xl'
             : 'py-5 bg-transparent'
         }`}
       >

@@ -1,109 +1,315 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import { Code, BookOpen, Lightbulb, Target, Quote } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { Code2, FlaskConical, Rocket } from 'lucide-react';
+import { useTranslations, useMessages } from 'next-intl';
 import SectionReveal from '@/components/animations/SectionReveal';
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  'projects': Code,
-  'thinking': BookOpen,
-  'learning': Lightbulb,
-  'practical': Target
-};
+// Exact transform coordinates matching Richard Miculob's portfolio card stack
+const CARD_POSITIONS = [
+  { tx: 6, ty: -4, rot: -7, sc: 1, op: 1, z: 30 },
+  { tx: 2, ty: 11, rot: 10, sc: 0.955, op: 0.7, z: 20 },
+  { tx: 30, ty: 22, rot: -13, sc: 0.91, op: 0.55, z: 10 },
+  { tx: 134, ty: -67, rot: 43, sc: 0.85, op: 0, z: 5 },
+];
+
+const FALLBACK_TRAITS = [
+  "Problem Solver",
+  "Detail-Oriented",
+  "Reliable",
+  "Continuous Learner",
+  "User-Focused",
+  "Analytical Thinker",
+  "Open to Feedback"
+];
 
 export default function About() {
   const t = useTranslations('about');
+  const messages = useMessages() as any;
 
-  const highlights = ['projects', 'thinking', 'learning', 'practical'];
+  // Localized traits array from i18n messages
+  const traits: string[] = messages?.about?.traits?.items || FALLBACK_TRAITS;
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [imgFailed, setImgFailed] = useState(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const nextCard = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % traits.length);
+  }, [traits.length]);
+
+  // Auto-rotate every 3 seconds
+  useEffect(() => {
+    timerRef.current = setInterval(nextCard, 3000);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [nextCard]);
+
+  // Click to cycle immediately and reset auto-timer
+  const handleStackClick = () => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = setInterval(nextCard, 3000);
+    }
+    nextCard();
+  };
 
   return (
-    <section id="about" className="relative py-16 md:py-24 px-4 md:px-6 bg-[#0d0d0d] content-visibility-auto">
-      {/* Simple gradient */}
+    <section id="about" className="relative md:min-h-screen flex flex-col justify-center py-20 sm:py-24 md:py-28 lg:py-32 px-4 md:px-6 bg-[#0d0d0d] content-visibility-auto">
+      {/* Eski orijinal temiz arka plan (Koyu degrade) */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0d0d0d] to-[#0a0a0a]" />
 
-      <div className="relative z-10 max-w-6xl mx-auto">
-        {/* Section Header */}
-        <SectionReveal className="text-center mb-10 md:mb-16">
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="inline-block text-xs font-medium tracking-[0.15em] uppercase text-[#819fa7] px-4 py-2 rounded-full border border-[#819fa7]/30 bg-[#819fa7]/5 mb-6"
-          >
-            {t('title')}
-          </motion.span>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-display font-bold text-[#f3f5f9] mb-4">
-            {t('subtitle')}
-          </h2>
+      <div className="relative z-10 max-w-[1100px] w-full mx-auto md:my-auto">
+        {/* Section Label + Title (Dile göre dinamik: TR'de HAKKIMDA, EN'de ABOUT ME) */}
+        <SectionReveal delay={0}>
+          <div className="mb-8">
+            <div className="font-mono text-xs font-semibold tracking-[0.2em] text-[#819fa7] uppercase mb-2">
+              {t('badge')}
+            </div>
+            <h2 className="text-3xl sm:text-5xl md:text-[54px] font-display font-extrabold text-[#f3f5f9] tracking-tight leading-[1.08]">
+              {t('headline')}
+            </h2>
+          </div>
         </SectionReveal>
 
-        {/* Clean 2-column layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 mb-8 md:mb-12">
-          {/* Bio Card */}
-          <SectionReveal direction="left" delay={0.1}>
-            <div className="h-full p-5 md:p-8 rounded-2xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/25 hover:-translate-y-1 transition-all duration-300">
-              <div className="flex items-start gap-4 mb-6">
-                <div className="w-1 h-full min-h-[60px] bg-gradient-to-b from-[#819fa7] to-transparent rounded-full" />
-                <div>
-                  <h3 className="text-lg md:text-xl font-display font-bold text-[#f3f5f9] mb-3 md:mb-4">
-                    {t('title')}
-                  </h3>
-                  <p className="text-sm md:text-base text-[#f3f5f9]/70 leading-relaxed">
-                    {t('bio')}
-                  </p>
+        {/* Profile Card Layout: Sol tarafta Profil Resmi, Sağ tarafta İsim + Sayaçlar + Bio */}
+        <SectionReveal delay={0.12}>
+          <div className="flex flex-col sm:flex-row items-start gap-6 md:gap-7">
+          {/* Avatar (120x120px tam yuvarlak profil çerçevesi) */}
+          <div className="shrink-0">
+            <div className="w-[120px] h-[120px] rounded-full overflow-hidden border border-white/10 bg-[#161616] relative flex items-center justify-center">
+              {!imgFailed ? (
+                <img
+                  src="/profilFoto.jpg"
+                  alt={t('name')}
+                  onError={() => setImgFailed(true)}
+                  className="w-full h-full object-cover select-none pointer-events-none"
+                  draggable={false}
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1a2327] to-[#0f1416] text-[#819fa7] select-none">
+                  <span className="font-display font-bold text-3xl tracking-wider text-gradient">
+                    DG
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Profile Info (İsim, Mavi Rozet, Sayaçlar ve Biyografi) */}
+          <div className="flex-1 flex flex-col gap-2">
+            {/* İsim + Mavi Onay Rozeti (Verified Badge) */}
+            <div className="inline-flex items-center gap-2 text-xl font-bold text-[#f3f5f9] tracking-tight font-display">
+              <span>{t('name')}</span>
+              <svg className="w-5 h-5 text-[#3b82f6] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+            </div>
+
+            {/* Quick Stats: PROJECTS | CERTIFICATES | GRADUATED */}
+            <div className="flex flex-row items-center gap-8 mt-1">
+              <div className="flex flex-col gap-0.5">
+                <span className="font-mono text-[11px] font-semibold text-white/40 tracking-[0.15em] uppercase">
+                  {t('stats.projectsLabel')}
+                </span>
+                <span className="text-base font-bold text-[#f3f5f9] leading-tight">
+                  {t('stats.projectsValue')}
+                </span>
+              </div>
+              <div className="flex flex-col gap-0.5">
+                <span className="font-mono text-[11px] font-semibold text-white/40 tracking-[0.15em] uppercase">
+                  {t('stats.certsLabel')}
+                </span>
+                <span className="text-base font-bold text-[#f3f5f9] leading-tight">
+                  {t('stats.certsValue')}
+                </span>
+              </div>
+              <div className="flex flex-col gap-0.5">
+                <span className="font-mono text-[11px] font-semibold text-white/40 tracking-[0.15em] uppercase">
+                  {t('stats.gradLabel')}
+                </span>
+                <span className="text-base font-bold text-[#f3f5f9] leading-tight">
+                  {t('stats.gradValue')}
+                </span>
+              </div>
+            </div>
+
+            {/* Description Paragraph */}
+            <div className="text-[15px] leading-[1.8] text-white/60 mt-3 space-y-4 max-w-[950px]">
+              <p>
+                {t('bio')}
+              </p>
+              <p>
+                {t('resumeCta')}{' '}
+                <a
+                  href="/3d-resume"
+                  className="text-white font-semibold underline underline-offset-4 hover:opacity-75 transition-opacity"
+                >
+                  {t('resumeLink')}
+                </a>
+                .
+              </p>
+            </div>
+          </div>
+        </div>
+        </SectionReveal>
+
+        {/* Alt Satır: CURRENTLY (Sol) ve INTERACTIVE CARD STACK (Sağ) */}
+        <SectionReveal delay={0.24}>
+          <div className="mt-8 pt-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          {/* Sol Taraf: CURRENTLY Strip */}
+          <div className="flex flex-col gap-3">
+            <div className="font-mono text-[11px] font-medium tracking-[0.12em] text-white/40 uppercase">
+              {t('currently.title')}
+            </div>
+            <div className="flex flex-wrap items-center gap-6 sm:gap-7">
+              {/* Building */}
+              <div className="flex items-center gap-2.5">
+                <span className="w-8 h-8 rounded-full flex items-center justify-center bg-[#1a1a1a] border border-white/10 text-[#f3f5f9] shrink-0">
+                  <Code2 className="w-4 h-4 text-[#819fa7]" />
+                </span>
+                <div className="flex flex-col">
+                  <span className="text-sm font-semibold text-[#f3f5f9] leading-tight">
+                    {t('currently.buildingLabel')}
+                  </span>
+                  <span className="text-xs text-white/40 leading-tight">
+                    {t('currently.buildingDesc')}
+                  </span>
+                </div>
+              </div>
+
+              {/* Exploring */}
+              <div className="flex items-center gap-2.5">
+                <span className="w-8 h-8 rounded-full flex items-center justify-center bg-[#1a1a1a] border border-white/10 text-[#f3f5f9] shrink-0">
+                  <FlaskConical className="w-4 h-4 text-[#819fa7]" />
+                </span>
+                <div className="flex flex-col">
+                  <span className="text-sm font-semibold text-[#f3f5f9] leading-tight">
+                    {t('currently.exploringLabel')}
+                  </span>
+                  <span className="text-xs text-white/40 leading-tight">
+                    {t('currently.exploringDesc')}
+                  </span>
+                </div>
+              </div>
+
+              {/* Learning */}
+              <div className="flex items-center gap-2.5">
+                <span className="w-8 h-8 rounded-full flex items-center justify-center bg-[#1a1a1a] border border-white/10 text-[#f3f5f9] shrink-0">
+                  <Rocket className="w-4 h-4 text-[#819fa7]" />
+                </span>
+                <div className="flex flex-col">
+                  <span className="text-sm font-semibold text-[#f3f5f9] leading-tight">
+                    {t('currently.learningLabel')}
+                  </span>
+                  <span className="text-xs text-white/40 leading-tight">
+                    {t('currently.learningDesc')}
+                  </span>
                 </div>
               </div>
             </div>
-          </SectionReveal>
+          </div>
 
-          {/* Highlights - 2x2 Grid with stagger */}
-          <div className="grid grid-cols-2 gap-2 md:gap-4">
-            {highlights.map((key, index) => {
-              const Icon = iconMap[key];
-              return (
-                <SectionReveal key={key} delay={0.15 + index * 0.1} direction="right">
-                  <div className="group h-full p-3 md:p-5 rounded-xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/25 hover:-translate-y-1 transition-all duration-300 cursor-default">
-                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-[#819fa7]/10 flex items-center justify-center mb-2 md:mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                      <Icon className="w-4 h-4 md:w-5 md:h-5 text-[#819fa7]" />
+          {/* Sağ Taraf: Richard Miculob Birebir 3D Card Stack (Dile göre ÖZELLİK / TRAIT) */}
+          <div className="flex justify-end p-3 ml-auto">
+            <div
+              onClick={handleStackClick}
+              className="relative w-[220px] h-[150px] cursor-pointer select-none"
+              style={{ perspective: '800px' }}
+              title="Kartı değiştirmek için tıkla"
+            >
+              {traits.map((trait, index) => {
+                const pos = (index - currentIndex + traits.length) % traits.length;
+                
+                let styleObj: React.CSSProperties = {
+                  position: 'absolute',
+                  inset: 0,
+                  borderRadius: '16px',
+                  padding: '20px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  willChange: 'transform, opacity',
+                  transition: 'transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease, box-shadow 0.4s ease',
+                  userSelect: 'none',
+                };
+
+                if (pos === 0) {
+                  // Front Card (Tilted slightly left)
+                  styleObj = {
+                    ...styleObj,
+                    background: '#141414',
+                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                    boxShadow: '0 20px 40px -15px rgba(0, 0, 0, 0.7)',
+                    transform: `translate(${CARD_POSITIONS[0].tx}px, ${CARD_POSITIONS[0].ty}px) rotate(${CARD_POSITIONS[0].rot}deg) scale(${CARD_POSITIONS[0].sc})`,
+                    opacity: CARD_POSITIONS[0].op,
+                    zIndex: CARD_POSITIONS[0].z,
+                  };
+                } else if (pos === 1) {
+                  // Second Card (Tilted right)
+                  styleObj = {
+                    ...styleObj,
+                    background: '#131313',
+                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    boxShadow: '0 14px 30px -12px rgba(0, 0, 0, 0.5)',
+                    transform: `translate(${CARD_POSITIONS[1].tx}px, ${CARD_POSITIONS[1].ty}px) rotate(${CARD_POSITIONS[1].rot}deg) scale(${CARD_POSITIONS[1].sc})`,
+                    opacity: CARD_POSITIONS[1].op,
+                    zIndex: CARD_POSITIONS[1].z,
+                  };
+                } else if (pos === 2) {
+                  // Third Card (Tilted left)
+                  styleObj = {
+                    ...styleObj,
+                    background: '#111111',
+                    border: '1px solid rgba(255, 255, 255, 0.05)',
+                    boxShadow: '0 10px 25px -12px rgba(0, 0, 0, 0.4)',
+                    transform: `translate(${CARD_POSITIONS[2].tx}px, ${CARD_POSITIONS[2].ty}px) rotate(${CARD_POSITIONS[2].rot}deg) scale(${CARD_POSITIONS[2].sc})`,
+                    opacity: CARD_POSITIONS[2].op,
+                    zIndex: CARD_POSITIONS[2].z,
+                  };
+                } else if (pos === traits.length - 1) {
+                  // Exiting Card (Sliding out to the top-right)
+                  styleObj = {
+                    ...styleObj,
+                    background: '#141414',
+                    border: '1px solid rgba(255, 255, 255, 0.05)',
+                    transform: `translate(${CARD_POSITIONS[3].tx}px, ${CARD_POSITIONS[3].ty}px) rotate(${CARD_POSITIONS[3].rot}deg) scale(${CARD_POSITIONS[3].sc})`,
+                    opacity: 0,
+                    zIndex: 5,
+                    pointerEvents: 'none',
+                  };
+                } else {
+                  // Other hidden cards
+                  styleObj = {
+                    ...styleObj,
+                    background: '#111111',
+                    border: 'none',
+                    transform: 'translate(40px, 30px) scale(0.8)',
+                    opacity: 0,
+                    zIndex: 1,
+                    pointerEvents: 'none',
+                  };
+                }
+
+                return (
+                  <div
+                    key={trait}
+                    style={styleObj}
+                    className="hover:scale-[1.02] active:scale-[0.98]"
+                  >
+                    <div className="font-mono text-[10px] font-semibold text-white/40 tracking-[0.2em] uppercase">
+                      {t('traits.label')}
                     </div>
-                    <h4 className="text-sm font-display font-semibold text-[#f3f5f9] mb-2 group-hover:text-[#819fa7] transition-colors">
-                      {t(`highlights.items.${key}.title`)}
-                    </h4>
-                    <p className="text-xs text-[#f3f5f9]/50 leading-relaxed">
-                      {t(`highlights.items.${key}.description`)}
-                    </p>
+                    <div className="text-lg font-bold text-[#f3f5f9] tracking-tight">
+                      {trait}
+                    </div>
                   </div>
-                </SectionReveal>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Quote with reveal animation */}
-        <SectionReveal delay={0.3}>
-          <div className="relative p-5 md:p-8 rounded-2xl bg-gradient-to-r from-[#819fa7]/5 to-transparent border border-[#819fa7]/10 overflow-hidden">
-            <Quote className="absolute top-2 left-2 md:top-4 md:left-4 w-8 h-8 md:w-12 md:h-12 text-[#819fa7]/10" />
-            <blockquote className="text-center relative z-10 pl-6 md:pl-0">
-              <p className="text-sm md:text-xl text-[#f3f5f9]/90 font-display italic max-w-2xl mx-auto">
-                &quot;{t('quote')}&quot;
-              </p>
-            </blockquote>
-          </div>
-        </SectionReveal>
-
-        {/* Status with pulse */}
-        <SectionReveal delay={0.4}>
-          <div className="mt-8 flex justify-center">
-            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/25 transition-colors">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#819fa7] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#819fa7]"></span>
-              </span>
-              <span className="text-sm text-[#f3f5f9]/70">{t('status.available')}</span>
+                );
+              })}
             </div>
           </div>
+        </div>
         </SectionReveal>
       </div>
     </section>

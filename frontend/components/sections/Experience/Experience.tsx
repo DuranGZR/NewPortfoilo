@@ -1,653 +1,869 @@
 "use client";
 
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GraduationCap, FileCheck, X, CheckCircle, Calendar, Building, BookOpen, Users } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { useState, useRef } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
+import {
+  GraduationCap,
+  Award,
+  BookOpen,
+  Users,
+  CheckCircle2,
+  X,
+  Calendar,
+  Building2,
+  ChevronRight,
+  Sparkles,
+  Layers,
+  Database,
+  Cpu,
+  Globe,
+  Code2,
+  Network,
+  Eye,
+  Box,
+  Wrench,
+  Terminal,
+  Cloud,
+  ShieldCheck,
+  ArrowUpRight,
+} from 'lucide-react';
 import SectionReveal from '@/components/animations/SectionReveal';
 
 interface DetailItem {
   key: string;
-  details: string[];
   isCourse?: boolean;
+  category?: 'education' | 'certification' | 'community';
+  icon?: any;
+  tags?: string[];
+  detailsTr: string[];
+  detailsEn: string[];
 }
 
-// Üniversite Dersleri
+// 10 Üniversite Dersi
 const coursesData: DetailItem[] = [
   {
     key: "dataStructures",
     isCourse: true,
-    details: [
+    category: 'education',
+    icon: Layers,
+    detailsTr: [
       "Array, Linked List, Stack, Queue veri yapıları",
       "Tree ve Graph yapıları",
       "Sorting ve Searching algoritmaları",
       "Big O notasyonu ve karmaşıklık analizi",
       "Recursive ve iterative problem çözme"
+    ],
+    detailsEn: [
+      "Array, Linked List, Stack, Queue data structures",
+      "Tree and Graph structures",
+      "Sorting and Searching algorithms",
+      "Big O notation and complexity analysis",
+      "Recursive and iterative problem solving"
     ]
   },
   {
     key: "oop",
     isCourse: true,
-    details: [
+    category: 'education',
+    icon: Box,
+    detailsTr: [
       "Sınıf ve nesne kavramları",
       "Inheritance, Polymorphism, Encapsulation",
       "Abstract class ve Interface",
       "Design patterns temelleri",
       "UML diyagramları"
+    ],
+    detailsEn: [
+      "Class and object fundamentals",
+      "Inheritance, Polymorphism, Encapsulation",
+      "Abstract classes and Interfaces",
+      "Design patterns fundamentals",
+      "UML diagrams"
     ]
   },
   {
     key: "database",
     isCourse: true,
-    details: [
+    category: 'education',
+    icon: Database,
+    detailsTr: [
       "İlişkisel veritabanı tasarımı",
       "SQL sorguları (SELECT, JOIN, GROUP BY)",
       "Normalizasyon (1NF, 2NF, 3NF)",
       "ER diyagramları",
       "Transaction ve ACID prensipleri"
+    ],
+    detailsEn: [
+      "Relational database design",
+      "SQL queries (SELECT, JOIN, GROUP BY)",
+      "Normalization (1NF, 2NF, 3NF)",
+      "ER diagrams",
+      "Transaction and ACID principles"
     ]
   },
   {
     key: "algorithms",
     isCourse: true,
-    details: [
+    category: 'education',
+    icon: Cpu,
+    detailsTr: [
       "Divide and Conquer stratejisi",
       "Dynamic Programming",
       "Greedy algoritmaları",
       "Graph algoritmaları (BFS, DFS, Dijkstra)",
       "Algoritma karmaşıklık analizi"
+    ],
+    detailsEn: [
+      "Divide and Conquer strategy",
+      "Dynamic Programming",
+      "Greedy algorithms",
+      "Graph algorithms (BFS, DFS, Dijkstra)",
+      "Algorithm complexity analysis"
     ]
   },
   {
     key: "ai",
     isCourse: true,
-    details: [
+    category: 'education',
+    icon: Sparkles,
+    detailsTr: [
       "Arama algoritmaları (A*, BFS, DFS)",
       "Oyun teorisi ve minimax",
       "Makine öğrenmesi temelleri",
       "Karar ağaçları",
       "Yapay sinir ağları giriş"
+    ],
+    detailsEn: [
+      "Search algorithms (A*, BFS, DFS)",
+      "Game theory and minimax",
+      "Machine learning fundamentals",
+      "Decision trees",
+      "Introduction to neural networks"
     ]
   },
   {
     key: "imageProcessing",
     isCourse: true,
-    details: [
+    category: 'education',
+    icon: Eye,
+    detailsTr: [
       "Görüntü filtreleme teknikleri",
       "Edge detection algoritmaları",
       "Histogram işlemleri",
       "Morfolojik operasyonlar",
       "Renk uzayları ve dönüşümleri"
+    ],
+    detailsEn: [
+      "Image filtering techniques",
+      "Edge detection algorithms",
+      "Histogram processing",
+      "Morphological operations",
+      "Color spaces and transformations"
     ]
   },
   {
     key: "computerNetworks",
     isCourse: true,
-    details: [
+    category: 'education',
+    icon: Network,
+    detailsTr: [
       "OSI ve TCP/IP modelleri",
       "IP adresleme ve subnetting",
       "Routing protokolleri",
       "Socket programlama",
       "Network güvenliği temelleri"
+    ],
+    detailsEn: [
+      "OSI and TCP/IP models",
+      "IP addressing and subnetting",
+      "Routing protocols",
+      "Socket programming",
+      "Network security fundamentals"
     ]
   },
   {
     key: "webProgramming",
     isCourse: true,
-    details: [
+    category: 'education',
+    icon: Globe,
+    detailsTr: [
       "HTML, CSS, JavaScript temelleri",
       "Backend geliştirme (PHP/Node.js)",
       "REST API tasarımı",
       "Veritabanı entegrasyonu",
       "Session ve authentication"
+    ],
+    detailsEn: [
+      "HTML, CSS, JavaScript fundamentals",
+      "Backend development (PHP/Node.js)",
+      "REST API design",
+      "Database integration",
+      "Session and authentication"
     ]
   },
   {
     key: "programmingLanguages",
     isCourse: true,
-    details: [
+    category: 'education',
+    icon: Code2,
+    detailsTr: [
       "Programlama paradigmaları",
       "Syntax ve semantik analiz",
       "Compiler ve interpreter farkları",
       "Memory yönetimi",
       "Fonksiyonel programlama kavramları"
+    ],
+    detailsEn: [
+      "Programming paradigms",
+      "Syntax and semantic analysis",
+      "Compiler vs interpreter differences",
+      "Memory management",
+      "Functional programming concepts"
     ]
   },
   {
     key: "softwareEng",
     isCourse: true,
-    details: [
+    category: 'education',
+    icon: Wrench,
+    detailsTr: [
       "Yazılım geliştirme yaşam döngüsü",
       "Agile ve Scrum metodolojileri",
       "Gereksinim analizi",
       "Test stratejileri",
       "Versiyon kontrol sistemleri"
+    ],
+    detailsEn: [
+      "Software development lifecycle",
+      "Agile and Scrum methodologies",
+      "Requirements analysis",
+      "Testing strategies",
+      "Version control systems"
     ]
   }
 ];
 
-// Eğitim verisi
-const educationData = {
-  degree: {
-    key: "degree",
-    details: [
-      "Veri yapıları ve algoritmalar",
-      "Nesne yönelimli programlama",
-      "Veritabanı yönetim sistemleri",
-      "Yapay zeka ve görüntü işleme",
-      "Bilgisayar ağları",
-      "Yazılım mühendisliği prensipleri"
-    ]
-  },
-  courses: coursesData
+// Lisans Derecesi
+const degreeData: DetailItem = {
+  key: "degree",
+  category: 'education',
+  icon: GraduationCap,
+  detailsTr: [
+    "Veri yapıları ve algoritmalar",
+    "Nesne yönelimli programlama",
+    "Veritabanı yönetim sistemleri",
+    "Yapay zeka ve görüntü işleme",
+    "Bilgisayar ağları",
+    "Yazılım mühendisliği prensipleri"
+  ],
+  detailsEn: [
+    "Data structures and algorithms",
+    "Object-oriented programming",
+    "Database management systems",
+    "Artificial intelligence & computer vision",
+    "Computer networks",
+    "Software engineering principles"
+  ]
 };
 
-// Sertifikalar
+// 6 Sertifika & Eğitim
 const certificationsData: DetailItem[] = [
   {
     key: "mlCamp",
-    details: [
+    category: 'certification',
+    icon: Sparkles,
+    detailsTr: [
       "End-to-end makine öğrenmesi pipeline'ı",
       "Feature engineering teknikleri",
       "Model seçimi ve değerlendirme",
       "Gerçek verilerle proje geliştirme",
       "Takım çalışması ve sunum"
+    ],
+    detailsEn: [
+      "End-to-end machine learning pipeline",
+      "Feature engineering techniques",
+      "Model selection and evaluation",
+      "Real-world project development",
+      "Team collaboration and presentation"
     ]
   },
   {
     key: "featureEng",
-    details: [
+    category: 'certification',
+    icon: Cpu,
+    detailsTr: [
       "Encoding teknikleri (Label, One-Hot, Target)",
       "Feature scaling ve normalization",
       "Missing value handling stratejileri",
       "Outlier detection ve treatment",
       "Feature extraction yöntemleri"
+    ],
+    detailsEn: [
+      "Encoding techniques (Label, One-Hot, Target)",
+      "Feature scaling and normalization",
+      "Missing value handling strategies",
+      "Outlier detection and treatment",
+      "Feature extraction methods"
     ]
   },
   {
     key: "machineLearning",
-    details: [
+    category: 'certification',
+    icon: Terminal,
+    detailsTr: [
       "Supervised learning algoritmaları",
       "Unsupervised learning teknikleri",
       "Model validation ve cross-validation",
+      "Hyperparameter tuning",
+      "Ensemble methods"
+    ],
+    detailsEn: [
+      "Supervised learning algorithms",
+      "Unsupervised learning techniques",
+      "Model validation and cross-validation",
       "Hyperparameter tuning",
       "Ensemble methods"
     ]
   },
   {
     key: "pythonDS",
-    details: [
+    category: 'certification',
+    icon: Code2,
+    detailsTr: [
       "NumPy ve Pandas ile veri manipülasyonu",
       "Matplotlib ve Seaborn ile görselleştirme",
       "Veri temizleme ve ön işleme",
       "Exploratory Data Analysis",
       "Python programlama best practices"
+    ],
+    detailsEn: [
+      "Data manipulation with NumPy and Pandas",
+      "Visualization with Matplotlib and Seaborn",
+      "Data cleaning and preprocessing",
+      "Exploratory Data Analysis",
+      "Python programming best practices"
     ]
   },
   {
     key: "csharp",
-    details: [
+    category: 'certification',
+    icon: Box,
+    detailsTr: [
       "C# syntax ve veri türleri",
       "OOP prensipleri (inheritance, polymorphism)",
       "Windows Forms ile GUI geliştirme",
       "Exception handling",
       "LINQ ve collections"
+    ],
+    detailsEn: [
+      "C# syntax and data types",
+      "OOP principles (inheritance, polymorphism)",
+      "GUI development with Windows Forms",
+      "Exception handling",
+      "LINQ and collections"
     ]
   },
   {
     key: "cloudNight",
-    details: [
+    category: 'certification',
+    icon: Cloud,
+    detailsTr: [
       "Cloud computing temelleri",
       "Huawei Cloud servisleri",
       "Sanal sunucu yönetimi",
       "Cloud storage ve networking",
       "DevOps pratikleri"
+    ],
+    detailsEn: [
+      "Cloud computing fundamentals",
+      "Huawei Cloud services",
+      "Virtual server management",
+      "Cloud storage and networking",
+      "DevOps practices"
     ]
   }
 ];
 
-// Topluluk Aktiviteleri
+// Topluluk Aktiviteleri & Roller
 const communityData: DetailItem[] = [
   {
     key: "hsdDevOps",
-    details: [
+    category: 'community',
+    icon: ShieldCheck,
+    tags: ["CI/CD Pipelines", "Docker", "GitHub Actions", "Linux Server", "DevOps"],
+    detailsTr: [
       "CI/CD pipeline tasarımı ve implementasyonu",
       "Docker container yönetimi ve orchestration",
       "GitHub Actions ile otomasyon workflow'ları",
       "Linux sunucu yönetimi ve güvenliği",
       "DevOps kültürü ve best practice'leri uygulama",
       "Topluluk projelerinde teknik altyapı kurulumu"
+    ],
+    detailsEn: [
+      "CI/CD pipeline design and implementation",
+      "Docker container management and orchestration",
+      "Automation workflows with GitHub Actions",
+      "Linux server administration and security",
+      "DevOps culture and best practices",
+      "Technical infrastructure setup for community projects"
     ]
   },
   {
     key: "cyberSecurityOrg",
-    details: [
+    category: 'community',
+    icon: Users,
+    tags: ["Liderlik", "15+ Ekip Yönetimi", "Etkinlik Planlama", "Eğitim", "Siber Güvenlik"],
+    detailsTr: [
       "Topluluk etkinlikleri planlama ve yürütme",
       "Siber güvenlik eğitim programları organize etme",
       "15+ kişilik ekibi yönetme ve koordinasyon",
       "Sponsor ve paydaş ilişkileri yönetimi",
       "Siber güvenlik farkındalığı kampanyaları",
       "Liderlik ve iletişim becerilerini geliştirme"
+    ],
+    detailsEn: [
+      "Planning and executing community events",
+      "Organizing cybersecurity training programs",
+      "Managing and coordinating 15+ team members",
+      "Sponsor and stakeholder relations",
+      "Cybersecurity awareness campaigns",
+      "Leadership and organizational communication"
     ]
   }
 ];
 
+// Modernized Modal Component (Monochrome, Zero Green)
 function DetailModal({
   item,
   onClose,
   t,
-  isCourse = false
+  locale
 }: {
   item: DetailItem | null;
   onClose: () => void;
   t: (key: string) => string;
-  isCourse?: boolean;
+  locale: string;
 }) {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (item) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [item, onClose]);
+
   if (!item) return null;
 
-  const prefix = isCourse ? 'courses' : 'items';
+  const prefix = item.isCourse ? 'courses' : 'items';
+  const Icon = item.icon || BookOpen;
+  const details = locale === 'tr' ? item.detailsTr : item.detailsEn;
 
   return (
     <AnimatePresence>
-      <motion.div
-        className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
         {/* Backdrop */}
         <motion.div
-          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          className="absolute inset-0 bg-black/85 backdrop-blur-md"
           onClick={onClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         />
 
-        {/* Modal */}
+        {/* Modal Window */}
         <motion.div
-          className="relative w-full max-w-lg bg-[#1a1a1a] border border-[#819fa7]/20 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-2xl max-h-[85vh] overflow-y-auto"
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          className="relative w-full max-w-lg bg-[#141414] border border-white/15 rounded-[22px] p-6 sm:p-7 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)] max-h-[85vh] overflow-y-auto"
+          initial={{ opacity: 0, scale: 0.94, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          transition={{ type: "spring", damping: 25, stiffness: 300 }}
+          exit={{ opacity: 0, scale: 0.94, y: 15 }}
+          transition={{ type: "spring", damping: 28, stiffness: 350 }}
         >
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-3 right-3 md:top-4 md:right-4 p-1.5 md:p-2 rounded-lg hover:bg-[#819fa7]/10 transition-colors"
+            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-white/60 hover:text-white transition-colors"
+            aria-label="Kapat"
           >
-            <X className="w-4 h-4 md:w-5 md:h-5 text-[#819fa7]" />
+            <X className="w-4 h-4" />
           </button>
 
           {/* Header */}
-          <div className="mb-4 md:mb-6">
-            <div className="flex items-center gap-2 md:gap-3 mb-2">
-              {isCourse && <BookOpen className="w-4 h-4 md:w-5 md:h-5 text-[#819fa7]" />}
-              <h3 className="text-lg md:text-xl font-display font-bold text-[#f3f5f9]">
-                {t(`${prefix}.${item.key}.title`)}
-              </h3>
-            </div>
-            {!isCourse && (
-              <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 text-xs md:text-sm">
-                <span className="flex items-center gap-1.5 text-[#819fa7]">
-                  <Building className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                  {t(`${prefix}.${item.key}.organization`)}
-                </span>
-                <span className="flex items-center gap-1.5 text-[#f3f5f9]/50">
-                  <Calendar className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                  {t(`${prefix}.${item.key}.period`)}
-                </span>
+          <div className="mb-5 pr-8">
+            <div className="flex items-center gap-3 mb-2.5">
+              <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#819fa7] shrink-0">
+                <Icon className="w-5 h-5" />
               </div>
-            )}
+              <div>
+                <h3 className="text-lg sm:text-xl font-display font-bold text-[#f3f5f9] leading-snug">
+                  {t(`${prefix}.${item.key}.title`)}
+                </h3>
+                {!item.isCourse && (
+                  <div className="flex items-center gap-2 mt-1 flex-wrap">
+                    <span className="text-xs text-[#819fa7] font-medium flex items-center gap-1">
+                      <Building2 className="w-3.5 h-3.5" />
+                      {t(`${prefix}.${item.key}.organization`)}
+                    </span>
+                    <span className="text-white/20">•</span>
+                    <span className="text-[11px] font-mono text-white/50 flex items-center gap-1">
+                      <Calendar className="w-3 h-3" />
+                      {t(`${prefix}.${item.key}.period`)}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
 
           {/* Description */}
-          <p className="text-sm md:text-base text-[#f3f5f9]/70 mb-4 md:mb-6 leading-relaxed">
+          <p className="text-sm text-white/70 mb-6 leading-relaxed font-sans bg-white/[0.02] p-3.5 rounded-xl border border-white/5">
             {t(`${prefix}.${item.key}.description`)}
           </p>
 
-          {/* Learnings */}
-          <div>
-            <h4 className="text-xs md:text-sm font-semibold text-[#819fa7] uppercase tracking-wider mb-3 md:mb-4">
-              {t('modal.learned')}
-            </h4>
-            <ul className="space-y-1.5 md:space-y-2">
-              {item.details.map((detail, index) => (
-                <motion.li
-                  key={index}
-                  className="flex items-start gap-2 md:gap-3 text-xs md:text-sm text-[#f3f5f9]/70"
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                >
-                  <CheckCircle className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#819fa7] mt-0.5 flex-shrink-0" />
-                  <span>{detail}</span>
-                </motion.li>
-              ))}
-            </ul>
-          </div>
+          {/* Learnings list */}
+          {details && details.length > 0 && (
+            <div>
+              <h4 className="text-xs font-mono font-semibold text-[#819fa7] uppercase tracking-wider mb-3 flex items-center gap-2">
+                <Sparkles className="w-3.5 h-3.5 text-white/60" />
+                {t('modal.learned')}
+              </h4>
+              <ul className="space-y-2.5">
+                {details.map((detail, index) => (
+                  <li
+                    key={index}
+                    className="flex items-start gap-3 text-xs sm:text-[13px] text-white/80 leading-relaxed"
+                  >
+                    <CheckCircle2 className="w-4 h-4 text-[#819fa7] mt-0.5 shrink-0" />
+                    <span>{detail}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </motion.div>
-      </motion.div>
+      </div>
     </AnimatePresence>
   );
 }
 
-// Tab types for mobile
-type MobileTab = 'education' | 'certifications' | 'community';
-
 export default function Experience() {
   const t = useTranslations('experience');
+  const locale = useLocale();
   const [selectedItem, setSelectedItem] = useState<DetailItem | null>(null);
-  const [isCourseModal, setIsCourseModal] = useState(false);
-  const [activeTab, setActiveTab] = useState<MobileTab>('education');
-
-  const handleItemClick = (item: DetailItem, isCourse: boolean = false) => {
-    setSelectedItem(item);
-    setIsCourseModal(isCourse);
-  };
+  const [activeTab, setActiveTab] = useState<'education' | 'community' | 'certifications'>('education');
 
   const tabs = [
-    { key: 'education' as MobileTab, icon: GraduationCap, label: t('categories.education') },
-    { key: 'certifications' as MobileTab, icon: FileCheck, label: t('categories.certifications') },
-    { key: 'community' as MobileTab, icon: Users, label: t('categories.community') },
+    {
+      id: 'education' as const,
+      label: t('categories.education'),
+      shortLabel: locale === 'tr' ? 'Eğitim' : 'Education',
+      icon: GraduationCap,
+      count: '10 ' + (locale === 'tr' ? 'Ders' : 'Courses'),
+      shortCount: '10'
+    },
+    {
+      id: 'community' as const,
+      label: t('categories.community'),
+      shortLabel: locale === 'tr' ? 'Topluluk' : 'Community',
+      icon: Users,
+      count: '2 ' + (locale === 'tr' ? 'Rol' : 'Roles'),
+      shortCount: '2'
+    },
+    {
+      id: 'certifications' as const,
+      label: t('categories.certifications'),
+      shortLabel: locale === 'tr' ? 'Sertifikalar' : 'Certs',
+      icon: Award,
+      count: '6 ' + (locale === 'tr' ? 'Sertifika' : 'Certs'),
+      shortCount: '6'
+    },
   ];
 
   return (
-    <section id="experience" className="relative py-12 md:py-24 px-4 md:px-6 bg-[#0d0d0d] content-visibility-auto">
-      {/* Simple gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] to-[#0d0d0d]" />
+    <section id="experience" className="relative md:min-h-screen flex flex-col justify-center py-20 sm:py-24 md:py-28 lg:py-32 px-4 md:px-6 bg-[#0d0d0d] content-visibility-auto">
+      {/* Koyu degrade arka plan (Monokrom) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0d0d0d] to-[#0a0a0a] pointer-events-none" />
 
-      <div className="relative z-10 max-w-6xl mx-auto">
+      <div className="relative z-10 max-w-[1100px] w-full mx-auto md:my-auto">
         {/* Section Header */}
-        <SectionReveal className="text-center mb-6 md:mb-16">
-          <span className="inline-block text-[10px] md:text-xs font-medium tracking-[0.15em] uppercase text-[#819fa7] px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-[#819fa7]/30 bg-[#819fa7]/5 mb-3 md:mb-6">
-            {t('badge')}
-          </span>
-          <h2 className="text-xl md:text-4xl lg:text-5xl font-display font-bold text-[#f3f5f9] mb-2 md:mb-4">
-            {t('title')}
-          </h2>
-          <p className="text-xs md:text-base text-[#f3f5f9]/50 max-w-xl mx-auto hidden md:block">
-            {t('subtitle')}
-          </p>
+        <SectionReveal delay={0}>
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10">
+            <div className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.2em] text-[#819fa7] uppercase mb-1.5 sm:mb-2">
+              {t('badge')}
+            </div>
+            <h2 className="text-2xl sm:text-4xl md:text-[52px] font-display font-extrabold text-[#f3f5f9] tracking-tight leading-[1.1] mb-2 sm:mb-3">
+              {t('title')}
+            </h2>
+            <p className="text-xs sm:text-[15px] leading-relaxed sm:leading-[1.8] text-white/60">
+              {t('subtitle')}
+            </p>
+          </div>
         </SectionReveal>
 
-        {/* ===== MOBILE LAYOUT - Tab Style ===== */}
-        <div className="md:hidden">
-          {/* Tab Buttons */}
-          <div className="flex gap-1 p-1 rounded-xl bg-[#1a1a1a]/50 mb-4">
-            {tabs.map((tab) => {
-              const Icon = tab.icon;
-              return (
-                <button
-                  key={tab.key}
-                  onClick={() => setActiveTab(tab.key)}
-                  className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-lg text-xs font-medium transition-all ${
-                    activeTab === tab.key
-                      ? 'bg-[#819fa7]/20 text-[#f3f5f9]'
-                      : 'text-[#f3f5f9]/50 hover:text-[#f3f5f9]/70'
-                  }`}
-                >
-                  <Icon className="w-3.5 h-3.5" />
-                  <span className="truncate">{tab.label}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Tab Content */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="min-h-[280px]"
-            >
-              {/* Education Tab */}
-              {activeTab === 'education' && (
-                <div className="space-y-3">
-                  {/* Degree Card */}
-                  <motion.div
-                    className="p-4 rounded-xl bg-[#1a1a1a]/60 border border-[#819fa7]/15 cursor-pointer active:scale-[0.99] transition-transform"
-                    onClick={() => handleItemClick(educationData.degree)}
-                    whileTap={{ scale: 0.99 }}
+        {/* ========================================================
+            SEGMENTED PILL TAB SWITCHER (Ferah, Sığan, Karışıklığı Önleyen)
+           ======================================================== */}
+        <SectionReveal delay={0.15}>
+          <div className="flex justify-center mb-6 sm:mb-12">
+            <div className="w-full max-w-sm sm:max-w-none sm:w-auto p-1 sm:p-1.5 rounded-2xl bg-[#141414] border border-white/10 grid grid-cols-3 sm:inline-flex gap-1 sm:gap-2">
+              {tabs.map((tab) => {
+                const Icon = tab.icon;
+                const isActive = activeTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`relative px-2 sm:px-6 py-2 sm:py-3 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 select-none ${
+                      isActive
+                        ? 'text-white'
+                        : 'text-white/50 hover:text-white/80 hover:bg-white/[0.02]'
+                    }`}
                   >
-                    <div className="flex items-start justify-between mb-2">
-                      <h4 className="text-base font-semibold text-[#f3f5f9]">
-                        {t('items.degree.title')}
-                      </h4>
-                      <span className="text-xs text-[#819fa7] font-mono">
-                        {t('items.degree.period')}
-                      </span>
-                    </div>
-                    <p className="text-sm text-[#819fa7] mb-1">{t('items.degree.organization')}</p>
-                    <p className="text-sm text-[#f3f5f9]/60">{t('items.degree.description')}</p>
-                  </motion.div>
-
-                  {/* Courses Grid */}
-                  <div>
-                    <h4 className="text-xs font-semibold text-[#819fa7] uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                      <BookOpen className="w-3.5 h-3.5" />
-                      {t('coursesTitle')}
-                    </h4>
-                    <div className="grid grid-cols-2 gap-2">
-                      {educationData.courses.slice(0, 6).map((course) => (
-                        <motion.button
-                          key={course.key}
-                          className="p-2 rounded-lg bg-[#0d0d0d]/50 border border-[#819fa7]/10 text-xs text-[#f3f5f9]/70 text-left"
-                          onClick={() => handleItemClick(course, true)}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          {t(`courses.${course.key}.title`)}
-                        </motion.button>
-                      ))}
-                    </div>
-                    {educationData.courses.length > 6 && (
-                      <p className="text-[10px] text-[#819fa7]/50 text-center mt-2">
-                        +{educationData.courses.length - 6} ders daha
-                      </p>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {/* Certifications Tab */}
-              {activeTab === 'certifications' && (
-                <div className="space-y-2">
-                  {certificationsData.map((item) => (
-                    <motion.div
-                      key={item.key}
-                      className="p-3 rounded-xl bg-[#1a1a1a]/60 border border-[#819fa7]/15 cursor-pointer active:scale-[0.99] transition-transform"
-                      onClick={() => handleItemClick(item)}
-                      whileTap={{ scale: 0.99 }}
-                    >
-                      <div className="flex items-start justify-between mb-1">
-                        <h4 className="text-sm font-semibold text-[#f3f5f9]">
-                          {t(`items.${item.key}.title`)}
-                        </h4>
-                        <span className="text-[10px] text-[#819fa7] font-mono">
-                          {t(`items.${item.key}.period`)}
-                        </span>
-                      </div>
-                      <p className="text-xs text-[#819fa7]">{t(`items.${item.key}.organization`)}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              )}
-
-              {/* Community Tab */}
-              {activeTab === 'community' && (
-                <div className="space-y-3">
-                  {communityData.map((item) => (
-                    <motion.div
-                      key={item.key}
-                      className="p-4 rounded-xl bg-[#1a1a1a]/60 border border-[#819fa7]/15 cursor-pointer active:scale-[0.99] transition-transform"
-                      onClick={() => handleItemClick(item)}
-                      whileTap={{ scale: 0.99 }}
-                    >
-                      <div className="flex items-start justify-between mb-2">
-                        <h4 className="text-base font-semibold text-[#f3f5f9]">
-                          {t(`items.${item.key}.title`)}
-                        </h4>
-                        <span className="text-xs text-[#819fa7] font-mono">
-                          {t(`items.${item.key}.period`)}
-                        </span>
-                      </div>
-                      <p className="text-sm text-[#819fa7] mb-1">{t(`items.${item.key}.organization`)}</p>
-                      <p className="text-sm text-[#f3f5f9]/60">{t(`items.${item.key}.description`)}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* ===== DESKTOP LAYOUT - Original Grid ===== */}
-        <div className="hidden md:block">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
-
-            {/* Education Section */}
-            <SectionReveal delay={0.1} direction="left">
-              <div className="h-full p-4 md:p-6 rounded-xl md:rounded-2xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/25 transition-colors">
-                {/* Category Header */}
-                <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-5">
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-[#819fa7]/10 flex items-center justify-center">
-                    <GraduationCap className="w-4 h-4 md:w-5 md:h-5 text-[#819fa7]" />
-                  </div>
-                  <h3 className="text-sm md:text-base font-display font-bold text-[#f3f5f9]">
-                    {t('categories.education')}
-                  </h3>
-                </div>
-
-                {/* Degree Info */}
-                <motion.div
-                  className="pl-3 md:pl-4 border-l-2 border-[#819fa7]/20 cursor-pointer hover:border-[#819fa7]/50 transition-colors mb-4 md:mb-6"
-                  whileHover={{ x: 4 }}
-                  onClick={() => handleItemClick(educationData.degree)}
-                >
-                  <div className="flex items-start justify-between mb-1">
-                    <h4 className="text-xs md:text-sm font-semibold text-[#f3f5f9]">
-                      {t('items.degree.title')}
-                    </h4>
-                    <span className="text-[10px] md:text-xs text-[#f3f5f9]/40 font-mono">
-                      {t('items.degree.period')}
-                    </span>
-                  </div>
-                  <p className="text-[10px] md:text-xs text-[#819fa7] mb-1">{t('items.degree.organization')}</p>
-                  <p className="text-[10px] md:text-xs text-[#f3f5f9]/50">{t('items.degree.description')}</p>
-                </motion.div>
-
-                {/* Courses */}
-                <div className="mt-3 md:mt-4">
-                  <h4 className="text-[10px] md:text-xs font-semibold text-[#819fa7] uppercase tracking-wider mb-2 md:mb-3 flex items-center gap-1.5 md:gap-2">
-                    <BookOpen className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                    {t('coursesTitle')}
-                  </h4>
-                  <div className="grid grid-cols-2 gap-1.5 md:gap-2">
-                    {educationData.courses.map((course) => (
+                    {isActive && (
                       <motion.div
+                        layoutId="experienceTab"
+                        className="absolute inset-0 rounded-xl bg-white/10 border border-white/20 shadow-md"
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      />
+                    )}
+                    <Icon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 relative z-10 ${isActive ? 'text-white' : 'text-[#819fa7]'}`} />
+                    <span className="relative z-10 font-sans font-semibold hidden sm:inline">{tab.label}</span>
+                    <span className="relative z-10 font-sans font-semibold sm:hidden truncate">{tab.shortLabel}</span>
+                    <span className={`relative z-10 text-[10px] font-mono px-1.5 sm:px-2 py-0.5 rounded-full ${
+                      isActive ? 'bg-white/20 text-white' : 'bg-white/5 text-white/40'
+                    }`}>
+                      <span className="hidden sm:inline">{tab.count}</span>
+                      <span className="sm:hidden">{tab.shortCount}</span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </SectionReveal>
+
+        {/* ========================================================
+            TAB CONTENT: Her alan kendi geniş, ferah sahnesinde
+           ======================================================== */}
+        <AnimatePresence mode="wait">
+          
+          {/* 1. EĞİTİM & MÜFREDAT */}
+          {activeTab === 'education' && (
+            <motion.div
+              key="education"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25 }}
+              className="flex flex-col lg:flex-row items-start justify-between gap-6 sm:gap-8 lg:gap-12"
+            >
+              {/* Sol: Lisans Derecesi & Bilgiler */}
+              <div className="flex-1 max-w-xl w-full">
+                <div className="font-mono text-[11px] font-semibold text-[#819fa7] tracking-[0.2em] uppercase mb-1.5 sm:mb-2">
+                  {t('categories.education')}
+                </div>
+                <h3 className="text-xl sm:text-3xl font-display font-bold text-[#f3f5f9] tracking-tight mb-2">
+                  {t('items.degree.title')}
+                </h3>
+
+                {/* Kurum, Dönem ve GPA Rozeti (Tam Monokrom, Sıfır Yeşil) */}
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 my-2.5 sm:my-3 text-xs sm:text-sm">
+                  <span className="font-semibold text-white/90 flex items-center gap-1.5">
+                    <GraduationCap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#819fa7]" />
+                    {t('items.degree.organization')}
+                  </span>
+                  <span className="text-white/20">•</span>
+                  <span className="font-mono text-xs text-white/50">
+                    {t('items.degree.period')}
+                  </span>
+                  <span className="text-white/20">•</span>
+                  <span className="font-mono text-[11px] sm:text-xs font-semibold text-white/90 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-white/5 border border-white/15">
+                    GPA: 2.84 / 4.0
+                  </span>
+                </div>
+
+                <p className="text-sm sm:text-[15px] leading-relaxed sm:leading-[1.8] text-white/60 mt-2 sm:mt-3">
+                  {t('items.degree.description')}
+                </p>
+              </div>
+
+              {/* Sağ: 10 Üniversite Dersi (Çipler - Mobil 2 Sütun Grid) */}
+              <div className="w-full lg:w-[480px] shrink-0 pt-2 sm:pt-0">
+                <div className="font-mono text-[11px] font-semibold text-white/40 tracking-[0.15em] uppercase mb-3 flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <BookOpen className="w-3.5 h-3.5 text-[#819fa7]" />
+                    {t('coursesTitle')}
+                  </span>
+                  <span className="text-[10px] text-white/30">10 {locale === 'tr' ? 'Ders' : 'Courses'}</span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+                  {coursesData.map((course) => {
+                    const CourseIcon = course.icon || BookOpen;
+                    return (
+                      <button
                         key={course.key}
-                        className="p-1.5 md:p-2 rounded-lg bg-[#0d0d0d]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/30 cursor-pointer transition-all text-[10px] md:text-xs text-[#f3f5f9]/70 hover:text-[#f3f5f9]"
-                        whileHover={{ scale: 1.02 }}
-                        onClick={() => handleItemClick(course, true)}
+                        onClick={() => setSelectedItem(course)}
+                        className="px-2.5 py-2 sm:px-3.5 sm:py-2.5 rounded-xl bg-[#141414] hover:bg-white/10 border border-white/10 hover:border-white/25 transition-all text-left flex items-center justify-between gap-1.5 sm:gap-2.5 group/chip cursor-pointer w-full sm:w-auto"
                       >
-                        {t(`courses.${course.key}.title`)}
-                      </motion.div>
-                    ))}
-                  </div>
+                        <div className="flex items-center gap-2 min-w-0">
+                          <CourseIcon className="w-3.5 h-3.5 text-[#819fa7] group-hover/chip:text-white transition-colors shrink-0" />
+                          <span className="text-[11.5px] sm:text-xs font-medium text-white/80 group-hover/chip:text-white truncate">
+                            {t(`courses.${course.key}.title`)}
+                          </span>
+                        </div>
+                        <ChevronRight className="w-3 h-3 text-white/20 group-hover/chip:text-white/70 group-hover/chip:translate-x-0.5 transition-all shrink-0 ml-1" />
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
-            </SectionReveal>
+            </motion.div>
+          )}
 
-            {/* Certifications Section */}
-            <SectionReveal delay={0.2} direction="right">
-              <div className="h-full p-4 md:p-6 rounded-xl md:rounded-2xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/25 transition-colors">
-                {/* Category Header */}
-                <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-5">
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-[#819fa7]/10 flex items-center justify-center">
-                    <FileCheck className="w-4 h-4 md:w-5 md:h-5 text-[#819fa7]" />
-                  </div>
-                  <h3 className="text-sm md:text-base font-display font-bold text-[#f3f5f9]">
-                    {t('categories.certifications')}
-                  </h3>
-                </div>
+          {/* 2. TOPLULUK & LİDERLİK ROLLERİ (Editoryal, Kutusuz Açık Düzen) */}
+          {activeTab === 'community' && (
+            <motion.div
+              key="community"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25 }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-10 lg:gap-14"
+            >
+              {communityData.map((role, idx) => {
+                const RoleIcon = role.icon || Users;
+                const isLive = idx === 0; // HSD DevOps aktif
+                return (
+                  <div
+                    key={role.key}
+                    className="flex flex-col justify-between p-4 sm:p-0 rounded-2xl sm:rounded-none bg-white/[0.02] sm:bg-transparent border border-white/5 sm:border-0"
+                  >
+                    <div>
+                      {/* Üst Kategori Etiketi */}
+                      <div className="font-mono text-[11px] font-semibold text-[#819fa7] tracking-[0.2em] uppercase mb-1.5 sm:mb-2">
+                        {t(`items.${role.key}.organization`)}
+                      </div>
 
-                {/* Certification Items */}
-                <div className="space-y-3 md:space-y-4">
-                  {certificationsData.map((item) => (
-                    <motion.div
-                      key={item.key}
-                      className="pl-3 md:pl-4 border-l-2 border-[#819fa7]/20 cursor-pointer hover:border-[#819fa7]/50 transition-colors"
-                      whileHover={{ x: 4 }}
-                      onClick={() => handleItemClick(item)}
-                    >
-                      <div className="flex items-start justify-between mb-1">
-                        <h4 className="text-xs md:text-sm font-semibold text-[#f3f5f9]">
-                          {t(`items.${item.key}.title`)}
-                        </h4>
-                        <span className="text-[10px] md:text-xs text-[#f3f5f9]/40 font-mono">
-                          {t(`items.${item.key}.period`)}
+                      {/* Başlık */}
+                      <h3 className="text-xl sm:text-3xl font-display font-bold text-[#f3f5f9] tracking-tight mb-2">
+                        {t(`items.${role.key}.title`)}
+                      </h3>
+
+                      {/* Kurum, Dönem ve Canlı Durum */}
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 my-2.5 sm:my-3 text-xs sm:text-sm">
+                        <span className="font-semibold text-white/90 flex items-center gap-1.5">
+                          <RoleIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#819fa7]" />
+                          {t(`items.${role.key}.organization`)}
+                        </span>
+                        <span className="text-white/20">•</span>
+                        <span className="font-mono text-xs text-white/50 flex items-center">
+                          {isLive && (
+                            <span className="relative flex h-2 w-2 mr-2">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-40" />
+                              <span className="relative inline-flex rounded-full h-2 w-2 bg-white/80" />
+                            </span>
+                          )}
+                          {t(`items.${role.key}.period`)}
                         </span>
                       </div>
-                      <p className="text-[10px] md:text-xs text-[#819fa7] mb-1">{t(`items.${item.key}.organization`)}</p>
-                      <p className="text-[10px] md:text-xs text-[#f3f5f9]/50">{t(`items.${item.key}.description`)}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </SectionReveal>
-          </div>
 
-          {/* Community Activities Section - Full Width */}
-          <SectionReveal delay={0.3} className="mt-4 md:mt-6">
-            <div className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 hover:border-[#819fa7]/25 transition-colors">
-              {/* Category Header */}
-              <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-5">
-                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-[#819fa7]/10 flex items-center justify-center">
-                  <Users className="w-4 h-4 md:w-5 md:h-5 text-[#819fa7]" />
-                </div>
-                <h3 className="text-sm md:text-base font-display font-bold text-[#f3f5f9]">
-                  {t('categories.community')}
-                </h3>
-              </div>
+                      {/* Açıklama Metni (Ferah, geniş) */}
+                      <p className="text-sm sm:text-[15px] leading-relaxed sm:leading-[1.8] text-white/60 my-2 sm:my-3">
+                        {t(`items.${role.key}.description`)}
+                      </p>
 
-              {/* Community Items */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-                {communityData.map((item) => (
-                  <motion.div
+                      {/* Etiketler (Minimalist açık haplar) */}
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2 my-3 sm:my-4">
+                        {(role.tags || []).map((tag, tIdx) => (
+                          <span
+                            key={tIdx}
+                            className="font-mono text-[11px] sm:text-xs px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-white/[0.04] border border-white/10 text-white/70"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                  </div>
+                );
+              })}
+            </motion.div>
+          )}
+
+          {/* 3. SERTİFİKALAR & BOOTCAMPLER (Editoryal Liste Düzeni - Kutusuz, Çizgili) */}
+          {activeTab === 'certifications' && (
+            <motion.div
+              key="certifications"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25 }}
+              className="divide-y divide-white/10 border-y border-white/10"
+            >
+              {certificationsData.map((item, idx) => {
+                const CertIcon = item.icon || Award;
+                return (
+                  <div
                     key={item.key}
-                    className="pl-3 md:pl-4 border-l-2 border-[#819fa7]/20 cursor-pointer hover:border-[#819fa7]/50 transition-colors"
-                    whileHover={{ x: 4 }}
-                    onClick={() => handleItemClick(item)}
+                    onClick={() => setSelectedItem(item)}
+                    className="py-3.5 sm:py-6 flex items-center justify-between gap-3 sm:gap-4 group cursor-pointer transition-all hover:bg-white/[0.02] px-1 sm:px-4 rounded-xl"
                   >
-                    <div className="flex items-start justify-between mb-1">
-                      <h4 className="text-xs md:text-sm font-semibold text-[#f3f5f9]">
-                        {t(`items.${item.key}.title`)}
-                      </h4>
-                      <span className="text-[10px] md:text-xs text-[#f3f5f9]/40 font-mono">
+                    <div className="flex items-center gap-3 sm:gap-6 min-w-0">
+                      <span className="font-mono text-xs text-[#819fa7] font-semibold select-none w-5 sm:w-6 shrink-0">
+                        0{idx + 1}
+                      </span>
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-[#819fa7] group-hover:text-white group-hover:border-white/20 transition-all">
+                        <CertIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+                      </div>
+                      <div className="min-w-0">
+                        <h4 className="text-sm sm:text-lg font-semibold text-[#f3f5f9] group-hover:text-white transition-colors truncate">
+                          {t(`items.${item.key}.title`)}
+                        </h4>
+                        <div className="flex items-center gap-2 mt-0.5">
+                          <p className="text-xs sm:text-sm text-[#819fa7] font-medium truncate">
+                            {t(`items.${item.key}.organization`)}
+                          </p>
+                          <span className="text-white/20 sm:hidden">•</span>
+                          <span className="font-mono text-[11px] text-white/40 sm:hidden">
+                            {t(`items.${item.key}.period`)}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 sm:gap-4 shrink-0">
+                      <span className="font-mono text-xs text-white/40 hidden sm:inline">
                         {t(`items.${item.key}.period`)}
                       </span>
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/30 group-hover:text-white group-hover:bg-white/10 group-hover:border-white/20 transition-all">
+                        <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </div>
                     </div>
-                    <p className="text-[10px] md:text-xs text-[#819fa7] mb-1">{t(`items.${item.key}.organization`)}</p>
-                    <p className="text-[10px] md:text-xs text-[#f3f5f9]/50 line-clamp-2">{t(`items.${item.key}.description`)}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </SectionReveal>
-        </div>
+                  </div>
+                );
+              })}
+            </motion.div>
+          )}
+
+        </AnimatePresence>
+
       </div>
 
-      {/* Modal */}
+      {/* Modal Dialog (Tıklanan ders / sertifikanın detayları) */}
       {selectedItem && (
         <DetailModal
           item={selectedItem}
           onClose={() => setSelectedItem(null)}
           t={t}
-          isCourse={isCourseModal}
+          locale={locale}
         />
       )}
     </section>

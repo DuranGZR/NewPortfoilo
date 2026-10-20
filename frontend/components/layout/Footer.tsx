@@ -15,7 +15,7 @@ const quickLinks = [
   { nameKey: 'projects', href: '/#projects' },
   { nameKey: 'skills', href: '/#skills' },
   { nameKey: 'experience', href: '/#experience' },
-  { nameKey: 'roadmap', href: '/#roadmap' }
+  { nameKey: 'thinking', href: '/#thinking' }
 ];
 
 
@@ -36,14 +36,14 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="relative bg-[#0d0d0d] border-t border-[#819fa7]/10">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-[#0d0d0d]" />
+      <footer className="relative bg-[#0d0d0d] border-t border-white/10">
+        {/* Degrade arka plan (Diğer tüm bölümler ile birebir aynı) */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0d0d0d] to-[#0a0a0a] pointer-events-none" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+        <div className="relative z-10 max-w-[1100px] mx-auto px-4 md:px-6">
           
           {/* ===== MOBILE LAYOUT ===== */}
-          <div className="md:hidden py-6">
+          <div className="md:hidden py-8">
             {/* Brand + Social Row */}
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-display font-bold text-[#f3f5f9]">
@@ -56,7 +56,7 @@ export default function Footer() {
                     href={social.href}
                     target={social.href.startsWith('http') ? '_blank' : undefined}
                     rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="w-8 h-8 rounded-lg bg-[#1a1a1a]/50 border border-[#819fa7]/10 flex items-center justify-center text-[#819fa7]/70"
+                    className="w-8 h-8 rounded-lg bg-[#141414] border border-white/10 hover:border-white/25 flex items-center justify-center text-[#819fa7] hover:text-white transition-all"
                     aria-label={social.label}
                   >
                     <social.icon className="w-3.5 h-3.5" />
@@ -66,18 +66,18 @@ export default function Footer() {
             </div>
 
             {/* Tagline */}
-            <p className="text-xs text-[#f3f5f9]/50 mb-4 leading-relaxed">
+            <p className="text-xs text-white/50 mb-4 leading-relaxed">
               {t('tagline')}
             </p>
 
             {/* Quick Links - Horizontal */}
-            <div className="flex flex-wrap gap-x-4 gap-y-2 mb-4 pb-4 border-b border-[#819fa7]/10">
+            <div className="flex flex-wrap gap-x-4 gap-y-2 mb-4 pb-4 border-b border-white/10">
               {quickLinks.map((link) => (
                 <a
                   key={link.nameKey}
                   href={link.href}
                   onClick={(e) => handleClick(e, link.href)}
-                  className="text-xs text-[#f3f5f9]/50 hover:text-[#819fa7] transition-colors"
+                  className="text-xs text-white/60 hover:text-white transition-colors"
                 >
                   {tNav(link.nameKey)}
                 </a>
@@ -87,7 +87,7 @@ export default function Footer() {
             {/* Contact Button */}
             <a
               href="mailto:contact@durangezer.com"
-              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-medium text-[#f3f5f9] bg-[#1a1a1a]/50 border border-[#819fa7]/20 rounded-lg mb-4"
+              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-medium text-[#f3f5f9] bg-[#141414] border border-white/10 hover:border-white/25 rounded-xl mb-4 transition-all"
             >
               <Mail className="w-3.5 h-3.5 text-[#819fa7]" />
               {t('sendMessage')}
@@ -95,13 +95,13 @@ export default function Footer() {
 
             {/* Copyright */}
             <div className="text-center">
-              <p className="text-[10px] text-[#f3f5f9]/30">
+              <p className="text-[10px] text-white/30">
                 © {currentYear} Duran Gezer • Next.js <Heart className="w-2.5 h-2.5 text-[#819fa7]/40 inline mx-0.5" />
               </p>
             </div>
           </div>
 
-          {/* ===== DESKTOP LAYOUT - Original ===== */}
+          {/* ===== DESKTOP LAYOUT ===== */}
           <div className="hidden md:block">
             {/* Main Footer Content */}
             <div className="py-16 grid grid-cols-12 gap-12">
@@ -117,7 +117,7 @@ export default function Footer() {
                   <h3 className="text-2xl font-display font-bold text-[#f3f5f9] mb-4">
                     Duran Gezer
                   </h3>
-                  <p className="text-sm text-[#f3f5f9]/60 leading-relaxed mb-6 max-w-sm">
+                  <p className="text-sm text-white/60 leading-relaxed mb-6 max-w-sm">
                     {t('tagline')}
                   </p>
 
@@ -129,8 +129,8 @@ export default function Footer() {
                         href={social.href}
                         target={social.href.startsWith('http') ? '_blank' : undefined}
                         rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                        className="group w-10 h-10 rounded-xl bg-[#1a1a1a]/50 border border-[#819fa7]/10 flex items-center justify-center text-[#819fa7]/70 hover:text-[#819fa7] hover:border-[#819fa7]/40 transition-all"
-                        whileHover={{ scale: 1.1, y: -2 }}
+                        className="group w-10 h-10 rounded-xl bg-[#141414] border border-white/10 flex items-center justify-center text-[#819fa7] hover:text-white hover:border-white/30 transition-all"
+                        whileHover={{ scale: 1.05, y: -2 }}
                         whileTap={{ scale: 0.95 }}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -152,7 +152,7 @@ export default function Footer() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.1 }}
                 >
-                  <h4 className="text-sm font-display font-semibold text-[#819fa7] uppercase tracking-wider mb-5">
+                  <h4 className="text-xs font-mono font-semibold text-[#819fa7] uppercase tracking-[0.2em] mb-5">
                     {t('quickLinks')}
                   </h4>
                   <ul className="space-y-3">
@@ -161,10 +161,10 @@ export default function Footer() {
                         <a
                           href={link.href}
                           onClick={(e) => handleClick(e, link.href)}
-                          className="group flex items-center gap-2 text-sm text-[#f3f5f9]/60 hover:text-[#819fa7] transition-colors"
+                          className="group flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
                         >
                           <span>{tNav(link.nameKey)}</span>
-                          <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                          <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[#819fa7]" />
                         </a>
                       </li>
                     ))}
@@ -180,34 +180,34 @@ export default function Footer() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                  <h4 className="text-sm font-display font-semibold text-[#819fa7] uppercase tracking-wider mb-5">
+                  <h4 className="text-xs font-mono font-semibold text-[#819fa7] uppercase tracking-[0.2em] mb-5">
                     {t('getInTouch')}
                   </h4>
-                  <p className="text-sm text-[#f3f5f9]/60 mb-5 leading-relaxed">
+                  <p className="text-sm text-white/60 mb-5 leading-relaxed">
                     {t('getInTouchDesc')}
                   </p>
                   <motion.a
                     href="mailto:contact@durangezer.com"
-                    className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium text-[#f3f5f9] bg-[#1a1a1a]/50 border border-[#819fa7]/10 rounded-xl hover:border-[#819fa7]/40 transition-all group"
+                    className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium text-[#f3f5f9] bg-[#141414] border border-white/10 hover:border-white/30 hover:bg-white/5 rounded-xl transition-all group"
                     whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <Mail className="w-4 h-4 text-[#819fa7]" />
+                    <Mail className="w-4 h-4 text-[#819fa7] group-hover:text-white transition-colors" />
                     {t('sendMessage')}
-                    <ArrowUpRight className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-[#819fa7]" />
                   </motion.a>
                 </motion.div>
               </div>
             </div>
 
             {/* Bottom Bar */}
-            <div className="py-6 border-t border-[#819fa7]/10 flex flex-row items-center justify-between gap-4">
-              <p className="text-xs text-[#f3f5f9]/40 flex items-center gap-1">
+            <div className="py-6 border-t border-white/10 flex flex-row items-center justify-between gap-4">
+              <p className="text-xs text-white/40 flex items-center gap-1">
                 © {currentYear} Duran Gezer. {t('builtWith')}
                 <Heart className="w-3 h-3 text-[#819fa7]/50 inline mx-1" />
                 Next.js
               </p>
-              <p className="text-xs text-[#f3f5f9]/40">
+              <p className="text-xs text-white/40">
                 {t('copyright')}
               </p>
             </div>
