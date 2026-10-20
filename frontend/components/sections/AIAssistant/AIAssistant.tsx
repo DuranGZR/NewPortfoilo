@@ -21,7 +21,7 @@ export default function AIAssistant() {
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const chatBottomRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
 
@@ -32,8 +32,11 @@ export default function AIAssistant() {
   ];
 
   useEffect(() => {
-    if (messages.length > 0) {
-      chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTo({
+        top: chatContainerRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
     }
   }, [messages, isLoading]);
 
@@ -89,7 +92,7 @@ export default function AIAssistant() {
       console.error('Chat error:', err);
     } finally {
       setIsLoading(false);
-      inputRef.current?.focus();
+      inputRef.current?.focus({ preventScroll: true });
     }
   };
 
@@ -149,7 +152,7 @@ export default function AIAssistant() {
                   </button>
                 </div>
 
-                <div className="space-y-4 max-h-[440px] overflow-y-auto pr-1">
+                <div ref={chatContainerRef} className="space-y-4 max-h-[440px] overflow-y-auto pr-1">
                   {messages.map((message) => (
                     <div
                       key={message.id}
@@ -187,7 +190,6 @@ export default function AIAssistant() {
                       {error}
                     </div>
                   )}
-                  <div ref={chatBottomRef} />
                 </div>
               </div>
             )}
