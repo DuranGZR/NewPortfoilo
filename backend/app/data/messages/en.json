@@ -1,0 +1,584 @@
+{
+    "metadata": {
+        "title": "Duran Gezer",
+        "description": "Understanding data, teaching machines, shaping the future."
+    },
+    "navigation": {
+        "home": "Home",
+        "about": "About",
+        "projects": "Projects",
+        "skills": "Skills",
+        "experience": "Experience",
+        "thinking": "Engineering Thinking",
+        "roadmap": "Roadmap",
+        "playground": "Playground",
+        "learningJourney": "Learning Journey",
+        "blog": "Blog",
+        "contact": "Contact",
+        "search": "Search",
+        "3dresume": "3D CV"
+    },
+    "hero": {
+        "greeting": "Hi, I'm",
+        "name": "Duran Gezer",
+        "title": "AI/ML Engineer",
+        "subtitle": "Understanding data, teaching machines, shaping the future.",
+        "location": "İzmir, Turkey",
+        "cta": {
+            "primary": "Explore My Projects",
+            "secondary": "Talk to My AI Assistant",
+            "3dresume": "Explore My 3D CV"
+        },
+        "scrollHint": "Discover more",
+        "status": "Available for opportunities"
+    },
+    "about": {
+        "title": "About Me",
+        "subtitle": "AI Passion, Engineering Vision",
+        "bio": "I'm a 4th-year Computer Engineering student at İnönü University. Since 2022, I've been focusing on artificial intelligence and machine learning, developing various projects with technologies like Python, TensorFlow, and Scikit-learn. I've gained experience across a wide range of areas, from image processing to natural language processing, from reinforcement learning to deep learning. In every project, I make it a principle to translate theory into practice, solve complex problems with analytical thinking, and continuously learn. My goal is to specialize in AI/ML after graduation and become an engineer who applies data science and AI technologies to real-world problems. I value contributing to open-source projects, writing technical blog posts, and sharing knowledge.",
+        "highlights": {
+            "title": "Highlights",
+            "items": {
+                "projects": {
+                    "title": "15+ Completed Projects",
+                    "description": "Applications solving real-world problems"
+                },
+                "thinking": {
+                    "title": "Analytical Thinking",
+                    "description": "Breaking down complex problems into solutions"
+                },
+                "learning": {
+                    "title": "Continuous Learner",
+                    "description": "Keeping up with the latest in AI/ML"
+                },
+                "practical": {
+                    "title": "Application-Focused",
+                    "description": "From theory to practice, building working solutions"
+                }
+            }
+        },
+        "quote": "Learning is a journey, every project is a new discovery.",
+        "status": {
+            "available": "Open to Opportunities",
+            "graduating": "Graduating: 2026"
+        }
+    },
+    "projects": {
+        "badge": "My Projects",
+        "title": "Real Projects, Real Learning",
+        "subtitle": "Projects I've developed in artificial intelligence, machine learning, and software development.",
+        "viewDetails": "View Details",
+        "viewCode": "View Code",
+        "viewDemo": "View Demo",
+        "viewCaseStudies": "View All Projects",
+        "showLess": "Show Less",
+        "moreProjects": "more projects",
+        "items": {
+            "visualAI": {
+                "title": "Real-Time Visual Understanding AI",
+                "period": "2024",
+                "tagline": "AI system that analyzes images from camera in real-time using Ollama LLaVA model. Understands and describes visual content instantly.",
+                "impact": "Built with Python, Ollama, LLaVA, OpenCV.",
+                "github": "https://github.com/DuranGZR/Real-Time-Visual-Understanding"
+            },
+            "handwriting": {
+                "title": "Handwriting Digit Recognition",
+                "period": "2024",
+                "tagline": "Deep learning model trained on MNIST dataset using CNN and OpenCV. Real-time drawing interface for recognizing handwritten digits.",
+                "impact": "Built with TensorFlow, Keras, OpenCV, CNN architecture.",
+                "github": "https://github.com/DuranGZR/El_Yazisi_Tahmin"
+            },
+            "diabetes": {
+                "title": "Diabetes Prediction System",
+                "period": "2024",
+                "tagline": "Machine learning model for early diabetes diagnosis. Data analysis, preprocessing, and multiple classification algorithms applied.",
+                "impact": "Built with Python, Scikit-learn, Pandas, NumPy.",
+                "github": "https://github.com/DuranGZR/Diabetes_Prediction"
+            },
+            "xoxBot": {
+                "title": "XOX Bot - Q-Learning AI",
+                "period": "2024",
+                "tagline": "AI-powered Tic-Tac-Toe bot trained with Q-Learning algorithm. Develops strategies through reinforcement learning to make optimal moves.",
+                "impact": "Built with Python, Q-Learning, Reinforcement Learning.",
+                "github": "https://github.com/DuranGZR/XOX_Bot"
+            },
+            "salary": {
+                "title": "Salary Prediction Model",
+                "period": "2024",
+                "tagline": "Machine learning model for predicting baseball player salaries. Exploratory data analysis, feature engineering, and regression algorithms applied.",
+                "impact": "Built with Python, Scikit-learn, Feature Engineering.",
+                "github": "https://github.com/DuranGZR/Salary_Prediction_with_Mahcine_Learning"
+            },
+            "neuron": {
+                "title": "Simple Artificial Neuron",
+                "period": "2024",
+                "tagline": "Educational project demonstrating the fundamental principles of artificial neural networks. Neuron structure and activation function implementation.",
+                "impact": "Built from scratch with Python and NumPy.",
+                "github": "https://github.com/DuranGZR/Simple-Artificial-Neuron"
+            },
+            "telegramBot": {
+                "title": "Telegram Birthday Reminder Bot",
+                "period": "2025",
+                "tagline": "Telegram bot that tracks birthdays and sends automatic reminders. Features CSV bulk import, admin authorization, and scheduling.",
+                "impact": "Built with Python, Telegram Bot API, SQLite, APScheduler. Running 24/7 on Railway.",
+                "github": "https://github.com/DuranGZR/Telegram_dogum_gunu_bot"
+            },
+            "busTicket": {
+                "title": "Bus Ticket Reservation System",
+                "period": "2024",
+                "tagline": "Ticket reservation system built using object-oriented programming and data structures. Features passenger management and seat selection.",
+                "impact": "Built with Java, OOP principles, and data structures.",
+                "github": "https://github.com/DuranGZR/A_Bus_Ticket_Reservation_System"
+            }
+        },
+        "metrics": {
+            "accuracy": "Accuracy",
+            "processing": "Processing",
+            "precision": "Precision",
+            "technologies": "Technologies",
+            "github": "GitHub"
+        }
+    },
+    "skills": {
+        "badge": "Tech Stack",
+        "title": "Skills & Technologies",
+        "subtitle": "Not just buzzwords. Tools I've used to ship real projects.",
+        "categories": {
+            "ml": "AI & Machine Learning",
+            "programming": "Programming",
+            "frameworks": "Frameworks & Tools",
+            "data": "Data & Analytics"
+        },
+        "levels": {
+            "beginner": "Beginner",
+            "intermediate": "Intermediate",
+            "advanced": "Advanced",
+            "expert": "Expert"
+        },
+        "stats": {
+            "technologies": "Technologies",
+            "projects": "Projects",
+            "codeLines": "Code Lines",
+            "learningHrs": "Learning Hrs"
+        },
+        "modal": {
+            "whatIKnow": "What I Know"
+        }
+    },
+    "experience": {
+        "badge": "Background",
+        "title": "Education, Certifications & Activities",
+        "subtitle": "The journey that shaped my engineering vision.",
+        "categories": {
+            "education": "Education",
+            "certifications": "Certifications",
+            "community": "Community Activities"
+        },
+        "items": {
+            "degree": {
+                "title": "B.S. Computer Engineering",
+                "organization": "İnönü University",
+                "period": "2022 - 2026",
+                "description": "Focus on Artificial Intelligence and Machine Learning. GPA: 2.84/4.0"
+            },
+            "mlCamp": {
+                "title": "Machine Learning Camp",
+                "organization": "Miuul",
+                "period": "2024",
+                "description": "Comprehensive machine learning bootcamp program"
+            },
+            "featureEng": {
+                "title": "Feature Engineering",
+                "organization": "Miuul",
+                "period": "2024",
+                "description": "Feature engineering and data preprocessing techniques"
+            },
+            "machineLearning": {
+                "title": "Machine Learning",
+                "organization": "Miuul",
+                "period": "2024",
+                "description": "Machine learning algorithms and applications"
+            },
+            "pythonDS": {
+                "title": "Python Programming for Data Science",
+                "organization": "Miuul",
+                "period": "2024",
+                "description": "Python programming for data science"
+            },
+            "csharp": {
+                "title": "C# Programming",
+                "organization": "Udemy",
+                "period": "2024",
+                "description": "Comprehensive C# programming course for all levels"
+            },
+            "cloudNight": {
+                "title": "Cloud Night",
+                "organization": "HSD İnönü - Huawei",
+                "period": "2025",
+                "description": "Cloud technologies and Huawei Cloud training"
+            },
+            "hsdDevOps": {
+                "title": "DevOps Developer",
+                "organization": "HSD İNÖNÜ",
+                "period": "Oct 2025 - Present",
+                "description": "Building CI/CD pipelines for community projects, Docker container management, automation with GitHub Actions, and server administration. Implementing DevOps culture and best practices."
+            },
+            "cyberSecurityOrg": {
+                "title": "Organization President",
+                "organization": "İnönü University Cyber Security Community",
+                "period": "Nov 2024 - Sep 2025",
+                "description": "During 11-month tenure: planning community events, organizing training programs, team management, and raising cybersecurity awareness. Developing leadership and organizational skills."
+            }
+        },
+        "modal": {
+            "learned": "What I Learned"
+        },
+        "coursesTitle": "Courses Taken",
+        "courses": {
+            "dataStructures": {
+                "title": "Data Structures",
+                "description": "Implementation of fundamental data structures and algorithms."
+            },
+            "oop": {
+                "title": "Object-Oriented Programming",
+                "description": "OOP principles and design patterns."
+            },
+            "database": {
+                "title": "Database Management Systems",
+                "description": "Relational databases and SQL."
+            },
+            "algorithms": {
+                "title": "Algorithm Analysis",
+                "description": "Algorithm design and complexity analysis."
+            },
+            "ai": {
+                "title": "Artificial Intelligence",
+                "description": "AI fundamentals and search algorithms."
+            },
+            "imageProcessing": {
+                "title": "Image Processing",
+                "description": "Digital image processing techniques."
+            },
+            "computerNetworks": {
+                "title": "Computer Networks",
+                "description": "Network protocols and communication."
+            },
+            "webProgramming": {
+                "title": "Web Programming",
+                "description": "Web development and backend systems."
+            },
+            "programmingLanguages": {
+                "title": "Programming Languages",
+                "description": "Programming paradigms and language design."
+            },
+            "softwareEng": {
+                "title": "Software Engineering",
+                "description": "Software development methodologies."
+            }
+        }
+    },
+    "thinking": {
+        "badge": "Engineering Mindset",
+        "title": "My Problem-Solving Philosophy",
+        "subtitle": "Principles I follow when transforming complex problems into simple solutions.",
+        "quote": "A good engineer never starts coding without understanding the problem first.",
+        "principles": {
+            "firstPrinciples": {
+                "title": "Understand First, Solve Later",
+                "description": "I never start coding without fully understanding the problem. I analyze requirements, consider edge cases, then move to implementation."
+            },
+            "outcome": {
+                "title": "Simplicity First",
+                "description": "The best code is the least complex code. I avoid premature optimization and focus on readable, maintainable solutions."
+            },
+            "iterations": {
+                "title": "Bugs = Learning",
+                "description": "Every bug is an opportunity to understand how the system works. Instead of quick fixes, I investigate the root cause."
+            },
+            "systems": {
+                "title": "Data-Driven Thinking",
+                "description": "I base decisions on data, not intuition. I measure model performance with metrics and validate with A/B testing."
+            },
+            "debugging": {
+                "title": "Documentation Culture",
+                "description": "Half of software is code, the other half is documentation. I leave explanatory notes even for my future self."
+            },
+            "curiosity": {
+                "title": "Continuous Learning",
+                "description": "Technology constantly evolves. I try to learn something new every day and experiment to stay current."
+            }
+        }
+    },
+    "roadmap": {
+        "badge": "Career Journey",
+        "title": "Looking Ahead",
+        "subtitle": "My post-graduation goals and career plan.",
+        "bottomNote": "A flexible plan. I adapt to opportunities and what I learn.",
+        "active": "Active",
+        "completed": "completed",
+        "milestones": {
+            "now": {
+                "period": "Now",
+                "title": "Senior Year - Self Development",
+                "goals": [
+                    "Strengthening my AI and machine learning projects",
+                    "Enriching my portfolio with real projects",
+                    "Researching and applying for internship opportunities"
+                ]
+            },
+            "6months": {
+                "period": "2026 - Graduation",
+                "title": "Career Start",
+                "goals": [
+                    "Earning my Computer Engineering degree",
+                    "Finding a junior position in AI/ML field",
+                    "Gaining professional work experience"
+                ],
+                "focus": "Learning > Salary"
+            },
+            "1year": {
+                "period": "1 Year Later",
+                "title": "Technical Deepening",
+                "goals": [
+                    "Gaining experience in real-world ML projects",
+                    "Specializing in deep learning and NLP",
+                    "Contributing to open-source projects"
+                ],
+                "focus": "Developing expertise"
+            },
+            "2years": {
+                "period": "2 Years Later",
+                "title": "Becoming an AI Engineer",
+                "goals": [
+                    "Reaching mid-level AI/ML Engineer position",
+                    "Bringing my own AI projects to life",
+                    "Actively contributing to the software community"
+                ],
+                "focus": "Creating value"
+            }
+        }
+    },
+    "aiAssistant": {
+        "badge": "Coming Soon",
+        "title": "Ask My AI Assistant",
+        "subtitle": "I'm building an AI that knows me better than my résumé does. Ask it anything about my work, thinking, or approach to problems.",
+        "chatHeader": {
+            "title": "AI Assistant",
+            "poweredBy": "Powered by my knowledge base"
+        },
+        "status": "Building...",
+        "sampleQuestionsTitle": "Sample questions you'll be able to ask:",
+        "sampleQuestions": {
+            "q1": "What projects are you most proud of?",
+            "q2": "How do you approach learning new technologies?",
+            "q3": "What's your take on the future of AI?",
+            "q4": "Walk me through your engineering process"
+        },
+        "inDevelopment": "In Development",
+        "inDevelopmentDesc": "Training on my projects, writing samples, and engineering philosophy",
+        "inputPlaceholder": "Ask me anything... (Coming Soon)",
+        "sendButton": "Send",
+        "features": {
+            "realtime": {
+                "title": "Real-time Responses",
+                "desc": "Instant answers about my projects and experience"
+            },
+            "context": {
+                "title": "Context-Aware",
+                "desc": "Understands follow-up questions and maintains conversation flow"
+            },
+            "learning": {
+                "title": "Always Learning",
+                "desc": "Updates as I complete new projects and gain experience"
+            }
+        },
+        "notifyQuestion": "Want to be notified when the AI assistant launches?",
+        "notifyButton": "Notify Me"
+    },
+    "footer": {
+        "tagline": "AI Engineer in Training. Building systems that solve real problems, not just adding lines to a résumé.",
+        "quickLinks": "Quick Links",
+        "getInTouch": "Get In Touch",
+        "getInTouchDesc": "Open to junior AI engineer roles and interesting problems to solve.",
+        "sendMessage": "Send a Message",
+        "builtWith": "Built with",
+        "copyright": "This portfolio is a living system—always evolving."
+    },
+    "contact": {
+        "title": "Get In Touch",
+        "name": "Your Name",
+        "email": "Email",
+        "subject": "Subject (Optional)",
+        "message": "Your Message",
+        "send": "Send",
+        "sending": "Sending...",
+        "success": "Your message has been sent successfully! I'll get back to you soon.",
+        "error": "An error occurred. Please try again."
+    },
+    "common": {
+        "learnMore": "Learn More",
+        "readMore": "Read More",
+        "viewAll": "View All",
+        "close": "Close",
+        "loading": "Loading...",
+        "error": "An error occurred",
+        "tryAgain": "Try Again",
+        "comingSoon": "Coming Soon",
+        "new": "New"
+    },
+    "resume3d": {
+        "title": "3D CV Experience",
+        "loading": "Loading world...",
+        "backToSite": "Back to Site",
+        "mobileWarning": "Best Experience on Desktop",
+        "mobileDescription": "The 3D CV experience works best on desktop browsers. Please visit from your computer.",
+        "instructions": "Click on islands to explore • Drag to rotate view",
+        "about": {
+            "title": "About Me",
+            "subtitle": "Discover who I am",
+            "items": {
+                "0": {
+                    "title": "Duran Gezer",
+                    "description": "A passionate engineer candidate in artificial intelligence and machine learning."
+                },
+                "1": {
+                    "title": "Vision",
+                    "description": "Developing intelligent systems that solve real-world problems."
+                },
+                "2": {
+                    "title": "Approach",
+                    "description": "Continuous learning, clean code, and user-centered design."
+                }
+            }
+        },
+        "education": {
+            "title": "Education",
+            "subtitle": "My academic journey",
+            "items": {
+                "0": {
+                    "title": "Computer Engineering",
+                    "description": "Bachelor's degree focused on AI and software development."
+                },
+                "1": {
+                    "title": "Online Certifications",
+                    "description": "AI/ML certifications from Coursera, Udacity, and other platforms."
+                }
+            }
+        },
+        "experience": {
+            "title": "Experience & Activities",
+            "subtitle": "My professional and community experiences",
+            "items": {
+                "0": {
+                    "title": "DevOps Developer - HSD İNÖNÜ",
+                    "description": "Oct 2025 - Present • CI/CD, Docker, GitHub Actions, server management"
+                },
+                "1": {
+                    "title": "Organization President - Cyber Security Community",
+                    "description": "Nov 2024 - Sep 2025 • 11 months leadership, event organization, team management"
+                },
+                "2": {
+                    "title": "Machine Learning Certifications",
+                    "description": "Miuul • 2024 • ML algorithms, Feature Engineering, Python for Data Science"
+                },
+                "3": {
+                    "title": "Cloud Night",
+                    "description": "HSD İnönü - Huawei • 2025 • Cloud technologies training"
+                }
+            }
+        },
+        "skills": {
+            "title": "Skills",
+            "subtitle": "My technical skills",
+            "items": {
+                "0": {
+                    "title": "Programming Languages",
+                    "description": "Python, JavaScript, SQL, C++, C#, C, Kotlin, Java"
+                },
+                "1": {
+                    "title": "AI/ML Frameworks",
+                    "description": "TensorFlow, PyTorch, Scikit-learn, Hugging Face"
+                },
+                "2": {
+                    "title": "Web Technologies",
+                    "description": "React, Next.js, FastAPI, Tailwind CSS"
+                },
+                "3": {
+                    "title": "Tools",
+                    "description": "Git, Docker, VS Code"
+                }
+            }
+        },
+        "projects": {
+            "title": "Projects",
+            "subtitle": "Projects I've built",
+            "items": {
+                "0": {
+                    "title": "AI Portfolio",
+                    "description": "Interactive 3D portfolio site with Next.js and React Three Fiber."
+                },
+                "1": {
+                    "title": "ML Model Visualizer",
+                    "description": "3D visualization of 11 different machine learning models."
+                },
+                "2": {
+                    "title": "Sentiment Analysis",
+                    "description": "Sentiment analysis application using natural language processing."
+                }
+            }
+        }
+    },
+    "projectDetail": {
+        "backToProjects": "Back to Projects",
+        "liveDemo": "Live Demo",
+        "viewCode": "View Code",
+        "status": {
+            "completed": "Completed",
+            "in-progress": "In Progress",
+            "planned": "Planned"
+        },
+        "sections": {
+            "problem": "The Problem",
+            "constraints": "Key Constraints",
+            "approach": "The Approach",
+            "modelChoice": "Model Choice",
+            "results": "Results & Evaluation",
+            "lessons": "Lessons Learned",
+            "techStack": "Tech Stack",
+            "tags": "Tags"
+        },
+        "labels": {
+            "selectedModel": "Selected Model",
+            "rationale": "Rationale",
+            "evaluationApproach": "Evaluation Approach",
+            "outcome": "Outcome"
+        }
+    },
+    "commandPalette": {
+        "placeholder": "Type a command or search...",
+        "noResults": "No results found.",
+        "categories": {
+            "navigation": "Navigation",
+            "language": "Language",
+            "social": "Social & Contact"
+        },
+        "navigation": {
+            "home": "Go to Home",
+            "about": "About Me",
+            "projects": "View Projects",
+            "skills": "My Skills",
+            "mlVisualizer": "ML Model Visualizer",
+            "experience": "Experience & Education",
+            "thinking": "Engineering Thinking",
+            "roadmap": "Career Roadmap",
+            "aiAssistant": "AI Assistant"
+        },
+        "social": {
+            "email": "Send Email"
+        },
+        "footer": {
+            "navigate": "Navigate",
+            "select": "Select"
+        }
+    }
+}

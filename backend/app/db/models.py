@@ -62,3 +62,19 @@ class ChatSession(Base):
         nullable=False
     )
     updated_at: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
+
+
+class SiteTranslation(Base):
+    """Dynamic site translations (TR / EN)."""
+    
+    __tablename__ = "site_translations"
+    
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    lang: Mapped[str] = mapped_column(String(10), unique=True, index=True, nullable=False)
+    content: Mapped[dict] = mapped_column(JSON, nullable=False)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        server_default=func.now(),
+        onupdate=func.now(),
+        nullable=False
+    )
