@@ -1,6 +1,6 @@
 """
 AI Service - Groq Integration for Portfolio Assistant
-Uses Groq API with Llama 3.3 70B model
+Uses Groq API with primary model (qwen/qwen3.8-27b) and automatic fallbacks
 """
 import json
 from pathlib import Path
@@ -240,15 +240,30 @@ async def get_ai_response(message: str, session_id: str) -> str:
         # Add current user message
         messages.append({"role": "user", "content": message})
         
-        # Generate response using Groq API
-        response = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
-            messages=messages,
-            temperature=0.5,
-            max_tokens=1024,
-        )
-        
-        ai_response = response.choices[0].message.content.strip()
+        # Generate response using Groq API with automatic model fallback
+        ai_response: Optional[str] = None
+        last_error: Optional[Exception] = None
+
+        for model_name in settings.groq_models_list:
+            try:
+                response = client.chat.completions.create(
+                    model=model_name,
+                    messages=messages,
+                    temperature=0.5,
+                    max_tokens=1024,
+                )
+                content = response.choices[0].message.content if response.choices else None
+                if content and content.strip():
+                    ai_response = content.strip()
+                    break
+                raise ValueError(f"Empty response from model {model_name}")
+            except Exception as model_err:
+                last_error = model_err
+                print(f"Groq model '{model_name}' failed: {model_err}")
+                continue
+
+        if not ai_response:
+            raise RuntimeError(f"All Groq models failed. Last error: {last_error}")
         
         # Update session history
         history.append({"role": "user", "content": message})

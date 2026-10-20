@@ -40,6 +40,18 @@ class Settings(BaseSettings):
     
     # AI - Groq
     groq_api_key: str = ""
+    groq_model: str = "qwen/qwen3.8-27b"
+    groq_fallback_models: str = "openai/gpt-oss-120b,openai/gpt-oss-20b"
+
+    @property
+    def groq_models_list(self) -> List[str]:
+        """Ordered list of primary and fallback Groq models."""
+        models = [self.groq_model.strip()]
+        for fallback in self.groq_fallback_models.split(","):
+            name = fallback.strip()
+            if name and name not in models:
+                models.append(name)
+        return [m for m in models if m]
     
     # Email - Resend
     resend_api_key: str = ""
