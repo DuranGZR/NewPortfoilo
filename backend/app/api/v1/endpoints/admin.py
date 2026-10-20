@@ -2,6 +2,7 @@
 Admin Panel Endpoint
 Secure admin authentication and management
 """
+import secrets
 from datetime import datetime, timedelta
 from typing import Optional
 
@@ -50,31 +51,32 @@ async def verify_admin_token(
 
 
 @router.post("/login", response_model=AdminLoginResponse)
-@limiter.limit("10/minute")
+@limiter.limit("5/minute")
 async def admin_login(request: Request, login_data: AdminLoginRequest):
-    """Admin login endpoint."""
+    """
+    Admin login endpoint.
+    Strictly rate limited to 5 attempts per minute to prevent brute-force attacks.
+    Uses constant-time comparison to prevent timing attacks.
+    """
     ip = get_client_ip(request)
     entered_password = login_data.password.strip()
 
     is_valid = False
 
-    # 1. Plain text comparison if admin_password is set
-    if settings.admin_password and entered_password == settings.admin_password:
-        is_valid = True
+    # 1. Constant-time plain text comparison if admin_password is set
+    if settings.admin_password:
+        if secrets.compare_digest(entered_password, settings.admin_password.strip()):
+            is_valid = True
 
     # 2. Bcrypt comparison if admin_password_hash is set
-    elif settings.admin_password_hash:
+    if not is_valid and settings.admin_password_hash:
         try:
             pw_bytes = entered_password.encode("utf-8")
-            hash_bytes = settings.admin_password_hash.encode("utf-8")
+            hash_bytes = settings.admin_password_hash.strip().encode("utf-8")
             if bcrypt.checkpw(pw_bytes, hash_bytes):
                 is_valid = True
         except Exception:
             pass
-
-    # 3. Default fallback if neither configured
-    elif entered_password == "admin123":
-        is_valid = True
 
     if not is_valid:
         return AdminLoginResponse(
